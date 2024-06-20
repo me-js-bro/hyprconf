@@ -1,0 +1,93 @@
+{
+  	"$schema": "/etc/xdg/swaync/configSchema.json",
+  	"positionX": "right",
+  	"positionY": "top",
+  	"layer": "overlay",
+  	"control-center-layer": "top",
+  	"layer-shell": true,
+ 	"cssPriority": "application",
+    "control-center-margin-top": 5,
+    "control-center-margin-bottom": 0,
+    "control-center-margin-right": 7,
+    "control-center-margin-left": 0,
+  	"notification-2fa-action": true,
+  	"notification-inline-replies": true,
+    "notification-icon-size": 60,
+    "notification-body-image-height": 100,
+    "notification-body-image-width": 200,
+    "timeout": 6,
+    "timeout-low": 3,
+    "timeout-critical": 0,
+    "fit-to-screen": false,
+    "control-center-width": 500,
+    "control-center-height": 900,
+    "notification-window-width": 300,
+    "keyboard-shortcuts": true,
+    "image-visibility": "when available",
+    "transition-time": 200,
+    "hide-on-clear": false,
+    "hide-on-action": true,
+    "script-fail-notify": true,
+    "widgets": [
+       	"dnd",
+		"mpris",
+        "buttons-grid",
+    	"volume", 
+   	 	"backlight",
+        "title",
+        "notifications"
+    ],
+    "widget-config": {
+        "title": {
+            "text": "Notifications",
+            "clear-all-button": true,
+            "button-text": "Clear"
+        },
+        "dnd": {
+            "text": "Do Not Disturb"
+        },
+        "label": {
+            "max-lines":3,
+            "text": "Notification"
+        },
+        "mpris": {
+            "image-size": 60,
+            "image-radius": 5
+        },
+        "volume": {
+            "label": "󰕾"
+        },
+        "backlight": {
+            "label": "󰃟"
+        },
+        "buttons-grid": {
+            "actions": [
+                
+                {
+                    "label": "󰕾",
+                    "command": "pavucontrol"
+                },
+                {
+                    "label": "󰌾",
+                    "command": "hyprlock"
+                },
+                {
+                    "label": "󰂯",
+                    "command": "blueman-manager"
+                },
+                {
+                    "label": "󰚰",
+                    "command": "kitty --title systemupdate sh -c 'sudo dnf update -y'"
+                },
+                {
+                    "label": "󰜉",
+                    "command": "systemctl reboot"
+                },
+                {
+                    "label": "󰐥",
+                    "command": "systemctl poweroff"
+                }
+            ]
+        }
+    }
+}

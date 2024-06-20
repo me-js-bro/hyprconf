@@ -1,0 +1,37 @@
+# ~/.config/alacritty/alacritty.toml
+
+[window]
+startup_mode = "Windowed"
+dynamic_padding = true
+opacity = 1.0
+
+[cursor]
+style = "Beam"
+
+[font]
+size = 16.0
+
+[font.normal]
+family = "JetBrains Mono Nerdfont"
+
+[window.padding]
+x = 10
+y = 10
+
+[colors.normal]
+black = "#0c0b1c"
+red = "#DC6D92"
+green = "#71B1C8"
+yellow = "#AA91A7"
+blue = "#E89AA0"
+magenta = "#C4BFC4"
+cyan = "#ACC7D2"
+white = "#ece4e0"
+
+[colors.primary]
+background = "#0c0b1c"
+foreground = "#ece4e0"
+
+[colors.cursor]
+text = "CellBackground"
+cursor = "CellForeground"

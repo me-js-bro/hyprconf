@@ -1,0 +1,142 @@
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                 false;
+    hover-select:               true;
+    me-select-entry:            "MouseSecondary";
+    me-accept-entry:            "MousePrimary";
+}
+
+/*****----- Global Properties -----*****/
+@import                         "~/.config/rofi/themes/rofi-pywal.rasi"
+
+
+* {
+    /* Resolution : 1920x1080 */
+    mainbox-spacing:             50px;
+    mainbox-margin:              0px 470px;
+    message-margin:              0px 350px;
+    message-padding:             15px;
+    message-border-radius:       100%;
+    listview-spacing:            25px;
+    element-padding:             45px 40px;
+    element-border-radius:       100%;
+
+    prompt-font:                 "Fira Code SemiBold 40";
+    textbox-font:                "Fira Code SemiBold 12";
+    element-text-font:           "feather Bold 48";
+    
+    
+    background-window:           @background;
+    background-normal:           white/10%;
+    background-selected:         @foreground;
+    foreground-normal:           white;
+    foreground-selected:         @background;
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  true;
+    cursor:                      "default";
+    background-color:            var(background-window);
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     var(mainbox-spacing);
+    margin:                      var(mainbox-margin);
+    background-color:            transparent;
+    children:                    [ "dummy", "userimage", "inputbar", "listview", "message", "dummy" ];
+}
+
+/*****----- User -----*****/
+userimage {
+    width:                       500px;
+    height:                      500px;
+    margin:                      0px 400px;
+    border:                      3px;
+    border-radius:               80%;
+    border-color:                @foreground;
+    background-color:            transparent;
+    background-image:            url("~/.config/hypr/.cache/current_wallpaper.png", both);
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    background-color:            transparent;
+    children:                    [ "dummy", "prompt", "dummy"];
+}
+
+dummy {
+    background-color:            transparent;
+}
+
+prompt {
+    enabled:                     true;
+    font:                        var(prompt-font);
+    background-color:            transparent;
+    text-color:                  var(foreground-normal);
+}
+
+/*****----- Message -----*****/
+message {
+    enabled:                     true;
+    margin:                      var(message-margin);
+    padding:                     var(message-padding);
+    border-radius:               var(message-border-radius);
+    background-color:            var(background-normal);
+    text-color:                  var(foreground-normal);
+}
+textbox {
+    font:                        var(textbox-font);
+    background-color:            transparent;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    expand:                      false;
+    columns:                     5;
+    lines:                       1;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     var(listview-spacing);
+    background-color:            transparent;
+    border:                      0px;
+    cursor:                      "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    padding:                     var(element-padding);
+    border-radius:               var(element-border-radius);
+    background-color:            var(background-normal);
+    text-color:                  var(foreground-normal);
+    cursor:                      pointer;
+}
+element-text {
+    font:                        var(element-text-font);
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+element selected.normal {
+    background-color:            var(background-selected);
+    text-color:                  var(foreground-selected);
+}
