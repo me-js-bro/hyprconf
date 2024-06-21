@@ -4,7 +4,7 @@
 styles_dir="$HOME/.config/rofi/power_option"
 
 # rofi them
-theme="$HOME/.config/rofi/themes/config-shell.rasi"
+theme="$HOME/.config/rofi/themes/conf-powertheme.rasi"
 
 # # Path to the script where the selected theme is saved
 menu_select_script="$HOME/.config/hypr/scripts/powermenu.sh"
