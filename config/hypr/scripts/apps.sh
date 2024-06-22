@@ -29,17 +29,20 @@ case $1 in
 esac
 
 # Define the browsers in the order of preference
-browsers=("chromium-browser" "google-chrome" "brave-browser")
+if [[ -f "/usr/bin/brave" ]]; then
+    browser="brave" || browser="brave-browser" || browser="Brave-browser"
+elif [[ -f "/usr/bin/chromium" ]]; then
+    browser="chromium-browser"
+fi
 
 # Loop through the browsers and try to open the URL with the first available one
-for browser in "${browsers[@]}"; do
-    if command -v "$browser" &> /dev/null; then
-        "$browser" --app="$url"
-        exit 0
-    fi
-done
+if command -v "$browser" &> /dev/null; then
+    "$browser" --app="$url"
+    echo "$browser"
+    exit 0
+fi
 
 # If no browser is found, display an error message
-echo "Error: No supported browser found."
-exit 1
+# echo "Error: No supported browser found."
+# exit 1
 
