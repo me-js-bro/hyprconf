@@ -34,13 +34,11 @@ tooltip label{
     opacity: 0.8;
     box-shadow: none;
 	text-shadow: none;
-    padding: 0px;
-    border-radius: 9px;
+    border-radius: 15px;
     margin-top: 3px;
     margin-bottom: 3px;
     margin: 0 2px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 1px 3px;
     animation: gradient_f 20s ease-in infinite;
     transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
 }
@@ -48,9 +46,8 @@ tooltip label{
 #workspaces button.active {
     background: @background;
     opacity: 0.6;
+    padding: 0px 10px;
     margin-left: 3px;
-    padding-left: 15px;
-    padding-right: 15px;
     margin-right: 3px;
     animation: gradient_f 20s ease-in infinite;
     transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
