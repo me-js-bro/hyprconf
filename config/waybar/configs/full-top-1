@@ -1,0 +1,48 @@
+{
+    "include": "$HOME/.config/waybar/modules",
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 20,
+    "margin-top": 5,
+    "margin-left": 5,
+    "margin-right": 5,
+
+    "modules-left": ["custom/launch_rofi", "tray", "hyprland/workspaces", "custom/weather", "mpris"],
+
+    "modules-center": ["custom/updater", "clock", "custom/swaync"],
+
+    "modules-right": [ "pulseaudio", "cpu","memory", "custom/light_dark","custom/wallpaper-change", "custom/clipboard", "battery", "backlight",  "network", "custom/power_btn"],
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1",
+        "format": "{icon}",
+        "format-icons": {
+            // for arch
+            "active": "󰮯",
+            "default": ""
+
+            // for fedora
+            //  "active": "󰣛",  
+            //  "default": ""
+
+            // for opensuse
+            // "active": "",
+            // "default": ""
+          },
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        }
+    }
+}

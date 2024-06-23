@@ -198,6 +198,7 @@ if [ -f $colors_file ]; then
     "workbench.iconTheme": "catppuccin-mocha",
     "workbench.colorTheme": "Theme Darker",
     "git.enableSmartCommit": true,
+    "files.autoSave": "afterDelay",
     // You can remove these part if you don't like the colors according to your wallpaper from the "$HOME/.config/hypr/scripts/pywal.sh" script, from 204-221 lines.
     // or you can totally remove the vs-code themming part from the script if you want to set and use your custom settings. if you don't do that, then your settings will be replaced/over writen by the default config.
 
@@ -225,57 +226,57 @@ fi
 
 # firefox colors changine, (test)
 # Extract colors from colors.json
-if [ -f $colors_file ]; then
-    background_color=$(jq -r '.special.background' "$colors_file")
-    foreground_color=$(jq -r '.special.foreground' "$colors_file")
+# if [ -f $colors_file ]; then
+#     background_color=$(jq -r '.special.background' "$colors_file")
+#     foreground_color=$(jq -r '.special.foreground' "$colors_file")
 
-    # Function to get the Firefox profile directory
-get_firefox_profile_dir() {
-    local profile_dir
-    profile_dir=$(find "$HOME/.mozilla/firefox/" -maxdepth 1 -type d -name '*.default-release' -print -quit)
-    echo "$profile_dir"
-}
+#     # Function to get the Firefox profile directory
+# get_firefox_profile_dir() {
+#     local profile_dir
+#     profile_dir=$(find "$HOME/.mozilla/firefox/" -maxdepth 1 -type d -name '*.default-release' -print -quit)
+#     echo "$profile_dir"
+# }
 
 # Get the Firefox profile directory
-firefox_profile_dir=$(get_firefox_profile_dir)
+# firefox_profile_dir=$(get_firefox_profile_dir)
 
-if [ -z "$firefox_profile_dir" ]; then
-    echo "Firefox profile directory not found. Exiting script."
-    exit 1
-fi
-    firefox_chrome_dir="$firefox_profile_dir/chrome"
+# if [ -z "$firefox_profile_dir" ]; then
+#     echo "Firefox profile directory not found. Exiting script."
+#     exit 1
+# fi
+#     firefox_chrome_dir="$firefox_profile_dir/chrome"
 
-    # Create the chrome directory if it doesn't exist
-    mkdir -p "$firefox_chrome_dir"
+#     # Create the chrome directory if it doesn't exist
+#     mkdir -p "$firefox_chrome_dir"
 
-    # Create or append to the userChrome.css file
-    firefox_css_file="$firefox_chrome_dir/userChrome.css"
-    touch $firefox_css_file
-    cat <<EOF >"$firefox_css_file"
-/* userChrome.css */
-:root {
-    --background-color: $background_color !important;
-    --foreground-color: $foreground_color !important;
-    --toolbar-bgcolor: $background_color !important;
-    --toolbar-color: $foreground_color !important;
-}
+#     # Create or append to the userChrome.css file
+#     firefox_css_file="$firefox_chrome_dir/userChrome.css"
+#     touch $firefox_css_file
+#     cat <<EOF >"$firefox_css_file"
+# /* userChrome.css */
+# :root {
+#     --background-color: $background_color !important;
+#     --foreground-color: $foreground_color !important;
+#     --toolbar-bgcolor: $background_color !important;
+#     --toolbar-color: $foreground_color !important;
+# }
 
-#nav-bar { background-color: var(--toolbar-bgcolor) !important; color: var(--toolbar-color) !important; }
-#navigator-toolbox { background-color: var(--background-color) !important; color: var(--foreground-color) !important; }
+# #nav-bar { background-color: var(--toolbar-bgcolor) !important; color: var(--toolbar-color) !important; }
+# #navigator-toolbox { background-color: var(--background-color) !important; color: var(--foreground-color) !important; }
 
-/* Set home page background color */
-#home-button { background-color: var(--toolbar-bgcolor) !important; }
+# /* Set home page background color */
+# #home-button { background-color: var(--toolbar-bgcolor) !important; }
 
-/* Set background color for the entire browser window */
-@-moz-document url-prefix("chrome://browser/content/browser.xhtml") {
-    #browser {
-        background-color: var(--background-color) !important;
-    }
-}
-EOF
+# /* Set background color for the entire browser window */
+# @-moz-document url-prefix("chrome://browser/content/browser.xhtml") {
+#     #browser {
+#         background-color: var(--background-color) !important;
+#     }
+# }
+# EOF
 
-    # Restart Firefox to apply changes
-    # pkill firefox
-fi
+#     # Restart Firefox to apply changes
+#     # pkill firefox
+# fi
 
 # ------------------------

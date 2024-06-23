@@ -30,7 +30,9 @@ esac
 
 # Define the browsers in the order of preference
 if [[ -f "/usr/bin/brave" ]]; then
-    browser="brave" || browser="brave-browser" || browser="Brave-browser"
+    browser="brave"
+elif [[ -f "/usr/bin/brave-browser" ]]; then
+    browser="brave-browser"
 elif [[ -f "/usr/bin/chromium" ]]; then
     browser="chromium-browser"
 fi
@@ -38,7 +40,7 @@ fi
 # Loop through the browsers and try to open the URL with the first available one
 if command -v "$browser" &> /dev/null; then
     "$browser" --app="$url"
-    echo "$browser"
+    # echo "$browser"
     exit 0
 fi
 
