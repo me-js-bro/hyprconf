@@ -39,37 +39,42 @@ yad --width=$dynamic_width --height=$dynamic_height \
     --timeout-indicator=bottom \
 " = " "SUPER KEY (Windows Key)" "(SUPER KEY)" \
 "" "" "" \
-" + k" "Terminal" "(Kitty  )" \
-" + + D" "App Launcher" "(Rofi)" \
-" + SHIFT + D" "Emoji Selector" "(Rofi)" \
-" + SHIFT + F" "FilrBrowser" "(Rofi)" \
+" + Return" "Terminal" "(Alacritty)" \
 " + E" "Open File Manager" "(Thunar)" \
-" + SHIFT + E" "Open File Manager" "(Dolphin)" \
+"" "" "" \
+" + D" "App Launcher" "(Rofi)" \
+" + Alt + D" "App Launcher Theme" "(Rofi)" \
+" + SHIFT + D" "Emoji Selector" "(Rofi)" \
+" + x" "Power Menu" "(Rofi)" \
+" + Alt + x" "Power Menu Theme" "(Rofi)" \
+" + Alt + b" "Shell (zsh/bash) Theme" "(Rofi)" \
 " + CTRL + E" "Choose to edit dotfiles" "(Rofi)" \
-" + Q" "close active window" "(not kill)" \
-" + ALT + C" "Clipboard Manager" "(Cliphist)" \
-" + ALT + W" "Clear Clipboard History" "(Cliphist)" \
-" + W" "Change wallpaper (Random)" "(Swww)" \
 " + SHIFT + W" "Select wallpaper" "(Rofi)" \
+" + Alt + SHIFT + W" "Select wallpaper (style-2)" "(Rofi)" \
+" + ALT + C" "Clipboard Manager" "(Cliphist (Rofi))" \
+" + ALT + W" "Clear Clipboard History" "(Cliphist (Rofi))" \
 " + CTRL + W" "Select Waybar Layout" "(Rofi)" \
-" + B" "Browser" "(Firefox 󰈹 )" \
-" + SHIFT + B" "Browser" "(Brave, if installed)" \
+"" "" "" \
+" + Q" "close active window" "(not kill)" \
+"" "" "" \
+" + W" "Change wallpaper (Random)" "(Swww)" \
+" + B" "Browser" "(Brave/Chromium)" \
+" + SHIFT + B" "Browser" "(Firefox 󰈹 )" \
 " + C" "Code Editor" "(Visual Studio Code 󰨞 )" \
 " " "Print" "Screenshot" "(Grimblast)" \
 " + Print" "Screenshot region" "(Grimblast)" \
-" + X" "Power-menu" "(Wlogout)" \
-" + SHIFT + L" "Screen lock" "(Swaylock)" \
+" + SHIFT + L" "Screen lock" "(hyprlock)" \
 " + F" "Fullscreen" "(Toggles full-screen)" \
 " + V" "Floating" "(Toggle floating window)" \
 " + H" " " "Launch this app" \
-" + P" "Toggle Keyboard" "Ibus (Bangla & English)" \
+"CTRL + Space" "Toggle Keyboard" "fcitx5 (Bangla & English)" \
 "" "" "" \
 "F9" "Volume" "(Volume Mute  )" \
 "F10" "Volume" "(Volume Decrease  )" \
 "F11" "Volume" "(Volume Increase  )" \
 "" "" "" \
-"CTRL + ESC" " " "Reload Waybar" \
-
-
-
-
+"F2" "Brightness" "(Brightness Increase  )" \
+"F3" "Brightness" "(Brightness Decrease  )" \
+"" "" "" \
+"CTRL + ESC" " " "Hide/Launch Waybar" \
+"CTRL+ Alt + ESC" " " "Reload Waybar" \

@@ -27,8 +27,6 @@ else
 
     notify-send -i "${RANDOMPICS}" "Changing wallpaper ${RANDOMPICS}"
     swww query || swww init && swww img ${RANDOMPICS} $SWWW_PARAMS
-
-    # making the current wallpaper dark for hyprlock
 fi
 
 

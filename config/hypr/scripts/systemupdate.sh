@@ -10,18 +10,10 @@ if [ -f /etc/arch-release ]; then
     aur=$(${aurhlpr} -Qua | wc -l)
 
     # Check for flatpak updates
-    if pkg_installed flatpak ; then
-        fpk=$(flatpak remote-ls --updates | wc -l)
-        fpk_disp="\n󰏓 Flatpak $fpk"
-        fpk_exup="; flatpak update"
-    else
-        fpk=0
-        fpk_disp=""
-    fi
     ofc=$(checkupdates | wc -l)
 
     # Calculate total available updates
-    upd=$(( ofc + aur + fpk ))
+    upd=$(( ofc + aur ))
 
     # Show tooltip
     if [ $upd -eq 0 ] ; then

@@ -34,7 +34,7 @@ apply_config() {
     ln -sf "$layout_file" "$waybar_config"
     ln -sf "$style_file" "$waybar_style"
 
-    if [[ "$1" == "fancy-top" || "$1" == "fancy-bottom" || "$1" == "colorful-bottom" || "$1" == "colorful-top" ]]; then
+    if [[ "$1" == "fancy-top" || "$1" == "fancy-bottom" || "$1" == "colorful-bottom" || "$1" == "colorful-top" || "$1" == "full-top-1" || "$1" == "full-bottom-1" ]]; then
         echo "Enabling blur in $window_rules"
         sed -i "/^#blurls = waybar$/ s/#//" "$window_rules"
         sed -i "/^#blurls = waybar$/d" "$window_rules"
