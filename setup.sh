@@ -40,7 +40,7 @@ printf " \n \n"
 present_dir=`pwd`
 # log directory
 log_dir="$present_dir/Logs"
-log="$log_dir"/install-dotfiles.log
+log="$log_dir"/dotfiles.log
 mkdir -p "$log_dir"
 if [[ ! -f "$log" ]]; then
     touch "$log"
@@ -75,7 +75,7 @@ for dir in "${dirs[@]}"; do
     dir_path=~/.config/$dir
     if [[ -d "$dir_path" ]]; then
         printf "${attention} - Config for $dir located, backing up...\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-        mv "$dir_path" "$dir_path"-${USER}
+        mv "$dir_path" "$dir_path"-${USER} 2>&1 | tee -a "$log"
         printf "${done} - Backed up $dir.\n"
     fi
 done
@@ -90,15 +90,15 @@ if [[ -d "$keyboard_path" ]]; then
 
     # Add fcitx5 environment variables to /etc/environment if not already present
     if ! grep -q "GTK_IM_MODULE=fcitx" /etc/environment; then
-        printf "\nGTK_IM_MODULE=fcitx\n" | sudo tee -a /etc/environment
+        printf "\nGTK_IM_MODULE=fcitx\n" | sudo tee -a /etc/environment 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     fi
 
     if ! grep -q "QT_IM_MODULE=fcitx" /etc/environment; then
-        printf "QT_IM_MODULE=fcitx\n" | sudo tee -a /etc/environment
+        printf "QT_IM_MODULE=fcitx\n" | sudo tee -a /etc/environment 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     fi
 
     if ! grep -q "XMODIFIERS=@im=fcitx" /etc/environment; then
-        printf "XMODIFIERS=@im=fcitx\n" | sudo tee -a /etc/environment
+        printf "XMODIFIERS=@im=fcitx\n" | sudo tee -a /etc/environment 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     fi
 
 fi
@@ -106,7 +106,7 @@ fi
 #_____ for virtual machine
 # Check if the configuration is in a virtual box
 if hostnamectl | grep -q 'Chassis: vm'; then
-    printf "${action} - You are using this script in a Virtual Machine. Setting up things for you.\n"
+    printf "${action} - You are using this script in a Virtual Machine. Setting up things for you.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     # Comment out the line 'monitor=,preferred,auto,auto'
     sed -i '/monitor=,preferred,auto,auto/s/^/#/' config/hypr/configs/settings.conf
 
@@ -119,7 +119,7 @@ fi
 #_____ for nvidia gpu. I don't know if it's gonna work or not. Because I don't have any gpu.
 # uncommenting WLR_NO_HARDWARE_CURSORS if nvidia is detected
 if lspci -k | grep -A 2 -E "(VGA|3D)" | grep -iq nvidia; then
-  echo "Nvidia GPU detected. Setting up proper env's" 2>&1 | tee -a "$log" || true
+  echo "Nvidia GPU detected. Setting up proper env's" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") || true
   sed -i '/env = WLR_NO_HARDWARE_CURSORS,1/s/^#//' config/hypr/configs/environment.conf
   sed -i '/env = LIBVA_DRIVER_NAME,nvidia/s/^#//' config/hypr/configs/environment.conf
   sed -i '/env = __GLX_VENDOR_LIBRARY_NAME,nvidia/s/^# //' config/hypr/configs/environment.conf
