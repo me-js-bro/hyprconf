@@ -9,11 +9,11 @@
     "height": 10,
     "margin-top": -3,
 
-    "modules-left": ["custom/launch_rofi", "custom/fb", "custom/yt", "custom/wapp", "custom/ps", "custom/ai", "custom/github", "custom/weather", "mpris"],
+    "modules-left": ["custom/launch_rofi", "cpu", "memory", "custom/ai", "custom/github", "custom/weather", "mpris"],
 
     "modules-center": ["hyprland/workspaces"],
 
-    "modules-right": ["tray", "cpu", "memory", "pulseaudio", "custom/updater", "custom/swaync", "custom/clipboard", "network", "clock"],
+    "modules-right": ["tray", "custom/updater", "custom/swaync", "pulseaudio", "battery", "backlight", "custom/clipboard", "network", "clock"],
 
     "hyprland/workspaces": {
         "disable-scroll": true,

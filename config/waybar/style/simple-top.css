@@ -114,10 +114,14 @@ tooltip label{
 #mpris,
 #backlight {
     background: @background;
-    opacity: 0.8;
+    opacity: 0.9;
     padding: 0px 10px;
     margin: 3px 0px;
     margin-top: 10px;
+}
+
+#memory {
+    border-radius: 0 10px 10px 0;
 }
 
 #mpris {
@@ -132,16 +136,14 @@ tooltip label{
 }
 
 #custom-clipboard {
-    border-radius: 10px;
+    border-radius: 0 10px 10px 0;
     margin-right: 10px;
     font-size: 14px;
 }
 
 #custom-wallpaper-change {
     font-size: 16px;
-    padding-right: 20px;
-    margin-right: 10px;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0;
 }
 
 #custom-power_btn {
@@ -168,8 +170,13 @@ tooltip label{
     border-radius: 10px;
 }
 
-#tray, #temperature, #backlight, #custom-launch_rofi, #cpu {
+#backlight, #custom-launch_rofi, #cpu {
     border-radius: 10px 0px 0px 10px;
+}
+
+#backlight {
+    margin-left: 10px;
+    padding-right: 0;
 }
 
 #custom-lock_screen {
@@ -257,6 +264,23 @@ tooltip label{
 #battery {
     color: #a6e3a1;
     border-left: 0px;
+    margin-left: 0;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #333333;
+    }
+}
+
+#battery.critical:not(.charging) {
+    color: #f53c3c;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #custom-cava {

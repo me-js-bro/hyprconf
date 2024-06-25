@@ -103,7 +103,6 @@ tooltip label{
 #custom-wallpaper-change,
 #memory,
 #clock,
-#battery,
 #pulseaudio,
 #network,
 #tray,
@@ -137,9 +136,26 @@ tooltip label{
 }
 
 #battery {
+    color: #a6e3a1;
     background-color: transparent;
     margin-right: 0;
-    font-size: 18px;
+    font-size: 14px;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #333333;
+    }
+}
+
+#battery.critical:not(.charging) {
+    color: #f53c3c;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #custom-clipboard {
@@ -212,7 +228,7 @@ tooltip label{
     background-color: transparent;
 }
 
-#custom-light_dark, #pulseaudio.microphone, #battery, #disk {
+#custom-light_dark, #pulseaudio.microphone, #disk {
     border-radius: 0px 15px 15px 0px;
     margin-right: 10px;
 }
@@ -280,11 +296,6 @@ tooltip label{
     /* color: #cba6f7; */
     border-left: 0px;
     border-right: 0px;
-}
-
-#battery {
-    color: #a6e3a1;
-    border-left: 0px;
 }
 
 #custom-cava {

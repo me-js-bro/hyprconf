@@ -100,7 +100,7 @@
         "interval": 2,
         "align": 0,
         "rotate": 0,
-        //"format": "{icon} {percent}%",
+        "format": "{icon} {percent}%",
         "format-icons": [
             " ",
             " ",
@@ -110,17 +110,15 @@
             "󰃟 ",
             "󰃠 "
         ],
-        "format": "{icon}",
-        //"format-icons": ["","","","","","","","","","","","","","",""],
         "tooltip-format": "backlight {percent}%",
         "icon-size": 10,
         "on-click": "",
         "on-click-middle": "",
         "on-click-right": "",
         "on-update": "",
-        "on-scroll-up": "~/.config/hypr/scripts/Brightness.sh --inc",
-        "on-scroll-down": "~/.config/hypr/scripts/Brightness.sh --dec",
-        "smooth-scrolling-threshold": 1,
+        "on-scroll-up": "~/.config/hypr/scripts/brightness.sh up",
+        "on-scroll-down": "~/.config/hypr/scripts/brightness.sh down",
+        "smooth-scrolling-threshold": 1
     },
 
     "tray": {
@@ -150,16 +148,28 @@
     },
 
     "battery": {
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 20
-        },
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+	//"interval": 5,
+	"align": 0,
+	"rotate": 0,
+	"full-at": 100,
+	"design-capacity": false,
+	"states": {
+		"good": 95,
+		"warning": 30,
+		"critical": 15
+	},
+	"format": "{icon} {capacity}%",
+	"format-charging": " {capacity}%",
+	"format-plugged": "󱘖 {capacity}%",
+	"format-alt-click": "click",
+	"format-full": "{icon} Full",
+	"format-alt": "{icon} {time}",
+	"format-icons": [
+		"󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"
+	    ],
+	"format-time": "{H}h {M}min",
+	"tooltip": true,
+	"tooltip-format": "{timeTo} {power}w",
     },
 
     "pulseaudio": {
@@ -175,8 +185,6 @@
             "hands-free": "",
             "headset": "",
             "phone": "",
-            "portable": "",
-            "car": "",
             "default": ["", "", " "]
         }
     },
@@ -231,12 +239,25 @@
         "on-click": "kitty --title btop sh -c 'btop'"
     },
 
+    // "keyboard-state": {
+	// "numlock": true,
+	// "capslock": true,
+	// "format": {
+	// 	"numlock": "N {icon}",
+	// 	"capslock": "󰪛 {icon}"
+	//     },
+	// "format-icons": {
+	// 	"locked": "",
+	// 	"unlocked": ""
+	//     }
+    // },
+
 
     // custom modules 👇
 
     "custom/launch_rofi": {
-        "format": "",   // for arch
-        //  "format": "󰣛",   // for fedora
+        // "format": "",   // for arch
+         "format": "󰣛",   // for fedora
         // "format": "",  // for opensuse
         "on-click": "~/.config/hypr/scripts/menu_select.sh",
         "on-click-right": "rofi -n -show filebrowser",
@@ -293,65 +314,44 @@
         "tooltip": true
     },
 
-     "custom/cava": {
-         "exec": "~/.config/hypr/scripts/cava.sh",
-            "framerate": 60
-     },
+    "custom/cava": {
+        "exec": "~/.config/hypr/scripts/cava.sh",
+        "framerate": 60
+    },
 
-     "custom/clipboard": {
+    "custom/clipboard": {
         "format": "󰅌 {}",
         "exec": "~/.config/hypr/scripts/cliphist.sh l",
         "on-click": "~/.config/hypr/scripts/cliphist.sh c",
         "on-click-right": "~/.config/hypr/scripts/cliphist.sh w",
         "interval": 1
-     },
+    },
 
-     "custom/wallpaper-change": {
+    "custom/wallpaper-change": {
         "format": "󰸉",
         "on-click": "exec ~/.config/hypr/scripts/Wallpaper.sh",
         "on-click-right": "~/.config/hypr/scripts/WallpaperSelect.sh style2"
-     },
+    },
 
    "custom/weather": {
-    "format": " {}",
-    "format-alt": "{alt}: {}",
-    "format-alt-click": "click",
-    "interval": 3600,
-    "return-type": "json",
-    "exec": "~/.config/hypr/scripts/Weather.sh",
-    //"exec": "~/.config/waybar/scripts/Weather.py",
-    "exec-if": "ping wttr.in -c1",
-    "tooltip" : true
+        "format": " {}",
+        "format-alt": "{alt}: {}",
+        "format-alt-click": "click",
+        "interval": 3600,
+        "return-type": "json",
+        "exec": "~/.config/hypr/scripts/Weather.sh",
+        //"exec": "~/.config/waybar/scripts/Weather.py",
+        "exec-if": "ping wttr.in -c1",
+        "tooltip" : true
+    },
+    "custom/ai": {
+        "format": "󱜙 ",
+        "on-click": "~/.config/hypr/scripts/apps.sh ai",
+        "on-click-right": "~/.config/hypr/scripts/apps.sh gem"
     },
     
-        "custom/fb": {
-            "format": " ",
-            "on-click": "~/.config/hypr/scripts/apps.sh fb"
-        },
-    
-        "custom/yt": {
-            "format": " ",
-            "on-click": "~/.config/hypr/scripts/apps.sh yt"
-        },
-    
-        "custom/wapp": {
-            "format": " ",
-            "on-click": "~/.config/hypr/scripts/apps.sh wapp"
-        },
-    
-        "custom/ai": {
-            "format": "󱜙 ",
-            "on-click": "~/.config/hypr/scripts/apps.sh ai",
-            "on-click-right": "~/.config/hypr/scripts/apps.sh gem"
-        },
-    
-        "custom/github": {
-            "format": " ",
-            "on-click": "~/.config/hypr/scripts/apps.sh github"
-        },
-
-        "custom/ps": {
-            "format": " ",
-            "on-click": "~/.config/hypr/scripts/apps.sh ps"
-        }
+    "custom/github": {
+        "format": " ",
+        "on-click": "~/.config/hypr/scripts/apps.sh github"
+    }
 }

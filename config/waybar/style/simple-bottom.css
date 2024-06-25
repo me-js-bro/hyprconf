@@ -11,11 +11,11 @@
 
 window#waybar {
     background: rgba(24, 32, 42, 0);
-    color: @foreground;
+    color: #9DB8C1;
 }
 
 tooltip {
-    background: @background;
+    background: #18202A;
     opacity: 0.8;
     border-radius: 10px;
     border-width: 2px;
@@ -24,18 +24,18 @@ tooltip {
 }
 
 tooltip label{
-    color: @foreground;
+    color: #9DB8C1;
 }
 
 #workspaces button {
     padding: 5px;
-    color: @color2;
+    color: #4f5064;
     margin-right: 5px;
     background-color: rgba(17, 17, 27, 0);
 }
 
 #workspaces button.active {
-    color: @foreground;
+    color: #b8bfdd;
 }
 
 #workspaces button.focused {
@@ -114,11 +114,14 @@ tooltip label{
 #mpris,
 #backlight {
     background: @background;
-    opacity: 0.8;
+    opacity: 0.9;
     padding: 0px 10px;
     margin: 3px 0px;
     margin-top: 10px;
-    border: 0px;
+}
+
+#memory {
+    border-radius: 0 10px 10px 0;
 }
 
 #mpris {
@@ -129,25 +132,26 @@ tooltip label{
 #custom-swaync {
     border-radius: 10px;
     margin-right: 10px;
+    padding: 0 15px;
 }
 
 #custom-clipboard {
     border-radius: 0 10px 10px 0;
     margin-right: 10px;
-    font-size: 20px;
-    padding-right: 20px;
+    font-size: 14px;
 }
 
 #custom-wallpaper-change {
     font-size: 16px;
-    padding-right: 20px;
-    margin-right: 10px;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0;
+}
+
+#custom-power_btn {
+    color: red;
 }
 
 #taskbar{
     border-radius: 10px;
-    margin-left: 10px;
 }
 
 #custom-ibus {
@@ -156,7 +160,7 @@ tooltip label{
 }
 
 #network {
-    margin-right: 5px;
+    margin-right: 10px;
     padding-right: 15px;
     border-radius: 10px;
 }
@@ -166,8 +170,18 @@ tooltip label{
     border-radius: 10px;
 }
 
-#tray, #custom-lock_screen, #temperature, #backlight, #custom-launch_rofi, #cpu {
+#backlight, #custom-launch_rofi, #cpu {
     border-radius: 10px 0px 0px 10px;
+}
+
+#backlight {
+    margin-left: 10px;
+    padding-right: 0;
+}
+
+#custom-lock_screen {
+    border-radius: 10px;
+    padding-right: 13px;
 }
 
 #temperature {
@@ -184,15 +198,8 @@ tooltip label{
     margin-right: 10px;
 }
 
-#pulseaudio.microphone, #custom-power_btn {
-    border-radius: 0px 10px 10px 0px;
-}
-
 #custom-power_btn {
-	margin-left: 10px;
-    border-radius: 10px;
-    color: red;
-    padding: 0 15px;
+    padding-right: 15px;
 }
 
 #custom-light_dark {
@@ -245,9 +252,7 @@ tooltip label{
 }
 
 #clock {
-    border-radius: 10px;
-    margin-left: 10px;
-    padding-right: 15px;
+    border-radius: 10px 0 0 10px;
 }
 
 #pulseaudio.microphone {
@@ -259,6 +264,23 @@ tooltip label{
 #battery {
     color: #a6e3a1;
     border-left: 0px;
+    margin-left: 0;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #333333;
+    }
+}
+
+#battery.critical:not(.charging) {
+    color: #f53c3c;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #custom-cava {
