@@ -10,7 +10,7 @@
 @import 'style/theme.css';
 
 window#waybar {
-    background: rgba(0, 0, 0, 0.521);
+    background: rgba(0, 0, 0, 0.5);
     /* opacity: 0.8; */
 }
 
@@ -225,6 +225,7 @@ tooltip label{
     color: @foreground;
     border-radius: 20px;
     margin-left: 5px;
+    border: 2px solid @foreground;
 }
 
 #custom-ibus {
@@ -257,13 +258,13 @@ tooltip label{
 }
 
 #tray {
-    background: transparent;
-    border: 2px solid @foreground;
+    background: none;
     margin-right: 10px;
+    border: 2px solid @foreground;
     border-radius: 20px;
 }
 
-#custom-light_dark, #custom-power_btn, #pulseaudio.microphone, #battery, #disk {
+#custom-light_dark, #custom-power_btn, #pulseaudio.microphone, #disk {
     border-radius: 10px 10px 10px 10px;
     margin-right: 10px;
 }
@@ -306,7 +307,6 @@ tooltip label{
 #workspaces {
     background: @foreground;
     color: @background;
-    
     padding: 5px 3px;
     border-radius: 20px;
 }
@@ -333,7 +333,7 @@ tooltip label{
 }
 
 #pulseaudio {
-    background: transparent;
+    background: rgba(0, 0, 0, 0);
     border: 2px solid @foreground;
     color: @foreground;
     /* border-left: 0px; */
@@ -356,16 +356,35 @@ tooltip label{
     /* color: #cba6f7; */
     border-left: 0px;
     border-right: 0px;
-}
-
-#pulseaudio.microphone {
     background: none;
     color: @foreground;
 }
 
+#battery, #backlight {
+    color: @foreground;
+    margin-left: 10px;
+    border-left: 0px;
+    background: transparent;
+}
+
 #battery {
     color: #a6e3a1;
-    border-left: 0px;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #333333;
+    }
+}
+
+#battery.critical:not(.charging) {
+    color: #f53c3c;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #custom-cava {

@@ -9,7 +9,7 @@
     "height": 20,
     "margin-top": -5,
 
-    "modules-left": ["custom/launch_rofi","hyprland/workspaces","cpu","memory","disk"],
+    "modules-left": ["custom/launch_rofi","hyprland/workspaces","cpu","memory", "backlight", "battery"],
 
     "modules-center": ["wlr/taskbar"],
 
