@@ -5,6 +5,8 @@ SCRIPTSDIR="$HOME/.config/hypr/scripts"
 # WALLPAPERS PATH
 wallDIR="$HOME/.config/hypr/Wallpaper"
 cache_dir="$HOME/.config/hypr/.cache"
+engine_file="$cache_dir/.engine"
+engine=$(cat "$engine_file")
 
 # Transition config
 FPS=60
@@ -46,40 +48,97 @@ menu() {
   printf "$RANDOM_PIC_NAME\n"
 }
 
-swww query || swww init
+if [[ "$engine" == "swww" ]]; then
 
-main() {
-  choice=$(menu | ${rofi_command})
+  swww query || swww init
 
-  # No choice case
-  if [[ -z $choice ]]; then
-    exit 0
-  fi
+  main() {
+    choice=$(menu | ${rofi_command})
 
-  # Random choice case
-  if [ "$choice" = "$RANDOM_PIC_NAME" ]; then
-    swww img "${wallDIR}/${RANDOM_PIC}" $SWWW_PARAMS
-    exit 0
-  fi
-
-  # Find the index of the selected file
-  pic_index=-1
-  for i in "${!PICS[@]}"; do
-    filename=$(basename "${PICS[$i]}")
-    if [[ "$filename" == "$choice"* ]]; then
-      pic_index=$i
-      break
+    # No choice case
+    if [[ -z $choice ]]; then
+      exit 0
     fi
-  done
 
-  if [[ $pic_index -ne -1 ]]; then
-    notify-send -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
-    swww img "${wallDIR}/${PICS[$pic_index]}" $SWWW_PARAMS
-  else
-    echo "Image not found."
-    exit 1
-  fi
-}
+    # Random choice case
+    if [ "$choice" = "$RANDOM_PIC_NAME" ]; then
+      swww img "${wallDIR}/${RANDOM_PIC}" $SWWW_PARAMS
+      exit 0
+    fi
+
+    # Find the index of the selected file
+    pic_index=-1
+    for i in "${!PICS[@]}"; do
+      filename=$(basename "${PICS[$i]}")
+      if [[ "$filename" == "$choice"* ]]; then
+        pic_index=$i
+        break
+      fi
+    done
+
+    if [[ $pic_index -ne -1 ]]; then
+      notify-send -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
+      swww img "${wallDIR}/${PICS[$pic_index]}" $SWWW_PARAMS
+    else
+      echo "Image not found."
+      exit 1
+    fi
+  }
+elif [[ "$engine" == "hyprpaper" ]]; then
+
+      # Ensure hyprpaper is running
+      if ! pgrep -x hyprpaper > /dev/null; then
+        hyprpaper -c ~/.config/hypr/hyprpaper.conf &
+        sleep 2  # give hyprpaper some time to start
+      fi
+
+  main() {
+    choice=$(menu | ${rofi_command})
+
+    # No choice case
+    if [[ -z $choice ]]; then
+      exit 0
+    fi
+
+    # Random choice case
+    if [ "$choice" = "$RANDOM_PIC_NAME" ]; then
+        # Preload the wallpaper
+        hyprctl hyprpaper preload "${wallDIR}/${RANDOM_PIC}"
+        if [ $? -ne 0 ]; then
+        echo "Failed to preload wallpaper"
+        exit 1
+        fi
+        
+        # Set the wallpaper using hyprpaper
+        hyprctl hyprpaper wallpaper " ,${wallDIR}/${RANDOM_PIC}"
+        hyprctl reload
+      exit 0
+    fi
+
+    # Find the index of the selected file
+    pic_index=-1
+    for i in "${!PICS[@]}"; do
+      filename=$(basename "${PICS[$i]}")
+      if [[ "$filename" == "$choice"* ]]; then
+        pic_index=$i
+        break
+      fi
+    done
+
+    if [[ $pic_index -ne -1 ]]; then
+      notify-send -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
+      hyprctl hyprpaper preload "${wallDIR}/${PICS[$pic_index]}"
+      hyprctl hyprpaper wallpaper " ,${wallDIR}/${PICS[$pic_index]}"
+
+      ln -sf "${wallDIR}/${PICS[$pic_index]}" "$cache_dir/current_wallpaper.png"
+    else
+      echo "Image not found."
+      exit 1
+    fi
+    rm -rf ~/.cache/wal
+  }
+
+fi
 
 # Check if rofi is already running
 if pidof rofi > /dev/null; then
@@ -90,9 +149,9 @@ fi
 main
 
 sleep 0.5
-${SCRIPTSDIR}/pywal.sh
+"$SCRIPTSDIR/pywal.sh"
 sleep 0.2
-${SCRIPTSDIR}/Refresh.sh
+"$SCRIPTSDIR/Refresh.sh"
 
 # Check if the cache directory exists, create it if not
 mkdir -p "$cache_dir"
