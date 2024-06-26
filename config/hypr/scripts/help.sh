@@ -51,6 +51,7 @@ yad --width=$dynamic_width --height=$dynamic_height \
 " + CTRL + E" "Choose to edit dotfiles" "(Rofi)" \
 " + SHIFT + W" "Select wallpaper" "(Rofi)" \
 " + Alt + SHIFT + W" "Select wallpaper (style-2)" "(Rofi)" \
+" + Alt + E" "Change wallpaper Engine (swww / hyprpaper)" "(Rofi)" \
 " + ALT + C" "Clipboard Manager" "(Cliphist (Rofi))" \
 " + ALT + W" "Clear Clipboard History" "(Cliphist (Rofi))" \
 " + CTRL + W" "Select Waybar Layout" "(Rofi)" \
