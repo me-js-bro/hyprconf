@@ -256,8 +256,8 @@
     // custom modules 👇
 
     "custom/launch_rofi": {
-        // "format": "",   // for arch
-         "format": "󰣛",   // for fedora
+        "format": "",   // for arch
+        //  "format": "󰣛",   // for fedora
         // "format": "",  // for opensuse
         "on-click": "~/.config/hypr/scripts/menu_select.sh",
         "on-click-right": "rofi -n -show filebrowser",

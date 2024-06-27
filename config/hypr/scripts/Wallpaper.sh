@@ -84,9 +84,9 @@ fi
 
 
 sleep 0.5
-"$SCRIPTSDIR/pywal.sh"
+"$scripts_dir/pywal.sh"
 sleep 0.2
-"$SCRIPTSDIR/Refresh.sh"
+"$scripts_dir/Refresh.sh"
 
 sleep 0.2
 # creating a blur image for hyprlock
