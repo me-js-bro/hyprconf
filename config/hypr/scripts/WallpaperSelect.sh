@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPTSDIR="$HOME/.config/hypr/scripts"
+scripts_dir="$HOME/.config/hypr/scripts"
 
 # WALLPAPERS PATH
 wallDIR="$HOME/.config/hypr/Wallpaper"
@@ -149,9 +149,9 @@ fi
 main
 
 sleep 0.5
-"$SCRIPTSDIR/pywal.sh"
+"$scripts_dir/pywal.sh"
 sleep 0.2
-"$SCRIPTSDIR/Refresh.sh"
+"$scripts_dir/Refresh.sh"
 
 # Check if the cache directory exists, create it if not
 mkdir -p "$cache_dir"

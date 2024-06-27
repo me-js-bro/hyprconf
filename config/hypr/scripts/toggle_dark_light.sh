@@ -3,7 +3,7 @@
 mode_file="$HOME/.mode"
 wallpaper_dir_dark="$HOME/.config/hypr/Dynamic-Wallpapers/dark"
 wallpaper_dir_light="$HOME/.config/hypr/Dynamic-Wallpapers/light"
-scriptsDir="$HOME/.config/hypr/scripts"
+scripts_dir="$HOME/.config/hypr/scripts"
 cache_dir="$HOME/.config/hypr/.cache"
 engine_file="$cache_dir/.engine"
 
@@ -79,9 +79,9 @@ else
 fi
 
 sleep 0.5
-"$SCRIPTSDIR/pywal.sh"
+"$scripts_dir/pywal.sh"
 sleep 0.2
-"$SCRIPTSDIR/Refresh.sh"
+"$scripts_dir/Refresh.sh"
 
 mkdir -p "$cache_dir"
 if [ -d "$cache_dir" ]; then
