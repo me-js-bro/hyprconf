@@ -192,7 +192,41 @@ fi
 # setting default themes, icon and cursor
 gsettings set org.gnome.desktop.interface gtk-theme "theme"
 gsettings set org.gnome.desktop.interface icon-theme "TokyoNight-SE"
-gsettings set org.gnome.desktop.interface cursor-theme 'Nordzy-cursors'
+gsettings set org.gnome.desktop.interface cursor-theme "Nordzy-cursors"
+
+
+
+# =========  wallpaper section  ========= #
+
+if [[ -d "$HOME/.config/hypr/Wallpaper" ]]; then
+  mode_file="$HOME/.mode"
+  engine="$HOME/.config/hypr/.cache/.engine"
+
+  touch "$mode_file" &> /dev/null
+  touch "$engine" &> /dev/null
+  
+  echo "dark" > "$mode_file"
+  echo "hyprpaper" > "$engine"
+
+  wallpaper="$HOME/.config/hypr/Wallpaper/${distro}.png"
+
+    # Ensure hyprpaper is running
+    if ! pgrep -x hyprpaper > /dev/null; then
+        hyprpaper -c ~/.config/hypr/hyprpaper.conf &
+        sleep 2  # give hyprpaper some time to start
+    fi
+
+    # Preload the wallpaper
+    hyprctl hyprpaper preload "$wallpaper"
+    if [ $? -ne 0 ]; then
+        echo "Failed to preload wallpaper"
+        exit 1
+    fi
+
+    hyprctl hyprpaper wallpaper " ,$wallpaper"
+    ln -sf "$wallpaper" "$HOME/.config/hypr/.cache/current_wallpaper.png"
+    "$HOME/.config/hypr/scripts/pywal.sh"
+fi
 
 # setting up the waybar
 ln -sf "$HOME/.config/waybar/configs/fancy-top" "$HOME/.config/waybar/config"
