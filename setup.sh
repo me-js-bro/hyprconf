@@ -55,6 +55,37 @@ printf "${attention} - Now setting up the pre installed Hyprland configuration.\
 
 mkdir -p ~/.config
 
+
+
+# =========  checking the distro  ========= #
+
+check_distro() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        case "$ID" in
+            arch)
+                printf "${action} - Starting the script for ${cyan}$ID${end} Linux\n\n"
+                distro="arch"
+                ;;
+            fedora)
+                printf "${action} - Starting the script for ${cyan}$ID${end}\n\n"
+                distro="fedora"
+                ;;
+            opensuse*)
+                printf "${action} - Starting the script for ${cyan}$ID${end}\n\n"
+                distro="opensuse"
+                ;;
+            *)
+                printf "${error} - Sorry, the script won't work in your distro...\n"
+                exit 1
+                ;;
+        esac
+    else
+        printf "${error} - Sorry, the script won't work in $ID...\n"
+        exit 1
+    fi
+}
+
 dirs=(
     alacritty
     btop
@@ -198,6 +229,8 @@ gsettings set org.gnome.desktop.interface cursor-theme "Nordzy-cursors"
 
 # =========  wallpaper section  ========= #
 
+check_distro &> /dev/null
+
 if [[ -d "$HOME/.config/hypr/Wallpaper" ]]; then
   mode_file="$HOME/.mode"
   engine="$HOME/.config/hypr/.cache/.engine"
@@ -208,24 +241,12 @@ if [[ -d "$HOME/.config/hypr/Wallpaper" ]]; then
   echo "dark" > "$mode_file"
   echo "hyprpaper" > "$engine"
 
-  wallpaper="$HOME/.config/hypr/Wallpaper/${distro}.png"
+  wallpaper="$HOME/.config/hypr/Wallpaper/$distro.png"
 
-    # Ensure hyprpaper is running
-    if ! pgrep -x hyprpaper > /dev/null; then
-        hyprpaper -c ~/.config/hypr/hyprpaper.conf &
-        sleep 2  # give hyprpaper some time to start
-    fi
-
-    # Preload the wallpaper
-    hyprctl hyprpaper preload "$wallpaper"
-    if [ $? -ne 0 ]; then
-        echo "Failed to preload wallpaper"
-        exit 1
-    fi
-
-    hyprctl hyprpaper wallpaper " ,$wallpaper"
-    ln -sf "$wallpaper" "$HOME/.config/hypr/.cache/current_wallpaper.png"
-    "$HOME/.config/hypr/scripts/pywal.sh"
+# setting the default wallpaper
+  ln -sf "$wallpaper" "$HOME/.config/hypr/.cache/current_wallpaper.png"
+   echo "wallpaper = ,/home/js-bro/.config/hypr/.cache/current_wallpaper.png" > "$HOME/.config/hypr/hyprpaper"
+  "$HOME/.config/hypr/scripts/pywal.sh"
 fi
 
 # setting up the waybar
