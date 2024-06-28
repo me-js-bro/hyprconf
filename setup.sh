@@ -55,6 +55,37 @@ printf "${attention} - Now setting up the pre installed Hyprland configuration.\
 
 mkdir -p ~/.config
 
+
+
+# =========  checking the distro  ========= #
+
+check_distro() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        case "$ID" in
+            arch)
+                printf "${action} - Starting the script for ${cyan}$ID${end} Linux\n\n"
+                distro="arch"
+                ;;
+            fedora)
+                printf "${action} - Starting the script for ${cyan}$ID${end}\n\n"
+                distro="fedora"
+                ;;
+            opensuse*)
+                printf "${action} - Starting the script for ${cyan}$ID${end}\n\n"
+                distro="opensuse"
+                ;;
+            *)
+                printf "${error} - Sorry, the script won't work in your distro...\n"
+                exit 1
+                ;;
+        esac
+    else
+        printf "${error} - Sorry, the script won't work in $ID...\n"
+        exit 1
+    fi
+}
+
 dirs=(
     alacritty
     btop
@@ -192,7 +223,31 @@ fi
 # setting default themes, icon and cursor
 gsettings set org.gnome.desktop.interface gtk-theme "theme"
 gsettings set org.gnome.desktop.interface icon-theme "TokyoNight-SE"
-gsettings set org.gnome.desktop.interface cursor-theme 'Nordzy-cursors'
+gsettings set org.gnome.desktop.interface cursor-theme "Nordzy-cursors"
+
+
+
+# =========  wallpaper section  ========= #
+
+check_distro &> /dev/null
+
+if [[ -d "$HOME/.config/hypr/Wallpaper" ]]; then
+  mode_file="$HOME/.mode"
+  engine="$HOME/.config/hypr/.cache/.engine"
+
+  touch "$mode_file" &> /dev/null
+  touch "$engine" &> /dev/null
+  
+  echo "dark" > "$mode_file"
+  echo "hyprpaper" > "$engine"
+
+  wallpaper="$HOME/.config/hypr/Wallpaper/$distro.png"
+
+# setting the default wallpaper
+  ln -sf "$wallpaper" "$HOME/.config/hypr/.cache/current_wallpaper.png"
+   echo "wallpaper = ,/home/js-bro/.config/hypr/.cache/current_wallpaper.png" > "$HOME/.config/hypr/hyprpaper"
+  "$HOME/.config/hypr/scripts/pywal.sh"
+fi
 
 # setting up the waybar
 ln -sf "$HOME/.config/waybar/configs/fancy-top" "$HOME/.config/waybar/config"
