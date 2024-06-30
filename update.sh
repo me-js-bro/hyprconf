@@ -98,9 +98,10 @@ fi
 
 sleep 1 && clear
 
-printf "${action} - Updating configs..\n"
+git clone --depth=1 https://github.com/me-js-bro/hyprconf.git "$HOME/.cache/hyprconf"
 
-git stash 2>&1 | tee -a "$log" &> /dev/null
-git pull origin main 2>&1 | tee -a "$log" &> /dev/null
-chmod +x setup.sh 2>&1 | tee -a "$log"
-./setup.sh
+if [[ -d "$HOME/.cache/hyprconf" ]]; then
+    cd "$HOME/.cache/hyprconf"
+    chmod +x setup.sh
+    ./setup.sh
+fi

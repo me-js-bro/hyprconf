@@ -88,9 +88,10 @@ If you have OpenBangla-Keyboard installed, then you need to follow some steps to
 <h4>To install and setup this hyprland configuration automaticly, just follow these stpes...</h4>
 
 - Clone this repository:
-   ```
+
+```shell
    git clone --depth=1 https://github.com/me-js-bro/hyprconf.git
-   ```
+```
 
 - Now cd into hyprconf directory and run this command.:
    ```
@@ -98,6 +99,13 @@ If you have OpenBangla-Keyboard installed, then you need to follow some steps to
    chmod +x setup.sh
    ./setup.sh
    ```
+
+## Update
+<h4>To Update into the latest commit. jusr run this command in your tarminal..</h4>
+
+```shell
+bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/update.sh -O -)"
+```
 - Hurrah! Now reboot your system, select Hyprland from your login manager, log into your Hyprland and enjoy it.
 <hr> <br>
 
