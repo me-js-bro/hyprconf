@@ -91,6 +91,7 @@ dirs=(
     btop
     fastfetch
     hypr
+    nvim
     rofi
     swaync 
     waybar
