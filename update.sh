@@ -80,7 +80,7 @@ if [[ "$bkup" =~ ^[Yy]$ ]]; then
         dir_path=~/.config/$dir
         if [[ -d "$dir_path" ]]; then
             printf "${action} - Removing the old $dir_path. \n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-            sudo rm -rf "$dir_path"
+            rm -rf "$dir_path"
             printf "${done} - Removed $dir.\n"
         fi
 done
@@ -105,4 +105,11 @@ if [[ -d "$HOME/.cache/hyprconf" ]]; then
     cd "$HOME/.cache/hyprconf"
     chmod +x setup.sh
     ./setup.sh
+fi
+
+
+# Removint the cache file
+if [[ -d "$HOME/.config/hypr/scripts" ]]; then
+    printf "${attention} - Removing the cache\n"
+    rm -rf "$HOME/.cache/hyprconf" &> /dev/null
 fi
