@@ -37,14 +37,12 @@ printf " \n \n"
 ###------ Startup ------###
 
 # finding the presend directory and log file
-present_dir=`pwd`
+dir="$(dirname "$(realpath "$0")")"
 # log directory
-log_dir="$present_dir/Logs"
+log_dir="$dir/Logs"
 log="$log_dir"/update-dotfiles.log
 mkdir -p "$log_dir"
-if [[ ! -f "$log" ]]; then
-    touch "$log"
-fi
+touch "$log"
 
 # Directories ----------------------------
 hypr_dir="$HOME/.config/hypr"
@@ -77,10 +75,11 @@ dirs=(
 if [[ "$bkup" =~ ^[Yy]$ ]]; then
 
     for dir in "${dirs[@]}"; do
-        dir_path=~/.config/$dir
+
+        dir_path="$HOME/.config/$dir"
         if [[ -d "$dir_path" ]]; then
             printf "${action} - Removing the old $dir_path. \n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-            rm -rf "$dir_path"
+            rm -rf "$dir_path" 2>&1 | tee -a "$log"
             printf "${done} - Removed $dir.\n"
         fi
 done
@@ -91,7 +90,7 @@ else
         dir_path=~/.config/$dir
         if [[ -d "$dir_path" ]]; then
             printf "${attention} - backing up old $dir_path\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-            mv "$dir_path" "$dir_path"-${USER}
+            mv "$dir_path" "$dir_path"-${USER} 2>&1 | tee -a "$log"
             printf "${done} - Backed up $dir.\n"
         fi
     done
@@ -110,6 +109,8 @@ fi
 
 # Removint the cache file
 if [[ -d "$HOME/.config/hypr/scripts" ]]; then
-    printf "${attention} - Removing the cache\n"
+    printf "${done} - Dotfiles were update successfully. Removing the cache.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+
     rm -rf "$HOME/.cache/hyprconf" &> /dev/null
+    exit 0
 fi

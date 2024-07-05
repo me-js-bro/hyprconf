@@ -37,14 +37,13 @@ printf " \n \n"
 ###------ Startup ------###
 
 # finding the presend directory and log file
-present_dir=`pwd`
+dir="$(dirname "$(realpath "$0")")"
 # log directory
-log_dir="$present_dir/Logs"
+log_dir="$dir/Logs"
 log="$log_dir"/dotfiles.log
 mkdir -p "$log_dir"
-if [[ ! -f "$log" ]]; then
-    touch "$log"
-fi
+touch "$log"
+
 
 # Directories ----------------------------
 hypr_dir="$HOME/.config/hypr"
@@ -160,7 +159,7 @@ fi
 sleep 1
 
 # cloning the dotfiles repository into ~/.config/hypr
-cp -r "$present_dir"/config/* "$HOME"/.config/
+cp -r "$dir"/config/* "$HOME"/.config/
 sleep 1
 
 if [ -d $scripts_dir ]; then
@@ -179,7 +178,7 @@ if [[ ! -d "$fonts_dir" ]]; then
 	mkdir -p "$fonts_dir"
 fi
 
-cp -r "$present_dir/extras/fonts" "$fonts_dir"
+cp -r "$dir/extras/fonts" "$fonts_dir"
 printf "${action} - Updating font cache...\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 sudo fc-cache -fv
 
@@ -191,7 +190,7 @@ else
     printf "${attention} - $wayland_session_dir NOT found, creating...\n"
     sudo mkdir $wayland_session_dir 2>&1 | tee -a "$log"
 fi
-    sudo cp "$present_dir/extras/hyprland.desktop" /usr/share/wayland-sessions/ 2>&1 | tee -a "$log"
+    sudo cp "$dir/extras/hyprland.desktop" /usr/share/wayland-sessions/ 2>&1 | tee -a "$log"
 
 clear && sleep 1
 
