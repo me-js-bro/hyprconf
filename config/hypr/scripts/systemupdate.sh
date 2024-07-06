@@ -5,34 +5,47 @@ scripts_dir="$HOME/.config/hypr/scripts"
 # for arch linux
 if [ -f /etc/arch-release ]; then
 
-    # Check for updates
+    # Function to check for updates
     aurhlpr=$(command -v yay || command -v paru)
-    aur=$(${aurhlpr} -Qua | wc -l)
+    check_for_updates() {
+        aur=$(${aurhlpr} -Qua | wc -l)
+        ofc=$(checkupdates | wc -l)
 
-    # Check for flatpak updates
+        # Calculate total available updates
+        upd=$(( ofc + aur ))
+
+        echo "$upd"
+    }
+
+    # tooltip in waybar
+    aur=$(${aurhlpr} -Qua | wc -l)
     ofc=$(checkupdates | wc -l)
 
-    # Calculate total available updates
-    upd=$(( ofc + aur ))
+    # Initial check for updates
+    upd=$(check_for_updates)
 
     # Show tooltip
     if [ $upd -eq 0 ] ; then
         echo "{\"text\":\"$upd\", \"tooltip\":\"  Packages are up to date\"}"
         # "$scripts_dir/notification.sh" notify "  Packages are up to date"
     else
-        echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Official $ofc\n󱓾 AUR $aur$fpk_disp\"}"
+        echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Official $ofc\n󱓾 AUR $aur\"}"
         "$scripts_dir/notification.sh" notify "󱓽 Updates Available: $upd"
     fi
 
+    # Function to update packages
     update_packages() {
-        alacritty --title systemupdate -e sh -c "${aurhlpr} -Syu $fpk_exup"
+        kitty --title systemupdate sh -c "${aurhlpr} -Syyu --noconfirm"
+        upd=$?
 
-        sleep 3
+        sleep 1
 
-        if [ $upd -eq 0 ] ; then
-            "$scripts_dir/notification.sh" notify "  Packages updated successfully"
+        if [ $upd -eq 0 ]; then
+            "$scripts_dir"/notification.sh notify "  Packages updated successfully"
+        elif [ $upd -gt 0 ]; then
+            "$scripts_dir"/notification.sh notify "Some packages were skipped..."
         else
-            "$scripts_dir/notification.sh" notify "Could not update your packages."
+            "$scripts_dir"/notification.sh notify "Could not update your packages."
         fi
     }
 
@@ -55,7 +68,7 @@ elif [ -f /etc/fedora-release ]; then
 
     update_packages() {
         # Run the update command and capture the return code
-        alacritty --title systemupdate -e sh -c "sudo dnf update -y && sudo dnf upgrade -y"
+        kitty --title systemupdate sh -c "sudo dnf update -y && sudo dnf upgrade -y"
         upd=$?
 
         sleep 2
@@ -92,8 +105,8 @@ elif [ -f /etc/os-release ]; then
         fi
 
         update_packages() {
-            alacritty --title systemupdate -e sh -c "sudo zypper up"
-
+            kitty --title systemupdate sh -c "sudo zypper up"
+            $upd=$?
             sleep 2
                 
             if ((upd == 0)); then
@@ -110,4 +123,5 @@ fi
 # Trigger upgrade
 if [ "$1" == "up" ] ; then
     update_packages
+    "$scripts_dir/Refresh.sh"
 fi

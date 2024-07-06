@@ -56,10 +56,10 @@ read -r -p "$(echo -e '\e[1;32mSelect: \e[0m')" bkup
 mkdir -p ~/.config
 
 dirs=(
-    alacritty
     btop
     fastfetch
     hypr
+    kitty
     nvim
     rofi
     swaync 
@@ -67,6 +67,7 @@ dirs=(
     gtk-3.0
     gtk-4.0
     Kvantum
+    ranger
     qt5ct
     qt6ct
 )

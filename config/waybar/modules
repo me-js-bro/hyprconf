@@ -260,7 +260,7 @@
         //  "format": "󰣛",   // for fedora
         // "format": "",  // for opensuse
         "on-click": "~/.config/hypr/scripts/menu_select.sh",
-        "on-click-right": "rofi -n -show filebrowser",
+        "on-click-right": "kitty --title ranger -e ranger",
         "tooltip": false
     },
 
