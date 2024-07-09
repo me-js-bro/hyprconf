@@ -109,72 +109,54 @@ else
 fi
 
 
-# Extract colors from colors.json
-kitty_colors=~/.cache/wal/colors-kitty.conf
-kitty=~/.config/kitty/kitty.conf
-# Define a function to extract a specific color
-extract_color() {
-  color_keyword="$1"
-  grep "^${color_keyword}" $kitty_colors | awk '{print $2}'
-}
-
-# Extract background and foreground colors
-# kitty_background_color=$(extract_color "background")
-# kitty_foreground_color=$(extract_color "foreground")
-
-# # kitty colors
-# sed -i "s/background .*$/background $kitty_background_color/g" "$kitty"
-# sed -i "s/foreground .*$/foreground $kitty_foreground_color/g" "$kitty"
-# kitty @ --to=unix:/tmp/kitty.sock quit
-
-# alacritty colors ( test )
-alacritty=~/.config/alacritty/alacritty.toml
+# Path to your Kitty configuration file
+kitty_config=~/.config/kitty/kitty.conf
 
 # Extract colors using jq
 background_color=$(jq -r '.special.background' "$colors_file")
 foreground_color=$(jq -r '.special.foreground' "$colors_file")
 
 # Normal colors
-black=$(jq -r '.colors.color0' $colors_file)
-red=$(jq -r '.colors.color1' $colors_file)
-green=$(jq -r '.colors.color2' $colors_file)
-yellow=$(jq -r '.colors.color3' $colors_file)
-blue=$(jq -r '.colors.color4' $colors_file)
-magenta=$(jq -r '.colors.color5' $colors_file)
-cyan=$(jq -r '.colors.color6' $colors_file)
-white=$(jq -r '.colors.color7' $colors_file)
+black=$(jq -r '.colors.color0' "$colors_file")
+red=$(jq -r '.colors.color1' "$colors_file")
+green=$(jq -r '.colors.color2' "$colors_file")
+yellow=$(jq -r '.colors.color3' "$colors_file")
+blue=$(jq -r '.colors.color4' "$colors_file")
+magenta=$(jq -r '.colors.color5' "$colors_file")
+cyan=$(jq -r '.colors.color6' "$colors_file")
+white=$(jq -r '.colors.color7' "$colors_file")
 
 # Bright colors
-bright_black=$(jq -r '.colors.color8' $colors_file)
-bright_red=$(jq -r '.colors.color9' $colors_file)
-bright_green=$(jq -r '.colors.color10' $colors_file)
-bright_yellow=$(jq -r '.colors.color11' $colors_file)
-bright_blue=$(jq -r '.colors.color12' $colors_file)
-bright_magenta=$(jq -r '.colors.color13' $colors_file)
-bright_cyan=$(jq -r '.colors.color14' $colors_file)
-bright_white=$(jq -r '.colors.color15' $colors_file)
+bright_black=$(jq -r '.colors.color8' "$colors_file")
+bright_red=$(jq -r '.colors.color9' "$colors_file")
+bright_green=$(jq -r '.colors.color10' "$colors_file")
+bright_yellow=$(jq -r '.colors.color11' "$colors_file")
+bright_blue=$(jq -r '.colors.color12' "$colors_file")
+bright_magenta=$(jq -r '.colors.color13' "$colors_file")
+bright_cyan=$(jq -r '.colors.color14' "$colors_file")
+bright_white=$(jq -r '.colors.color15' "$colors_file")
 
-# Update Alacritty configuration file with new colors
-sed -i "s/^background = .*/background = \"$background_color\"/g" "$alacritty"
-sed -i "s/^foreground = .*/foreground = \"$foreground_color\"/g" "$alacritty"
+# Update Kitty configuration file with new colors
+sed -i "s/^background .*/background $background_color/g" "$kitty_config"
+sed -i "s/^foreground .*/foreground $foreground_color/g" "$kitty_config"
 
-sed -i "s/^black = .*/black = \"$black\"/g" "$alacritty"
-sed -i "s/^red = .*/red = \"$red\"/g" "$alacritty"
-sed -i "s/^green = .*/green = \"$green\"/g" "$alacritty"
-sed -i "s/^yellow = .*/yellow = \"$yellow\"/g" "$alacritty"
-sed -i "s/^blue = .*/blue = \"$blue\"/g" "$alacritty"
-sed -i "s/^magenta = .*/magenta = \"$magenta\"/g" "$alacritty"
-sed -i "s/^cyan = .*/cyan = \"$cyan\"/g" "$alacritty"
-sed -i "s/^white = .*/white = \"$white\"/g" "$alacritty"
+sed -i "s/^color0 .*/color0 $black/g" "$kitty_config"
+sed -i "s/^color1 .*/color1 $red/g" "$kitty_config"
+sed -i "s/^color2 .*/color2 $green/g" "$kitty_config"
+sed -i "s/^color3 .*/color3 $yellow/g" "$kitty_config"
+sed -i "s/^color4 .*/color4 $blue/g" "$kitty_config"
+sed -i "s/^color5 .*/color5 $magenta/g" "$kitty_config"
+sed -i "s/^color6 .*/color6 $cyan/g" "$kitty_config"
+sed -i "s/^color7 .*/color7 $white/g" "$kitty_config"
 
-sed -i "s/^bright_black = .*/bright_black = \"$bright_black\"/g" "$alacritty"
-sed -i "s/^bright_red = .*/bright_red = \"$bright_red\"/g" "$alacritty"
-sed -i "s/^bright_green = .*/bright_green = \"$bright_green\"/g" "$alacritty"
-sed -i "s/^bright_yellow = .*/bright_yellow = \"$bright_yellow\"/g" "$alacritty"
-sed -i "s/^bright_blue = .*/bright_blue = \"$bright_blue\"/g" "$alacritty"
-sed -i "s/^bright_magenta = .*/bright_magenta = \"$bright_magenta\"/g" "$alacritty"
-sed -i "s/^bright_cyan = .*/bright_cyan = \"$bright_cyan\"/g" "$alacritty"
-sed -i "s/^bright_white = .*/bright_white = \"$bright_white\"/g" "$alacritty"
+sed -i "s/^color8 .*/color8 $bright_black/g" "$kitty_config"
+sed -i "s/^color9 .*/color9 $bright_red/g" "$kitty_config"
+sed -i "s/^color10 .*/color10 $bright_green/g" "$kitty_config"
+sed -i "s/^color11 .*/color11 $bright_yellow/g" "$kitty_config"
+sed -i "s/^color12 .*/color12 $bright_blue/g" "$kitty_config"
+sed -i "s/^color13 .*/color13 $bright_magenta/g" "$kitty_config"
+sed -i "s/^color14 .*/color14 $bright_cyan/g" "$kitty_config"
+sed -i "s/^color15 .*/color15 $bright_white/g" "$kitty_config"
 
 # (__________________________)
 

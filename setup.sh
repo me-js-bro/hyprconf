@@ -86,11 +86,12 @@ check_distro() {
 }
 
 dirs=(
-    alacritty
     btop
     fastfetch
     hypr
+    kitty
     nvim
+    ranger
     rofi
     swaync 
     waybar
