@@ -72,6 +72,19 @@ dirs=(
     qt6ct
 )
 
+# this part if for the new update. ( switched to kitty )
+# check for kitty terminal
+if sudo pacman -Qs kitty &> /dev/null; then
+    printf "${done} - Kitty is already installed...\n"
+else
+    printf "${action} - Installing kitty terminal..\n"
+    sudo pacman -S --noconfirm kitty
+    if sudo pacman -Qs alacritty &> /dev/null; then
+        printf "${attention} - Removing Alacritty"
+        sudo pacman -Rns --noconfirm alacritty
+    fi
+fi
+
 # if some main directories exists, backing them up.
 if [[ "$bkup" =~ ^[Yy]$ ]]; then
 
