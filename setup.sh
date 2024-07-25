@@ -103,10 +103,10 @@ dirs=(
 )
 
 # if some main directories exists, backing them up.
-for dir in "${dirs[@]}"; do
-    dir_path=~/.config/$dir
+for confs in "${dirs[@]}"; do
+    dir_path=~/.config/$confs
     if [[ -d "$dir_path" ]]; then
-        printf "${attention} - Config for $dir located, backing up...\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+        printf "${attention} - Config for $confs located, backing up...\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
         mv "$dir_path" "$dir_path"-${USER} 2>&1 | tee -a "$log"
         printf "${done} - Backed up $dir.\n"
     fi
@@ -166,6 +166,7 @@ sleep 1
 if [ -d $scripts_dir ]; then
     # make all the scripts executable...
     chmod +x "$scripts_dir"/* 2>&1 | tee -a "$log"
+    chmod +x "$HOME/.config/ranger/scope.sh" 2>&1 | tee -a "$log"
 
     printf "${done} - All the necessary scripts have been executable.\n"
     sleep 1

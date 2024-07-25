@@ -23,21 +23,31 @@ cat << "EOF"
 EOF
 }
 
+option1="Fullscreen (delay 3 sec)"
 option2="Selected area"
-option3="Fullscreen (delay 1 sec)"
 
-options="$option2\n$option3"
+options="$option1\n$option2"
 
 choice=$(echo -e "$options" | rofi -dmenu -replace -config ~/.config/rofi/themes/config-screenshots.rasi -i -no-show-icons -l 2 -width 30 -p)
 
+send_notification() {
+    local msg="$1"
+    notify-send -e "Taking Screenshot in" "$msg"
+    sleep 1
+    pkill swaync
+}
+
 case $choice in
-    $option2)  # print all outputs
-        sleep 0.5
-        grimblast --freeze copysave area $temp_screenshot && swappy -f $temp_screenshot 
-        ;;
-    $option3)  # drag to manually snip an area / click on a window to print it
-        sleep 0.5
+    $option1)  # full area, 3 sec delay.
+        for time in 3 2 1; do
+            send_notification "$time"
+        done
+        sleep 1
         grimblast copysave screen $temp_screenshot && swappy -f $temp_screenshot
+        ;;
+    $option2)  # drag to manually snip an area / click on a window to print it
+        grimblast --freeze copysave area $temp_screenshot && swappy -f $temp_screenshot 
+        sleep 0.5
         ;;
     *)  # invalid option
         print_error ;;
@@ -46,5 +56,5 @@ esac
 rm "$temp_screenshot"
 
 if [ -f "$save_dir/$save_file" ] ; then
-    notify-send "saved in $save_dir" -i "$save_dir/$save_file" -r 91190 -t 2200
+    notify-send "saved in" "$save_dir" -i "$save_dir/$save_file" -r 91190 -t 2200
 fi

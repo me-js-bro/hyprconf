@@ -8,11 +8,14 @@ configuration {
     display-window:              " ";
     drun-display-format:         "{name}";
     window-format:               "{w}{t}";
+    hover-select:                true;
+    me-select-entry:            "MouseSecondary";
+    me-accept-entry:            "MousePrimary";
     font:                        "JetBrainsMono Nerd Font 10";
     icon-theme:                  "Tela-circle-dracula";
 }
 
-/* ---- Load pywal colors (custom wal template) ---- */
+// ---- Load pywal colors (custom wal template) ---- //
 @import "~/.config/rofi/themes/rofi-pywal.rasi"
 
 
@@ -26,9 +29,13 @@ window {
     cursor:                      "default";
     spacing:                     0em;
     padding:                     0em;
-    border-color:                @background;
+    border:                      2px solid;
+    border-color:                @foreground;
     background-color:            @background;
     border-radius: 20px;
+    location: northWest;
+    x-offset: 15px;
+    y-offset: 15px;
 }
 mainbox {
     enabled:                     true;
@@ -57,18 +64,18 @@ mode-switcher {
     enabled:                     true;
     padding:                     3em 1.8em 3em 1.8em;
     spacing:                     1em;
-    background-color:            @foreground;
+    background-color:            transparent;
 }
 button {
     cursor:                      pointer;
     border-radius:               3em;
-    background-color:            @foreground;
-    text-color:                  @background;
+    background-color:            @background;
+    text-color:                  @foreground;
 }
 button selected {
     border-radius:               3em;
-    background-color:            @background;
-    text-color:                  @foreground;
+    background-color:            @foreground;
+    text-color:                  @background;
 }
 
 
@@ -115,11 +122,11 @@ element {
     border-radius: 10px;
 }
 element selected.normal {
-    background-color:            @selected-active-background;
-    text-color:                  @selected-active-foreground;
+    background-color:            @foreground;
+    text-color:                  @background;
 }
 element-icon {
-    size:                        3em;
+    size:                        2em;
     cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;

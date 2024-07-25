@@ -31,7 +31,7 @@ window {
     padding:                    1px;
     margin:                     0px; 
     border:                     2px;
-    border-color:               @active-background;
+    border-color:               @foreground;
     cursor:                     "default";
     location:                   center;
     anchor:                     center;
