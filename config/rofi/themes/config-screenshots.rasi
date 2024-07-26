@@ -27,9 +27,9 @@ window {
     spacing:                      0px;
     padding:                      0px;
     margin:                       0px; 
-    color:                        #FFFFFF;
+    color:                        @foreground;
     border:                       2px solid;
-    border-color:                 #FFFFFF;
+    border-color:                 @foreground;
     cursor:                       "default";
     transparency:                 "real";
     location:                     center;
@@ -37,7 +37,7 @@ window {
     fullscreen:                   false;
     enabled:                      true;
     border-radius:                20px;
-    background-color:             transparent;
+    background-color:             @background;
 }
 
 /* ---- Mainbox ---- */
@@ -47,7 +47,6 @@ mainbox {
     spacing:                      0px;
     margin:                       0px;
     background-color:             @background;
-    background-image:             url("~/.config/hypr/.cache/current_wallpaper.png");
     children:                     ["listbox"];
 }
 
@@ -170,8 +169,8 @@ element normal.active {
 }
 
 element selected.normal {
-    background-color:            @color11;
-    text-color:                  @foreground;
+    background-color:            @foreground;
+    text-color:                  @background;
 }
 
 element selected.urgent {

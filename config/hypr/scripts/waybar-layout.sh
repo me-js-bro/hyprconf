@@ -11,6 +11,8 @@ waybar_style="$HOME/.config/waybar/style.css"
 script_dir="$HOME/.config/hypr/scripts"
 window_rules="$HOME/.config/hypr/configs/environment.conf"
 rofi_config="$HOME/.config/rofi/themes/rofi-waybar.rasi"
+rofi_menu="$HOME/.config/rofi/menu/style-4.rasi"
+rofi_clipboard="$HOME/.config/rofi/themes/rofi-clipboard.rasi"
 environment_config="$HOME/.config/hypr/configs/environment.conf"
 
 # Function to display menu options
@@ -34,13 +36,35 @@ apply_config() {
     ln -sf "$layout_file" "$waybar_config"
     ln -sf "$style_file" "$waybar_style"
 
-    if [[ "$1" == "fancy-top" || "$1" == "fancy-bottom" || "$1" == "colorful-bottom" || "$1" == "colorful-top" || "$1" == "full-top-1" || "$1" == "full-bottom-1" ]]; then
+    if [[ "$1" == "fancy-top" || "$1" == "fancy-bottom" || "$1" == "colorful-bottom" || "$1" == "colorful-top" || "$1" == "full-top" || "$1" == "full-bottom" ]]; then
         echo "Enabling blur in $window_rules"
         sed -i "/^#blurls = waybar$/ s/#//" "$window_rules"
         sed -i "/^#blurls = waybar$/d" "$window_rules"
     else
         echo "Disabling blur in $window_rules"
         sed -i "/^blurls = waybar$/ s/^/#/" "$window_rules"
+    fi
+
+    if [[ "$1" == *"-top" ]]; then
+        echo "top"
+        sed -i "s/location:.*/location: northWest;/g" "$rofi_menu"
+        sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"
+        sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_menu"
+
+        sed -i "s/location:.*/location: northEast;/g" "$rofi_clipboard"
+        sed -i "s/anchor:.*/anchor: northeast;/g" "$rofi_clipboard"
+        sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_clipboard"
+    elif [[ "$1" == *"-bottom" ]]; then
+        echo "bottom"
+        sed -i "s/location:.*/location: southWest;/g" "$rofi_menu"
+        sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"
+        sed -i "s/y-offset:.*/y-offset: -15px;/g" "$rofi_menu"
+
+        sed -i "s/location:.*/location: southeast;/g" "$rofi_clipboard"
+        sed -i "s/anchor:.*/anchor: southeast;/g" "$rofi_clipboard"
+        sed -i "s/y-offset:.*/y-offset: -15px;/g" "$rofi_clipboard"
+    else
+        echo "------------( error )------------"
     fi
 
     restart_waybar_if_needed
