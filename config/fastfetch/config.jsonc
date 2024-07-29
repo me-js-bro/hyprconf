@@ -10,7 +10,9 @@
     },
     "display": {
         "separator": "",
-        "keyWidth": 15
+        "key": {
+            "width": 16
+        }
     },
     "modules": [
         {
