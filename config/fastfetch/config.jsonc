@@ -9,7 +9,7 @@
         }
     },
     "display": {
-        "separator": "",
+        "separator": " ",
         "key": {
             "width": 16
         }
