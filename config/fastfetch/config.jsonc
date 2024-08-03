@@ -9,8 +9,10 @@
         }
     },
     "display": {
-        "separator": "",
-        "keyWidth": 15
+        "separator": " ",
+        "key": {
+            "width": 16
+        }
     },
     "modules": [
         {
