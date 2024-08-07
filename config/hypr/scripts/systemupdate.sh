@@ -1,4 +1,22 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+SOUND_FILE_UPDATE="$HOME/.config/hypr/sounds/update.wav"
+SOUND_FILE_ERROR="$HOME/.config/hypr/sounds/error.wav"
+update_sign="$HOME/.config/hypr/icons/update.png"
+done_sign="$HOME/.config/hypr/icons/done.png"
+warning_sign="$HOME/.config/hypr/icons/warning.png"
+error_sign="$HOME/.config/hypr/icons/error.png"
+
+# notification functions
+update_notification() {
+    notify-send -i "$1" "$2" "$3"
+    paplay "$SOUND_FILE_UPDATE"
+}
+
+error_notification() {
+    notify-send -i "$1" "$2" "$3"
+    paplay "$SOUND_FILE_ERROR"
+}
 
 scripts_dir="$HOME/.config/hypr/scripts"
 
@@ -27,10 +45,9 @@ if [ -f /etc/arch-release ]; then
     # Show tooltip
     if [ $upd -eq 0 ] ; then
         echo "{\"text\":\"$upd\", \"tooltip\":\"  Packages are up to date\"}"
-        # "$scripts_dir/notification.sh" notify "  Packages are up to date"
     else
         echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Official $ofc\n󱓾 AUR $aur\"}"
-        "$scripts_dir/notification.sh" notify "󱓽 Updates Available: $upd"
+        update_notification "$update_sign" "Updates Available: $upd" "Main: $ofc, Aur: $aur"
     fi
 
     # Function to update packages
@@ -41,11 +58,11 @@ if [ -f /etc/arch-release ]; then
         sleep 1
 
         if [ $upd -eq 0 ]; then
-            "$scripts_dir"/notification.sh notify "  Packages updated successfully"
+            update_notification "$done_sign" "Done" "Packages have been updated"
         elif [ $upd -gt 0 ]; then
-            "$scripts_dir"/notification.sh notify "Some packages were skipped..."
+            error_notification "$warning_sign" "Warning!" "Some packages may have skipped"
         else
-            "$scripts_dir"/notification.sh notify "Could not update your packages."
+            error_notification "$error_sign" "Error!" "Sorry, could not update packages"
         fi
     }
 
@@ -61,7 +78,7 @@ elif [ -f /etc/fedora-release ]; then
         # "$scripts_dir/notification.sh" notify "  Packages are up to date"
     else
         echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Updates Available: $upd\"}"
-        "$scripts_dir/notification.sh" notify "󱓽 Updates Available: $upd"
+        update_notification "$update_sign" "Updates Available" "$upd packages"
     fi
 
     sleep 1
@@ -74,11 +91,11 @@ elif [ -f /etc/fedora-release ]; then
         sleep 2
 
         if [ $upd -eq 0 ]; then
-            "$scripts_dir"/notification.sh notify "  Packages updated successfully"
+            update_notification "$done_sign" "Done" "Packages have been updated"
         elif [ $upd -gt 0 ]; then
-            "$scripts_dir"/notification.sh notify "Some packages were skipped..."
+            error_notification "$warning_sign" "Warning!" "Some packages may have skipped"
         else
-            "$scripts_dir"/notification.sh notify "Could not update your packages."
+            error_notification "$error_sign" "Error!" "Sorry, could not update packages"
         fi
 }
 
@@ -101,7 +118,7 @@ elif [ -f /etc/os-release ]; then
             # "$scripts_dir/notification.sh" notify "  Packages are up to date"
         else
             echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Updates Available: $upd\"}"
-            "$scripts_dir/notification.sh" notify "󱓽 Updates Available: $upd"
+            update_notification "$update_sign" "Updates Available" "$upd packages"
         fi
 
         update_packages() {
@@ -110,11 +127,11 @@ elif [ -f /etc/os-release ]; then
             sleep 2
                 
             if ((upd == 0)); then
-                "$scripts_dir/notification.sh" notify "  Packages updated successfully"
+                update_notification "$done_sign" "Done" "Packages have been updated"
             elif ((upd > 0)); then
-                "$scripts_dir/notification.sh" notify "Some packages were skipped..."
+                error_notification "$warning_sign" "Warning!" "Some packages may have skipped"
             else
-                "$scripts_dir/notification.sh" notify "Could not update your packages."
+                error_notification "$error_sign" "Error!" "Sorry, could not update packages"
             fi
         }
     fi
