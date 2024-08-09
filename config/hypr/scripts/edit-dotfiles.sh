@@ -7,49 +7,59 @@ scripts="$hypr_dir/scripts"
 rofi="$HOME/.config/rofi"
 swaync="$HOME/.config/swaync"
 waybar="$HOME/.config/waybar"
+kitty="$HOME/.config/kitty"
 
 menu(){
-  printf "1. Edit Hyprland Configs\n"
-  printf "2. Edit Scripts\n"
-  printf "3. Edit Rofi\n"
-  printf "4. Edit Swaync\n"
-  printf "5. Edit Waybar\n"
+  printf "Hyprland\n"
+  printf "Scripts\n"
+  printf "Kitty\n"
+  printf "Waybar\n"
+  printf "Rofi\n"
+  printf "Swaync\n"
 }
 
 notify() {
     if [ -n "$(command -v code)" ]; then
-        notify-send "$1" "Opening with VS Code"
+        notify-send "Opening with VS Code" "$1"
         editor="code"
     elif [ -n "$(command -v nvim)" ]; then
-        notify-send "$1" "Opening with Neovim"
+        notify-send "Opening with Neovim" "$1"
         editor="nvim"
     else
-        notify-send "$1" "Opening with Nano"
+        notify-send "Opening with Nano" "$1"
         editor="nano"  # Default to nano if neither VS Code nor Neovim is found
     fi
 }
 
 main() {
-    notify "Starting Editor"
-    choice=$(menu | rofi -dmenu -config ~/.config/rofi/themes/rofi-edit-dots.rasi | cut -d. -f1)
+    choice=$(menu | rofi -dmenu -config ~/.config/rofi/themes/rofi-edit-dots.rasi)
+
     case $choice in
-        1)
+        "Hyprland")
+            notify "Hyprland (settings, keybinds and all)"
             $editor $hypr_configs
             ;;
-        2)
+        "Scripts")
+            notify "Scripts (necessary scripts)"
             $editor $scripts
             ;;
-        3)
-            $editor $rofi
+        "Kitty")
+            notify "Kitty (kitty terminal)"
+            $editor $kitty
             ;;
-        4)
-            $editor $swaync
-            ;;
-        5)
+        "Waybar")
+            notify "Waybar (the top bar)"
             $editor $waybar
             ;;
+        "Rofi")
+            notify "Rofi (the app launcher)"
+            $editor $rofi
+            ;;
+        "Swaync")
+            notify "Swaync (sway notification center)"
+            $editor $swaync
+            ;;
         *)
-            notify-send "...." "No config found"
             ;;
     esac
 }
