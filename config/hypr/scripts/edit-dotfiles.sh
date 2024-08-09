@@ -12,19 +12,25 @@ menu(){
   printf "1. Edit Hyprland Configs\n"
   printf "2. Edit Scripts\n"
   printf "3. Edit Rofi\n"
-  printf "5. Edit Swaync\n"
-  printf "6. Edit Waybar\n"
+  printf "4. Edit Swaync\n"
+  printf "5. Edit Waybar\n"
 }
 
-if dnf list installed code &>> /dev/null; then
-    editor="code"
-else
-    notify-send "Opening with Neovim"
-
-    editor="nvim"
-fi
+notify() {
+    if [ -n "$(command -v code)" ]; then
+        notify-send "$1" "Opening with VS Code"
+        editor="code"
+    elif [ -n "$(command -v nvim)" ]; then
+        notify-send "$1" "Opening with Neovim"
+        editor="nvim"
+    else
+        notify-send "$1" "Opening with Nano"
+        editor="nano"  # Default to nano if neither VS Code nor Neovim is found
+    fi
+}
 
 main() {
+    notify "Starting Editor"
     choice=$(menu | rofi -dmenu -config ~/.config/rofi/themes/rofi-edit-dots.rasi | cut -d. -f1)
     case $choice in
         1)
@@ -36,17 +42,14 @@ main() {
         3)
             $editor $rofi
             ;;
-            ;;
         4)
             $editor $swaync
             ;;
         5)
             $editor $waybar
             ;;
-        6)
-            $editor $wlogout
-            ;;
         *)
+            notify-send "...." "No config found"
             ;;
     esac
 }
