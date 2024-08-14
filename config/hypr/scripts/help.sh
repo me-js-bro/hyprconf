@@ -78,4 +78,6 @@ yad --width=$dynamic_width --height=$dynamic_height \
 "F3" "Brightness" "(Brightness Decrease  )" \
 "" "" "" \
 "CTRL + ESC" " " "Hide/Launch Waybar" \
-"CTRL+ Alt + ESC" " " "Reload Waybar" \
+"CTRL + Alt + ESC" " " "Reload Waybar" \
+"CTRL + R" " " "Reload Hyprland" \
+"CTRL + U" " " "Update System" \
