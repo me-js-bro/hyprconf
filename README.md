@@ -136,13 +136,16 @@ bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/up
 | Clipboard Manager               | `SUPER` + `ALT` + `c`       | Manage clipboard contents (clear or view)    |
 | Clipboard Wipe                  | `SUPER` + `ALT` + `w`       | Clear clipboard contents                     |
 | Emoji Selector                  | `SUPER` + `SHIFT` + `D`     | Open emoji selector                          |
-| Shutdown/Restart Menu           | `SUPER` + `x`               | Open power menu                   |
+| Shutdown/Restart Menu           | `SUPER` + `x`               | Open power menu                              |
 | Change Power Menu Theme         | `SUPER` + `ALT` + `x`       | Change power menu theme                      |
 | Open Code Editor                | `SUPER` + `c`               | Open code editor                             |
 | Open Web Browsers               | `SUPER` + `b`               | Open preferred web browsers                  |
 | Open Web Browsers               | `SUPER` + `SHIFT` + `b`     | Open secondary web browser                   |
 | Switch Window                   | `SUPER` + `Tab`             | Open rofi to switch between windows          |
 | Hide/Unhide Waybar              | `CONTROL` + `ESCAPE`        | Hide and unhide status bar (waybar)          |
+|Reload Waybar                    | `CONTROL` + `ALT` + `ESCAPE`| Reload status bar (waybar)                   |
+|Reload Hyprland                  | `CONTROL` + `R`             | Reload Hyprland                              |
+|Update system                    | `CONTROL` + `U`             | Update the system                            |
 | Lock Screen                     | `SUPER` + `SHIFT` + `l`     | Lock the screen   (Hyprlock)                 |
 | Toggle Dark/Light Theme         | `SUPER` + `CTRL` + `l`      | Toggle between dark and light themes         |
 | Adjust Waybar Layout            | `SUPER` + `CTRL` + `w`      | Adjust waybar layout                         |
