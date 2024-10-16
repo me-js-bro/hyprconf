@@ -70,7 +70,7 @@ if [ -f /etc/arch-release ]; then
 elif [ -f /etc/fedora-release ]; then
 
     # Calculate total available updates fedora
-    upd=$(dnf check-update -q | wc -l)
+    upd=$(dnf check-update -q | grep -vE 'Last metadata expiration|^$' | wc -l)
 
     # Show tooltip
     if [ $upd -eq 0 ] ; then
