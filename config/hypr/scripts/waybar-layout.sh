@@ -45,7 +45,7 @@ apply_config() {
         sed -i "/^blurls = waybar$/ s/^/#/" "$window_rules"
     fi
 
-    if [[ "$1" == *"-top" ]]; then
+    if [[ "$1" == *"-top"* ]]; then
         echo "top"
         sed -i "s/location:.*/location: northWest;/g" "$rofi_menu"
         sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"
@@ -54,7 +54,7 @@ apply_config() {
         sed -i "s/location:.*/location: northEast;/g" "$rofi_clipboard"
         sed -i "s/anchor:.*/anchor: northeast;/g" "$rofi_clipboard"
         sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_clipboard"
-    elif [[ "$1" == *"-bottom" ]]; then
+    elif [[ "$1" == *"-bottom"* ]]; then
         echo "bottom"
         sed -i "s/location:.*/location: southWest;/g" "$rofi_menu"
         sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"

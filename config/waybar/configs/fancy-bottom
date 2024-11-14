@@ -40,8 +40,8 @@
 
     "custom/launch_rofi": {
         "format": "Apps",
-        "on-click": "~/.config/hypr/scripts/menu_select.sh",
-        "on-click-right": "rofi -n -show filebrowser",
+        "on-click": "rofi -show drun -theme ~/.config/rofi/menu/style-4.rasi",
+            "on-click-right": "kitty --title ranger -e ranger",
         "tooltip": false
     }
 }
