@@ -259,7 +259,7 @@
         "format": "",   // for arch
         //  "format": "󰣛",   // for fedora
         // "format": "",  // for opensuse
-        "on-click": "~/.config/hypr/scripts/menu_select.sh",
+        "on-click": "rofi -show drun -theme ~/.config/rofi/menu/style-4.rasi",
         "on-click-right": "kitty --title ranger -e ranger",
         "tooltip": false
     },
