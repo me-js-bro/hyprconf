@@ -107,7 +107,7 @@ elif [ -f /etc/os-release ]; then
     if [[ $ID == "opensuse-tumbleweed" ]]; then
 
         # Count the number of available updates
-        ofc=$(zypper lu --best-effort | grep -c 'v |')
+        ofc=$(zypper lu --best-effort | grep -c 'v  |')
 
         # Calculate total available updates
         upd=$(( ofc ))
