@@ -124,11 +124,12 @@ elif [ -f /etc/os-release ]; then
         update_packages() {
             kitty --title systemupdate sh -c "sudo zypper up"
             $upd=$?
+
             sleep 2
                 
-            if ((upd == 0)); then
+            if [ "$upd" -eq 0 ]; then
                 update_notification "$done_sign" "Done" "Packages have been updated"
-            elif ((upd > 0)); then
+            elif [ "$upd" -gt 0 ]; then
                 error_notification "$warning_sign" "Warning!" "Some packages may have skipped"
             else
                 error_notification "$error_sign" "Error!" "Sorry, could not update packages"
