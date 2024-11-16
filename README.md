@@ -149,7 +149,7 @@ bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/up
 |Reload Hyprland                  | `CONTROL` + `R`             | Reload Hyprland                              |
 |Update system                    | `CONTROL` + `U`             | Update the system                            |
 | Lock Screen                     | `SUPER` + `SHIFT` + `l`     | Lock the screen   (Hyprlock)                 |
-| Toggle Dark/Light Theme         | `SUPER` + `CTRL` + `l`      | Toggle between dark and light themes         |
+| Toggle Dark/Light Theme         | `SUPER` + `ALT` + `l`      | Toggle between dark and light themes         |
 | Adjust Waybar Layout            | `SUPER` + `CTRL` + `w`      | Adjust waybar layout                         |
 | Edit Dotfiles                   | `SUPER` + `CTRL` + `e`      | Edit dotfiles                                |
 | Open Shell Script               | `SUPER` + `ALT` + `b`       | Open theme selector for  shell script   (bash/zsh)  |
