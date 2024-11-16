@@ -67,6 +67,8 @@
 - <h4>Opening some web pages as single tab</h4>
 - <h4>Locking with Hyprlock</h4>
 - <h4>Set your user image in Hyprlock ( a script to set your user image )</h4>
+- <h4>Hypridle to handle auto lock and suspend when no action is running </h4>
+- <h4>Hyprsunset to toggle nightlisht, `mod` + F1 && `mod` + F2 </h4>
 <br>
 
 
@@ -161,19 +163,21 @@ bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/up
 |                                 | `F10`                       | Decrease volume                              |
 |                                 | `F11`                       | Increase volume                              |
 | Move Focus (Arrow Keys)         | `SUPER` + `l`               | Move focus right                             |
-|                                 | `SUPER` + `j`               | Move focus left                              |
-|                                 | `SUPER` + `u`               | Move focus up                                |
-|                                 | `SUPER` + `M`               | Move focus down                              |
-| Move Window (Arrow Keys)        | `SUPER` + `CONTROL` + `j`   | Move window left                             |
+|                                 | `SUPER` + `h`               | Move focus left                              |
+|                                 | `SUPER` + `k`               | Move focus up                                |
+|                                 | `SUPER` + `j`               | Move focus down                              |
+| Move Window (Arrow Keys)        | `SUPER` + `CONTROL` + `h`   | Move window left                             |
 |                                 | `SUPER` + `CONTROL` + `l`   | Move window right                            |
-|                                 | `SUPER` + `CONTROL` + `u`   | Move window up                               |
-|                                 | `SUPER` + `CONTROL` + `m`   | Move window down                             |
+|                                 | `SUPER` + `CONTROL` + `k`   | Move window up                               |
+|                                 | `SUPER` + `CONTROL` + `j`   | Move window down                             |
 | Switch Workspaces               | `SUPER` + `[0-9]`           | Switch to workspace `[0-9]`                  |
 | Move Window to Workspace        | `SUPER` + `SHIFT` + `[0-9]` | Move active window to workspace `[0-9]`      |
 | Move Window Silently to Workspace | `SUPER` + `ALT` + `[0-9]` | Move window silently to workspace `[0-9]`    |
 | Scroll through Workspaces       | `SUPER` + `mouse_down`      | Scroll to next workspace                     |
 |                                 | `SUPER` + `mouse_up`        | Scroll to previous workspace                 |
 | Move/Resize Window              | `SUPER` + `LMB/RMB`         | Drag to move or resize window                |
+|                                 |                             |                                              |
+| Toggle nightlight mode          | `SUPER` + F1 && `SUPER + F2 | Toggle between nightlight and default colors |
 
 
 ## Contribute.
