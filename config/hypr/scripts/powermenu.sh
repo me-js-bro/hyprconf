@@ -51,11 +51,13 @@ run_cmd() {
         if [[ $1 == '--shutdown' ]]; then
             systemctl poweroff
         elif [[ $1 == '--reboot' ]]; then
-            systemctl reboot
+            systemctl reboot --now
         elif [[ $1 == '--lock' ]]; then
             hyprlock
         elif [[ $1 == '--logout' ]]; then
             hyprctl dispatch exit 0
+        elif [[ $1 == '--suspend' ]]; then
+            systemctl suspend
         fi
     else
         exit 0
