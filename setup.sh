@@ -222,13 +222,6 @@ if [[ "$wallpaper" =~ ^[Y|y]$ ]]; then
     fi
 fi
 
-# setting default themes, icon and cursor
-gsettings set org.gnome.desktop.interface gtk-theme "theme"
-gsettings set org.gnome.desktop.interface icon-theme "TokyoNight-SE"
-gsettings set org.gnome.desktop.interface cursor-theme "Nordzy-cursors"
-
-
-
 # =========  wallpaper section  ========= #
 
 check_distro &> /dev/null
@@ -256,3 +249,5 @@ ln -sf "$HOME/.config/waybar/configs/fancy-top" "$HOME/.config/waybar/config"
 ln -sf "$HOME/.config/waybar/style/fancy-top.css" "$HOME/.config/waybar/style.css"
 
 printf "${done} - Script execution was successful! Now you can reboot and enjoy your customization \n"
+
+# === ___ Script Ends Here ___ === #
