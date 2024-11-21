@@ -85,8 +85,8 @@ prompt {
 /*****----- Message -----*****/
 message {
     enabled:                     true;
-    margin:                      var(message-margin);
-    padding:                     var(message-padding);
+    margin:                      30px;
+    padding:                     20px;
     border-radius:               var(message-border-radius);
     background-color:            var(background-normal);
     text-color:                  var(foreground-normal);

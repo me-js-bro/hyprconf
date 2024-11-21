@@ -3,10 +3,10 @@
 # Current Theme
 main_dir="$HOME/.config/rofi"
 dir="$main_dir/power_option"
-theme='style-4'
+theme='style-1'
 
 # CMDs
-uptime="$(uptime -p | sed -e 's/up //g')"
+uptime="$(awk '{printf "%d hour, %d minutes\n", $1/3600, ($1%3600)/60}' /proc/uptime)"
 host=$(hostname)
 
 # Options
