@@ -123,11 +123,11 @@ tooltip label{
 #clock,
 #battery,
 #pulseaudio,
+#pulseaudio.microphone,
 #network,
 #tray,
 #temperature,
 #workspaces,
-#custom-ibus,
 #taskbar,
 #mpris,
 #custom-swaync,
@@ -137,6 +137,7 @@ tooltip label{
 #custom-yt,
 #custom-wapp,
 #custom-github,
+#custom-nightlight,
 #backlight {
     background: #18202A;
     opacity: 1;
@@ -158,6 +159,13 @@ tooltip label{
     background: none;
     color: @foreground;
     margin-right: -3px;
+}
+
+#custom-nightlight {
+    background: none;
+    color: @foreground;
+    font-size: 18px;
+    margin: 0 3px 0 10px;
 }
 
 #custom-wallpaper-change {
@@ -228,14 +236,6 @@ tooltip label{
     border: 2px solid @foreground;
 }
 
-#custom-ibus {
-    background: #eba0ac;
-    color: #18202A;
-    font-weight: 700;
-    border-radius: 10px;
-    margin-right: 10px;
-}
-
 #network {
     margin-right: 3px;
     border-radius: 10px;
@@ -264,12 +264,12 @@ tooltip label{
     border-radius: 20px;
 }
 
-#custom-light_dark, #custom-power_btn, #pulseaudio.microphone, #disk {
+#custom-light_dark, #custom-power_btn, #disk {
     border-radius: 10px 10px 10px 10px;
     margin-right: 10px;
 }
 
-#pulseaudio.microphone, #custom-power_btn {
+#custom-power_btn {
     border-radius: 0px 10px 10px 0px;
 }
 
@@ -336,9 +336,8 @@ tooltip label{
     background: rgba(0, 0, 0, 0);
     border: 2px solid @foreground;
     color: @foreground;
-    /* border-left: 0px; */
-    /* border-right: 0px; */
-    border-radius: 20px;
+    border-right: none;
+    border-radius: 20px 0 0 20px;
 }
 
 #clock {
@@ -353,11 +352,13 @@ tooltip label{
 }
 
 #pulseaudio.microphone {
-    /* color: #cba6f7; */
-    border-left: 0px;
-    border-right: 0px;
+    border: 2px solid @foreground;
+    border-left: none;
+    border-radius: 0 20px 20px 0;
     background: none;
     color: @foreground;
+    margin-left: -3px;
+    margin-right: 3px;
 }
 
 #battery, #backlight {

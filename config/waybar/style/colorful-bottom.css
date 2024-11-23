@@ -106,7 +106,6 @@ tooltip label{
 #tray,
 #temperature,
 #workspaces,
-#custom-ibus,
 #taskbar,
 #custom-swaync,
 #custom-ai,
@@ -116,6 +115,7 @@ tooltip label{
 #custom-wapp,
 #custom-github,
 #mpris,
+#custom-nightlight,
 #backlight {
     background: @background;;
     opacity: 0.8;
@@ -130,7 +130,7 @@ tooltip label{
     color: @color2;
 }
 
-#custom-swaync {
+#custom-swaync, #custom-nightlight {
     margin-right: 3px;
     border-radius: 3px;
     color: @color4;
@@ -210,12 +210,6 @@ tooltip label{
 
 #taskbar{
     border-radius: 3px;
-}
-
-#custom-ibus {
-    border-radius: 3px;
-    margin-right: 3px;
-    color: @color11;
 }
 
 #network {

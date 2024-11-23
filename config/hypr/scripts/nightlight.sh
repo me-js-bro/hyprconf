@@ -25,33 +25,32 @@ if command -v hyprsunset &> /dev/null; then
                 if (( value + 100 <= 6000 )); then
                     value=$((value + 100))
                     echo "$value" > "$value_file"
-                    notification_id=$(notify-send -p -r "$notification_id" "Nightlight" "Screen temp: $value\k")
+                    notification_id=$(notify-send -p -r "$notification_id" "Nightlight" "Screen temp: ${value}k")
                     echo "$notification_id" > "$notification_id_file"
                     hyprsunset -t "$value"
                 else
-                    echo "Value cannot exceed 6000."
+                    notification_id=$(notify-send -p -r "$notification_id" "Nightlight Max Value" "Cannot increase more than ${value}k")
+                    echo "$notification_id" > "$notification_id_file"
                 fi
             ;;
             --dec)
                 if (( value - 100 >= 3000 )); then
                     value=$((value - 100))
                     echo "$value" > "$value_file"
-                    notification_id=$(notify-send -p -r "$notification_id" "Nightlight" "Screen temp: $value\k")
+                    notification_id=$(notify-send -p -r "$notification_id" "Nightlight" "Screen temp: ${value}k")
                     echo "$notification_id" > "$notification_id_file"
                     hyprsunset -t "$value"
                 else
-                    echo "Value cannot go below 3000."
+                    notification_id=$(notify-send -p -r "$notification_id" "Nightlight Min Value" "Cannot decrease more than ${value}k")
+                    echo "$notification_id" > "$notification_id_file"
                 fi
             ;;
             --def)
                 value=$default
                 echo "$value" > "$value_file"
-                notification_id=$(notify-send -p -r "$notification_id" "Nightlight" "Screen temp reset to default: $value\k")
+                notification_id=$(notify-send -p -r "$notification_id" "Nightlight" "Screen temp reset to default")
                 echo "$notification_id" > "$notification_id_file"
-                hyprsunset -t "$value"
-            ;;
-            *)
-                echo "Usage: $0 [--inc|--dec|--def]"
+                killall hyprsunset
             ;;
         esac
     }
@@ -60,3 +59,5 @@ if command -v hyprsunset &> /dev/null; then
 else
     echo "hyprsunset command not found. Please install it or add it to your PATH."
 fi
+
+printf "${value}K"
