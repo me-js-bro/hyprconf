@@ -65,7 +65,7 @@
 - <h4>Gorgeous looking Waybar styles</h4>
 - <h4>Rofi app launcher styles</h4>
 - <h4>Rofi power menu</h4>
-- <h4>Opening some web pages as single tab (chatGPT, Gemini, Facebook, YouTube, WhatsApp, Photopea</h4>
+- <h4>Opening some web pages as single tab (chatGPT, Gemini, Facebook, YouTube, WhatsApp, Photopea)</h4>
 - <h4>Locking with Hyprlock</h4>
 - <h4>Set your user image in Hyprlock ( a script to set your user image )</h4>
 - <h4>Hypridle to handle auto lock and suspend when no action is running </h4>
