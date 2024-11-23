@@ -39,7 +39,7 @@ yad --width=$dynamic_width --height=$dynamic_height \
     --timeout-indicator=bottom \
 " = " "SUPER KEY (Windows Key)" "(SUPER KEY)" \
 "" "" "" \
-" + Return" "Terminal" "(Alacritty)" \
+" + Return" "Terminal" "(Kitty)" \
 " + E" "Open File Manager" "(Thunar)" \
 "" "" "" \
 " + D" "App Launcher" "(Rofi)" \
@@ -62,20 +62,24 @@ yad --width=$dynamic_width --height=$dynamic_height \
 " + B" "Browser" "(Brave/Chromium)" \
 " + SHIFT + B" "Browser" "(Firefox 󰈹 )" \
 " + C" "Code Editor" "(Visual Studio Code 󰨞 )" \
-" " "Print" "Screenshot" "(Grimblast)" \
-" + Print" "Screenshot region" "(Grimblast)" \
+"" "" "" \
+"Print" "Full Screen Screenshot" "Screenshot (Grimblast)" \
+" + Print" "Select Area Screenshot" "Screenshot (Grimblast)" \
 " + SHIFT + L" "Screen lock" "(hyprlock)" \
 " + F" "Fullscreen" "(Toggles full-screen)" \
 " + V" "Floating" "(Toggle floating window)" \
-" + H" " " "Launch this app" \
+" + H" " " "See Keybinds" \
 "CTRL + Space" "Toggle Keyboard" "fcitx5 (Bangla & English)" \
 "" "" "" \
 "F9" "Volume" "(Volume Mute  )" \
 "F10" "Volume" "(Volume Decrease  )" \
-"F11" "Volume" "(Volume Increase  )" \
+"F11" "Volume" "(Volume Increase   )" \
 "" "" "" \
-"F2" "Brightness" "(Brightness Increase  )" \
-"F3" "Brightness" "(Brightness Decrease  )" \
+"F2" "Brightness" "(Brightness Decrease 󰃞 )" \
+"F3" "Brightness" "(Brightness Increase 󰃠 )" \
+" + F1" "NightLight" "(Increase NightLight by 100K )" \
+" + F2" "NightLight" "(Decrease NightLight by 100K )" \
+" + F3" "NightLight" "(Default NightLight 6000K )" \
 "" "" "" \
 "CTRL + ESC" " " "Hide/Launch Waybar" \
 "CTRL + Alt + ESC" " " "Reload Waybar" \

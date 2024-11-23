@@ -148,7 +148,7 @@ tooltip label{
 }
 
 #custom-swaync {
-    margin-right: -3px;
+    margin-right: 3px;
     border-radius: 10px;
     background: transparent;
     color: @foreground;
