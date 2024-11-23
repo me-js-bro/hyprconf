@@ -1,10 +1,13 @@
-<h1 align="center">Hyprland Configuration Script V2</h1>
+<h1 align="center">Minimal Hyprland Configuration</h1>
 <h3 align="center">By</h3>
 <h2 align="center">Js Bro ( Md. Mahin Islam Mahi )</h2>
 <br>
 
+<h3>This Hyprland configuration is kind of minila looking, but also little bit gorgeous I guess. Why don't you check it out? </h3>
+
 ## Screenshots
-### theme
+<details close>
+<summary>Themes</summary>
 <p align="center">
    <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/theme/1.png?raw=true" />
    <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/theme/2.png?raw=true" /> <br>
@@ -12,63 +15,61 @@
    <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/theme/3.png?raw=true" />
    <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/theme/4.png?raw=true" />
 </p> <br>
+</details>
 
-### menu
+<details close>
+<summary>Menu</summary>
 <p align="center">
    <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/menu/1.png?raw=true" />
    <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/menu/2.png?raw=true" /> <br>
 
-   <img aligh="center" width="99%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/menu/3.png?raw=true" />
+   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/menu/4.png?raw=true" />
+   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/menu/3.png?raw=true" />
 </p> <br>
+</details>
 
-### power menu
+<details close>
+<summary>Power Menu</summary>
 <p align="center">
    <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/power/1.png?raw=true" />
    <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/power/2.png?raw=true" /> <br>
-</p> <br>
 
-### wallpaper
+   <img aligh="center" width="99%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/power/3.png?raw=true" />
+</p> <br>
+</details>
+
+<details close>
+<summary>Wallpaper</summary>
 <p align="center">
    <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/wallpaper/1.png?raw=true" />
    <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/wallpaper/2.png?raw=true" /> <br>
 
    <img aligh="center" width="99%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/wallpaper/3.png?raw=true" />
 </p> <br>
+</details>
 
-#### lock screen
+<details close>
+<summary>Lock Screen</summary>
 <p align="center">
    <img aligh="center" width="99%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/lock.png?raw=true" />
 </p>
+</details>
 
-<br>
-
-## Whats new?
-- <h4>Switched from Wlogout to Rofi power menu</h4>
-- <h4>Switched from Kitty terminal to Alacritty</h4>
-- <h4>Now main wallpapers are also dynamic, ( different for light and dark mode )</h4>
-- <h4>Startup sound</h4>
-- <h4>System Update notification with a sound</h4>
-- <h4>Change theme for Rofi Wallpaper select menu</h4>
-- <h4>Change theme for Rofi App launcher menu</h4>
-- <h4>Change theme for Rofi Power Menu</h4>
-- <h4>Moved from Swaylock to Hyprlock </h4>
-- <h4>A script ( setup.sh ) to set this configuration automaticly</h4>
-- <h4>Working on more features...</h4>
 <br>
 
 ## Features
 - <h4>Dynamic Wallpaper changing script</h4>
 - <h4>Change colors according to the changed wallpaper (pywal)</h4>
 - <h4>Light and Dark Mode</h4>
-- <h4>Select and Open apps using Rofi</h4>
+- <h4>Select and Open apps using Rofi app launcher</h4>
 - <h4>Gorgeous looking Waybar styles</h4>
 - <h4>Rofi app launcher styles</h4>
 - <h4>Rofi power menu</h4>
-- <h4>Opening some web pages as single tab</h4>
+- <h4>Opening some web pages as single tab (chatGPT, Gemini, Facebook, YouTube, WhatsApp, Photopea)</h4>
 - <h4>Locking with Hyprlock</h4>
 - <h4>Set your user image in Hyprlock ( a script to set your user image )</h4>
 - <h4>Hypridle to handle auto lock and suspend when no action is running </h4>
-- <h4>Hyprsunset to toggle nightlisht, `mod` + F1 && `mod` + F2 </h4>
+- <h4>Hyprsunset to use nightlight, `SUPER` + F1 to increase, `SUPER` + F2 to decrease and `SUPER` + F3 to set to default </h4>
 <br>
 
 
@@ -127,12 +128,12 @@ bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/up
 |                                 | `SUPER` + `ALT` + `SHIFT` + `W` | Select wallpaper, style 2                |
 | Screenshot                      | `PRINT`                     | Take a screenshot                            |
 | Key Binds Help                  | `SUPER` + `SHIFT` + `h`     | Display keybinds help                        |
-| Open Terminal                   | `SUPER` + `Return`          | Open terminal (Alacritty)                    |
+| Open Terminal                   | `SUPER` + `Return`          | Open terminal (Kitty)                    |
 | Kill Active Window              | `SUPER` + `Q`               | Close active window                          |
 | Exit Window Manager             | `SUPER` + `SHIFT` + `M`     | Exit window manager                          |
 | Open File Manager               | `SUPER` + `E`               | Open file manager                            |
 | Toggle Floating Window          | `SUPER` + `V`               | Toggle floating state of active window       |
-| Fullscreen Toggle               | `SUPER` + `f`               | Toggle fullscreen of active window           |
+| Fullscreen Toggle               | `SUPER` + `F`               | Toggle fullscreen of active window           |
 | Open Application Menu           | `SUPER` + `D`               | Open application menu                        |
 |                                 | `SUPER` + `ALT` + `D`       | Open theme selector rofi menu                |
 | Clipboard Manager               | `SUPER` + `ALT` + `c`       | Manage clipboard contents (clear or view)    |
@@ -140,16 +141,16 @@ bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/up
 | Emoji Selector                  | `SUPER` + `SHIFT` + `D`     | Open emoji selector                          |
 | Shutdown/Restart Menu           | `SUPER` + `x`               | Open power menu                              |
 | Change Power Menu Theme         | `SUPER` + `ALT` + `x`       | Change power menu theme                      |
-| Open Code Editor                | `SUPER` + `c`               | Open code editor                             |
-| Open Web Browsers               | `SUPER` + `b`               | Open preferred web browsers                  |
-| Open Web Browsers               | `SUPER` + `SHIFT` + `b`     | Open secondary web browser                   |
+| Open Code Editor                | `SUPER` + `C`               | Open code editor                             |
+| Open Web Browsers               | `SUPER` + `B`               | Open preferred web browsers                  |
+| Open Web Browsers               | `SUPER` + `SHIFT` + `B`     | Open secondary web browser                   |
 | Switch Window                   | `SUPER` + `Tab`             | Open rofi to switch between windows          |
 | Hide/Unhide Waybar              | `CONTROL` + `ESCAPE`        | Hide and unhide status bar (waybar)          |
-|Reload Waybar                    | `CONTROL` + `ALT` + `ESCAPE`| Reload status bar (waybar)                   |
-|Reload Hyprland                  | `CONTROL` + `R`             | Reload Hyprland                              |
-|Update system                    | `CONTROL` + `U`             | Update the system                            |
+| Reload Waybar                   | `CONTROL` + `ALT` + `ESCAPE`| Reload status bar (waybar)                   |
+| Reload Hyprland                 | `CONTROL` + `R`             | Reload Hyprland                              |
+| Update system                   | `CONTROL` + `U`             | Update the system                            |
 | Lock Screen                     | `SUPER` + `SHIFT` + `l`     | Lock the screen   (Hyprlock)                 |
-| Toggle Dark/Light Theme         | `SUPER` + `ALT` + `l`      | Toggle between dark and light themes         |
+| Toggle Dark/Light Theme         | `SUPER` + `ALT` + `l`       | Toggle between dark and light themes         |
 | Adjust Waybar Layout            | `SUPER` + `CTRL` + `w`      | Adjust waybar layout                         |
 | Edit Dotfiles                   | `SUPER` + `CTRL` + `e`      | Edit dotfiles                                |
 | Open Shell Script               | `SUPER` + `ALT` + `b`       | Open theme selector for  shell script   (bash/zsh)  |
@@ -158,7 +159,7 @@ bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/up
 |                                 | `SUPER` + `SHIFT` + `a`     | Open WhatsApp                                |
 |                                 | `SUPER` + `CTRL` + `a`      | Open ChatGPT                                 |
 |                                 | `SUPER` + `SHIFT` + `g`     | Open GitHub                                  |
-|                                 | `SUPER` + `SHIFT` + `p`     | Open Photopea|
+|                                 | `SUPER` + `SHIFT` + `p`     | Open Photopea                                |
 | Audio Control                   | `F9`                        | Toggle audio mute                            |
 |                                 | `F10`                       | Decrease volume                              |
 |                                 | `F11`                       | Increase volume                              |
@@ -176,8 +177,8 @@ bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/up
 | Scroll through Workspaces       | `SUPER` + `mouse_down`      | Scroll to next workspace                     |
 |                                 | `SUPER` + `mouse_up`        | Scroll to previous workspace                 |
 | Move/Resize Window              | `SUPER` + `LMB/RMB`         | Drag to move or resize window                |
-|                                 |                             |                                              |
-| Toggle nightlight mode          | `SUPER` + F1 && `SUPER + F2 | Toggle between nightlight and default colors |
+| Brightness                      | `SUPER` + `F2`, `SUPER` + `F3` | Decrease and Increase screen brightness.  |
+| Toggle nightlight mode          | `SUPER` + `F1`, `SUPER` + `F2` && `SUPER` + `F3` | Increase, Decrease night light and set to default (6000k) using SUPER F3 |
 
 
 ## Contribute.

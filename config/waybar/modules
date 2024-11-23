@@ -334,7 +334,7 @@
     },
 
    "custom/weather": {
-        "format": " {}",
+        "format": "  {}",
         "format-alt": "{alt}: {}",
         "format-alt-click": "click",
         "interval": 3600,
