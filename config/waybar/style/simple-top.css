@@ -108,7 +108,6 @@ tooltip label{
 #tray,
 #temperature,
 #workspaces,
-#custom-ibus,
 #taskbar,
 #custom-swaync,
 #mpris,
@@ -152,11 +151,6 @@ tooltip label{
 
 #taskbar{
     border-radius: 10px;
-}
-
-#custom-ibus {
-    border-radius: 10px;
-    margin-right: 10px;
 }
 
 #network {

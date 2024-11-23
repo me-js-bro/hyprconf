@@ -108,11 +108,11 @@ tooltip label{
 #tray,
 #temperature,
 #workspaces,
-#custom-ibus,
 #taskbar,
 #custom-swaync,
 #battery,
 #mpris,
+#custom-nightlight,
 #backlight {
     background: @background;
     opacity: 0.8;
@@ -133,6 +133,11 @@ tooltip label{
 #custom-swaync {
     border-radius: 15px;
     padding: 0 15px;
+}
+
+#custom-nightlight {
+    border-radius: 15px 0 0 15px;
+    padding-left: 10px;
 }
 
 #battery {
@@ -167,7 +172,7 @@ tooltip label{
 #custom-wallpaper-change {
     font-size: 16px;
     padding-right: 20px;
-    border-radius: 0;
+    border-radius: 0 15px 15px 0;
 }
 
 #custom-power_btn {
@@ -182,11 +187,6 @@ tooltip label{
 
 #taskbar{
     border-radius: 15px;
-}
-
-#custom-ibus {
-    border-radius: 15px;
-    margin-right: 10px;
 }
 
 #network {
@@ -228,17 +228,14 @@ tooltip label{
     background-color: transparent;
 }
 
-#custom-light_dark, #pulseaudio.microphone, #disk {
+#disk {
     border-radius: 0px 15px 15px 0px;
     margin-right: 10px;
 }
 
 #custom-light_dark {
     border-radius: 15px 0 0 15px;
-    margin-right: 0;
-}
-
-#custom-light_dark {
+    margin-left: 10px;
     padding: 0 15px;
 }
 
@@ -277,11 +274,10 @@ tooltip label{
 }
 
 #pulseaudio {
-    background-color: transparent;
+    background-color: @background;
     border-left: 0px;
     border-right: 0px;
-    border-radius: 15px 0 0 10px;
-    margin-right: 5px;
+    border-radius: 15px 0 0 15px;
 }
 
 #clock {
@@ -296,6 +292,7 @@ tooltip label{
     /* color: #cba6f7; */
     border-left: 0px;
     border-right: 0px;
+    border-radius: 0 15px 15px 0;
 }
 
 #custom-cava {
