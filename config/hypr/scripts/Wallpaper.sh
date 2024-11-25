@@ -67,7 +67,7 @@ elif [[ "$engine" == "hyprpaper" ]]; then
         
 
         # Set the wallpaper using hyprpaper
-        notify-send -i "$wallpaper" "Changing..."
+        notify-send -i "$wallpaper" "Changing wallpaper"
         hyprctl hyprpaper wallpaper " ,$wallpaper"
         ln -sf "$wallpaper" "$cache_dir/current_wallpaper.png"
         hyprctl reload
@@ -87,11 +87,3 @@ sleep 0.5
 "$scripts_dir/pywal.sh"
 sleep 0.2
 "$scripts_dir/Refresh.sh"
-
-sleep 0.2
-# creating a blur image for hyprlock
-mkdir -p "$cache_dir"
-if [ -d "$cache_dir" ]; then
-    convert "$cache_dir/current_wallpaper.png" -blur 0x20 -resize 100% "$cache_dir/blurred.png"
-    notify-send -e "Blurred.png" "Created a blurred version of your Wallpaper"
-fi
