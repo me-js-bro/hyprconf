@@ -152,18 +152,3 @@ sleep 0.5
 "$scripts_dir/pywal.sh"
 sleep 0.2
 "$scripts_dir/Refresh.sh"
-
-# Check if the cache directory exists, create it if not
-mkdir -p "$cache_dir"
-
-# Check if the conversion can proceed
-if [ -d "$cache_dir" ]; then
-    # Perform the conversion
-    convert "${cache_dir}/current_wallpaper.png" -blur 0x30 -resize 100% "${cache_dir}/blurred.png"
-    notify-send -e "Blurred.png" "Created a blurred version of your Wallpaper"
-else
-    echo "Cache directory not found."
-    exit 1
-fi
-
-

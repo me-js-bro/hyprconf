@@ -10,8 +10,6 @@ display_menu() {
     echo "Style-4"
     echo "Style-5"
     echo "Style-6"
-    echo "Style-7"
-    echo "Style-8"
 }
 
 rofi_command="rofi -i -dmenu -config ~/.config/rofi/themes/config-shell.rasi"
@@ -27,24 +25,18 @@ case $style in
         PS1='\e[90m${elapsed_time_display}\e[0m\n┌( \u )─[$(if [[ "$PWD" = "$HOME" ]]; then echo " \e[1;36m󰋜\e[1;0m"; elif [[ "$PWD" = "/" ]]; then echo " \e[1;32m$(check_distro)\e[1;0m"; else echo " \w"; fi) $(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo $(git_info) || echo "")]\n└─|> '
         ;;
     Style-2)
-        PS1='\e[90m${elapsed_time_display}\e[0m\n$(if [[ "$PWD" = "$HOME" ]]; then echo "\e[1;36m\e[1;0m"; elif [[ "$PWD" = "/" ]]; then echo " \e[1;32m$(check_distro)\e[1;0m"; else echo "\W"; fi) $(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo $(git_info) || echo "")\e[1;32m❯\e[1;0m '
+        PS1='\e[90m${elapsed_time_display}\e[0m $(if [[ "$PWD" = "$HOME" ]]; then echo "\e[1;36m\e[1;0m"; elif [[ "$PWD" = "/" ]]; then echo " \e[1;32m$(check_distro)\e[1;0m"; else echo "\w"; fi) $(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo $(git_info) || echo "")\n\e[1;32m❯\e[1;0m '
         ;;
     Style-3)
-        PS1='\e[90m${elapsed_time_display}\e[0m\n$(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo $(git_info) || echo "") \n $(if [[ "$PWD" = "$HOME" ]]; then echo "\e[1;36m󰜥\e[1;0m"; elif [[ "$PWD" = "/" ]]; then echo "\e[1;36m\e[1;0m"; else echo "\W"; fi) \e[1;32m\e[1;0m ' 
+        PS1='\e[90m${elapsed_time_display}\e[0m $(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo $(git_info) || echo "")\n$(if [[ "$PWD" = "$HOME" ]]; then echo "\e[1;36m \e[1;0m"; elif [[ "$PWD" = "/" ]]; then echo "\e[1;36m\e[1;0m"; else echo "\w"; fi) \e[1;32m\e[1;0m '
         ;;
     Style-4)
-        PS1='\e[90m${elapsed_time_display}\e[0m\n\e[1;36m╭─\e[1;0m $(if [[ "$PWD" = "$HOME" ]]; then echo "\e[1;36m  $(check_distro)\e"; elif [[ "$PWD" = "/" ]]; then echo "\e[1;36m\e[1;0m"; else echo "\e[1;33m\w"; fi) $(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo $(git_info) || echo "") \n\e[1;36m╰──\e[1;32m❯\e[1;0m '
+        PS1='\e[90m${elapsed_time_display}\e[0m\n\e[1;36m╭─\e[1;0m $(if [[ "$PWD" = "$HOME" ]]; then echo "\e[1;36m "; elif [[ "$PWD" = "/" ]]; then echo "\e[1;36m\e[1;0m"; else echo "\e[1;33m\w"; fi) $(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo $(git_info) || echo "") \n\e[1;36m╰──\e[1;32m❯\e[1;0m '
         ;;
     Style-5)
         PS1='\e[90m${elapsed_time_display}\e[0m\n\e[1;36m╭─ \e[1;37m\u\e[1;34m@\e[1;37m\h\e[1;0m in $(if [[ "$PWD" = "$HOME" ]]; then echo "\e[1;36m󰜥"; elif [[ "$PWD" = "/" ]]; then echo "\e[1;36m\e[1;0m"; else echo "\e[1;33m\W"; fi) $(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo $(git_info) || echo "")\n\e[1;36m╰──\e[1;32m󰘧\e[1;0m '
         ;;
     Style-6)
-        PS1='\e[90m${elapsed_time_display}\e[0m\n$(if [[ "$PWD" = "$HOME" ]]; then echo " " ; elif [[ "$PWD" = "/" ]]; then echo " \e[1;32mroot\e[1;0m"; else echo " \w"; fi) $(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo $(git_info) || echo "")$(current_time)\n \e[1;32m❯\e[1;0m '
-        ;;
-    Style-7)
-        PS1='\n\e[90m${elapsed_time_display}\e[0m\n\e[1;36m \u\e[1;34m in \e[1;33m \h\e[1;0m // $(if [[ "$PWD" = "$HOME" ]]; then echo "\e[1;36m󰜥"; elif [[ "$PWD" = "/" ]]; then echo "\e[1;36m\e[1;0m"; else echo "\e[1;33m\w"; fi)$(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo $(git_info) || echo "")\e[1;36m\e[1;32m\e[1;0m :$ '
-        ;;
-    Style-8)
         PS1='\e[90m${elapsed_time_display}\e[0m\n╭( \u )─[$(if [[ "$PWD" = "$HOME" ]]; then echo " \e[1;36m \e[1;0m"; elif [[ "$PWD" = "/" ]]; then echo " \e[1;32m \e[1;0m"; else echo "\e[1;33m \W\e[1;0m"; fi) ]$(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo ──{ $(git_info) }─ || echo "")─( $(current_time) )\n╰─\e[1;32m❯\e[1;0m '
         ;;
 esac
