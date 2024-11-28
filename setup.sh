@@ -22,12 +22,12 @@ error="[${red} ERROR ${end}]"
 
 display_text() {
     cat << "EOF"
-   ____                __  _                      _                 _   _                      _                    _ 
-  / ___| ___   _ __   / _|(_)  __ _  _   _  _ __ (_) _ __    __ _  | | | | _   _  _ __   _ __ | |  __ _  _ __    __| |
- | |    / _ \ | '_ \ | |_ | | / _` || | | || '__|| || '_ \  / _` | | |_| || | | || '_ \ | '__|| | / _` || '_ \  / _` |
- | |___| (_) || | | ||  _|| || (_| || |_| || |   | || | | || (_| | |  _  || |_| || |_) || |   | || (_| || | | || (_| |
-  \____|\___/ |_| |_||_|  |_| \__, | \__,_||_|   |_||_| |_| \__, | |_| |_| \__, || .__/ |_|   |_| \__,_||_| |_| \__,_|
-                              |___/                         |___/          |___/ |_|                                  
+  ____         _                    ____                __  _                 
+ / ___|   ___ | |_  _   _  _ __    / ___| ___   _ __   / _|(_)  __ _          
+ \___ \  / _ \| __|| | | || '_ \  | |    / _ \ | '_ \ | |_ | | / _` |         
+  ___) ||  __/| |_ | |_| || |_) | | |___| (_) || | | ||  _|| || (_| | _  _  _ 
+ |____/  \___| \__| \__,_|| .__/   \____|\___/ |_| |_||_|  |_| \__, |(_)(_)(_)
+                          |_|                                  |___/           
 EOF
 }
 
@@ -139,12 +139,29 @@ fi
 # Check if the configuration is in a virtual box
 if hostnamectl | grep -q 'Chassis: vm'; then
     printf "${action} - You are using this script in a Virtual Machine. Setting up things for you.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-    # Comment out the line 'monitor=,preferred,auto,auto'
-    sed -i '/monitor=,preferred,auto,auto/s/^/#/' config/hypr/configs/settings.conf
-
     sed -i '/env = WLR_NO_HARDWARE_CURSORS,1/s/^#//' config/hypr/configs/environment.conf
     sed -i '/env = WLR_RENDERER_ALLOW_SOFTWARE,1/s/^#//' config/hypr/configs/environment.conf
-    sed -i '/monitor=Virtual-1, 1920x1080@60,auto,1/s/^#//' config/hypr/configs/settings.conf
+    echo -e '#Monitor\nmonitor=Virtual-1, 1920x1080@60,auto,1' config/hypr/configs/monitor.conf
+
+else
+    #_____ setting up the monitor
+    monitor="$(xrandr | grep 'connected' | awk '{print $1}')"
+    resolution="$(xrandr | grep 'connected' | awk '{print $3}' | cut -d'+' -f1)"
+
+    printf "${ask}\nYour monitor name: ${cyan}$monitor${end}\nYour screen resolution: ${green}$resolution.${end} \n"
+    printf "Is it correct? [ y/n ] \n"
+    read -r -p "$(echo -e '\e[1;32mSelect: \e[0m')" user_monitor
+
+    printf "${ask} - What is your monitor refresh rate? For example: (60/75/120).\n"
+    read -r -p "$(echo -e '\e[1;32mWrite: \e[0m')" refresh_rate
+
+    if [[ "$user_monitor" =~ ^[Yy]$ ]]; then
+        printf "${action} - Setting up Hyprland for your monitor, \n"
+        echo -e "#Monitor\nmonitor=$monitor, $resolution@$refresh_rate, 0x0, 1" > config/hypr/configs/monitor.conf
+    else
+        printf "${action} - Setting the default monitor setup.\n"
+        echo -e "#Monitor\nmonitor=monitor=,preferred,auto,auto" > config/hypr/configs/monitor.conf
+    fi
 fi
 
 
@@ -182,7 +199,7 @@ fi
 
 cp -r "$dir/extras/fonts" "$fonts_dir"
 printf "${action} - Updating font cache...\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-sudo fc-cache -fv
+sudo fc-cache -fv &> /dev/null
 
 
 wayland_session_dir=/usr/share/wayland-sessions
