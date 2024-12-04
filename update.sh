@@ -20,16 +20,36 @@ done="[${cyan} DONE ${end}]"
 ask="[${orange} QUESTION ${end}]"
 error="[${red} ERROR ${end}]"
 
+if command -v gum &> /dev/null; then
+
+display_text() {
+    gum style \
+        --border rounded \
+        --align center \
+        --width 60 \
+        --margin "1" \
+        --padding "1" \
+'
+  __  __        __     __        __ __                            ___
+ / / / /__  ___/ /__ _/ /____   / // /_ _____  ___________  ___  / _/
+/ /_/ / _ \/ _  / _ `/ __/ -_) / _  / // / _ \/ __/ __/ _ \/ _ \/ _/ 
+\____/ .__/\_,_/\_,_/\__/\__/ /_//_/\_, / .__/_/  \__/\___/_//_/_/   
+    /_/                            /___/_/                           
+'
+}
+
+else
 display_text() {
     cat << "EOF"
-     _   _             _         _    _                 ____          _     __  _  _            
-    | | | | _ __    __| |  __ _ | |_ (_) _ __    __ _  |  _ \   ___  | |_  / _|(_)| |  ___  ___ 
-    | | | || '_ \  / _` | / _` || __|| || '_ \  / _` | | | | | / _ \ | __|| |_ | || | / _ \/ __|
-    | |_| || |_) || (_| || (_| || |_ | || | | || (_| | | |_| || (_) || |_ |  _|| || ||  __/\__ \
-     \___/ | .__/  \__,_| \__,_| \__||_||_| |_| \__, | |____/  \___/  \__||_|  |_||_| \___||___/
-           |_|                                  |___/                                           
+  __  __        __     __        __ __                            ___
+ / / / /__  ___/ /__ _/ /____   / // /_ _____  ___________  ___  / _/
+/ /_/ / _ \/ _  / _ `/ __/ -_) / _  / // / _ \/ __/ __/ _ \/ _ \/ _/ 
+\____/ .__/\_,_/\_,_/\__/\__/ /_//_/\_, / .__/_/  \__/\___/_//_/_/   
+    /_/                            /___/_/                             
+
 EOF
 }
+fi
 
 clear && display_text
 printf " \n \n"
@@ -49,9 +69,8 @@ hypr_dir="$HOME/.config/hypr"
 scripts_dir="$hypr_dir/scripts"
 fonts_dir="$HOME/.local/share/fonts"
 
-printf "${action} - Updating to the Hyprland configuration.\n" && sleep 1
-printf "${attention} - Would you like to remove the old dotfiles? If no, then we will be backing up those configs. [ y/n ]\n"
-read -r -p "$(echo -e '\e[1;32mSelect: \e[0m')" bkup
+printf "${action}\n==> Updating to the Hyprland configuration.\n" && sleep 1
+printf "${action}\n==> Backing up old dotfiles.\n"
 
 mkdir -p ~/.config
 
@@ -72,43 +91,15 @@ dirs=(
     qt6ct
 )
 
-# this part if for the new update. ( switched to kitty )
-# check for kitty terminal
-if sudo pacman -Qs kitty &> /dev/null; then
-    printf "${done} - Kitty is already installed...\n"
-else
-    printf "${action} - Installing kitty terminal..\n"
-    sudo pacman -S --noconfirm kitty
-    if sudo pacman -Qs alacritty &> /dev/null; then
-        printf "${attention} - Removing Alacritty"
-        sudo pacman -Rns --noconfirm alacritty
+for dir in "${dirs[@]}"; do
+    dir_path=~/.config/$dir
+    if [[ -d "$dir_path" ]]; then
+        printf "${attention}\n! backing up old $dir_path\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+        mkdir -p "$HOME/.config/HyprBackup"-${USER}
+        mv "$dir_path" "$HOME/.config/HyprBackup"-* 2>&1 | tee -a "$log"
+        printf "${done}\n:: Backed up $dir.\n"
     fi
-fi
-
-# if some main directories exists, backing them up.
-if [[ "$bkup" =~ ^[Yy]$ ]]; then
-
-    for dir in "${dirs[@]}"; do
-
-        dir_path="$HOME/.config/$dir"
-        if [[ -d "$dir_path" ]]; then
-            printf "${action} - Removing the old $dir_path. \n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-            rm -rf "$dir_path" 2>&1 | tee -a "$log"
-            printf "${done} - Removed $dir.\n"
-        fi
 done
-
-else
-
-    for dir in "${dirs[@]}"; do
-        dir_path=~/.config/$dir
-        if [[ -d "$dir_path" ]]; then
-            printf "${attention} - backing up old $dir_path\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-            mv "$dir_path" "$dir_path"-${USER} 2>&1 | tee -a "$log"
-            printf "${done} - Backed up $dir.\n"
-        fi
-    done
-fi
 
 sleep 1 && clear
 
@@ -123,7 +114,7 @@ fi
 
 # Removint the cache file
 if [[ -d "$HOME/.config/hypr/scripts" ]]; then
-    printf "${done} - Dotfiles were update successfully. Removing the cache.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+    printf "${done}\n:: Dotfiles were update successfully. Removing the cache.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 
     rm -rf "$HOME/.cache/hyprconf" &> /dev/null
     exit 0
