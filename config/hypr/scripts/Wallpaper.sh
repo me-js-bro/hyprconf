@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mode_file="$HOME/.mode"
+mode_file="$HOME/.config/hypr/.cache/.mode"
 scripts_dir="$HOME/.config/hypr/scripts"
 cache_dir="$HOME/.config/hypr/.cache"
 engine_file="$cache_dir/.engine"

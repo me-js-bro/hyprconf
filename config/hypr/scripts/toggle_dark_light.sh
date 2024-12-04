@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mode_file="$HOME/.mode"
+mode_file="$HOME/.config/hypr/.cache/.mode"
 wallpaper_dir_dark="$HOME/.config/hypr/Dynamic-Wallpapers/dark"
 wallpaper_dir_light="$HOME/.config/hypr/Dynamic-Wallpapers/light"
 scripts_dir="$HOME/.config/hypr/scripts"
