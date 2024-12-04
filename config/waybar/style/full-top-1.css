@@ -98,6 +98,7 @@ tooltip label{
 #window,
 #cpu,
 #disk,
+#idle_inhibitor,
 #custom-updates,
 #custom-clipboard,
 #custom-wallpaper-change,
@@ -113,6 +114,7 @@ tooltip label{
 #battery,
 #mpris,
 #custom-nightlight,
+#hyprland-keyboard,
 #backlight {
     background: @background;
     opacity: 0.8;
@@ -123,6 +125,19 @@ tooltip label{
 #memory, #cpu {
     margin-right: 10px;
     background-color: transparent;
+}
+
+#idle_inhibitor {
+    font-size: 15px;
+    padding: 0 15px;
+    background: @background;
+    border-radius: 15px 0 0 15px;
+    margin-right: 0px;
+}
+
+#hyprland-language {
+    font-size: 15px;
+    margin-right: 20px;
 }
 
 #mpris {
@@ -136,8 +151,7 @@ tooltip label{
 }
 
 #custom-nightlight {
-    border-radius: 15px 0 0 15px;
-    padding-left: 10px;
+    border-radius: 0;
 }
 
 #battery {

@@ -50,6 +50,5 @@ if [[ -d "/usr/share/openbangla-keyboard" ]]; then
 fi
 
 "$scripts_dir/notification.sh" sys
-# sleep 0.5
 "$scripts_dir/pywal.sh"
 "$scripts_dir/Refresh.sh"

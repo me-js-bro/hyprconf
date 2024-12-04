@@ -95,6 +95,7 @@ tooltip label{
 #window,
 #cpu,
 #disk,
+#idle_inhibitor,
 #custom-updates,
 #custom-clipboard,
 #custom-wallpaper-change,
@@ -128,6 +129,12 @@ tooltip label{
     border-radius: 3px;
     margin-right: 3px;
     color: @color2;
+}
+
+#idle_inhibitor {
+    border-radius: 3px;
+    margin-right: 3px;
+    padding-right: 15px;
 }
 
 #custom-swaync, #custom-nightlight {

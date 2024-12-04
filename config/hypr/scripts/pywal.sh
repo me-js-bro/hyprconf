@@ -109,7 +109,7 @@ else
 fi
 
 # setting rofi theme
-mode_file=~/.mode
+mode_file="$HOME/.config/hypr/.cache/.mode"
 current_mode=$(cat "$mode_file")
 if [ "$current_mode" == "dark" ]; then
     ln -sf ~/.cache/wal/colors-rofi-dark.rasi ~/.config/rofi/themes/rofi-pywal.rasi
