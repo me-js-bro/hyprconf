@@ -97,10 +97,12 @@ if [ -f $colors_file ]; then
     sed -i "s/col.active_border .*$/col.active_border = $rgba_color/g" "$hyprland_config"
     sed -i "s/col.inactive_border .*$/col.inactive_border = $rgba_color_other/g" "$hyprland_config"
 
-    # for hyprlock
-    sed -i "s/outer_color .*$/outer_color = $rgba_color/g" "$hyprlock_config"
-    sed -i "s/inner_color .*$/inner_color = $rgba_color_opacity/g" "$hyprlock_config"
-    sed -i "s/border_color .*$/border_color = $rgba_color_opacity/g" "$hyprlock_config"
+# for hyprlock
+    sed -i "s/outer_color = .*$/outer_color = $rgba_color_opacity/" "$hyprlock_config"
+    sed -i "s/inner_color = .*$/inner_color = $rgba_color_opacity/" "$hyprlock_config"
+    sed -i "s/border_color = .*$/border_color = $rgba_color_opacity/" "$hyprlock_config"
+    sed -i "s/font_color = .*$/font_color = $rgba_color/" "$hyprlock_config"
+    sed -i "s/^[c]olor = .*$/color = $rgba_color/" "$hyprlock_config"
     
     # Reload Hyprland configuration (optional)
     hyprctl reload
