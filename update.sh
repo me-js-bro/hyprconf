@@ -64,45 +64,9 @@ log="$log_dir"/update-dotfiles.log
 mkdir -p "$log_dir"
 touch "$log"
 
-# Directories ----------------------------
-hypr_dir="$HOME/.config/hypr"
-scripts_dir="$hypr_dir/scripts"
-fonts_dir="$HOME/.local/share/fonts"
+sleep 1
 
-printf "${action}\n==> Updating to the Hyprland configuration.\n" && sleep 1
-printf "${action}\n==> Backing up old dotfiles.\n"
-
-mkdir -p ~/.config
-
-dirs=(
-    btop
-    fastfetch
-    hypr
-    kitty
-    nvim
-    rofi
-    swaync 
-    waybar
-    gtk-3.0
-    gtk-4.0
-    Kvantum
-    ranger
-    qt5ct
-    qt6ct
-)
-
-for dir in "${dirs[@]}"; do
-    dir_path=~/.config/$dir
-    if [[ -d "$dir_path" ]]; then
-        printf "${attention}\n! backing up old $dir_path\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-        mkdir -p "$HOME/.config/HyprBackup"-${USER}
-        mv "$dir_path" "$HOME/.config/HyprBackup"-* 2>&1 | tee -a "$log"
-        printf "${done}\n:: Backed up $dir.\n"
-    fi
-done
-
-sleep 1 && clear
-
+printf "${action}\n==> Cloning hyprconf repository\n"
 git clone --depth=1 https://github.com/me-js-bro/hyprconf.git "$HOME/.cache/hyprconf"
 
 if [[ -d "$HOME/.cache/hyprconf" ]]; then

@@ -40,6 +40,10 @@ if [[ "$auto_generated_setting" ]]; then
         240Hz)
             settings="monitor=${monitor_name},${monitor_resolution}@240, 0x0, 1"
             ;;
+        *)
+            echo "Nothing will be changed. Exiting.."
+            exit 0
+            ;;
     esac
 
     sed -i "s/$auto_generated_setting/$settings/" "$config_file"

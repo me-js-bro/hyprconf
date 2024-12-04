@@ -321,7 +321,7 @@
 
     // works for arch, fedora and opensuse also.
     "custom/updater": {
-        "exec": "~/.config/hypr/scripts/systemupdate.sh",
+        "exec": "~/.config/hypr/scripts/systemupdate.sh cu",
         "return-type": "json",
         "format": " {}",
         "on-click": "~/.config/hypr/scripts/systemupdate.sh up",

@@ -126,9 +126,13 @@ dirs=(
 for confs in "${dirs[@]}"; do
     dir_path=~/.config/$confs
     if [[ -d "$dir_path" ]]; then
-        printf "${attention}\n! Config for $confs located, backing up.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+        if [[ -d "$HOME/.config/HyprBackup-${USER}" ]]; then
+            printf "${attention}\n! A backup directory was found, moving it to '$HOME/.config/HyprArchive-${USER}' directory\n"
+            mkdir -p "$HOME/.config/HyprArchive-${USER}" && zip -r "$HOME/.config/HyprArchive-${USER}/HyprBackup-${USER}.zip" "$HOME/.config/HyprBackup-${USER}" && rm -r "$HOME/.config/HyprBackup-${USER}" &> /dev/null
+        fi
+
         mkdir -p "$HOME/.config/HyprBackup"-${USER}
-        mv "$dir_path" "$HOME/.config/HyprBackup"-* 2>&1 | tee -a "$log"
+        mv "$dir_path" "$HOME/.config/HyprBackup"-${USER} 2>&1 | tee -a "$log"
         printf "${done}\n:: Everything has been backuped in $HOME/.config/HyprBackup-${USER}.\n"
     fi
 done
@@ -167,7 +171,7 @@ if hostnamectl | grep -q 'Chassis: vm'; then
 else
     #_____ setting up the monitor
     printf "${action}\n==> Setting the default monitor setup.\n"
-    echo -e "#Monitor\nmonitor=monitor=,preferred,auto,auto" > config/hypr/configs/monitor.conf
+    echo -e "#Monitor\nmonitor=,preferred,auto,auto" > config/hypr/configs/monitor.conf
 fi
 
 

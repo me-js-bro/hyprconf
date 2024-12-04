@@ -58,5 +58,6 @@ fi
 
 monitor_setting=$(cat $monitor_config | grep "monitor")
 if [[ "$monitor_setting" == "monitor=,preferred,auto,auto" ]]; then
-    "$scripts_dir/monitor.sh"
+    notify-send "Starting script" "S script to setup monitor configuration"
+    kitty --title monitor sh -c "$scripts_dir/monitor.sh"
 fi
