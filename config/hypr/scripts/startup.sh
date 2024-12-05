@@ -61,3 +61,7 @@ if [[ "$monitor_setting" == "monitor=,preferred,auto,auto" ]]; then
     notify-send "Starting script" "S script to setup monitor configuration"
     kitty --title monitor sh -c "$scripts_dir/monitor.sh"
 fi
+
+sleep 3
+
+"$scripts_dir/default_browser.sh"
