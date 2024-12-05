@@ -27,3 +27,11 @@ elif [[ "$browsers_num" -eq 1 && -z "$default" ]]; then
     notify-send "Default browser" "Setting $existing as your default browser."
     echo "default=$existing" >> "$browser_cache"
 fi
+
+case $1 in
+    --reset)
+        rm ~/.config/hypr/.cache/browser
+        notify-send "Reset" "Default browser list has been reset"
+        "$HOME/.config/hypr/scripts/default_browser.sh"
+        ;;
+esac
