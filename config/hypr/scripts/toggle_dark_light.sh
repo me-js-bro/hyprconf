@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mode_file="$HOME/.mode"
+mode_file="$HOME/.config/hypr/.cache/.mode"
 wallpaper_dir_dark="$HOME/.config/hypr/Dynamic-Wallpapers/dark"
 wallpaper_dir_light="$HOME/.config/hypr/Dynamic-Wallpapers/light"
 scripts_dir="$HOME/.config/hypr/scripts"
@@ -82,10 +82,3 @@ sleep 0.5
 "$scripts_dir/pywal.sh"
 sleep 0.2
 "$scripts_dir/Refresh.sh"
-
-mkdir -p "$cache_dir"
-if [ -d "$cache_dir" ]; then
-    convert "$cache_dir/current_wallpaper.png" -blur 0x20 -resize 100% "$cache_dir/blurred.png"
-    notify-send -e " " "Created a blurred version of your Wallpaper"
-fi
-

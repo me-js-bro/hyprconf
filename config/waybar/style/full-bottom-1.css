@@ -98,6 +98,7 @@ tooltip label{
 #window,
 #cpu,
 #disk,
+#idle_inhibitor,
 #custom-updates,
 #custom-clipboard,
 #custom-wallpaper-change,
@@ -125,6 +126,14 @@ tooltip label{
     background-color: transparent;
 }
 
+#idle_inhibitor {
+    font-size: 15px;
+    padding: 0 15px;
+    background: @background;
+    border-radius: 15px 0 0 15px;
+    margin-right: 0px;
+}
+
 #mpris {
     background-color: transparent;
     margin-left: 10px;
@@ -136,8 +145,7 @@ tooltip label{
 }
 
 #custom-nightlight {
-    border-radius: 15px 0 0 15px;
-    padding-left: 10px;
+    border-radius: 0;
 }
 
 #battery {

@@ -27,11 +27,28 @@
     	"format-icons": [
     		"󰤯", "󰤟", "󰤢", "󰤥", "󰤨"
     	],
-        "on-click-right": "alacritty -e nmtui"
+        "on-click-right": "kitty -e nmtui"
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+	"start-activated": true,
+        "format-icons": {
+            "activated": "󰛐",
+            "deactivated": "󰛑"
+        },
+        "tooltip": true
     },
 
     "hyprland/window": {
         "format": "{}"
+    },
+
+    "hyprland/language": {
+        "interval": 1,
+        "format": " {}",
+        "format-uk": "Uk",
+        "format-en": "US"
     },
 
     "hyprland/workspaces": {
@@ -74,7 +91,6 @@
 
     "cpu": {
         "interval": 10,
-        // "format": "󰍛 {usage}%",
         "format": "{icon0}{icon1}{icon2}{icon3} {usage}%",
         "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
     },
@@ -90,7 +106,6 @@
     "memory": {
         "interval": 30,
         "format": "󰾅 {used}GB",
-        // "format-alt": "󰾅 {used}GB",
         "max-length": 10,
         "tooltip": true,
         "tooltip-format": " {used:0.1f}GB/{total:0.1f}GB"
@@ -306,7 +321,7 @@
 
     // works for arch, fedora and opensuse also.
     "custom/updater": {
-        "exec": "~/.config/hypr/scripts/systemupdate.sh",
+        "exec": "~/.config/hypr/scripts/systemupdate.sh cu",
         "return-type": "json",
         "format": " {}",
         "on-click": "~/.config/hypr/scripts/systemupdate.sh up",

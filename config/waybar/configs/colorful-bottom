@@ -10,11 +10,11 @@
         "margin-top": 0,
         "margin-bottom": 0,
     
-        "modules-left": ["custom/launch_rofi","hyprland/workspaces","custom/ai", "custom/github"],
+        "modules-left": ["custom/launch_rofi","hyprland/workspaces","custom/ai", "custom/github", "mpris"],
     
         "modules-center": [],
     
-        "modules-right": ["tray", "custom/updater", "custom/swaync", "mpris", "custom/light_dark","custom/wallpaper-change", "pulseaudio","pulseaudio#microphone", "network", "battery", "backlight", "custom/nightlight", "custom/clipboard", "clock","custom/power_btn"],
+        "modules-right": ["tray", "custom/updater", "custom/swaync", "mpris", "custom/light_dark","custom/wallpaper-change", "pulseaudio","pulseaudio#microphone", "network", "battery", "backlight", "idle_inhibitor", "custom/nightlight", "custom/clipboard", "clock","custom/power_btn"],
 
         "hyprland/workspaces": {
         "disable-scroll": true,

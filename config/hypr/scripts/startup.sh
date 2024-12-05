@@ -1,10 +1,11 @@
 #!/bin/bash
 
-mode_file="$HOME/.mode"
+mode_file="$HOME/.config/hypr/.cache/.mode"
 scripts_dir="$HOME/.config/hypr/scripts"
 wallpaper_dir="$HOME/.config/hypr/Wallpaper"
 wallpaper="$HOME/.config/hypr/.cache/current_wallpaper.png"
 engine_path="$HOME/.config/hypr/.cache/.engine"
+monitor_config="$HOME/.config/hypr/configs/monitor.conf"
 
 engine=$(cat $engine_path)
 
@@ -50,6 +51,13 @@ if [[ -d "/usr/share/openbangla-keyboard" ]]; then
 fi
 
 "$scripts_dir/notification.sh" sys
-# sleep 0.5
 "$scripts_dir/pywal.sh"
 "$scripts_dir/Refresh.sh"
+
+#_____ setup monitor
+
+monitor_setting=$(cat $monitor_config | grep "monitor")
+if [[ "$monitor_setting" == "monitor=,preferred,auto,auto" ]]; then
+    notify-send "Starting script" "S script to setup monitor configuration"
+    kitty --title monitor sh -c "$scripts_dir/monitor.sh"
+fi

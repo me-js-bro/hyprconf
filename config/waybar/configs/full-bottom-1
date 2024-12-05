@@ -11,11 +11,11 @@
     "margin-left": 5,
     "margin-right": 5,
 
-    "modules-left": ["custom/launch_rofi", "tray", "hyprland/workspaces", "custom/weather",  "custom/light_dark","custom/wallpaper-change"],
+    "modules-left": ["custom/launch_rofi", "tray", "hyprland/workspaces", "custom/weather",  "custom/light_dark","custom/wallpaper-change", "mpris"],
 
     "modules-center": ["custom/updater", "clock", "custom/swaync"],
 
-    "modules-right": [ "pulseaudio", "pulseaudio#microphone", "cpu","memory", "custom/nightlight", "custom/clipboard", "battery", "backlight",  "network", "custom/power_btn"],
+    "modules-right": [ "pulseaudio", "pulseaudio#microphone", "cpu","memory", "idle_inhibitor", "custom/nightlight", "custom/clipboard", "battery", "backlight",  "network", "custom/power_btn"],
 
     "hyprland/workspaces": {
         "disable-scroll": true,

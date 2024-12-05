@@ -116,6 +116,7 @@ tooltip label{
 #window,
 #cpu,
 #disk,
+#idle_inhibitor,
 #custom-updates,
 #custom-clipboard,
 #custom-wallpaper-change,
@@ -161,7 +162,7 @@ tooltip label{
     margin-right: -3px;
 }
 
-#custom-nightlight {
+#custom-nightlight, #idle_inhibitor {
     background: none;
     color: @foreground;
     font-size: 18px;

@@ -97,10 +97,12 @@ if [ -f $colors_file ]; then
     sed -i "s/col.active_border .*$/col.active_border = $rgba_color/g" "$hyprland_config"
     sed -i "s/col.inactive_border .*$/col.inactive_border = $rgba_color_other/g" "$hyprland_config"
 
-    # for hyprlock
-    sed -i "s/outer_color .*$/outer_color = $rgba_color/g" "$hyprlock_config"
-    sed -i "s/inner_color .*$/inner_color = $rgba_color_opacity/g" "$hyprlock_config"
-    sed -i "s/border_color .*$/border_color = $rgba_color_opacity/g" "$hyprlock_config"
+# for hyprlock
+    sed -i "s/outer_color = .*$/outer_color = $rgba_color_opacity/" "$hyprlock_config"
+    sed -i "s/inner_color = .*$/inner_color = $rgba_color_opacity/" "$hyprlock_config"
+    sed -i "s/border_color = .*$/border_color = $rgba_color_opacity/" "$hyprlock_config"
+    sed -i "s/font_color = .*$/font_color = $rgba_color/" "$hyprlock_config"
+    sed -i "s/^[c]olor = .*$/color = $rgba_color/" "$hyprlock_config"
     
     # Reload Hyprland configuration (optional)
     hyprctl reload
@@ -108,60 +110,8 @@ else
     echo "No file found named colors.json"
 fi
 
-
-# Path to your Kitty configuration file
-kitty_config=~/.config/kitty/kitty.conf
-
-# Extract colors using jq
-background_color=$(jq -r '.special.background' "$colors_file")
-foreground_color=$(jq -r '.special.foreground' "$colors_file")
-
-# Normal colors
-black=$(jq -r '.colors.color0' "$colors_file")
-red=$(jq -r '.colors.color1' "$colors_file")
-green=$(jq -r '.colors.color2' "$colors_file")
-yellow=$(jq -r '.colors.color3' "$colors_file")
-blue=$(jq -r '.colors.color4' "$colors_file")
-magenta=$(jq -r '.colors.color5' "$colors_file")
-cyan=$(jq -r '.colors.color6' "$colors_file")
-white=$(jq -r '.colors.color7' "$colors_file")
-
-# Bright colors
-bright_black=$(jq -r '.colors.color8' "$colors_file")
-bright_red=$(jq -r '.colors.color9' "$colors_file")
-bright_green=$(jq -r '.colors.color10' "$colors_file")
-bright_yellow=$(jq -r '.colors.color11' "$colors_file")
-bright_blue=$(jq -r '.colors.color12' "$colors_file")
-bright_magenta=$(jq -r '.colors.color13' "$colors_file")
-bright_cyan=$(jq -r '.colors.color14' "$colors_file")
-bright_white=$(jq -r '.colors.color15' "$colors_file")
-
-# Update Kitty configuration file with new colors
-sed -i "s/^background .*/background $background_color/g" "$kitty_config"
-sed -i "s/^foreground .*/foreground $foreground_color/g" "$kitty_config"
-
-sed -i "s/^color0 .*/color0 $black/g" "$kitty_config"
-sed -i "s/^color1 .*/color1 $red/g" "$kitty_config"
-sed -i "s/^color2 .*/color2 $green/g" "$kitty_config"
-sed -i "s/^color3 .*/color3 $yellow/g" "$kitty_config"
-sed -i "s/^color4 .*/color4 $blue/g" "$kitty_config"
-sed -i "s/^color5 .*/color5 $magenta/g" "$kitty_config"
-sed -i "s/^color6 .*/color6 $cyan/g" "$kitty_config"
-sed -i "s/^color7 .*/color7 $white/g" "$kitty_config"
-
-sed -i "s/^color8 .*/color8 $bright_black/g" "$kitty_config"
-sed -i "s/^color9 .*/color9 $bright_red/g" "$kitty_config"
-sed -i "s/^color10 .*/color10 $bright_green/g" "$kitty_config"
-sed -i "s/^color11 .*/color11 $bright_yellow/g" "$kitty_config"
-sed -i "s/^color12 .*/color12 $bright_blue/g" "$kitty_config"
-sed -i "s/^color13 .*/color13 $bright_magenta/g" "$kitty_config"
-sed -i "s/^color14 .*/color14 $bright_cyan/g" "$kitty_config"
-sed -i "s/^color15 .*/color15 $bright_white/g" "$kitty_config"
-
-# (__________________________)
-
 # setting rofi theme
-mode_file=~/.mode
+mode_file="$HOME/.config/hypr/.cache/.mode"
 current_mode=$(cat "$mode_file")
 if [ "$current_mode" == "dark" ]; then
     ln -sf ~/.cache/wal/colors-rofi-dark.rasi ~/.config/rofi/themes/rofi-pywal.rasi
