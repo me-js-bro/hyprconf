@@ -11,8 +11,8 @@ case $1 in
         url="https://chat.openai.com"
         ;;
     gem)
-	    url="https://gemini.google.com/app"
-	    ;;
+	url="https://gemini.google.com/app"
+	;;
     wapp)
         url="https://web.whatsapp.com"
         ;;
@@ -29,22 +29,12 @@ case $1 in
 esac
 
 # Define the browsers in the order of preference
-if [[ -f "/usr/bin/brave" ]]; then
-    browser="brave"
-elif [[ -f "/usr/bin/brave-browser" ]]; then
-    browser="brave-browser"
-elif [[ -f "/usr/bin/chromium" ]]; then
-    browser="chromium-browser"
-fi
+browser_cache="$HOME/.config/hypr/.cache/browser"
+browser=$(grep "default" "$browser_cache" | awk -F'=' '{print $2}')
 
 # Loop through the browsers and try to open the URL with the first available one
-if command -v "$browser" &> /dev/null; then
+if [[ ! "$browser" == "firefox" ]]; then
     "$browser" --app="$url"
-    # echo "$browser"
-    exit 0
+elif [[ "$browser" == "firefox" ]]; then
+    "$browser" --new-window "$url"
 fi
-
-# If no browser is found, display an error message
-# echo "Error: No supported browser found."
-# exit 1
-
