@@ -6,6 +6,8 @@ wallpaper_dir_light="$HOME/.config/hypr/Dynamic-Wallpapers/light"
 scripts_dir="$HOME/.config/hypr/scripts"
 cache_dir="$HOME/.config/hypr/.cache"
 engine_file="$cache_dir/.engine"
+dark_theme="Dracula"
+light_theme="Mkosbigsur-gtk"
 
 # Create the mode file if it doesn't exist
 touch "$mode_file"
@@ -54,7 +56,7 @@ if [ "$current_mode" == "dark" ]; then
     # Switch to light mode
 
     # gtk theme
-    gsettings set org.gnome.desktop.interface gtk-theme "theme-light"
+    gsettings set org.gnome.desktop.interface gtk-theme "$light_theme"
 
     # switch wallpaper
     if [[ "$engine" == "swww" ]]; then
@@ -67,7 +69,7 @@ else
     # Switch to dark mode
 
     # gtk theme
-    gsettings set org.gnome.desktop.interface gtk-theme "theme"
+    gsettings set org.gnome.desktop.interface gtk-theme "$dark_theme"
 
     # switch wallpaper
     if [[ "$engine" == "swww" ]]; then

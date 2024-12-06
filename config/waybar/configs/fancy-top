@@ -41,7 +41,7 @@
     "custom/launch_rofi": {
         "format": "Apps",
         "on-click": "rofi -show drun -theme ~/.config/rofi/menu/style-4.rasi",
-        "on-click-right": "kitty --title ranger -e ranger",
+        "on-click-right": "kitty --title yazi -e yazi",
         "tooltip": false
     }
 }
