@@ -128,11 +128,13 @@ bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/up
 |                                 | `SUPER` + `ALT` + `SHIFT` + `W` | Select wallpaper, style 2                |
 | Screenshot                      | `PRINT`                     | Take a screenshot                            |
 | Key Binds Help                  | `SUPER` + `SHIFT` + `h`     | Display keybinds help                        |
-| Open Terminal                   | `SUPER` + `Return`          | Open terminal (Kitty)                    |
+| Open Terminal                   | `SUPER` + `Return`          | Open terminal (Kitty)                        |
+| Open Terminal                   | `SUPER` + `SHIFT` + `Return`| Open terminal floating mode (Kitty)          |
 | Kill Active Window              | `SUPER` + `Q`               | Close active window                          |
 | Exit Window Manager             | `SUPER` + `SHIFT` + `M`     | Exit window manager                          |
 | Open File Manager               | `SUPER` + `E`               | Open file manager                            |
 | Toggle Floating Window          | `SUPER` + `V`               | Toggle floating state of active window       |
+| Toggle Floating Window          | `SUPER` + `ALT` + `V`       | Toggle floating all windows                  |
 | Fullscreen Toggle               | `SUPER` + `F`               | Toggle fullscreen of active window           |
 | Open Application Menu           | `SUPER` + `D`               | Open application menu                        |
 |                                 | `SUPER` + `ALT` + `D`       | Open theme selector rofi menu                |
@@ -142,12 +144,12 @@ bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/up
 | Shutdown/Restart Menu           | `SUPER` + `x`               | Open power menu                              |
 | Change Power Menu Theme         | `SUPER` + `ALT` + `x`       | Change power menu theme                      |
 | Open Code Editor                | `SUPER` + `C`               | Open code editor                             |
-| Open Web Browsers               | `SUPER` + `B`               | Open preferred web browsers                  |
-| Open Web Browsers               | `SUPER` + `SHIFT` + `B`     | Open secondary web browser                   |
+| Open Web Browsers               | `SUPER` + `B`               | Open default web browsers                    |
+| Open Web Browsers               | `ALT` + `B`                 | Open script to set default web browser       |
 | Switch Window                   | `SUPER` + `Tab`             | Open rofi to switch between windows          |
 | Hide/Unhide Waybar              | `CONTROL` + `ESCAPE`        | Hide and unhide status bar (waybar)          |
 | Reload Waybar                   | `CONTROL` + `ALT` + `ESCAPE`| Reload status bar (waybar)                   |
-| Reload Hyprland                 | `CONTROL` + `R`             | Reload Hyprland                              |
+| Reload Hyprland                 | `SUPER` + `CTRL` + `R`      | Reload Hyprland                              |
 | Update system                   | `CONTROL` + `U`             | Update the system                            |
 | Lock Screen                     | `SUPER` + `SHIFT` + `l`     | Lock the screen   (Hyprlock)                 |
 | Toggle Dark/Light Theme         | `SUPER` + `ALT` + `l`       | Toggle between dark and light themes         |
@@ -159,10 +161,7 @@ bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/up
 |                                 | `SUPER` + `SHIFT` + `a`     | Open WhatsApp                                |
 |                                 | `SUPER` + `CTRL` + `a`      | Open ChatGPT                                 |
 |                                 | `SUPER` + `SHIFT` + `g`     | Open GitHub                                  |
-|                                 | `SUPER` + `SHIFT` + `p`     | Open Photopea                                |
-| Audio Control                   | `F9`                        | Toggle audio mute                            |
-|                                 | `F10`                       | Decrease volume                              |
-|                                 | `F11`                       | Increase volume                              |
+|                                 | `SUPER` + `CTRL` + `p`      | Open Photopea                                |
 | Move Focus (Arrow Keys)         | `SUPER` + `l`               | Move focus right                             |
 |                                 | `SUPER` + `h`               | Move focus left                              |
 |                                 | `SUPER` + `k`               | Move focus up                                |
@@ -177,8 +176,14 @@ bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/up
 | Scroll through Workspaces       | `SUPER` + `mouse_down`      | Scroll to next workspace                     |
 |                                 | `SUPER` + `mouse_up`        | Scroll to previous workspace                 |
 | Move/Resize Window              | `SUPER` + `LMB/RMB`         | Drag to move or resize window                |
-| Brightness                      | `SUPER` + `F2`, `SUPER` + `F3` | Decrease and Increase screen brightness.  |
-| Toggle nightlight mode          | `SUPER` + `F1`, `SUPER` + `F2` && `SUPER` + `F3` | Increase, Decrease night light and set to default (6000k) using SUPER F3 |
+| Audio Control                   | `F9`                        | Toggle audio mute                            |
+|                                 | `F10`                       | Decrease volume                              |
+|                                 | `F11`                       | Increase volume                              |
+| Brightness                      | `F2`                        | Decrease screen brightness.                  |
+| Brightness                      | `F3`                        | Increase screen brightness.                  |
+| Toggle nightlight mode          | `SUPER` + `F1`, `SUPER` + `F2` && `SUPER` + `F3` | Decrease, Increase night light & set to default (6000k) using SUPER F3 |
+
+For more, just visit the `~/.config/hypr/configs/keybinds.conf` file.
 
 
 ## Contribute.

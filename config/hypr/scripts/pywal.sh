@@ -110,6 +110,24 @@ else
     echo "No file found named colors.json"
 fi
 
+# kitty# Extract colors from colors.json
+kitty_colors=~/.cache/wal/colors-kitty.conf
+kitty=~/.config/kitty/kitty.conf
+# Define a function to extract a specific color
+extract_color() {
+  color_keyword="$1"
+  grep "^${color_keyword}" $kitty_colors | awk '{print $2}'
+}
+
+# Extract background and foreground colors
+active_border_color=$(extract_color "foreground")
+inactive_border_color=$(extract_color "color5")
+
+# kitty colors
+sed -i "s/active_border_color .*$/active_border_color $active_border_color/g" "$kitty"
+sed -i "s/inactive_border_color .*$/inactive_border_color $inactive_border_color/g" "$kitty"
+kitty @ set-color -a "$kitty"
+
 # setting rofi theme
 mode_file="$HOME/.config/hypr/.cache/.mode"
 current_mode=$(cat "$mode_file")
