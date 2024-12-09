@@ -267,7 +267,7 @@ if [[ -d "$HOME/.config/hypr/Wallpaper" ]]; then
 
 # setting the default wallpaper
   ln -sf "$wallpaper" "$HOME/.config/hypr/.cache/current_wallpaper.png"
-   echo "wallpaper = ,$HOME/.config/hypr/.cache/current_wallpaper.png" > "$HOME/.config/hypr/hyprpaper"
+   echo "wallpaper = ,$HOME/.config/hypr/.cache/current_wallpaper.png" > "$HOME/.config/hypr/hyprpaper.conf"
   "$HOME/.config/hypr/scripts/pywal.sh" &> /dev/null
 fi
 
