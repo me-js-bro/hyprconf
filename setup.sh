@@ -127,7 +127,7 @@ if [[ -d "$HOME/.config/HyprBackup-${USER}" ]]; then
     printf "${attention}\n! a HyprBackup directory was there. Archiving it.\n"
     cd "$HOME/.config"
     mkdir -p "HyprArchive-${USER}"
-    zip -r -1 "HyprBackup-${USER}.zip" "HyprBackup-${USER}" &> /dev/null
+    zip -r -1 "HyprBackup-${USER}-$(date +%d-%m-%Y).zip" "HyprBackup-${USER}" &> /dev/null
     mv "HyprBackup-${USER}.zip" "HyprArchive-${USER}/"
     printf "${done}\n:: HyprBackup-${USER} was zipped and backed to HyprArchive-${USER} directory.\n"
 fi
