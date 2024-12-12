@@ -321,10 +321,10 @@
 
     // works for arch, fedora and opensuse also.
     "custom/updater": {
-        "exec": "~/.config/hypr/scripts/systemupdate.sh cu",
+        "exec": "~/.config/hypr/scripts/systemupdate.sh --check",
         "return-type": "json",
         "format": " {}",
-        "on-click": "~/.config/hypr/scripts/systemupdate.sh up",
+        "on-click": "~/.config/hypr/scripts/systemupdate.sh --update",
         "interval": 86400, // once every day
         "tooltip": true
     },

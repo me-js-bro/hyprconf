@@ -128,10 +128,10 @@ package_update() {
 }
 
 case $1 in
-    cu)
+    --check)
         check_update  # Check for available updates
         ;;
-    up)
+    --update)
         package_update  # Perform package update
         ;;
     *)

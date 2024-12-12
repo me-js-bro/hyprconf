@@ -37,10 +37,10 @@ choose_default() {
 
 
 open_browser() {
-    if [[ -z "$default" ]]; then
+    if [[ "$default" == "" ]]; then
         "$scripts_dir/default_browser.sh"
     elif [[ ! "$default" == "firefox" ]]; then
-        "$default" --enable-wayland-img
+        "$default" --enable-wayland-ime
     elif [[ "$default" == "firefox" ]]; then
         "$default"
     fi

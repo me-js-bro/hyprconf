@@ -123,16 +123,20 @@ dirs=(
 )
 
 # if some main directories exists, backing them up.
-for confs in "${dirs[@]}"; do
-    dir_path=~/.config/$confs
-    if [[ -d "$dir_path" ]]; then
-        if [[ -d "$HOME/.config/HyprBackup-${USER}" ]]; then
-            printf "${attention}\n! A backup directory was found, moving it to '$HOME/.config/HyprArchive-${USER}' directory\n"
-            mkdir -p "$HOME/.config/HyprArchive-${USER}" && zip -r "$HOME/.config/HyprArchive-${USER}/HyprBackup-${USER}.zip" "$HOME/.config/HyprBackup-${USER}" && rm -r "$HOME/.config/HyprBackup-${USER}" &> /dev/null
-        fi
+if [[ -d "$HOME/.config/HyprBackup-${USER}" ]]; then
+    printf "${attention}\n! a HyprBackup directory was there. Archiving it.\n"
+    cd "$HOME/.config"
+    mkdir -p "HyprArchive-${USER}"
+    zip -r -1 "HyprBackup-${USER}.zip" "HyprBackup-${USER}" &> /dev/null
+    mv "HyprBackup-${USER}.zip" "HyprArchive-${USER}/"
+    printf "${done}\n:: HyprBackup-${USER} was zipped and backed to HyprArchive-${USER} directory.\n"
+fi
 
-        mkdir -p "$HOME/.config/HyprBackup"-${USER}
-        mv "$dir_path" "$HOME/.config/HyprBackup"-${USER} 2>&1 | tee -a "$log"
+for confs in "${dirs[@]}"; do
+    mkdir -p "$HOME/.config/HyprBackup-${USER}"
+    dir_path="$HOME/.config/$confs"
+    if [[ -d "$dir_path" ]]; then
+        mv "$dir_path" "$HOME/.config/HyprBackup-${USER}/" 2>&1 | tee -a "$log"
         printf "${done}\n:: Everything has been backuped in $HOME/.config/HyprBackup-${USER}.\n"
     fi
 done
@@ -193,8 +197,6 @@ sleep 1
 if [ -d $scripts_dir ]; then
     # make all the scripts executable...
     chmod +x "$scripts_dir"/* 2>&1 | tee -a "$log"
-    chmod +x "$HOME/.config/ranger/scope.sh" 2>&1 | tee -a "$log"
-
     printf "${done}\n:: All the necessary scripts have been executable.\n"
     sleep 1
 else
@@ -267,7 +269,7 @@ if [[ -d "$HOME/.config/hypr/Wallpaper" ]]; then
 
 # setting the default wallpaper
   ln -sf "$wallpaper" "$HOME/.config/hypr/.cache/current_wallpaper.png"
-   echo "wallpaper = ,$HOME/.config/hypr/.cache/current_wallpaper.png" > "$HOME/.config/hypr/hyprpaper"
+   echo "wallpaper = ,$HOME/.config/hypr/.cache/current_wallpaper.png" > "$HOME/.config/hypr/hyprpaper.conf"
   "$HOME/.config/hypr/scripts/pywal.sh" &> /dev/null
 fi
 
