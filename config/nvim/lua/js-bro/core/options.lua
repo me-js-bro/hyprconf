@@ -9,7 +9,7 @@ opt.number = true
 opt.tabstop = 4 -- 2 spaces for tabs (prettier default)
 opt.shiftwidth = 4 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
-opt.autoindent = true -- copy indent from current line when starting new one
+-- opt.autoindent = false -- copy indent from current line when starting new one
 
 opt.wrap = true -- wrapping lines
 opt.linebreak = true -- Companion to wrap, don't split words (default: false)
@@ -41,9 +41,9 @@ opt.swapfile = false
 
 vim.wo.number = true -- Make line numbers default (default: false)
 vim.o.relativenumber = true -- Set relative numbered lines (default: false)
-vim.o.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim. (default: '')
+-- vim.o.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim. (default: '')
 -- vim.o.wrap = false -- Display lines as one long line (default: true)
--- vim.o.mouse = 'a' -- Enable mouse mode (default: '')
+opt.mouse = 'a' -- Enable mouse mode (default: '')
 -- vim.o.autoindent = true -- Copy indent from current line when starting new one (default: true)
 -- vim.o.ignorecase = true -- Case-insensitive searching UNLESS \C or capital in search (default: false)
 -- vim.o.smartcase = true -- Smart case (default: false)
