@@ -17,7 +17,7 @@ case $packages in
     ;;
 "Swaync")
     # gum function to choose swaync settings.
-    printf "[ * ]\nChoose which settings you want to change (_select by pressing space_)..\n"
+    printf "[ * ]\nChoose which settings you want to change (_select by pressing space_ ( only one ) )..\n"
     _swaync_choice=$(gum choose --limit=1 "roundness" "cancel")
     ;;
 esac
