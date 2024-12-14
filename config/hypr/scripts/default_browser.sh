@@ -9,13 +9,17 @@ scripts_dir="$HOME/.config/hypr/scripts"
 chromium_based=$(compgen -c | grep -- '-browser' | grep -E '^(brave|chromium|opera|vivaldi|zen)-browser$' | sed 's/-stable//' | sort -u)
 browsers=("firefox" "${chromium_based[@]}")
 
-IFS=$'\n' read -rd '' -a browsers <<< "$chromium_based"
+IFS=$'\n' read -rd '' -a browsers <<<"$chromium_based"
+
+if [[ -n "$(command -v firefox)" && -z "$chromium_based" ]]; then
+    echo "firefox" >>"$browser_cache"
+fi
 
 # Loop through the list and append found browsers to the cache.
 for browser in "${browsers[@]}"; do
     if command -v "$browser" &>/dev/null && ! grep -qx "$browser" "$browser_cache"; then
         echo "Found: $browser"
-        echo "$browser" >> "$browser_cache"
+        echo "$browser" >>"$browser_cache"
     fi
 done
 
@@ -28,13 +32,13 @@ if [[ "$browsers_num" -gt 1 && -z "$default" ]]; then
 elif [[ "$browsers_num" -eq 1 && -z "$default" ]]; then
     existing=$(grep -v "default=" "$browser_cache")
     notify-send "Default browser" "Setting $existing as your default browser."
-    echo "default=$existing" >> "$browser_cache"
+    echo "default=$existing" >>"$browser_cache"
 fi
 
 case $1 in
-    --reset)
-        rm ~/.config/hypr/.cache/browser
-        notify-send "Reset" "Default browser list has been reset"
-        "$HOME/.config/hypr/scripts/default_browser.sh"
-        ;;
+--reset)
+    rm ~/.config/hypr/.cache/browser
+    notify-send "Reset" "Default browser list has been reset"
+    "$HOME/.config/hypr/scripts/default_browser.sh"
+    ;;
 esac
