@@ -371,7 +371,7 @@
     },
 
     "custom/nightlight": {
-        "format": "󱠃",
+        "format": "󰖔 ",
         "exec": "~/.config/hypr/scripts/nightlight.sh",
         "on-scroll-down": "~/.config/hypr/scripts/nightlight.sh --dec",
         "on-scroll-up": "~/.config/hypr/scripts/nightlight.sh --inc",
