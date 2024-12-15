@@ -228,8 +228,18 @@ clear && sleep 1
 
 
 # Asking if the user wants to download more wallpapers
-printf "${attention}\n! Would you like to add more ${green}Wallpapers${end}? ${blue}[ y/n ]${end}\n"
-read -r -p "$(echo -e '\e[1;32mSelect: \e[0m')" wallpaper
+if [[ -n "$(command -v gum)" ]]; then
+    printf "${ask}\n?? Would you like to add more wallpapers?\n"
+    gum confirm "Please confirm."
+    if [ $? -eq 0 ]; then
+       wallpaper="y" 
+    else
+        wallpaper="n"
+    fi
+else
+    printf "${ask}\n?? Would you like to add more ${green}Wallpapers${end}? ${blue}[ y/n ]${end}\n"
+    read -r -p "$(echo -e '\e[1;32mSelect: \e[0m')" wallpaper
+fi
 
 printf " \n"
 

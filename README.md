@@ -56,6 +56,13 @@
 </p>
 </details>
 
+<details close>
+<summary>Login Screen (sddm)</summary>
+<p align="center">
+   <img aligh="center" width="99%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/sddm/sddm_theme.jpg?raw=true" />
+</p>
+</details>
+
 <br>
 
 ## Features
