@@ -127,8 +127,9 @@ if [[ -d "$HOME/.config/HyprBackup-${USER}" ]]; then
     printf "${attention}\n! a HyprBackup directory was there. Archiving it.\n"
     cd "$HOME/.config"
     mkdir -p "HyprArchive-${USER}"
-    zip -r -1 "HyprBackup-${USER}-$(date +%d-%m-%Y).zip" "HyprBackup-${USER}" &> /dev/null
+    zip -r -1 "HyprBackup-${USER}.zip" "HyprBackup-${USER}" &> /dev/null
     mv "HyprBackup-${USER}.zip" "HyprArchive-${USER}/"
+    rm -rf "HyprBackup-${USER}"
     printf "${done}\n:: HyprBackup-${USER} was zipped and backed to HyprArchive-${USER} directory.\n"
 fi
 
@@ -168,14 +169,14 @@ fi
 # Check if the configuration is in a virtual box
 if hostnamectl | grep -q 'Chassis: vm'; then
     printf "${attention}\n! You are using this script in a Virtual Machine.\n${action}\n=> Setting up things for you.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-    sed -i '/env = WLR_NO_HARDWARE_CURSORS,1/s/^#//' config/hypr/configs/environment.conf
-    sed -i '/env = WLR_RENDERER_ALLOW_SOFTWARE,1/s/^#//' config/hypr/configs/environment.conf
-    echo -e '#Monitor\nmonitor=Virtual-1, 1920x1080@60,auto,1' config/hypr/configs/monitor.conf
+    sed -i '/env = WLR_NO_HARDWARE_CURSORS,1/s/^#//' "$dir/config/hypr/configs/environment.conf"
+    sed -i '/env = WLR_RENDERER_ALLOW_SOFTWARE,1/s/^#//' "$dir/config/hypr/configs/environment.conf"
+    echo -e '#Monitor\nmonitor=Virtual-1, 1920x1080@60,auto,1' "$dir/config/hypr/configs/monitor.conf"
 
 else
     #_____ setting up the monitor
     printf "${action}\n==> Setting the default monitor setup.\n"
-    echo -e "#Monitor\nmonitor=,preferred,auto,auto" > config/hypr/configs/monitor.conf
+    echo -e "#Monitor\nmonitor=,preferred,auto,auto" > "$dir/config/hypr/configs/monitor.conf"
 fi
 
 
