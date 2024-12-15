@@ -125,6 +125,10 @@ package_update() {
             error_notification "$error_sign" "Error!" "Sorry, could not update packages"
         fi
     fi
+
+        # reload waybar
+        killall waybar
+        waybar &
 }
 
 case $1 in
