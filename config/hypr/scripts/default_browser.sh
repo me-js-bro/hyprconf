@@ -7,12 +7,16 @@ scripts_dir="$HOME/.config/hypr/scripts"
 
 # List of browsers to check.
 chromium_based=$(compgen -c | grep -- '-browser' | grep -E '^(brave|chromium|opera|vivaldi|zen)-browser$' | sed 's/-stable//' | sort -u)
-browsers=("firefox" "${chromium_based[@]}")
+browsers=("firefox" "brave" "${chromium_based[@]}")
 
 IFS=$'\n' read -rd '' -a browsers <<<"$chromium_based"
 
 if [[ -n "$(command -v firefox)" && -z "$chromium_based" ]]; then
-    echo "firefox" >>"$browser_cache"
+    echo "firefox" >> "$browser_cache"
+fi
+
+if [[ -n "$(command -v brave)" ]]; then
+    echo "brave" >> "$browser_cache"
 fi
 
 # Loop through the list and append found browsers to the cache.
