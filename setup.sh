@@ -249,19 +249,19 @@ printf " \n"
 # wallpaper...
 if [[ "$wallpaper" =~ ^[Y|y]$ ]]; then
     printf "${action}\n==> Downloading some wallpapers.\n" && sleep 1
-
+    
     # cloning the wallpapers in a temporary directory
-    git clone --depth=1 https://github.com/me-js-bro/Wallpapers.git ~/.cache/wallpaper-cache 2>&1 | tee -a "$log"
+    git clone --depth=1 https://github.com/me-js-bro/Wallpapers.git ~/.cache/wallpaper-cache 2>&1 | tee -a "$log" &> /dev/null
 
     # copying the wallpaper to the main directory
     if [[ -d "$HOME/.cache/wallpaper-cache" ]]; then
-        cp "$HOME/.cache/wallpaper-cache/dark"/* ~/.config/hypr/Dynamic-Wallpapers/dark/
-        cp "$HOME/.cache/wallpaper-cache/light"/* ~/.config/hypr/Dynamic-Wallpapers/light/
-        cp "$HOME/.cache/wallpaper-cache/all"/* ~/.config/hypr/Wallpaper/
+        cp "$HOME/.cache/wallpaper-cache/dark"/* ~/.config/hypr/Dynamic-Wallpapers/dark/ &> /dev/null
+        cp "$HOME/.cache/wallpaper-cache/light"/* ~/.config/hypr/Dynamic-Wallpapers/light/ &> /dev/null
+        cp "$HOME/.cache/wallpaper-cache/all"/* ~/.config/hypr/Wallpaper/ &> /dev/null
         rm -rf "$HOME/.cache/wallpaper-cache" &> /dev/null
         printf "${done}\n:: Wallpapers were downloaded successfully..\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") & sleep 0.5
     else
-        printf "${error}\n! Sorry, could not download wallpapers.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") && sleep 0.5
+        printf "\n${error}\n! Sorry, could not download more wallpapers. Going forward with the limited wallpapers.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") && sleep 0.5
     fi
 fi
 
