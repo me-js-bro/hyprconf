@@ -19,6 +19,14 @@ if [[ -n "$(command -v brave)" ]]; then
     echo "brave" >> "$browser_cache"
 fi
 
+if [[ -n "$(command -v chromium)" ]]; then
+    echo "chromium" >> "$browser_cache"
+fi
+
+if [[ -n "$(command -v vivaldi)" ]]; then
+    echo "vivaldi" >> "$browser_cache"
+fi
+
 # Loop through the list and append found browsers to the cache.
 for browser in "${browsers[@]}"; do
     if command -v "$browser" &>/dev/null && ! grep -qx "$browser" "$browser_cache"; then

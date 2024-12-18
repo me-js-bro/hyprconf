@@ -171,7 +171,7 @@ if hostnamectl | grep -q 'Chassis: vm'; then
     printf "${attention}\n! You are using this script in a Virtual Machine.\n${action}\n=> Setting up things for you.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     sed -i '/env = WLR_NO_HARDWARE_CURSORS,1/s/^#//' "$dir/config/hypr/configs/environment.conf"
     sed -i '/env = WLR_RENDERER_ALLOW_SOFTWARE,1/s/^#//' "$dir/config/hypr/configs/environment.conf"
-    echo -e '#Monitor\nmonitor=Virtual-1, 1920x1080@60,auto,1' "$dir/config/hypr/configs/monitor.conf"
+    echo -e '#Monitor\nmonitor=Virtual-1, 1920x1080@60,auto,1' > "$dir/config/hypr/configs/monitor.conf"
 
 else
     #_____ setting up the monitor
