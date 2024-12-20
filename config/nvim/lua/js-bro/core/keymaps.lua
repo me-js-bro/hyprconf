@@ -11,6 +11,12 @@ keymap.set({ "i", "n" }, "<C-s>", "<ESC>:w<CR>", { desc = "save with Ctrl + s" }
 keymap.set({ "i", "n" }, "<C-z>", "<ESC>u", { desc = "undo" })                    -- undo with ctrl + z
 keymap.set({ "i", "n" }, "<C-y>", "<C-r>", { desc = "redo" })                     -- redo with ctrl + y
 
+-- Delete a word backwards
+keymap.set("n", "dw", 'vb"_d')
+
+-- Select all
+keymap.set("n", "<C-a>", "gg<S-v>G")
+
 -- window management
 keymap.set("n", "<leader>v", "<C-w>v", { desc = "Split window vertically" })                    -- split window vertically
 keymap.set("n", "<leader>h", "<C-w>s", { desc = "Split window horizontally" })                  -- split window horizontally

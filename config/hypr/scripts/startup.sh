@@ -53,6 +53,7 @@ fi
 "$scripts_dir/notification.sh" sys
 "$scripts_dir/pywal.sh"
 "$scripts_dir/Refresh.sh"
+"$scripts_dir/system.sh" run &
 
 #_____ setup monitor
 
