@@ -26,6 +26,9 @@
 
    <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/menu/4.png?raw=true" />
    <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/menu/3.png?raw=true" />
+    <br>
+
+   <img aligh="center" width="99%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/clipboard.png?raw=true" />
 </p> <br>
 </details>
 
