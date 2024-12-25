@@ -18,10 +18,9 @@ window {
     anchor:                      center;
     fullscreen:                  false;
     width:                       100%;
-    height:                      70%;
+    height:                      63%;
     x-offset:                    0px;
     y-offset:                    0px;
-
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
@@ -56,23 +55,9 @@ inputbar {
     border-color:                @selected-active-background;
     background-color:            @background;
     text-color:                  @foreground;
-    children:                    [ "prompt", "entry" ];
+    children:                    [ "entry" ];
 }
 
-prompt {
-    enabled:                     true;
-    padding:                     15px;
-    border-radius:               15px;
-    background-color:            @selected-active-background;
-    text-color:                  @background;
-}
-textbox-prompt-colon {
-    enabled:                     true;
-    expand:                      false;
-    str:                         "::";
-    background-color:            inherit;
-    text-color:                  inherit;
-}
 entry {
     enabled:                     true;
     expand:                      false;
@@ -82,7 +67,7 @@ entry {
     background-color:            @alternate-active-background;
     text-color:                  @foreground;
     cursor:                      text;
-    placeholder:                 "Search Wallpaper...";
+    placeholder:                 " Search Wallpaper...";
     placeholder-color:           inherit;
 }
 
@@ -116,57 +101,108 @@ scrollbar {
     background-color:            @alternate-active-background;
 }
 
-/*****----- Elements -----*****/
+/* ---- Element ---- */
 element {
-    enabled:                     true;
-    spacing:                     0px;
-    margin:                      0px;
-    padding:                     0px 10px;
-    border:                      0px solid;
-    border-radius:               20px;
-    border-color:                @selected-active-background;
-    background-color:            @background;
-    text-color:                  @foreground;
-    orientation:                 vertical;
-    cursor:                      pointer;
+    enabled:                true;
+    padding:                5px;
+    cursor:                 pointer;
+	orientation: 			vertical;
+    background-color:       transparent;
+    border-radius:          10px;
+    border:                 0px;
 }
+
 element normal.normal {
-    background-color:            @background;
+    background-color:            inherit;
     text-color:                  @foreground;
 }
+
+element normal.urgent {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element normal.active {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
 element selected.normal {
-    background-color:            @foreground;
+    background-color:            transparent;
     text-color:                  @background;
 }
+
+element selected.urgent {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element selected.active {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element alternate.normal {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element alternate.urgent {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element alternate.active {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
 element-icon {
-    padding:                     0px 0px 0px 0px;
     background-color:            transparent;
     text-color:                  inherit;
     size:                        500px;
+    margin:                      -50px 0px;
     cursor:                      inherit;
 }
+
 element-text {
     background-color:            transparent;
     text-color:                  inherit;
-    highlight:                   inherit;
     cursor:                      inherit;
+    padding:                     10px 15px;
+    border-radius:               10px;
     vertical-align:              0.5;
     horizontal-align:            0.5;
 }
 
-/*****----- Message -----*****/
-error-message {
-    padding:                     50px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @selected-active-background;
-    background-color:            @background;
-    text-color:                  @foreground;
+element-text selected {
+    background-color:            @foreground;
 }
+
+/*****----- Message -----*****/
+message {
+    background-color:            transparent;
+    border:0px;
+    margin:20px 0px 0px 0px;
+    padding:0px;
+    spacing:0px;
+    border-radius: 10px;
+}
+
 textbox {
+    padding:                     15px;
+    margin:                      0px;
+    border-radius:               0px;
     background-color:            @background;
     text-color:                  @foreground;
     vertical-align:              0.5;
     horizontal-align:            0.0;
-    highlight:                   none;
 }
+
+error-message {
+    padding:                     15px;
+    border-radius:               20px;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+

@@ -5,17 +5,17 @@ configuration {
     modi:                       "drun,filebrowser,window";
     font:                       "Fira Code SemiBold 12";
     show-icons:                 true;
-    display-drun:               "";
-    display-run:                 " ";
-    display-filebrowser:         " ";
-    display-window:              " ";
+    display-drun:               "";
+    display-run:                "";
+    display-filebrowser:        "";
+    display-window:             "";
 	drun-display-format:        "{name}";
     hover-select:               true;
     me-select-entry:            "MouseSecondary";
     me-accept-entry:            "MousePrimary";
-    window-format:               "{w}{t}";
-	font:                        "JetBrainsMono Nerd Font 10";
-    icon-theme:                  "Tela-circle-dracula";
+    window-format:              "{w}{t}";
+	font:                       "JetBrainsMono Nerd Font 10";
+    icon-theme:                 "Tela-circle-dracula";
     
 }
 
@@ -24,52 +24,82 @@ configuration {
 
 /* ---- Window ---- */
 window {
-    width:						700px;
-	height:						600px;
+    width:						1000px;
+	height:						700px;
     x-offset:                   0px;
     y-offset:                   0px;
     spacing:                    0px;
     padding:                    5px;
     margin:                     0px; 
-    border:                     3px;
+    border:                     2px;
     border-color:               @foreground;
     cursor:                     "default";
     location:                   center;
     anchor:                     center;
     fullscreen:                 false;
     enabled:                    true;
-    border-radius:              30px;
-    background-image:           url("~/.config/hypr/.cache/current_wallpaper.png", height);
+    border-radius:              20px;
 }
 
 /* ---- Mainbox ---- */
 mainbox {
     enabled:                    true;
     orientation:                vertical;
-	padding:					8px;
+	padding:					3px;
     background-color:           transparent;
-    children:                   [ "imagebox" ];
+    children:                   [ "listbox" ];
     border-radius:              8px;
 }
+
 
 /* ---- Imagebox ---- */
 imagebox {
     background-color:           transparent;
     orientation:                vertical;
-    children:                   [ "listbox", "mode-switcher"];
+    border-radius:              10px;
+    background-image:           url("~/.config/hypr/.cache/current_wallpaper.png", width);
+    children:                   [ "inputbar","mode" ];
+}
+
+mode {
+    orientation:                horizontal; 
+    margin:                     -2px;
+    children:                   [ "dummy", "mode-switcher" ];
+    background-color:           transparent;
+}
+
+mode-switcher {
+    orientation:                vertical;
+    padding:                    20px;
+    spacing:                    40px;
+    background-color:           #00000080;
+}
+
+button {
+    border-radius:              100%;
+    padding:                    20px;
+    background-color:           @background;
+    text-color:                 @foreground;
+    cursor:                     pointer;
+}
+
+button selected {
+    text-color:                 @background;
+    background-color:           @selected-normal-background;
 }
 
 /* ---- Listbox ---- */
 listbox {
     spacing:                    4px;
     orientation:                vertical;
-	padding:					20px;
-    border-radius:              30px;
+	padding:					10px;
+    border-radius:              10px;
     border:                     0;
     border-color:               @active-background;
 	background-color:		    @background;
-    children:                   [ "inputbar", "listview" ];
+    children:                   [ "imagebox", "listview" ];
 }
+
 
 /* ---- Dummy ---- */
 dummy {
@@ -78,81 +108,50 @@ dummy {
 
 /* ---- Inputbar ---- */
 inputbar {
-    enabled:                    false;
+    enabled:                    true;
     text-color:                 @foreground;
-    spacing:                    10px;
-    border-radius:              8px;
-    border-color:               @foreground;
-	background-color:		    @background;
+    border-radius:              10px 10px 0px 0px;
+	background-color:		    #00000080;
     children:                   [ "textbox-prompt-colon","entry" ];
-    border:                     1px;
     border-color:               @active-background;
 }
 
 textbox-prompt-colon {
     enabled:                    true;
-	padding:					6px 0px 6px 10px;
+	padding:					15px;
     expand:                     false;
-    str:                           "🐧";
+    str:                        " ";
     text-color:                 inherit;
 	background-color:			transparent;
 }
 
 entry {
     enabled:                    true;
-	padding:					6px 0px 0px 0px;
+	padding:					10px;
     text-color:                 inherit;
     cursor:                     text;
-    placeholder:                "Search (ctrl tab to choose mode)";
+    placeholder:                "Search..";
     placeholder-color:          inherit;
 	background-color:			transparent;
 }
 
-/* ---- Mode Switcher ---- */
-mode-switcher{
-    orientation:				horizontal;
-    enabled:                    true;
-    spacing:                    12px;
-    padding:                    40px 5px 5px 0;
-    background-color:          	transparent;
-    text-color:                 @foreground;
-}
 
-button {
-    padding:                   20px;
-    border-radius:             30px;
-    background-color:          @background;
-    text-color:                inherit;
-    cursor:                    pointer;
-    border:                    1px;
-    border-color:              @active-background;
-}
-
-button selected {
-    background-color:          @selected-normal-background;
-    text-color:                @foreground;
-    border:                    1px;
-    border-color:              @background;
-	
-}
 
 /* ---- Listview ---- */
 listview {
 	enabled:					true;
-	columns:					1;
-	lines:						6;
-	spacing:                    1px;
+	columns:					4;
+	lines:						4;
 	padding:					4px;
 	dynamic:                    true;
 	cycle:                      true;
 	scrollbar:                  false;
 	layout:                     vertical;
 	reverse:                    false;
-	fixed-height:               true;
-	fixed-columns:              false;
+	fixed-height:               false;
+	fixed-columns:              true;
 	background-color:           transparent;
-	border-radius:   	        30px;
-	border:						0px;
+	border-radius:   	        10px;
 }
 
 /* ---- Element ---- */
@@ -162,7 +161,8 @@ element {
     margin:                     2px;
     cursor:                     pointer;
     background-color:         	transparent;
-    border-radius:              5px;
+    orientation:                horizontal;
+    border-radius:              10px;
     border:                     0px;
 }
 
@@ -224,6 +224,14 @@ element-text {
     cursor:                     inherit;
     vertical-align:             0.5;
     horizontal-align:           0;
+}
+
+element-text selected {
+    background-color:           transparent;
+    text-color:                 @background;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0.5;
 }
 
 /*****----- Message -----*****/
