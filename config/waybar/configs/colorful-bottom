@@ -10,11 +10,11 @@
         "margin-top": 0,
         "margin-bottom": 0,
     
-        "modules-left": ["custom/launch_rofi","hyprland/workspaces","custom/ai", "custom/github", "mpris"],
+        "modules-left": ["custom/launch_rofi","hyprland/workspaces", "mpris"],
     
         "modules-center": [],
     
-        "modules-right": ["tray", "custom/updater", "custom/swaync", "mpris", "custom/light_dark","custom/wallpaper-change", "pulseaudio","pulseaudio#microphone", "network", "battery", "backlight", "idle_inhibitor", "custom/nightlight", "custom/clipboard", "clock","custom/power_btn"],
+        "modules-right": ["tray", "custom/updater", "custom/swaync", "custom/light_dark","custom/wallpaper-change", "pulseaudio","pulseaudio#microphone", "network", "battery", "backlight", "idle_inhibitor", "custom/nightlight", "custom/clipboard", "clock","custom/power_btn"],
 
         "hyprland/workspaces": {
         "disable-scroll": true,
@@ -50,7 +50,7 @@
             // "format": "",   // for arch
             //  "format": "󰣛",   // for fedora
             // "format": "",  // for opensuse
-            "on-click": "rofi -show drun -theme ~/.config/rofi/menu/style-4.rasi",
+            "on-click": "rofi -show drun -theme ~/.config/rofi/menu/menu.rasi",
             "on-click-right": "kitty --title yazi -e yazi",
             "tooltip": false
         }

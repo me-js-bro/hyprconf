@@ -24,7 +24,7 @@ configuration {
     textbox-font:                "Fira Code SemiBold 12";
     element-text-font:           "feather 48";
 
-    background-window:           black/30%;
+    background-window:           @background;
     background-normal:           @active-background;
     background-selected:         @selected-active-background;
     foreground-normal:           white;

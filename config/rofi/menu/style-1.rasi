@@ -4,10 +4,10 @@ configuration {
     modi:                       "drun,filebrowser,window";
     font:                       "Fira Code SemiBold 12";
     show-icons:                 true;
-    display-drun:               "";
-    display-run:                 " ";
-    display-filebrowser:         " ";
-    display-window:              " ";
+    display-drun:               "";
+    display-run:                "";
+    display-filebrowser:        "";
+    display-window:             "";
 	drun-display-format:        "{name}";
     hover-select:               true;
     me-select-entry:            "MouseSecondary";
@@ -23,12 +23,12 @@ configuration {
 
 /* ---- Window ---- */
 window {
-    width:						900px;
-	height:						450px;
+    width:						1000px;
+	height:						500px;
     x-offset:                   0px;
     y-offset:                   0px;
     spacing:                    0px;
-    padding:                    1px;
+    padding:                    0px;
     margin:                     0px; 
     border:                     2px;
     border-color:               @foreground;
@@ -38,14 +38,14 @@ window {
     fullscreen:                 false;
     enabled:                    true;
     border-radius:              20px;
-    background-image:           url("~/.config/hypr/.cache/current_wallpaper.png", height);
+    background-image:           url("~/.config/hypr/.cache/current_wallpaper.png", width);
 }
 
 /* ---- Mainbox ---- */
 mainbox {
     enabled:                    true;
     orientation:                vertical;
-	padding:					8px;
+	padding:					0px;
     background-color:           transparent;
     children:                   [ "imagebox" ];
     border-radius:              20px;
@@ -55,19 +55,16 @@ mainbox {
 imagebox {
     background-color:           transparent;
     orientation:                horizontal;
-    children:                   [ "mode-switcher", "dummy", "listbox"];
+    padding:                    10px;
+    children:                   [ "mode-switcher",  "dummy", "listbox"];
 }
 
 /* ---- Listbox ---- */
 listbox {
-    spacing:                    4px;
+    spacing:                    10px;
     orientation:                vertical;
-    children:                   ["listview" ];
-	padding:					6px;
-    border-radius:              12px;
-    border:                     1px;
     border-color:               @active-background;
-	background-color:		    @background;
+	background-color:		    transparent;
     children:                   [ "inputbar", "listview" ];
 }
 
@@ -81,29 +78,26 @@ inputbar {
     enabled:                    true;
     text-color:                 @foreground;
     spacing:                    10px;
-    border-radius:              8px;
-    border-color:               @foreground;
+    border-radius:              10px;
 	background-color:		    @background;
     children:                   [ "textbox-prompt-colon","entry" ];
-    border:                     1px;
-    border-color:               @active-background;
 }
 
 textbox-prompt-colon {
     enabled:                    true;
-	padding:					6px 0px 6px 10px;
+	padding:					10px;
     expand:                     false;
-    str:                           "🐧";
+    str:                        "";
     text-color:                 inherit;
 	background-color:			transparent;
 }
 
 entry {
     enabled:                    true;
-	padding:					6px 0px 0px 0px;
+	padding:					10px;
     text-color:                 inherit;
     cursor:                     text;
-    placeholder:                "Search (ctrl tab to choose mode)";
+    placeholder:                "Search..";
     placeholder-color:          inherit;
 	background-color:			transparent;
 }
@@ -113,18 +107,18 @@ mode-switcher{
     orientation:				vertical;
     width:                      40px;
     enabled:                    true;
-    spacing:                    12px;
+    spacing:                    20px;
     background-color:          	transparent;
     text-color:                 @foreground;
 }
 
 button {
     padding:                   0px 12px 0px 8px;
-    border-radius:             20px;
+    border-radius:             15px;
     background-color:          @background;
     text-color:                inherit;
     cursor:                    pointer;
-    border:                    2px;
+    border:                    1px;
     border-color:              @active-background;
 }
 
@@ -150,9 +144,8 @@ listview {
 	reverse:                    false;
 	fixed-height:               true;
 	fixed-columns:              false;
-	background-color:           transparent;
-	border-radius:   	        8px;
-	border:						0px;
+	background-color:           @background;
+	border-radius:   	        10px;
 }
 
 /* ---- Element ---- */
@@ -214,7 +207,7 @@ element alternate.active {
 element-icon {
     background-color:           transparent;
     text-color:                 inherit;
-    size:                       32px;
+    size:                       50px;
     cursor:                     inherit;
 }
 
