@@ -29,7 +29,7 @@ window {
     border-radius:               50px;
     border-color:                @foreground;
     cursor:                      "default";
-    background-color:            transparent;
+    background-color:            black/60%;
 }
 
 /*****----- Main Box -----*****/

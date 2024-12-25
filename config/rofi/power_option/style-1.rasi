@@ -25,7 +25,7 @@ configuration {
     textbox-font:                "JetBrains Mono Nerd Font 16";
     element-text-font:           "feather 64";
 
-    background-window:           black/40%;
+    background-window:           black/70%;
     background-normal:           white/5%;
     background-selected:         white/15%;
     foreground-normal:           white;

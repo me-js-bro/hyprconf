@@ -15,6 +15,8 @@ window {
     anchor:                      center;
     fullscreen:                  false;
     width:                       500px;
+    border:                      2px;
+    border-color:                @foreground;
     border-radius:               20px;
     cursor:                      "default";
     background-color:            @background;
@@ -81,6 +83,6 @@ element-text {
     horizontal-align:            0.5;
 }
 element selected.normal {
-    background-color:            @selected-active-background;
-    text-color:                  @selected-active-foreground;
+    background-color:            @foreground;
+    text-color:                  @background;
 }
