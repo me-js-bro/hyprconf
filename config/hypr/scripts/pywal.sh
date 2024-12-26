@@ -110,24 +110,6 @@ else
     echo "No file found named colors.json"
 fi
 
-# kitty# Extract colors from colors.json
-kitty_colors=~/.cache/wal/colors-kitty.conf
-kitty=~/.config/kitty/kitty.conf
-# Define a function to extract a specific color
-extract_color() {
-  color_keyword="$1"
-  grep "^${color_keyword}" $kitty_colors | awk '{print $2}'
-}
-
-# Extract background and foreground colors
-active_border_color=$(extract_color "foreground")
-inactive_border_color=$(extract_color "color5")
-
-# kitty colors
-sed -i "s/active_border_color .*$/active_border_color $active_border_color/g" "$kitty"
-sed -i "s/inactive_border_color .*$/inactive_border_color $inactive_border_color/g" "$kitty"
-kitty @ set-color -a "$kitty"
-
 # setting rofi theme
 mode_file="$HOME/.config/hypr/.cache/.mode"
 current_mode=$(cat "$mode_file")
@@ -143,6 +125,31 @@ ln -sf ~/.cache/wal/colors-waybar.css ~/.config/waybar/style/theme.css
 # setting waybar colors for swaync
 ln -sf ~/.cache/wal/colors-waybar.css ~/.config/swaync/colors.css
 
+# ----- Dunst
+dunst_file="$HOME/.config/dunst/dunstrc"
+
+# Function to update Dunst colors
+update_dunst_colors() {
+    frame=$(jq -r '.special.foreground' "$colors_file")
+    low_bg=$(jq -r '.colors.color0' "$colors_file")
+    low_fg=$(jq -r '.colors.color7' "$colors_file")
+    normal_bg=$(jq -r '.special.background' "$colors_file")
+    normal_fg=$(jq -r '.special.foreground' "$colors_file")
+
+    echo "$normal_bg"
+    echo "$normal_fg"
+
+    # Update Dunst configuration
+    sed -i "s/frame_color = .*/frame_color = \"$frame\"/g" "$dunst_file"
+    sed -i "/^\[urgency_low\]/,/^\[/ s/^    background = .*/    background = \"$low_bg\"/g" "$dunst_file"
+    sed -i "/^\[urgency_low\]/,/^\[/ s/^    foreground = .*/    foreground = \"$low_fg\"/g" "$dunst_file"
+    sed -i "/^\[urgency_normal\]/,/^\[/ s/^    background = .*/    background = \"${normal_bg}80\"/g" "$dunst_file"
+    sed -i "/^\[urgency_normal\]/,/^\[/ s/^    foreground = .*/    foreground = \"$normal_fg\"/g" "$dunst_file"
+    sed -i "/^\[urgency_critical\]/,/^\[/ s/^    foreground = .*/    foreground = \"$normal_fg\"/g" "$dunst_file"
+}
+
+update_dunst_colors
+
 # Extract colors from colors.json
 colors_file=~/.cache/wal/colors.json
 
@@ -153,6 +160,7 @@ if [ -f $colors_file ]; then
 
     # Update VS Code settings
     vscode_settings_file="$HOME/.config/Code/User/settings.json"
+    if [ -f "$vscode_settings_file" ]; then
     cat <<EOF >"$vscode_settings_file"
 {
     "editor.mouseWheelZoom": true,
@@ -194,61 +202,7 @@ if [ -f $colors_file ]; then
     },
 }
 EOF
+    fi
 fi
-
-# firefox colors changine, (test)
-# Extract colors from colors.json
-# if [ -f $colors_file ]; then
-#     background_color=$(jq -r '.special.background' "$colors_file")
-#     foreground_color=$(jq -r '.special.foreground' "$colors_file")
-
-#     # Function to get the Firefox profile directory
-# get_firefox_profile_dir() {
-#     local profile_dir
-#     profile_dir=$(find "$HOME/.mozilla/firefox/" -maxdepth 1 -type d -name '*.default-release' -print -quit)
-#     echo "$profile_dir"
-# }
-
-# Get the Firefox profile directory
-# firefox_profile_dir=$(get_firefox_profile_dir)
-
-# if [ -z "$firefox_profile_dir" ]; then
-#     echo "Firefox profile directory not found. Exiting script."
-#     exit 1
-# fi
-#     firefox_chrome_dir="$firefox_profile_dir/chrome"
-
-#     # Create the chrome directory if it doesn't exist
-#     mkdir -p "$firefox_chrome_dir"
-
-#     # Create or append to the userChrome.css file
-#     firefox_css_file="$firefox_chrome_dir/userChrome.css"
-#     touch $firefox_css_file
-#     cat <<EOF >"$firefox_css_file"
-# /* userChrome.css */
-# :root {
-#     --background-color: $background_color !important;
-#     --foreground-color: $foreground_color !important;
-#     --toolbar-bgcolor: $background_color !important;
-#     --toolbar-color: $foreground_color !important;
-# }
-
-# #nav-bar { background-color: var(--toolbar-bgcolor) !important; color: var(--toolbar-color) !important; }
-# #navigator-toolbox { background-color: var(--background-color) !important; color: var(--foreground-color) !important; }
-
-# /* Set home page background color */
-# #home-button { background-color: var(--toolbar-bgcolor) !important; }
-
-# /* Set background color for the entire browser window */
-# @-moz-document url-prefix("chrome://browser/content/browser.xhtml") {
-#     #browser {
-#         background-color: var(--background-color) !important;
-#     }
-# }
-# EOF
-
-#     # Restart Firefox to apply changes
-#     # pkill firefox
-# fi
 
 # ------------------------
