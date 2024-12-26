@@ -48,7 +48,7 @@ check_update() {
             echo "{\"text\":\"$upd\", \"tooltip\":\"  Packages are up to date\"}"
         else
             echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Official $ofc\n󱓾 AUR $aur\"}"
-            update_notification "$update_sign" "Updates Available: $upd" "Main: $ofc, Aur: $aur"
+            update_notification "$update_sign" "Updates Available: $upd" "Main: $ofc\nAur: $aur"
         fi
 
     elif [ -n "$(command -v dnf)" ]; then
@@ -126,9 +126,7 @@ package_update() {
         fi
     fi
 
-        # reload waybar
-        killall waybar
-        waybar &
+    "$scripts_dir/waybar-reload.sh" --reload
 }
 
 case $1 in

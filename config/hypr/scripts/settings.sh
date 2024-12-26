@@ -2,25 +2,12 @@
 
 # Script for setting window border width and roundness.
 hyprconf_setting="$HOME/.config/hypr/configs/settings.conf"
-swaync_style="$HOME/.config/swaync/style.css"
+dunst="$HOME/.config/dunst/dunstrc"
 
-printf "[ * ]\n Choose where do do you want to make changes. ( Only one )\n"
-packages=$(gum choose --limit=1 "Hyprland" "Swaync")
 
-clear
-
-case $packages in
-"Hyprland")
-    # gum function to choose multiple settings
-    printf "[ * ]\nChoose which settings you want to change (_multiple_selection by pressing space_)..\n"
-    _hyprland_choice=$(gum choose --no-limit "border_size" "roundness" "inner_gap" "outer_gap" "blur" "cancel")
-    ;;
-"Swaync")
-    # gum function to choose swaync settings.
-    printf "[ * ]\nChoose which settings you want to change (_select by pressing space_)..\n"
-    _swaync_choice=$(gum choose --limit=1 "roundness" "cancel")
-    ;;
-esac
+# gum function to choose multiple settings
+printf "[ * ]\nChoose which settings you want to change (_multiple_selection by pressing space_)..\n"
+_hyprland_choice=$(gum choose --no-limit "border_size" "roundness" "inner_gap" "outer_gap" "blur" "cancel")
 
 # Convert the newline-separated string into an array
 IFS=$'\n' read -rd '' -a primary_choice <<<"$_hyprland_choice"
@@ -28,10 +15,6 @@ IFS=$'\n' read -rd '' -a _swaync_primary <<<"$_swaync_choice"
 
 # Exit if "cancel" is chosen
 if [[ -n "$_hyprland_choice" && "${primary_choice[*]}" =~ "cancel" ]]; then
-    exit 1
-fi
-
-if [[ -n "$_swaync_choice" && "${_swaync_primary[*]}" =~ "cancel" ]]; then
     exit 1
 fi
 
@@ -47,6 +30,7 @@ for user_choice in "${primary_choice[@]}"; do
             border_size=$(gum input --placeholder "Type border width you want (in numbers)...")
         done
         sed -i "s/border_size = .*/border_size = $border_size/g" "$hyprconf_setting"
+        sed -i "s/frame_width = .*/frame_width = $border_size/g" "$dunst"
         ;;
     "roundness")
         printf "\n[ <> ]\nSetting border roundness...\n\n"
@@ -56,6 +40,7 @@ for user_choice in "${primary_choice[@]}"; do
             rounding=$(gum input --placeholder "Type border roundness you want (in numbers)...")
         done
         sed -i "s/rounding = .*/rounding = $rounding/g" "$hyprconf_setting"
+        sed -i "s/^[[:space:]]*corner_radius[[:space:]]*= .*/corner_radius = $rounding/g" "$dunst"
         ;;
     "inner_gap")
         printf "\n[ <> ]\nSetting inner gap...\n\n"
@@ -96,24 +81,7 @@ for user_choice in "${primary_choice[@]}"; do
     esac
 done
 
-for swaync_settings in "${_swaync_primary[@]}"; do
-    clear
-    case "$swaync_settings" in
-    "roundness")
-        printf "\n[ <> ]\nSetting border roundness...\n\n"
-        while ! [[ "$rounding" =~ ^[0-9]+$ ]]; do
-            printf "Invalid input. Please enter a number.\n"
-            rounding=$(gum input --placeholder "Type border roundness you want (in numbers)...")
-        done
-        sed -i "s/border-radius: .*;/border-radius: ${rounding}px;/g" "$swaync_style"
-
-        killall swaync
-        ;;
-    *) ;;
-    esac
-done
-
 # Reload Hyprland
 printf "\n[ ** ] Reloading Hyprland configuration...\n"
-swaync &
+killall dunst
 hyprctl reload

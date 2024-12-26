@@ -1,7 +1,7 @@
 # #!/bin/bash
 # # I copied this script from JaKooLit. https://github.com/JaKooLit. Because I do not have any laptop to test these kinds of features.
 
-iDIR="$HOME/.config/swaync/icons/brightness"
+iDIR="$HOME/.config/dunst/icons/brightness"
 notification_timeout=1000
 
 # Get brightness
