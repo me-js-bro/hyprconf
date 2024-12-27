@@ -19,10 +19,12 @@
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{icon}",
         "format-ethernet": "󰌘",
-	    "format-disconnected": "󰌙 Disconnected",
-        "format-alt": " {bandwidthUpBytes}  {bandwidthDownBytes}",
-        "tooltip-format": " {bandwidthUpBytes}  {bandwidthDownBytes}",
-        "interval": 5,
+        "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+        "format-linked": "󰈀 {ifname} (No IP)",
+        "format-disconnected": "󰖪 ",
+        "tooltip-format-disconnected": "Disconnected",
+        "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
+        "interval": 2,
         "max-length": 30,
     	"format-icons": [
     		"󰤯", "󰤟", "󰤢", "󰤥", "󰤨"
@@ -34,10 +36,11 @@
         "format": "{icon}",
 	"start-activated": true,
         "format-icons": {
-            "activated": "󰛐",
-            "deactivated": "󰛑"
+            "activated": "",
+            "deactivated": "󰛊"
         },
-        "tooltip": true
+        "tooltip-format-activated":"Caffeine Mode Active",
+        "tooltip-format-deactivated":"Caffeine Mode Inactive"
     },
 
     "hyprland/window": {
@@ -104,7 +107,7 @@
     },
 
     "memory": {
-        "interval": 30,
+        "interval": 2,
         "format": "󰾅 {used}GB",
         "max-length": 10,
         "tooltip": true,
@@ -298,24 +301,30 @@
         "tooltip": false
     },
 
-    "custom/swaync": {
-        "tooltip":true,     
-        "format": "{} {icon}",
+    "custom/notify": {
+      // "format": "{icon} {}",
+        "format": "{} {icon}", // TODO: workaround for the module not showing up // revert when fixed
         "format-icons": {
-          "notification": "<span foreground='red'><sup></sup></span>",
-          "none": "",
-          "dnd-notification": "<span foreground='red'><sup></sup></span>",
-          "dnd-none": "",
-          "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-          "inhibited-none": "",
-          "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-          "dnd-inhibited-none": ""
+            "email-notification": "<span foreground='white'><sup></sup></span>",
+            "chat-notification": "󱋊<span foreground='white'><sup></sup></span>",
+            "warning-notification": "󱨪<span foreground='yellow'><sup></sup></span>",
+            "error-notification": "󱨪<span foreground='red'><sup></sup></span>",
+            "network-notification": "󱂇<span foreground='white'><sup></sup></span>",
+            "battery-notification": "󰁺<span foreground='white'><sup></sup></span>",
+            "update-notification": "󰚰<span foreground='white'><sup></sup></span>",
+            "notification": "<span foreground='white'><sup></sup></span>",
+            "dnd": "",
+            "none": ""
         },
         "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "sleep 0.1 && swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
+        "exec-if": "which dunstctl",
+        "exec": "$HOME/.config/hypr/scripts/notifications.py",
+        "on-scroll-down": "sleep 0.1 && dunstctl history-pop",
+        "on-click": "dunstctl set-paused toggle",
+        "on-click-middle": "dunstctl history-clear",
+        "on-click-right": "dunstctl close-all",
+        "interval": 1,
+        "tooltip": true,
         "escape": true
     },
 

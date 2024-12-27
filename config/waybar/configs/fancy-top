@@ -13,7 +13,7 @@
 
     "modules-center": ["hyprland/workspaces"],
 
-    "modules-right": ["tray", "custom/updater", "custom/swaync", "pulseaudio", "pulseaudio#microphone", "battery", "backlight", "idle_inhibitor", "custom/nightlight" , "custom/clipboard", "network", "clock"],
+    "modules-right": ["tray", "custom/updater", "custom/notify", "pulseaudio", "pulseaudio#microphone", "battery", "backlight", "idle_inhibitor", "custom/nightlight" , "custom/clipboard", "network", "clock"],
 
     "hyprland/workspaces": {
         "disable-scroll": true,

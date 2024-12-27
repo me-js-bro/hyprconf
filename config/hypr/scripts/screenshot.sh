@@ -33,7 +33,7 @@ choice=$(echo -e "$options" | rofi -dmenu -replace -config ~/.config/rofi/themes
 send_notification() {
     local msg="$1"
     notify-send -e "Taking Screenshot in" "$msg"
-    sleep 0.5
+    sleep 1
     pkill dunst
 }
 

@@ -13,7 +13,7 @@
 
     "modules-left": ["custom/launch_rofi", "tray", "hyprland/workspaces", "custom/weather",  "custom/light_dark","custom/wallpaper-change", "mpris" ],
 
-    "modules-center": ["custom/updater", "clock", "custom/swaync"],
+    "modules-center": ["custom/updater", "clock", "custom/notify"],
 
     "modules-right": [ "pulseaudio", "pulseaudio#microphone", "cpu","memory", "idle_inhibitor", "custom/nightlight", "custom/clipboard", "battery", "backlight",  "network", "custom/power_btn"],
 
