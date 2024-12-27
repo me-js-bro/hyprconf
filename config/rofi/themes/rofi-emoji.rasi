@@ -29,14 +29,13 @@ window {
     padding:                    2px;
     margin:                     0px; 
     border:                     2px;
-    border-color:               @active-background;
+    border-color:               @foreground;
     cursor:                     "default";
     location:                   center;
     anchor:                     center;
     fullscreen:                 false;
     enabled:                    true;
-    border-radius:              7px;
-    background-image:    		url("~/.config//Wallpaper/current_wallpaper", height);
+    border-radius:              20px;
  	
 }
 
@@ -46,25 +45,17 @@ mainbox {
     orientation:                vertical;
 	padding:					8px;
     background-color:           transparent;
-    children:                   [ "imagebox" ];
     border-radius:              12px;
-}
-
-/* ---- Imagebox ---- */
-imagebox {
-    background-color:           transparent;
-    orientation:                vertical;
     children:                   [ "inputbar", "message", "listbox"];
 }
+
 
 /* ---- Listbox ---- */
 listbox {
     spacing:                    4px;
     orientation:                vertical;
-    children:                   [ "listview", "mode-switcher" ];
+    children:                   [ "listview" ];
     border-radius:              10px;
-    border:                     1px;
-    border-color:               @active-background;
 	background-color:		    @background;
 }
 
@@ -75,15 +66,12 @@ inputbar {
     spacing:                    10px;
     padding:                    6px;
     border-radius:              10px;
-    border-color:               @foreground;
 	background-color:		    @background;
-    children:                   [ "textbox-prompt-colon", "entry" ];
-    border:                     1px;
-    border-color:               @active-background;
+    children:                   [ "entry" ];
 }
 
 textbox-prompt-colon {
-    enabled:                    true;
+    enabled:                    false;
     expand:                     false;
     str:                        "🔎 ";
     text-color:                 inherit;
@@ -94,7 +82,7 @@ entry {
     enabled:                    true;
     text-color:                 inherit;
     cursor:                     text;
-    placeholder:                "Search Emoji";
+    placeholder:                " Emojis";
     placeholder-color:          inherit;
     background-color:           transparent;
 }

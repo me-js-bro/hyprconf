@@ -13,7 +13,7 @@
 
     "modules-center": ["wlr/taskbar"],
 
-    "modules-right": ["tray", "custom/updater", "custom/swaync", "mpris", "custom/light_dark","custom/wallpaper-change", "custom/clipboard", "pulseaudio","pulseaudio#microphone", "network", "clock","custom/power_btn"],
+    "modules-right": ["tray", "custom/updater", "custom/notify", "mpris", "custom/light_dark","custom/wallpaper-change", "custom/clipboard", "pulseaudio","pulseaudio#microphone", "network", "clock","custom/power_btn"],
 
     "hyprland/workspaces": {
         "disable-scroll": true,

@@ -104,4 +104,4 @@ fi
 
 main
 
-"${script_dir}/Refresh.sh"
+# "${script_dir}/Refresh.sh"

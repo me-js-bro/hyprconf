@@ -27,6 +27,8 @@ set_random_wallpaper_swww() {
     wallpaper_files=("$1"/*)
     random_wallpaper="${wallpaper_files[RANDOM % ${#wallpaper_files[@]}]}"
     swww query || swww init && swww img ${random_wallpaper} $SWWW_PARAMS
+
+    ln -sf "$random_wallpaper" "$cache_dir/current_wallpaper.png"
 }
 
 set_random_wallpaper_hyprpaper() {
@@ -82,5 +84,6 @@ fi
 
 sleep 0.5
 "$scripts_dir/pywal.sh"
+"$scripts_dir/wallcache.sh"
 sleep 0.2
 "$scripts_dir/Refresh.sh"

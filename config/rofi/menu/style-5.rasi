@@ -21,8 +21,8 @@ configuration {
 
 // Main //
 window {
-    height:                      30em;
-    width:                       58em;
+    height:                      12em;
+    width:                       38em;
     transparency:                "real";
     fullscreen:                  false;
     enabled:                     true;
@@ -30,78 +30,87 @@ window {
     spacing:                     0em;
     padding:                     0em;
     border-color:                @foreground;
-    background-color:            transparent;
+    border-radius:               1em;
+    background-color:            @background;
 }
 mainbox {
     enabled:                     true;
     spacing:                     0em;
-    padding:                     0.8em;
-    orientation:                 horizontal;
-    children:                    [ "inputbar" , "listbox" , "mode-switcher" ];
-    background-color:            #00000003;
-}
-
-
-// Inputs //
-inputbar {
-    enabled:                     true;
-    width:                       28.5em;
-    spacing:                     0em;
     padding:                     0em;
-    children:                    [ "entry" ];
-    expand:                      false;
-    background-color:            @background;
-    background-image:            url("~/.config/hypr/.cache/wall.quad", width);
-    border-radius:               1em 0em 0em 1em;
-}
-entry {
-    enabled:                     false;
+    orientation:                 vertical;
+    children:                    [ "listbox" , "inputmode" ];
+    background-color:            transparent;
 }
 
 
 // Lists //
 listbox {
-    spacing:                     0em;
     padding:                     0em;
-    children:                    [ "dummy" , "listview"  , "dummy" ];
-    background-color:            @background;
-    border-radius:               0em;
+    spacing:                     0em;
+    orientation:                 horizontal;
+    children:                    [ "listview" ];
+    background-color:            transparent;
 }
 listview {
+    padding:                     0.5em;
+    spacing:                     0.2em;
     enabled:                     true;
-    spacing:                     0em;
-    padding:                     1em 2em 1em 2em;
-    columns:                     1;
-    lines:                       8;
+    columns:                     5;
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;
-    layout:                      vertical;
     reverse:                     false;
-    expand:                      false;
     fixed-height:                true;
     fixed-columns:               true;
     cursor:                      "default";
-    background-color:            transparent;
+    background-color:            @background;
     text-color:                  @foreground;
 }
-dummy {
+
+
+// Inputs //
+inputmode {
+    padding:                     0em;
+    spacing:                     0em;
+    orientation:                 horizontal;
+    children:                    [ "inputbar" , "mode-switcher" ];
+    background-color:            transparent;
+    background-image:            url("~/.config/hypr/.cache/wall.blur", width);
+}
+inputbar {
+    enabled:                     true;
+    width:                       24em;
+    padding:                     0em;
+    spacing:                     0em;
+    padding:                     1.5em 1em 1.5em 2.5em;
+    children:                    [ "entry" ];
     background-color:            transparent;
 }
-
-/* ---- Mode Switcher ---- */
-mode-switcher{
-    orientation:                 vertical;
+entry {
+    vertical-align:              0.5;
+    border-radius:               3em;
     enabled:                     true;
-    width:                       7em;
-    spacing:                     3.4em;
-    padding:                     3.4em 1em 3.4em 1em;
-    border-radius:               0em 1em 1em 0em;
+    spacing:                     0em;
+    padding:                     1em;
+    placeholder:                 " Search..";
+    text-color:                  @foreground;
     background-color:            @background;
+}
+
+
+// Modes //
+mode-switcher {
+    width:                       13em;
+    orientation:                 horizontal;
+    enabled:                     true;
+    padding:                     1.5em 2.5em 1.5em 0em;
+    spacing:                     1em;
+    background-color:            transparent;
 }
 button {
     cursor:                      pointer;
-    border-radius:               5em;
+    padding:                     0em;
+    border-radius:               3.5em;
     background-color:            @background;
     text-color:                  @foreground;
 }
@@ -110,11 +119,13 @@ button selected {
     text-color:                  @background;
 }
 
+
 // Elements //
 element {
+    orientation:                 vertical;
     enabled:                     true;
-    spacing:                     1em;
-    padding:                     0.5em 0.5em 0.5em 1.5em;
+    spacing:                     0.2em;
+    padding:                     0.5em;
     cursor:                      pointer;
     background-color:            transparent;
     text-color:                  @foreground;
@@ -122,17 +133,17 @@ element {
 element selected.normal {
     background-color:            @foreground;
     text-color:                  @background;
-    border-radius:               10px;
+    border-radius:               1em;
 }
 element-icon {
-    size:                        2.2em;
+    size:                        2.5em;
     cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
 }
 element-text {
     vertical-align:              0.5;
-    horizontal-align:            0.0;
+    horizontal-align:            0.5;
     cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
