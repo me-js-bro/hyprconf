@@ -107,13 +107,13 @@ check_distro() {
 
 dirs=(
     btop
+    dunst
     fastfetch
     hypr
     kitty
     nvim
     ranger
     rofi
-    swaync 
     waybar
     gtk-3.0
     gtk-4.0
@@ -272,12 +272,15 @@ check_distro &> /dev/null
 if [[ -d "$HOME/.config/hypr/Wallpaper" ]]; then
   mode_file="$HOME/.config/hypr/.cache/.mode"
   engine="$HOME/.config/hypr/.cache/.engine"
+  wallCache="$HOME/.config/hypr/.cache/.wallpaper"
 
   touch "$mode_file" &> /dev/null
   touch "$engine" &> /dev/null
+  touch "$wallCache" &> /dev/null
   
   echo "dark" > "$mode_file"
   echo "hyprpaper" > "$engine"
+  echo "${distro}" > "$wallCache"
 
   wallpaper="$HOME/.config/hypr/Wallpaper/$distro.png"
 
@@ -288,8 +291,8 @@ if [[ -d "$HOME/.config/hypr/Wallpaper" ]]; then
 fi
 
 # setting up the waybar
-ln -sf "$HOME/.config/waybar/configs/fancy-top" "$HOME/.config/waybar/config"
-ln -sf "$HOME/.config/waybar/style/fancy-top.css" "$HOME/.config/waybar/style.css"
+ln -sf "$HOME/.config/waybar/configs/catppuccin-top" "$HOME/.config/waybar/config"
+ln -sf "$HOME/.config/waybar/style/catppuccin-top.css" "$HOME/.config/waybar/style.css"
 
 printf "${done}\n:: Script execution was successful! Now you can reboot and enjoy your customization.\n"
 
