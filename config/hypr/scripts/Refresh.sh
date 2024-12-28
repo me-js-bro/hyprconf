@@ -24,7 +24,7 @@ for _prs in "${_ps[@]}"; do
 done
 
 sleep 0.3
-waybar & swaync &
+waybar &
 sleep 0.5
 hyprctl reload
 

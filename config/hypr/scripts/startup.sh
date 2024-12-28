@@ -9,16 +9,15 @@ if [[ -d "/usr/share/openbangla-keyboard" ]]; then
 fi
 
 "$scripts_dir/notification.sh" sys
-"$scripts_dir/wallcache.sh" sys
+"$scripts_dir/wallcache.sh"
 "$scripts_dir/pywal.sh"
-"$scripts_dir/Refresh.sh"
 "$scripts_dir/system.sh" run &
 
 #_____ setup monitor
 
 monitor_setting=$(cat $monitor_config | grep "monitor")
 if [[ "$monitor_setting" == "monitor=,preferred,auto,auto" ]]; then
-    notify-send "Starting script" "S script to setup monitor configuration"
+    notify-send -t 3000 "Starting script" "S script to setup monitor configuration"
     kitty --title monitor sh -c "$scripts_dir/monitor.sh"
 fi
 

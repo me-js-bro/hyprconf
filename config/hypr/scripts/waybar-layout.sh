@@ -68,17 +68,14 @@ apply_config() {
         echo "------------( error )------------"
     fi
 
-    restart_waybar_if_needed
+    restart_waybar
 }
 
 # Restart Waybar
-restart_waybar_if_needed() {
-    if pgrep -x "waybar" >/dev/null; then
-        echo "Restarting Waybar"
-        killall waybar
-        sleep 0.1  # Delay for Waybar to completely terminate
-    fi
-    "$script_dir/Refresh.sh"
+restart_waybar() {
+    killall waybar
+    sleep 0.1  # Delay for Waybar to completely terminate
+    waybar &
 }
 
 # Main function
@@ -97,11 +94,9 @@ main() {
     esac
 }
 
-if pgrep -x "rofi" >/dev/null; then
+if pgrep -x "rofi" &> /dev/null; then
     pkill rofi
     exit 0
 fi
 
 main
-
-# "${script_dir}/Refresh.sh"

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 swww_cache="$HOME/.cache/swww"
+scripts_dir="$HOME/.config/hypr/scripts"
 cacheDir="$HOME/.config/hypr/.cache"
 themes_dir="$HOME/.config/hypr/.cache/colors"
 engine_file="$cacheDir/.engine"
@@ -51,6 +52,8 @@ if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then
     fi
     cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors" || echo "no wal file"
     rm -rf "$HOME/.cache/wal"
+else
+    printf "\n\n  ==> No need to generate colors, already exists in the ${themes_dir}/${wallName}-colors dir\n"
 fi
 
 
@@ -224,5 +227,8 @@ update_dunst_colors
 # EOF
 # fi
 
+# Refresh the scripts
+sleep 0.5
+"${scripts_dir}/Refresh.sh"
 
 # ------------------------

@@ -117,7 +117,5 @@ fi
 
 
 sleep 0.5
-"$scripts_dir/pywal.sh"
 "$scripts_dir/wallcache.sh"
-sleep 0.2
-"$scripts_dir/Refresh.sh"
+"$scripts_dir/pywal.sh"
