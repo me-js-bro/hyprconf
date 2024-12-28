@@ -6,14 +6,17 @@
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
+    "reload_style_on_change": true,
     "height": 20,
-    "margin-top": -5,
+    "margin-top": 5,
+    "margin-left": 10,
+    "margin-right": 10,
 
-    "modules-left": ["custom/launch_rofi","hyprland/workspaces","cpu","memory", "backlight", "battery"],
+    "modules-left": ["custom/launch_rofi","hyprland/window", "hyprland/workspaces", "mpris" ],
 
-    "modules-center": ["wlr/taskbar"],
+    "modules-center": ["clock"],
 
-    "modules-right": ["tray", "custom/updater", "mpris", "custom/light_dark","custom/wallpaper-change", "custom/clipboard", "pulseaudio","pulseaudio#microphone", "network", "clock","custom/power_btn"],
+    "modules-right": [ "tray", "pulseaudio", "pulseaudio#microphone", "custom/updater", "idle_inhibitor", "custom/nightlight", "custom/clipboard", "battery", "backlight",  "network", "custom/power_btn"],
 
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -24,8 +27,8 @@
         "format": "{icon}",
         "format-icons": {
             // for arch
-            "active": "󰮯",
-            "default": ""
+            //"active": "󰮯",
+            "default": ""
 
             // for fedora
             //  "active": "󰣛",  

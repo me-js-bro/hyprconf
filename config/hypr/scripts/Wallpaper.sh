@@ -1,13 +1,15 @@
 #!/bin/bash
 
-mode_file="$HOME/.config/hypr/.cache/.mode"
 scripts_dir="$HOME/.config/hypr/scripts"
+mode_file="$HOME/.config/hypr/.cache/.mode"
+themes_dir="$HOME/.config/hypr/.cache/colors"
 cache_dir="$HOME/.config/hypr/.cache"
 engine_file="$cache_dir/.engine"
 wallCache="$cache_dir/.wallpaper"
 engine=$(cat "$engine_file")
 
 [[ ! -f "$wallCache" ]] && touch "$wallCache"
+[[ ! -f "$themes_dir" ]] && mkdir -p "$themes_dir"
 
 if [[ "$engine" == "swww" ]]; then
 
@@ -32,7 +34,7 @@ if [[ "$engine" == "swww" ]]; then
         BEZIER=".43,1.19,1,.4"
         SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
 
-        notify-send -i "${wallpaper}" "Changing wallpaper."
+        notify-send -t 2000 -i "${wallpaper}" "Changing wallpaper."
         swww query || swww init && swww img ${wallpaper} $SWWW_PARAMS
 
         ln -sf "$wallpaper" "$cache_dir/current_wallpaper.png"
@@ -41,13 +43,13 @@ if [[ "$engine" == "swww" ]]; then
         wallName=${baseName%.*}
         echo "$wallName" > "$wallCache"
 
-        if [[ ! -d "$HOME/.config/hypr/.cache/${wallName}-colors" ]]; then 
+        if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
             if [[ "$current_mode" == "light" ]]; then
-                wal -l -i "$wallpaper"
-                elif [[ "$current_mode" == "dark" ]]; then
-                wal -i "$wallpaper"
+                wal -q -l -i "$wallpaper" || printf "\n\nCould not generate any color palet\n"
+            elif [[ "$current_mode" == "dark" ]]; then
+                wal -q -i "$wallpaper" || printf "\n\nCould not generate any color palet\n"
             fi
-            cp -r "$HOME/.cache/wal" "$HOME/.config/hypr/.cache/${wallName}-colors"
+            cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
         fi
         rm -rf "$HOME/.cache/wal"
 
@@ -86,7 +88,7 @@ elif [[ "$engine" == "hyprpaper" ]]; then
         fi
 
         # Set the wallpaper using hyprpaper
-        notify-send -i "$wallpaper" "Changing wallpaper"
+        notify-send -t 2000 -i "$wallpaper" "Changing wallpaper"
         hyprctl hyprpaper wallpaper " ,$wallpaper"
         ln -sf "$wallpaper" "$cache_dir/current_wallpaper.png"
         
@@ -94,13 +96,13 @@ elif [[ "$engine" == "hyprpaper" ]]; then
         wallName=${baseName%.*}
         echo "$wallName" > "$wallCache"
 
-        if [[ ! -d "$HOME/.config/hypr/.cache/${wallName}-colors" ]]; then 
+        if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
             if [[ "$current_mode" == "light" ]]; then
-                wal -q -l -i "$wallpaper"
+                wal -q -l -i "$wallpaper" || printf "\n\nCould not generate any color palet\n"
                 elif [[ "$current_mode" == "dark" ]]; then
-                wal -q -i "$wallpaper"
+                wal -q -i "$wallpaper" || printf "\n\nCould not generate any color palet\n"
             fi
-            cp -r "$HOME/.cache/wal" "$HOME/.config/hypr/.cache/${wallName}-colors"
+            cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
         fi
         rm -rf "$HOME/.cache/wal"
 

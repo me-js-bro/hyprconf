@@ -1,6 +1,6 @@
 #!/bin/bash
 
-browser_cache="$HOME/.config/hypr/.cache/browser"
+browser_cache="$HOME/.config/hypr/.cache/.browser"
 browser_num=$(grep -v -n "default" "$browser_cache" | wc -l)
 browsers=($(grep -v "default" "$browser_cache"))
 default=$(grep "default=" "$browser_cache" | awk -F'=' '{print $2}')

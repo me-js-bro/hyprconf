@@ -1,17 +1,18 @@
 #!/bin/bash
 
-# Define directories and files
 swww_cache="$HOME/.cache/swww"
 cacheDir="$HOME/.config/hypr/.cache"
+themes_dir="$HOME/.config/hypr/.cache/colors"
 engine_file="$cacheDir/.engine"
 current_wallpaper="$cacheDir/current_wallpaper.png"
+
+[[ ! -d "$themes_dir" ]] && mkdir -p "$themes_dir"
 
 wallName="$(cat "$cacheDir/.wallpaper")"
 engine=$(cat "$engine_file")
 
-if [[ ! -d "${cacheDir}/${wallName}-colors" ]]; then
+if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then
     if [[ "$engine" = "swww" ]]; then
-        echo "$engine"
         # Get a list of monitor outputs
         monitor_outputs=($(ls "$swww_cache"))
         # Initialize a flag to determine if the ln command was executed
@@ -40,20 +41,16 @@ if [[ ! -d "${cacheDir}/${wallName}-colors" ]]; then
             wal -q -i "$wallpaper_path"
         fi
     elif [[ "$engine" = "hyprpaper" ]]; then
-        echo "$engine"
         current_wallpaper="$HOME/.config/hypr/.cache/current_wallpaper.png"
         if [[ -f "$current_wallpaper" ]]; then
             wal -q -i "$current_wallpaper"
         else
-            echo "No $current_wallpaper found"
+            # echo "No $current_wallpaper found"
+            exit 1
         fi
     fi
-
-    cp -r "$HOME/.cache/wal" "${cacheDir}/${wallName}-colors"
+    cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors" || echo "no wal file"
     rm -rf "$HOME/.cache/wal"
-else
-    echo "Color scheme already exists in ${wallName}-colors dir"
-    return
 fi
 
 
@@ -83,7 +80,7 @@ hex_to_rgba_opacity() {
 }
 
 # Extract colors from colors.json
-colors_file="${cacheDir}/${wallName}-colors/colors.json"
+colors_file="${themes_dir}/${wallName}-colors/colors.json"
 if [ -f $colors_file ]; then
     background_color=$(jq -r '.special.background' "$colors_file")
     foreground_color=$(jq -r '.special.foreground' "$colors_file")
@@ -113,12 +110,12 @@ if [ -f $colors_file ]; then
     # Reload Hyprland configuration (optional)
     hyprctl reload
 else
-    echo "No file found named colors.json"
+    exit 1
 fi
 
 
 # setting kitty colors 
-kitty_colors="${cacheDir}/${wallName}-colors/colors-kitty.conf"
+kitty_colors="${themes_dir}/${wallName}-colors/colors-kitty.conf"
 kitty="$HOME/.config/kitty/kitty.conf"
 
 # Define a function to extract a specific color
@@ -135,7 +132,7 @@ inactive_border_color=$(extract_color "color5")
 sed -i "s/active_border_color .*$/active_border_color $active_border_color/g" "$kitty"
 sed -i "s/inactive_border_color .*$/inactive_border_color $inactive_border_color/g" "$kitty"
 
-ln -sf "${cacheDir}/${wallName}-colors/colors-kitty.conf" "$HOME/.config/kitty/colors-kitty.conf"
+ln -sf "${themes_dir}/${wallName}-colors/colors-kitty.conf" "$HOME/.config/kitty/colors-kitty.conf"
 kitty @ set-color -a "$kitty"
 
 # setting rofi theme
@@ -143,13 +140,13 @@ mode_file="$HOME/.config/hypr/.cache/.mode"
 current_mode=$(cat "$mode_file")
 
 if [ "$current_mode" == "dark" ]; then
-    ln -sf "${cacheDir}/${wallName}-colors/colors-rofi-dark.rasi" "$HOME/.config/rofi/themes/rofi-pywal.rasi"
+    ln -sf "${themes_dir}/${wallName}-colors/colors-rofi-dark.rasi" "$HOME/.config/rofi/themes/rofi-pywal.rasi"
 else
-    ln -sf "${cacheDir}/${wallName}-colors/colors-rofi-light.rasi" "$HOME/.config/rofi/themes/rofi-pywal.rasi"
+    ln -sf "${themes_dir}/${wallName}-colors/colors-rofi-light.rasi" "$HOME/.config/rofi/themes/rofi-pywal.rasi"
 fi
 
 # setting waybar colors
-ln -sf "${cacheDir}/${wallName}-colors/colors-waybar.css" "$HOME/.config/waybar/style/theme.css"
+ln -sf "${themes_dir}/${wallName}-colors/colors-waybar.css" "$HOME/.config/waybar/style/theme.css"
 
 # ----- Dunst
 dunst_file="$HOME/.config/dunst/dunstrc"
@@ -178,108 +175,54 @@ update_dunst_colors
 
 
 # remove these part if you don't like the colors according to your wallpaper.
-if [ -f $colors_file ]; then
-    background_color=$(jq -r '.special.background' "$colors_file")
-    foreground_color=$(jq -r '.special.foreground' "$colors_file")
-
-    # Update VS Code settings
-    vscode_settings_file="$HOME/.config/Code/User/settings.json"
-    cat <<EOF >"$vscode_settings_file"
-{
-    "editor.mouseWheelZoom": true,
-    "workbench.startupEditor": "none",
-    "editor.fontSize": 20,
-    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace",
-    "editor.fontLigatures": true,
-    "window.menuBarVisibility": "toggle",
-    "editor.smoothScrolling": true,
-    "editor.scrollbar.horizontal": "hidden",
-    "editor.mouseWheelScrollSensitivity": 2,
-    "editor.wordWrap": "on",
-    "editor.cursorBlinking": "expand",
-    "terminal.integrated.fontSize": 18,
-    "workbench.iconTheme": "catppuccin-mocha",
-    "workbench.colorTheme": "Theme Darker",
-    "git.enableSmartCommit": true,
-    "files.autoSave": "afterDelay",
-    // You can remove these part if you don't like the colors according to your wallpaper from the "$HOME/.config/hypr/scripts/pywal.sh" script, from 204-221 lines.
-    // or you can totally remove the vs-code themming part from the script if you want to set and use your custom settings. if you don't do that, then your settings will be replaced/over writen by the default config.
-
-    "workbench.colorCustomizations": {
-        "editor.background": "$background_color",
-        "sideBar.background": "$background_color",
-        "sideBar.border": "$background_color",
-        "sideBar.foreground": "$foreground_color",
-        "editorGroupHeader.tabsBackground": "#191b274b",
-        "activityBar.background": "$background_color",
-        "activityBar.border": "$background_color",
-        "activityBar.foreground": "$foreground_color",
-        "tab.activeBackground": "#13151f",
-        "tab.activeForeground": "#ffffff",
-        "tab.activeBorder": "$background_color",
-        "tab.border": "$background_color",
-        "tab.inactiveBackground": "$background_color",
-        "tab.inactiveForeground": "$foreground_color",
-        "terminal.foreground": "$foreground_color",
-        "terminal.background": "$background_color"
-    },
-}
-EOF
-fi
-
-# firefox colors changine, (test)
-# Extract colors from colors.json
 # if [ -f $colors_file ]; then
 #     background_color=$(jq -r '.special.background' "$colors_file")
 #     foreground_color=$(jq -r '.special.foreground' "$colors_file")
-
-#     # Function to get the Firefox profile directory
-# get_firefox_profile_dir() {
-#     local profile_dir
-#     profile_dir=$(find "$HOME/.mozilla/firefox/" -maxdepth 1 -type d -name '*.default-release' -print -quit)
-#     echo "$profile_dir"
-# }
-
-# Get the Firefox profile directory
-# firefox_profile_dir=$(get_firefox_profile_dir)
-
-# if [ -z "$firefox_profile_dir" ]; then
-#     echo "Firefox profile directory not found. Exiting script."
-#     exit 1
-# fi
-#     firefox_chrome_dir="$firefox_profile_dir/chrome"
-
-#     # Create the chrome directory if it doesn't exist
-#     mkdir -p "$firefox_chrome_dir"
-
-#     # Create or append to the userChrome.css file
-#     firefox_css_file="$firefox_chrome_dir/userChrome.css"
-#     touch $firefox_css_file
-#     cat <<EOF >"$firefox_css_file"
-# /* userChrome.css */
-# :root {
-#     --background-color: $background_color !important;
-#     --foreground-color: $foreground_color !important;
-#     --toolbar-bgcolor: $background_color !important;
-#     --toolbar-color: $foreground_color !important;
-# }
-
-# #nav-bar { background-color: var(--toolbar-bgcolor) !important; color: var(--toolbar-color) !important; }
-# #navigator-toolbox { background-color: var(--background-color) !important; color: var(--foreground-color) !important; }
-
-# /* Set home page background color */
-# #home-button { background-color: var(--toolbar-bgcolor) !important; }
-
-# /* Set background color for the entire browser window */
-# @-moz-document url-prefix("chrome://browser/content/browser.xhtml") {
-#     #browser {
-#         background-color: var(--background-color) !important;
-#     }
+#
+#     # Update VS Code settings
+#     vscode_settings_file="$HOME/.config/Code/User/settings.json"
+#     cat <<EOF >"$vscode_settings_file"
+# {
+#     "editor.mouseWheelZoom": true,
+#     "workbench.startupEditor": "none",
+#     "editor.fontSize": 20,
+#     "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace",
+#     "editor.fontLigatures": true,
+#     "window.menuBarVisibility": "toggle",
+#     "editor.smoothScrolling": true,
+#     "editor.scrollbar.horizontal": "hidden",
+#     "editor.mouseWheelScrollSensitivity": 2,
+#     "editor.wordWrap": "on",
+#     "editor.cursorBlinking": "expand",
+#     "terminal.integrated.fontSize": 18,
+#     "workbench.iconTheme": "catppuccin-mocha",
+#     "workbench.colorTheme": "Theme Darker",
+#     "git.enableSmartCommit": true,
+#     "files.autoSave": "afterDelay",
+#     // You can remove these part if you don't like the colors according to your wallpaper from the "$HOME/.config/hypr/scripts/pywal.sh" script, from 204-221 lines.
+#     // or you can totally remove the vs-code themming part from the script if you want to set and use your custom settings. if you don't do that, then your settings will be replaced/over writen by the default config.
+#
+#     "workbench.colorCustomizations": {
+#         "editor.background": "$background_color",
+#         "sideBar.background": "$background_color",
+#         "sideBar.border": "$background_color",
+#         "sideBar.foreground": "$foreground_color",
+#         "editorGroupHeader.tabsBackground": "#191b274b",
+#         "activityBar.background": "$background_color",
+#         "activityBar.border": "$background_color",
+#         "activityBar.foreground": "$foreground_color",
+#         "tab.activeBackground": "#13151f",
+#         "tab.activeForeground": "#ffffff",
+#         "tab.activeBorder": "$background_color",
+#         "tab.border": "$background_color",
+#         "tab.inactiveBackground": "$background_color",
+#         "tab.inactiveForeground": "$foreground_color",
+#         "terminal.foreground": "$foreground_color",
+#         "terminal.background": "$background_color"
+#     },
 # }
 # EOF
-
-#     # Restart Firefox to apply changes
-#     # pkill firefox
 # fi
+
 
 # ------------------------
