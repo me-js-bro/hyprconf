@@ -1,8 +1,8 @@
 {
     "include": [
-        "$HOME/.config/waybar/modules/modules-main.jsonc",
-        "$HOME/.config/waybar/modules/modules-groups.jsonc",
+        "$HOME/.config/waybar/modules/modules-catppuccin.jsonc",
         "$HOME/.config/waybar/modules/modules-custom.jsonc",
+        "$HOME/.config/waybar/modules/modules-groups.jsonc"
     ],
     "layer": "top",
     "position": "top",
@@ -13,32 +13,34 @@
     "reload_style_on_change": true,
     "height": 20,
     "margin-top": 5,
-    "margin-left": 5,
-    "margin-right": 5,
+    "margin-left": 10,
+    "margin-right": 10,
 
     "modules-left": [
-        "custom/launch_rofi", 
-        "tray", 
-        "hyprland/workspaces", 
-        "custom/weather",
+        "custom/launch_rofi",
+        "hyprland/window", 
+        "hyprland/workspaces",
+        "group/sysinfo",
+        "group/ai",
         "mpris" 
     ],
 
     "modules-center": [
-        "custom/updater", 
-        "clock"],
+        "clock"
+    ],
 
-    "modules-right": [
+    "modules-right": [ 
+        "tray", 
         "pulseaudio", 
         "pulseaudio#microphone", 
-        "group/sysinfo", 
+        "custom/updater", 
         "idle_inhibitor", 
         "custom/nightlight", 
         "custom/clipboard", 
         "battery", 
         "backlight",  
         "group/network", 
-        "custom/power_btn"
+        "group/power"
     ],
 
     "hyprland/workspaces": {
@@ -49,24 +51,12 @@
         "on-scroll-down": "hyprctl dispatch workspace e+1",
         "format": "{icon}",
         "format-icons": {
-            // for arch
-            "active": "󰮯",
-            "default": ""
-
-            // for fedora
-            //  "active": "󰣛",  
-            //  "default": ""
-
-            // for opensuse
-            // "active": "",
-            // "default": ""
+            "default": ""
           },
         "persistent-workspaces": {
             "1": [],
             "2": [],
-            "3": [],
-            "4": [],
-            "5": []
+            "3": []
         }
     }
 }

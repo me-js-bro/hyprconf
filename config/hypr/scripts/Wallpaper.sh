@@ -1,25 +1,17 @@
 #!/bin/bash
 
-mode_file="$HOME/.config/hypr/.cache/.mode"
 scripts_dir="$HOME/.config/hypr/scripts"
+themes_dir="$HOME/.config/hypr/.cache/colors"
 cache_dir="$HOME/.config/hypr/.cache"
 engine_file="$cache_dir/.engine"
 wallCache="$cache_dir/.wallpaper"
+wallpaper_dir="$HOME/.config/hypr/Wallpaper"
 engine=$(cat "$engine_file")
 
 [[ ! -f "$wallCache" ]] && touch "$wallCache"
+[[ ! -f "$themes_dir" ]] && mkdir -p "$themes_dir"
 
 if [[ "$engine" == "swww" ]]; then
-
-    if [ ! -f "$mode_file" ]; then
-        "$scripts_dir"/toggle_dark_light.sh
-    else
-        current_mode=$(cat "$mode_file")
-        if [ "$current_mode" = "light" ]; then
-            wallpaper_dir="$HOME/.config/hypr/Dynamic-Wallpapers/light"
-        elif [ "$current_mode" = "dark" ]; then
-            wallpaper_dir="$HOME/.config/hypr/Dynamic-Wallpapers/dark"
-        fi
 
         PICS=($(find ${wallpaper_dir} -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" \)))
         wallpaper=${PICS[ $RANDOM % ${#PICS[@]} ]}
@@ -32,7 +24,7 @@ if [[ "$engine" == "swww" ]]; then
         BEZIER=".43,1.19,1,.4"
         SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
 
-        notify-send -i "${wallpaper}" "Changing wallpaper."
+        notify-send -t 2000 -i "${wallpaper}" "Changing wallpaper."
         swww query || swww init && swww img ${wallpaper} $SWWW_PARAMS
 
         ln -sf "$wallpaper" "$cache_dir/current_wallpaper.png"
@@ -41,28 +33,13 @@ if [[ "$engine" == "swww" ]]; then
         wallName=${baseName%.*}
         echo "$wallName" > "$wallCache"
 
-        if [[ ! -d "$HOME/.config/hypr/.cache/${wallName}-colors" ]]; then 
-            if [[ "$current_mode" == "light" ]]; then
-                wal -l -i "$wallpaper"
-                elif [[ "$current_mode" == "dark" ]]; then
-                wal -i "$wallpaper"
-            fi
-            cp -r "$HOME/.cache/wal" "$HOME/.config/hypr/.cache/${wallName}-colors"
+        if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
+            cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
         fi
         rm -rf "$HOME/.cache/wal"
 
-    fi
 elif [[ "$engine" == "hyprpaper" ]]; then
 
-    if [ ! -f "$mode_file" ]; then
-        "$scripts_dir"/toggle_dark_light.sh
-    else
-        current_mode=$(cat "$mode_file")
-        if [ "$current_mode" = "light" ]; then
-            wallpaper_dir="$HOME/.config/hypr/Dynamic-Wallpapers/light"
-        elif [ "$current_mode" = "dark" ]; then
-            wallpaper_dir="$HOME/.config/hypr/Dynamic-Wallpapers/dark"
-        fi
         # Get a random wallpaper from the directory
         wallpaper=$(find "$wallpaper_dir" -type f | shuf -n 1)
 
@@ -86,7 +63,7 @@ elif [[ "$engine" == "hyprpaper" ]]; then
         fi
 
         # Set the wallpaper using hyprpaper
-        notify-send -i "$wallpaper" "Changing wallpaper"
+        notify-send -t 2000 -i "$wallpaper" "Changing wallpaper"
         hyprctl hyprpaper wallpaper " ,$wallpaper"
         ln -sf "$wallpaper" "$cache_dir/current_wallpaper.png"
         
@@ -94,13 +71,8 @@ elif [[ "$engine" == "hyprpaper" ]]; then
         wallName=${baseName%.*}
         echo "$wallName" > "$wallCache"
 
-        if [[ ! -d "$HOME/.config/hypr/.cache/${wallName}-colors" ]]; then 
-            if [[ "$current_mode" == "light" ]]; then
-                wal -q -l -i "$wallpaper"
-                elif [[ "$current_mode" == "dark" ]]; then
-                wal -q -i "$wallpaper"
-            fi
-            cp -r "$HOME/.cache/wal" "$HOME/.config/hypr/.cache/${wallName}-colors"
+        if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
+            cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
         fi
         rm -rf "$HOME/.cache/wal"
 
@@ -109,13 +81,8 @@ elif [[ "$engine" == "hyprpaper" ]]; then
         echo "Failed to set wallpaper"
         exit 1
         fi
-
-    fi
 fi
 
-
 sleep 0.5
-"$scripts_dir/pywal.sh"
 "$scripts_dir/wallcache.sh"
-sleep 0.2
-"$scripts_dir/Refresh.sh"
+"$scripts_dir/pywal.sh"

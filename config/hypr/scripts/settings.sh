@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script for setting window border width and roundness.
-hyprconf_setting="$HOME/.config/hypr/configs/settings.conf"
+hyprconf_setting="$HOME/.config/hypr/configs/decoration.conf"
 dunst="$HOME/.config/dunst/dunstrc"
 
 

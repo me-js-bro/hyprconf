@@ -3,99 +3,66 @@
   border-radius: 0;
   font-family: "JetBrainsMono Nerd Font", "MesloLGS Nerd Font", "Font Awesome";
   font-weight: bold;
-  font-size: 13px;
+  font-size: 14px;
   min-height: 0;
 }
 
-@import "style/theme.css";
+@import "style/mocha.css";
 
 window#waybar {
-  background: rgba(39, 48, 52, 0.432);
-  color: @foreground;
-  border-radius: 20px;
+  background-color: shade(@base, 0.9);
+  border-radius: 25px;
 }
 
 tooltip {
-  background: @background;
-  opacity: 0.8;
-  border-radius: 15px;
-  border-width: 1px;
+  background: @crust;
+  opacity: 1;
+  border-radius: 10px;
+  border-width: 2px;
   border-style: solid;
-  border-color: @foreground;
+  border-color: @sapphire;
 }
 
 tooltip label {
-  color: @foreground;
+  color: @blue;
 }
 
 #workspaces button {
   padding: 5px;
-  color: #4f5064;
+  color: @surface2;
   margin-right: 5px;
-  background-color: rgba(17, 17, 27, 0);
+  background-color: @crust;
 }
 
 #workspaces button.active {
-  color: #b8bfdd;
+  color: @maroon;
 }
 
 #workspaces button.focused {
-  color: #a6adc8;
-  background: #eba0ac;
+  color: @rosewater;
+  background: @crust;
   border-radius: 15px;
 }
 
 #workspaces button.urgent {
   color: #11111b;
-  background: #eba0ac;
+  background: @crust;
   border-radius: 15px;
 }
 
 #workspaces button:hover {
-  background: #11111b;
-  color: #cdd6f4;
+  background: @crust;
+  color: @flamingo;
   border-radius: 15px;
-}
-
-#taskbar button {
-  box-shadow: none;
-  text-shadow: none;
-  padding: 0px;
-  border-radius: 9px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-  padding-left: 3px;
-  padding-right: 3px;
-  animation: gradient_f 20s ease-in infinite;
-  transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.682);
-}
-
-#taskbar button.active {
-  background: #324857;
-  margin-left: 3px;
-  padding-left: 12px;
-  padding-right: 12px;
-  margin-right: 3px;
-  animation: gradient_f 20s ease-in infinite;
-  transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
-}
-
-#taskbar button:hover {
-  background: #304150;
-  padding-left: 3px;
-  padding-right: 3px;
-  animation: gradient_f 20s ease-in infinite;
-  transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
 #custom-launch_rofi,
 #custom-lock_screen,
 #custom-light_dark,
-#custom-power_btn,
+#custom-power,
 #custom-power_profile,
 #custom-weather,
 #custom-updater,
-#custom-system,
 #window,
 #cpu,
 #disk,
@@ -117,23 +84,14 @@ tooltip label {
 #custom-nightlight,
 #hyprland-keyboard,
 #backlight {
-  background: @background;
-  opacity: 0.8;
+  background: @crust;
+  opacity: 1;
   padding: 0px 10px;
   margin: 3px 0px;
 }
 
-#custom-system {
-  margin: 3px 10px;
-  padding: 0 10px;
-  padding-right: 15px;
-  background: transparent;
-}
-
 #memory,
-#cpu,
-#disk,
-#temperature {
+#cpu {
   margin-right: 10px;
   background-color: transparent;
 }
@@ -141,7 +99,8 @@ tooltip label {
 #idle_inhibitor {
   font-size: 15px;
   padding: 0 15px;
-  background: @background;
+  background: @crust;
+  color: @pink;
   border-radius: 15px 0 0 15px;
   margin-right: 0px;
 }
@@ -152,10 +111,9 @@ tooltip label {
 }
 
 #mpris {
-  background-color: @background;
-  border-radius: 15px;
-  padding-left: 15px;
+  background-color: transparent;
   margin-left: 10px;
+  color: @rosewater;
 }
 
 #custom-notify {
@@ -165,13 +123,16 @@ tooltip label {
 
 #custom-nightlight {
   border-radius: 0;
+  color: @peach;
 }
 
 #battery {
   color: #a6e3a1;
-  background-color: transparent;
+  background-color: @crust;
   margin-right: 0;
-  font-size: 14px;
+  font-size: 16px;
+  padding-left: 15px;
+  border-radius: 15px 0 0 15px;
 }
 
 @keyframes blink {
@@ -192,8 +153,10 @@ tooltip label {
 
 #custom-clipboard {
   border-radius: 0 15px 15px 0;
+  margin-right: 10px;
   font-size: 14px;
-  padding-right: 15px;
+  color: @lavender;
+  padding-right: 10px;
 }
 
 #custom-wallpaper-change {
@@ -203,7 +166,7 @@ tooltip label {
 }
 
 #custom-power_btn {
-  color: red;
+  color: @red;
   padding: 0 15px;
   padding-right: 20px;
   margin-right: 10px;
@@ -216,28 +179,27 @@ tooltip label {
   border-radius: 15px;
 }
 
-#network,
-#network.speed {
+#network {
+  /* margin-right: 10px; */
+  padding-right: 15px;
   background-color: transparent;
   font-size: 15px;
+  color: @mauve;
 }
 
 #custom-updater {
   border-radius: 15px;
   padding: 0 15px;
+  margin-right: 10px;
+  color: @teal;
 }
 
 #backlight {
-  background-color: transparent;
+  background-color: @crust;
+  color: @flamingo;
   padding: 0 5px;
-}
-
-#custom-launch_rofi {
-  margin-right: 10px;
-  padding: 0 15px;
-  padding-right: 20px;
-  font-size: 15px;
-  border-radius: 15px;
+  font-size: 16px;
+  border-radius: 0 15px 15px 0;
 }
 
 #custom-lock_screen {
@@ -252,6 +214,11 @@ tooltip label {
 #tray {
   margin-right: 10px;
   background-color: transparent;
+}
+
+#disk {
+  border-radius: 0px 15px 15px 0px;
+  margin-right: 10px;
 }
 
 #custom-light_dark {
@@ -283,33 +250,43 @@ tooltip label {
 }
 
 #window {
-  border-radius: 15px;
-  margin-left: 20px;
-  margin-right: 20px;
+  color: @teal;
+  border-radius: 0 15px 15px 0;
+  margin-left: 0px;
+  margin-right: 10px;
+  padding-right: 15px;
 }
 
 #custom-launch_rofi {
   color: #89b4fa;
   margin-left: 10px;
+  margin-right: 0px;
+  padding: 0 15px;
+  padding-right: 20px;
+  font-size: 15px;
+  border-radius: 15px 0 0 15px;
 }
 
 #pulseaudio {
-  background-color: @background;
+  background-color: @crust;
+  color: @blue;
   border-left: 0px;
   border-right: 0px;
   border-radius: 15px 0 0 15px;
 }
 
 #clock {
+  color: @sapphire;
   border-radius: 15px;
   margin-right: 10px;
   margin-left: 10px;
   padding: 0 20px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 #pulseaudio.microphone {
-  /* color: #cba6f7; */
+  color: @green;
+  margin-right: 10px;
   border-left: 0px;
   border-right: 0px;
   border-radius: 0 15px 15px 0;
@@ -325,4 +302,33 @@ tooltip label {
   margin-top: 10px;
   border: 0px;
   border-radius: 15px;
+}
+
+#custom-ai {
+  font-size: 18px;
+  color: @sapphire2;
+  padding: 0 15px;
+  opacity: 0.5;
+}
+
+#custom-chatgpt {
+  margin-left: 15px;
+  font-size: 5px;
+  background-image: url("svg/openai.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  padding-right: 18px;
+  opacity: 0.8;
+}
+
+#custom-gemini {
+  margin-left: 15px;
+  font-size: 5px;
+  background-image: url("svg/google-gemini.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  padding-right: 18px;
+  opacity: 0.8;
 }

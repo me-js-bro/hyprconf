@@ -1,15 +1,15 @@
 #!/bin/bash
 
 scripts_dir="$HOME/.config/hypr/scripts"
-
-# WALLPAPERS PATH
 wallDIR="$HOME/.config/hypr/Wallpaper"
 cache_dir="$HOME/.config/hypr/.cache"
+themes_dir="$HOME/.config/hypr/.cache/colors"
 wallCache="$cache_dir/.wallpaper"
 engine_file="$cache_dir/.engine"
 engine=$(cat "$engine_file")
 
 [[ ! -f "$wallCache" ]] && touch "$wallCache"
+[[ ! -f "$themes_dir" ]] && mkdir -p "$themes_dir"
 
 # Transition config
 FPS=60
@@ -76,7 +76,7 @@ if [[ "$engine" == "swww" ]]; then
     done
 
     if [[ $pic_index -ne -1 ]]; then
-      notify-send -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
+      notify-send -t 2000 -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
       swww img "${wallDIR}/${PICS[$pic_index]}" $SWWW_PARAMS
 
       ln -sf "${wallDIR}/${PICS[$pic_index]}" "$cache_dir/current_wallpaper.png"
@@ -84,9 +84,8 @@ if [[ "$engine" == "swww" ]]; then
         wallName="${basename%.*}"
         echo "$wallName" > "$wallCache"
 
-        if [[ ! -d "$HOME/.config/hypr/.cache/${wallName}-colors" ]]; then 
-            wal -i "${wallDIR}/${PICS[$pic_index]}"
-            cp -r "$HOME/.cache/wal" "$HOME/.config/hypr/.cache/${wallName}-colors"
+        if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
+            cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
         fi
         rm -rf "$HOME/.cache/wal"
 
@@ -105,7 +104,6 @@ elif [[ "$engine" == "hyprpaper" ]]; then
 
   main() {
     choice=$(menu | ${rofi_command})
-    echo "You have chosen: $choice"
 
     # No choice case
     if [[ -z $choice ]]; then
@@ -139,7 +137,7 @@ elif [[ "$engine" == "hyprpaper" ]]; then
     done
 
     if [[ $pic_index -ne -1 ]]; then
-      notify-send -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
+      notify-send -t 2000 -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
       hyprctl hyprpaper preload "${wallDIR}/${PICS[$pic_index]}"
       hyprctl hyprpaper wallpaper " ,${wallDIR}/${PICS[$pic_index]}"
 
@@ -149,9 +147,9 @@ elif [[ "$engine" == "hyprpaper" ]]; then
 
       ln -sf "${wallDIR}/${PICS[$pic_index]}" "$cache_dir/current_wallpaper.png"
 
-        if [[ ! -d "$HOME/.config/hypr/.cache/${wallName}-colors" ]]; then 
-            wal -i "${wallDIR}/${PICS[$pic_index]}"
-            cp -r "$HOME/.cache/wal" "$HOME/.config/hypr/.cache/${wallName}-colors"
+        if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
+            wal -q -i "${wallDIR}/${PICS[$pic_index]}" || printf "\n\nCouls not generate any colors\n"
+            cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
         fi
         rm -rf "$HOME/.cache/wal"
     else
@@ -171,7 +169,5 @@ fi
 main
 
 sleep 0.5
-"$scripts_dir/pywal.sh"
 "$scripts_dir/wallcache.sh"
-sleep 0.2
-"$scripts_dir/Refresh.sh"
+"$scripts_dir/pywal.sh"

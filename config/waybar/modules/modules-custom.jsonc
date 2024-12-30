@@ -1,0 +1,142 @@
+{
+    //_________\\ Custom Modules //_________\\
+
+    // rofi app launcher
+    "custom/launch_rofi": {
+        "format": "",   // for arch
+        //  "format": "󰣛",   // for fedora
+        // "format": "",  // for opensuse
+        "on-click": "rofi -show drun -theme ~/.config/rofi/menu/menu.rasi",
+        "on-click-right": "kitty --title yazi -e yazi",
+        "tooltip": false
+    },
+
+    // power menu ( universal )
+    "custom/power_btn": {
+        "format": "",
+        "on-click": "~/.config/hypr/scripts/powermenu.sh",
+        "tooltip": false
+    },
+
+    // notify using dunst ( haven't add in the waybar )
+    "custom/notify": {
+      // "format": "{icon} {}",
+        "format": "{} {icon}", // TODO: workaround for the module not showing up // revert when fixed
+        "format-icons": {
+            "email-notification": "<span foreground='white'><sup></sup></span>",
+            "chat-notification": "󱋊<span foreground='white'><sup></sup></span>",
+            "warning-notification": "󱨪<span foreground='yellow'><sup></sup></span>",
+            "error-notification": "󱨪<span foreground='red'><sup></sup></span>",
+            "network-notification": "󱂇<span foreground='white'><sup></sup></span>",
+            "battery-notification": "󰁺<span foreground='white'><sup></sup></span>",
+            "update-notification": "󰚰<span foreground='white'><sup></sup></span>",
+            "notification": "<span foreground='white'><sup></sup></span>",
+            "dnd": "",
+            "none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which dunstctl",
+        "exec": "$HOME/.config/hypr/scripts/notifications.py",
+        "on-scroll-down": "sleep 0.1 && dunstctl history-pop",
+        "on-click": "dunstctl set-paused toggle",
+        "on-click-middle": "dunstctl history-clear",
+        "on-click-right": "dunstctl close-all",
+        "interval": 1,
+        "tooltip": true,
+        "escape": true
+    },
+
+
+    // System updater ( works for arch, fedora and opensuse also. )
+    "custom/updater": {
+        "exec": "~/.config/hypr/scripts/systemupdate.sh --check",
+        "return-type": "json",
+        "format": " {}",
+        "on-click": "~/.config/hypr/scripts/systemupdate.sh --update",
+        "interval": 86400, // once every day
+        "tooltip": true
+    },
+
+    // waybar cava ( haven't add in the waybar )
+    "custom/cava": {
+        "exec": "~/.config/hypr/scripts/cava.sh",
+        "framerate": 60
+    },
+
+    
+    // clipboard manager
+    "custom/clipboard": {
+        "format": "󰅌 {}",
+        "exec": "~/.config/hypr/scripts/cliphist.sh l",
+        "on-click": "~/.config/hypr/scripts/cliphist.sh c",
+        "on-click-right": "~/.config/hypr/scripts/cliphist.sh w",
+        "interval": 1,
+        "tooltip-format": "You have {} items copied"
+    },
+
+
+    // wallpaper changer and selector ( haven't add in the waybar )
+    "custom/wallpaper-change": {
+        "format": "󰸉",
+        "on-click": "exec ~/.config/hypr/scripts/Wallpaper.sh",
+        "on-click-right": "~/.config/hypr/scripts/WallpaperSelect.sh style2"
+    },
+
+
+    // weather ( default "Munshiganj" - my area. change it to your area in the ~/.config/hypr/scripts/weather.sh script )
+   "custom/weather": {
+        "format": "  {}",
+        "format-alt": "{alt}: {}",
+        "format-alt-click": "click",
+        "interval": 3600,
+        "return-type": "json",
+        "exec": "~/.config/hypr/scripts/Weather.sh",
+        //"exec": "~/.config/waybar/scripts/Weather.py",
+        "exec-if": "ping wttr.in -c1",
+        "tooltip" : true
+    },
+
+    
+    // Nightlight option.
+    "custom/nightlight": {
+        "format": "󰖔 ",
+        "exec": "~/.config/hypr/scripts/nightlight.sh",
+        "on-scroll-down": "~/.config/hypr/scripts/nightlight.sh --dec",
+        "on-scroll-up": "~/.config/hypr/scripts/nightlight.sh --inc",
+        "on-click": "~/.config/hypr/scripts/nightlight.sh --def",
+        "tooltip": true,
+        "tooltip-format": "Screen temperature is: {}",
+        "interval": 1
+    },
+
+    // system info expand
+    "custom/system": {
+        "format": "",
+        "tooltip-format": "system info"
+    },
+
+    // power section expand
+    "custom/power": {
+        "format": "",
+        "tooltip-format": "Poweroff",
+        "on-click": "~/.config/hypr/scripts/power.sh --poweroff"
+    },
+
+    "custom/reboot": {
+        "format": "",
+        "tooltip-format": "Reboot" ,
+        "on-click": "~/.config/hypr/scripts/power.sh --reboot"
+    },
+
+    "custom/lock": {
+        "format": "",
+        "tooltip-format": "Screen lock" ,
+        "on-click": "~/.config/hypr/scripts/power.sh --lock"
+    },
+    
+    "custom/logout": {
+        "format": "󰿅",
+        "tooltip-format": "logout" ,
+        "on-click": "~/.config/hypr/scripts/power.sh --logout"
+    }
+}
