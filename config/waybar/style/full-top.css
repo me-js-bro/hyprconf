@@ -95,6 +95,7 @@ tooltip label {
 #custom-power_profile,
 #custom-weather,
 #custom-updater,
+#custom-system,
 #window,
 #cpu,
 #disk,
@@ -122,8 +123,17 @@ tooltip label {
   margin: 3px 0px;
 }
 
+#custom-system {
+  margin: 3px 10px;
+  padding: 0 10px;
+  padding-right: 15px;
+  background: transparent;
+}
+
 #memory,
-#cpu {
+#cpu,
+#disk,
+#temperature {
   margin-right: 10px;
   background-color: transparent;
 }
@@ -142,7 +152,9 @@ tooltip label {
 }
 
 #mpris {
-  background-color: transparent;
+  background-color: @background;
+  border-radius: 15px;
+  padding-left: 15px;
   margin-left: 10px;
 }
 
@@ -180,8 +192,8 @@ tooltip label {
 
 #custom-clipboard {
   border-radius: 0 15px 15px 0;
-  margin-right: 10px;
   font-size: 14px;
+  padding-right: 15px;
 }
 
 #custom-wallpaper-change {
@@ -204,9 +216,8 @@ tooltip label {
   border-radius: 15px;
 }
 
-#network {
-  margin-right: 10px;
-  padding-right: 15px;
+#network,
+#network.speed {
   background-color: transparent;
   font-size: 15px;
 }
@@ -241,11 +252,6 @@ tooltip label {
 #tray {
   margin-right: 10px;
   background-color: transparent;
-}
-
-#disk {
-  border-radius: 0px 15px 15px 0px;
-  margin-right: 10px;
 }
 
 #custom-light_dark {

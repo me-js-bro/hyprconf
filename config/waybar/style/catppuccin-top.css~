@@ -60,9 +60,6 @@ tooltip label {
 #custom-lock_screen,
 #custom-light_dark,
 #custom-power,
-#custom-reboot,
-#custom-logout,
-#custom-lock,
 #custom-power_profile,
 #custom-weather,
 #custom-updater,
@@ -93,35 +90,10 @@ tooltip label {
   margin: 3px 0px;
 }
 
-#custom-system {
-  color: @yellow;
-  padding: 0 15px;
-  margin: 3px 0;
-}
-
 #memory,
-#cpu,
-#disk,
-#temperature {
-  background-color: transparent;
-}
-
-#temperature {
-  color: @rosewater;
-}
-
-#memory {
-  color: @teal;
-}
-
 #cpu {
-  color: @flamingo;
-  padding-left: 15px;
-}
-
-#disk {
-  color: @blue;
-  margin-right: -5px;
+  margin-right: 10px;
+  background-color: transparent;
 }
 
 #idle_inhibitor {
@@ -181,6 +153,7 @@ tooltip label {
 
 #custom-clipboard {
   border-radius: 0 15px 15px 0;
+  margin-right: 10px;
   font-size: 14px;
   color: @lavender;
   padding-right: 10px;
@@ -192,10 +165,7 @@ tooltip label {
   border-radius: 0 15px 15px 0;
 }
 
-#custom-reboot,
-#custom-logout,
-#custom-lock,
-#custom-power {
+#custom-power_btn {
   color: @red;
   padding: 0 15px;
   padding-right: 20px;
@@ -210,6 +180,8 @@ tooltip label {
 }
 
 #network {
+  /* margin-right: 10px; */
+  padding-right: 15px;
   background-color: transparent;
   font-size: 15px;
   color: @mauve;
@@ -233,6 +205,10 @@ tooltip label {
 #custom-lock_screen {
   border-radius: 15px;
   padding-right: 13px;
+}
+
+#temperature {
+  border-radius: 0 10px 10px 0;
 }
 
 #tray {

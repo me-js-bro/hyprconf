@@ -94,6 +94,8 @@ tooltip label {
 #custom-power_profile,
 #custom-weather,
 #custom-updater,
+#idle_inhibitor,
+#custom-nightlight,
 #window,
 #cpu,
 #disk,
@@ -128,6 +130,18 @@ tooltip label {
   margin-right: 10px;
 }
 
+#idle_inhibitor {
+  font-size: 15px;
+  padding-right: 15px;
+}
+
+#custom-nightlight {
+  font-size: 15px;
+  border-radius: 10px 0 0 10px;
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
 #custom-notify {
   border-radius: 10px;
   margin-right: 10px;
@@ -155,7 +169,7 @@ tooltip label {
 
 #network {
   margin-right: 10px;
-  padding-right: 15px;
+  padding-right: 10px;
   border-radius: 10px;
 }
 

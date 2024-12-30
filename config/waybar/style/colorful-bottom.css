@@ -222,9 +222,13 @@ tooltip label {
 
 #network {
   margin-right: 3px;
-  padding-right: 16px;
   border-radius: 3px;
   color: @color4;
+}
+
+#network.speed {
+  /* border: 1px solid red; */
+  margin-right: 10px;
 }
 
 #custom-updater {

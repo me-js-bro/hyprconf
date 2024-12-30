@@ -1,5 +1,9 @@
 {
-    "include": "$HOME/.config/waybar/modules",
+    "include": [
+        "$HOME/.config/waybar/modules/modules-catppuccin.jsonc",
+        "$HOME/.config/waybar/modules/modules-custom.jsonc",
+        "$HOME/.config/waybar/modules/modules-groups.jsonc"
+    ],
     "layer": "top",
     "position": "top",
     "mod": "dock",
@@ -12,11 +16,32 @@
     "margin-left": 10,
     "margin-right": 10,
 
-    "modules-left": ["custom/launch_rofi","hyprland/window", "hyprland/workspaces", "mpris" ],
+    "modules-left": [
+        "custom/launch_rofi",
+        "hyprland/window", 
+        "hyprland/workspaces",
+        "group/sysinfo",
+        "group/ai",
+        "mpris" 
+    ],
 
-    "modules-center": ["clock"],
+    "modules-center": [
+        "clock"
+    ],
 
-    "modules-right": [ "tray", "pulseaudio", "pulseaudio#microphone", "custom/updater", "idle_inhibitor", "custom/nightlight", "custom/clipboard", "battery", "backlight",  "network", "custom/power_btn"],
+    "modules-right": [ 
+        "tray", 
+        "pulseaudio", 
+        "pulseaudio#microphone", 
+        "custom/updater", 
+        "idle_inhibitor", 
+        "custom/nightlight", 
+        "custom/clipboard", 
+        "battery", 
+        "backlight",  
+        "group/network", 
+        "group/power"
+    ],
 
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -26,24 +51,12 @@
         "on-scroll-down": "hyprctl dispatch workspace e+1",
         "format": "{icon}",
         "format-icons": {
-            // for arch
-            //"active": "󰮯",
             "default": ""
-
-            // for fedora
-            //  "active": "󰣛",  
-            //  "default": ""
-
-            // for opensuse
-            // "active": "",
-            // "default": ""
           },
         "persistent-workspaces": {
             "1": [],
             "2": [],
-            "3": [],
-            "4": [],
-            "5": []
+            "3": []
         }
     }
 }

@@ -38,7 +38,7 @@ tooltip label {
   margin-top: 3px;
   margin-bottom: 3px;
   margin: 0 2px;
-  padding: 1px 3px;
+  padding: 1px 5px;
   animation: gradient_f 20s ease-in infinite;
   transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
@@ -106,13 +106,6 @@ tooltip label {
   transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
-#custom-launch_rofi,
-#custom-lock_screen,
-#custom-light_dark,
-#custom-power_btn,
-#custom-power_profile,
-#custom-weather,
-#custom-updater,
 #window,
 #cpu,
 #disk,
@@ -123,6 +116,7 @@ tooltip label {
 #memory,
 #clock,
 #battery,
+#backlight
 #pulseaudio,
 #pulseaudio.microphone,
 #network,
@@ -131,28 +125,23 @@ tooltip label {
 #workspaces,
 #taskbar,
 #mpris,
+#custom-launch_rofi,
+#custom-lock_screen,
+#custom-light_dark,
+#custom-power_btn,
+#custom-power_profile,
+#custom-weather,
+#custom-updater,
+#custom-system,
 #custom-notify,
-#custom-ai,
-#custom-ps,
-#custom-fb,
-#custom-yt,
-#custom-wapp,
-#custom-github,
-#custom-nightlight #backlight {
+#custom-nightlight {
   background: #18202a;
   opacity: 1;
-  padding: 0px 10px;
+  padding: 0 5px;
   margin-top: 8px;
   margin-bottom: 6px;
   border: 0px;
   font-size: 14px;
-}
-
-#custom-notify {
-  margin-right: 3px;
-  border-radius: 10px;
-  background: transparent;
-  color: @foreground;
 }
 
 #custom-clipboard {
@@ -169,63 +158,13 @@ tooltip label {
   margin: 0 3px 0 10px;
 }
 
-#custom-wallpaper-change {
-  font-size: 16px;
-  padding-right: 20px;
-  margin-right: 10px;
-  border-radius: 0 10px 10px 0;
-}
-
-#custom-ai,
-#custom-fb,
-#custom-yt,
-#custom-wapp,
-#custom-ps,
-#custom-github {
-  background: transparent;
-  color: @foreground;
-  padding: 0 5px;
-  transition: 0.3s ease;
-}
-
-#custom-ps {
-  margin-left: -2px;
-}
-
-#custom-fb,
-#custom-yt,
-#custom-wappp {
-  font-size: 15px;
-}
-
-#custom-wapp,
-#custom-ps {
-  font-size: 16px;
-}
-
-#custom-ai,
-#custom-github {
-  border: 2px solid @foreground;
-}
-
-#custom-ai {
-  padding-bottom: 3px;
-  padding-left: 8px;
-  border-right: none;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-}
-
-#custom-github {
-  border-left: none;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
-
 #cpu,
-#memory {
+#memory,
+#disk,
+#custom-system {
   background: transparent;
   color: @foreground;
+  padding: 0 15px;
 }
 
 #memory {
@@ -242,26 +181,29 @@ tooltip label {
   background: transparent;
   color: @foreground;
   border-radius: 20px;
-  margin-left: 5px;
+  margin-left: 15px;
+  padding: 0 15px;
+  padding-left: 20px;
   border: 2px solid @foreground;
 }
 
 #network {
-  margin-right: 3px;
+  /* margin-right: 3px; */
   border-radius: 10px;
   background: none;
   color: @foreground;
 }
 
 #custom-updater {
-  margin-right: -3px;
+  margin-right: 10px;
   border-radius: 10px;
   background: none;
   color: @foreground;
+  padding: 0 5px;
 }
 
 #temperature {
-  background: @background;
+  background: transparent;
   color: @foreground;
   margin-left: 5px;
   border-radius: 20px;
@@ -270,40 +212,9 @@ tooltip label {
 #tray {
   background: none;
   margin-right: 10px;
+  padding: 0 15px;
   border: 2px solid @foreground;
   border-radius: 20px;
-}
-
-#custom-light_dark,
-#custom-power_btn,
-#disk {
-  border-radius: 10px 10px 10px 10px;
-  margin-right: 10px;
-}
-
-#custom-power_btn {
-  border-radius: 0px 10px 10px 0px;
-}
-
-#custom-power_btn {
-  border-radius: 10px;
-  background: red;
-  color: #11111b;
-  padding: 0 15px;
-}
-
-#custom-light_dark {
-  border-radius: 10px 0 0 10px;
-  margin-right: 0;
-  padding: 0 10px;
-  margin-left: 15px;
-}
-
-#custom-light_dark,
-#custom-wallpaper-change {
-  background: @background;
-  color: @foreground;
-  font-weight: 700;
 }
 
 #custom-weather {
@@ -320,7 +231,7 @@ tooltip label {
 #workspaces {
   background: @foreground;
   color: @background;
-  padding: 5px 3px;
+  padding: 5px 10px;
   border-radius: 20px;
 }
 
@@ -343,6 +254,7 @@ tooltip label {
   margin-left: 20px;
   border-radius: 20px;
   font-size: 13px;
+  padding: 0 15px;
 }
 
 #pulseaudio {
@@ -351,6 +263,8 @@ tooltip label {
   color: @foreground;
   border-right: none;
   border-radius: 20px 0 0 20px;
+  padding: 0 15px;
+  margin: 8px 0 6px 0;
 }
 
 #clock {
@@ -360,7 +274,7 @@ tooltip label {
   border-radius: 10px;
   margin-right: 20px;
   margin-left: 5px;
-  padding-right: 15px;
+  padding: 0 15px;
   border-radius: 20px;
 }
 
@@ -372,6 +286,7 @@ tooltip label {
   color: @foreground;
   margin-left: -3px;
   margin-right: 3px;
+  padding: 0 15px;
 }
 
 #battery,
