@@ -85,11 +85,6 @@ if [[ "$engine" == "swww" ]]; then
         echo "$wallName" > "$wallCache"
 
         if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
-            if [[ "$current_mode" == "light" ]]; then
-                wal -q -l -i "${wallDIR}/${PICS[$pic_index]}"
-            elif [[ "$current_mode" == "dark" ]]; then
-                wal -q -i "${wallDIR}/${PICS[$pic_index]}"
-            fi
             cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
         fi
         rm -rf "$HOME/.cache/wal"

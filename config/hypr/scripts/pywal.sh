@@ -139,14 +139,7 @@ ln -sf "${themes_dir}/${wallName}-colors/colors-kitty.conf" "$HOME/.config/kitty
 kitty @ set-color -a "$kitty"
 
 # setting rofi theme
-mode_file="$HOME/.config/hypr/.cache/.mode"
-current_mode=$(cat "$mode_file")
-
-if [ "$current_mode" == "dark" ]; then
-    ln -sf "${themes_dir}/${wallName}-colors/colors-rofi-dark.rasi" "$HOME/.config/rofi/themes/rofi-pywal.rasi"
-else
-    ln -sf "${themes_dir}/${wallName}-colors/colors-rofi-light.rasi" "$HOME/.config/rofi/themes/rofi-pywal.rasi"
-fi
+ln -sf "${themes_dir}/${wallName}-colors/colors-rofi-dark.rasi" "$HOME/.config/rofi/themes/rofi-pywal.rasi"
 
 # setting waybar colors
 ln -sf "${themes_dir}/${wallName}-colors/colors-waybar.css" "$HOME/.config/waybar/style/theme.css"
@@ -178,54 +171,56 @@ update_dunst_colors
 
 
 # remove these part if you don't like the colors according to your wallpaper.
-# if [ -f $colors_file ]; then
-#     background_color=$(jq -r '.special.background' "$colors_file")
-#     foreground_color=$(jq -r '.special.foreground' "$colors_file")
-#
-#     # Update VS Code settings
-#     vscode_settings_file="$HOME/.config/Code/User/settings.json"
-#     cat <<EOF >"$vscode_settings_file"
-# {
-#     "editor.mouseWheelZoom": true,
-#     "workbench.startupEditor": "none",
-#     "editor.fontSize": 20,
-#     "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace",
-#     "editor.fontLigatures": true,
-#     "window.menuBarVisibility": "toggle",
-#     "editor.smoothScrolling": true,
-#     "editor.scrollbar.horizontal": "hidden",
-#     "editor.mouseWheelScrollSensitivity": 2,
-#     "editor.wordWrap": "on",
-#     "editor.cursorBlinking": "expand",
-#     "terminal.integrated.fontSize": 18,
-#     "workbench.iconTheme": "catppuccin-mocha",
-#     "workbench.colorTheme": "Theme Darker",
-#     "git.enableSmartCommit": true,
-#     "files.autoSave": "afterDelay",
-#     // You can remove these part if you don't like the colors according to your wallpaper from the "$HOME/.config/hypr/scripts/pywal.sh" script, from 204-221 lines.
-#     // or you can totally remove the vs-code themming part from the script if you want to set and use your custom settings. if you don't do that, then your settings will be replaced/over writen by the default config.
-#
-#     "workbench.colorCustomizations": {
-#         "editor.background": "$background_color",
-#         "sideBar.background": "$background_color",
-#         "sideBar.border": "$background_color",
-#         "sideBar.foreground": "$foreground_color",
-#         "editorGroupHeader.tabsBackground": "#191b274b",
-#         "activityBar.background": "$background_color",
-#         "activityBar.border": "$background_color",
-#         "activityBar.foreground": "$foreground_color",
-#         "tab.activeBackground": "#13151f",
-#         "tab.activeForeground": "#ffffff",
-#         "tab.activeBorder": "$background_color",
-#         "tab.border": "$background_color",
-#         "tab.inactiveBackground": "$background_color",
-#         "tab.inactiveForeground": "$foreground_color",
-#         "terminal.foreground": "$foreground_color",
-#         "terminal.background": "$background_color"
-#     },
-# }
-# EOF
-# fi
+if [ -f $colors_file ]; then
+    background_color=$(jq -r '.special.background' "$colors_file")
+    foreground_color=$(jq -r '.special.foreground' "$colors_file")
+
+    # Update VS Code settings
+    vscode_settings_file="$HOME/.config/Code/User/settings.json"
+    cat <<EOF >"$vscode_settings_file"
+{
+    "editor.mouseWheelZoom": true,
+    "workbench.startupEditor": "none",
+    "editor.fontSize": 20,
+    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.fontLigatures": true,
+    "window.menuBarVisibility": "toggle",
+    "editor.smoothScrolling": true,
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.mouseWheelScrollSensitivity": 2,
+    "editor.wordWrap": "on",
+    "editor.cursorBlinking": "expand",
+    "terminal.integrated.fontSize": 18,
+    "workbench.iconTheme": "catppuccin-mocha",
+    "workbench.colorTheme": "Theme Darker",
+    "git.enableSmartCommit": true,
+    "files.autoSave": "afterDelay",
+    // You can remove these part if you don't like the colors according to your wallpaper from the "$HOME/.config/hypr/scripts/pywal.sh" script, from 204-221 lines.
+    // or you can totally remove the vs-code themming part from the script if you want to set and use your custom settings. if you don't do that, then your settings will be replaced/over writen by the default config.
+
+    "workbench.colorCustomizations": {
+        "editor.background": "$background_color",
+        "sideBar.background": "$background_color",
+        "sideBar.border": "$background_color",
+        "sideBar.foreground": "$foreground_color",
+        "editorGroupHeader.tabsBackground": "#191b274b",
+        "activityBar.background": "$background_color",
+        "activityBar.border": "$background_color",
+        "activityBar.foreground": "$foreground_color",
+        "tab.activeBackground": "#13151f",
+        "tab.activeForeground": "#ffffff",
+        "tab.activeBorder": "$background_color",
+        "tab.border": "$background_color",
+        "tab.inactiveBackground": "$background_color",
+        "tab.inactiveForeground": "$foreground_color",
+        "terminal.foreground": "$foreground_color",
+        "terminal.background": "$background_color"
+    },
+}
+EOF
+else
+    exit 0
+fi
 
 # Refresh the scripts
 sleep 0.5

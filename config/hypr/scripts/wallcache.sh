@@ -51,6 +51,5 @@ fn_wallcache "${currentWall_name}" "${input_file}"
 
 # Notify success
 if [ ! -f "${thmbDir}/${currentWall_name}.quad" ]; then
-    echo "Error: Quad image creation failed!"
     exit 1
 fi
