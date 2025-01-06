@@ -1,6 +1,6 @@
 #!/bin/bash
 
-iDIR="$HOME/.config/swaync/icons/vol"
+iDIR="$HOME/.config/dunst/icons/vol"
 
 # Get Volume
 get_volume() {
@@ -62,10 +62,10 @@ get_icon() {
 
 # Notify
 notify_user() {
-    if [[ "$(get_volume)" == "Muted" ]]; then
-        notify-send -e -h string:x-canonical-private-synchronous:volume_notif -u low -i "$(get_icon)" "Volume: Muted"
+    if [[ "$(get_volume)" == " " ]]; then
+        notify-send -a -r -h string:x-dunst-stack-tag:volume_notif -i "$(get_icon)" "Volume: Muted"
     else
-        notify-send -e -h int:value:"$(get_volume | sed 's/%//')" -h string:x-canonical-private-synchronous:volume_notif -u low -i "$(get_icon)" "Volume: $(get_volume)"
+        notify-send -a -r -h string:x-dunst-stack-tag:volume_notif -i "$(get_icon)" "Volume: $(get_volume)"
     fi
 }
 
@@ -87,28 +87,29 @@ dec_volume() {
 
 # Toggle Mute
 toggle_mute() {
-	if [ "$(pamixer --get-mute)" == "false" ]; then
-		pamixer -m && notify-send -e -u low -i "$iDIR/muted-speaker.svg" "Volume Switched OFF"
-	elif [ "$(pamixer --get-mute)" == "true" ]; then
-		pamixer -u && notify-send -e -u low -i "$iDIR/unmuted-speaker.svg" "Volume Switched ON"
-	fi
+    if [ "$(pamixer --get-mute)" == "false" ]; then
+        pamixer -m && notify-send -a -h -i "$iDIR/muted-speaker.svg" "Volume Switched OFF"
+    elif [ "$(pamixer --get-mute)" == "true" ]; then
+        pamixer -u && notify-send -a -h -i "$iDIR/unmuted-speaker.svg" "Volume Switched ON"
+    fi
 }
 
 # Toggle Mic
 toggle_mic() {
-	if [ "$(pamixer --default-source --get-mute)" == "false" ]; then
-		pamixer --default-source -m && notify-send -e -u low -i "$iDIR/muted-mic.svg" "Microphone Switched OFF"
-	elif [ "$(pamixer --default-source --get-mute)" == "true" ]; then
-		pamixer -u --default-source u && notify-send -e -u low -i "$iDIR/unmuted-mic.svg" "Microphone Switched ON"
-	fi
+    if [ "$(pamixer --default-source --get-mute)" == "false" ]; then
+        pamixer --default-source -m && notify-send -e -u low -i "$iDIR/muted-mic.svg" "Microphone Switched OFF"
+    elif [ "$(pamixer --default-source --get-mute)" == "true" ]; then
+        pamixer --default-source -u && notify-send -e -u low -i "$iDIR/unmuted-mic.svg" "Microphone Switched ON"
+    fi
 }
+
 # Get Mic Icon
 get_mic_icon() {
     current=$(pamixer --default-source --get-volume)
     if [[ "$current" -eq "0" ]]; then
-        echo "$iDIR/muted-speaker.svg"
+        echo "$iDIR/muted-mic.svg"
     else
-        echo "$iDIR/unmuted-speaker.svg"
+        echo "$iDIR/unmuted-mic.svg"
     fi
 }
 
@@ -126,7 +127,7 @@ get_mic_volume() {
 notify_mic_user() {
     volume=$(get_mic_volume)
     icon=$(get_mic_icon)
-    notify-send -e -h int:value:"$volume" -h "string:x-canonical-private-synchronous:volume_notif" -u low -i "$icon" "Mic=vel: $volume"
+    notify-send -a -r 91190 -t 800 -i "$icon" "Mic=vel: $volume"
 }
 
 # Increase MIC Volume
@@ -147,23 +148,23 @@ dec_mic_volume() {
 
 # Execute accordingly
 if [[ "$1" == "--get" ]]; then
-	get_volume
+    get_volume
 elif [[ "$1" == "--inc" ]]; then
-	inc_volume
+    inc_volume
 elif [[ "$1" == "--dec" ]]; then
-	dec_volume
+    dec_volume
 elif [[ "$1" == "--toggle" ]]; then
-	toggle_mute
+    toggle_mute
 elif [[ "$1" == "--toggle-mic" ]]; then
-	toggle_mic
+    toggle_mic
 elif [[ "$1" == "--get-icon" ]]; then
-	get_icon
+    get_icon
 elif [[ "$1" == "--get-mic-icon" ]]; then
-	get_mic_icon
+    get_mic_icon
 elif [[ "$1" == "--mic-inc" ]]; then
-	inc_mic_volume
+    inc_mic_volume
 elif [[ "$1" == "--mic-dec" ]]; then
-	dec_mic_volume
+    dec_mic_volume
 else
-	get_volume
+    get_volume
 fi

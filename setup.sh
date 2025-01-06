@@ -64,13 +64,47 @@ log="$log_dir"/dotfiles.log
 mkdir -p "$log_dir"
 touch "$log"
 
+# message prompts
+msg() {
+    local actn="$1"
+    local msg="$2"
+
+    case $actn in
+        act)
+            printf "${green}=>${end} $msg\n"
+            ;;
+        ask)
+            printf "${orange}??${end} $msg\n"
+            ;;
+        dn)
+            printf "${cyan}::${end} $msg\n"
+            ;;
+        att)
+            printf "${yellow}!!${end} $msg\n"
+            ;;
+        nt)
+            printf "${blue}\$\$${end} $msg\n"
+            ;;
+        skp)
+            printf "${magenta}[ SKIP ]${end} $msg\n"
+            ;;
+        err)
+            printf "${red}>< Ohh sheet! an error..${end}\n   $msg\n"
+            sleep 1
+            ;;
+        *)
+            printf "$msg\n"
+            ;;
+    esac
+}
+
 
 # Directories ----------------------------
 hypr_dir="$HOME/.config/hypr"
 scripts_dir="$hypr_dir/scripts"
 fonts_dir="$HOME/.local/share/fonts"
 
-printf "${attention}\n! Now setting up the pre installed Hyprland configuration.\n" && sleep 1
+msg act "Now setting up the pre installed Hyprland configuration..."sleep 1
 
 mkdir -p ~/.config
 
@@ -83,37 +117,27 @@ check_distro() {
         . /etc/os-release
         case "$ID" in
             arch)
-                printf "${action} - Starting the script for ${cyan}$ID${end} Linux\n\n"
                 distro="arch"
                 ;;
             fedora)
-                printf "${action} - Starting the script for ${cyan}$ID${end}\n\n"
                 distro="fedora"
                 ;;
             opensuse*)
-                printf "${action} - Starting the script for ${cyan}$ID${end}\n\n"
                 distro="opensuse"
                 ;;
-            *)
-                printf "${error} - Sorry, the script won't work in your distro...\n"
-                exit 1
-                ;;
         esac
-    else
-        printf "${error} - Sorry, the script won't work in $ID...\n"
-        exit 1
     fi
 }
 
 dirs=(
     btop
+    dunst
     fastfetch
     hypr
     kitty
     nvim
     ranger
     rofi
-    swaync 
     waybar
     gtk-3.0
     gtk-4.0
@@ -124,13 +148,13 @@ dirs=(
 
 # if some main directories exists, backing them up.
 if [[ -d "$HOME/.config/HyprBackup-${USER}" ]]; then
-    printf "${attention}\n! a HyprBackup directory was there. Archiving it.\n"
+    msg att "a HyprBackup directory was there. Archiving it..."
     cd "$HOME/.config"
     mkdir -p "HyprArchive-${USER}"
     zip -r -1 "HyprBackup-${USER}.zip" "HyprBackup-${USER}" &> /dev/null
     mv "HyprBackup-${USER}.zip" "HyprArchive-${USER}/"
     rm -rf "HyprBackup-${USER}"
-    printf "${done}\n:: HyprBackup-${USER} was zipped and backed to HyprArchive-${USER} directory.\n"
+    msg dn "HyprBackup-${USER} was zipped and backed to HyprArchive-${USER} directory..."
 fi
 
 for confs in "${dirs[@]}"; do
@@ -138,7 +162,7 @@ for confs in "${dirs[@]}"; do
     dir_path="$HOME/.config/$confs"
     if [[ -d "$dir_path" ]]; then
         mv "$dir_path" "$HOME/.config/HyprBackup-${USER}/" 2>&1 | tee -a "$log"
-        printf "${done}\n:: Everything has been backuped in $HOME/.config/HyprBackup-${USER}.\n"
+        msg dn "Everything has been backuped in $HOME/.config/HyprBackup-${USER}..."
     fi
 done
 
@@ -148,19 +172,19 @@ sleep 1
 keyboard_path="/usr/share/openbangla-keyboard"
 
 if [[ -d "$keyboard_path" ]]; then
-    printf "${action}\n==> Setting up OpenBangla-Keyboard.\n"
+    msg act "Setting up OpenBangla-Keyboard..."
 
     # Add fcitx5 environment variables to /etc/environment if not already present
     if ! grep -q "GTK_IM_MODULE=fcitx" /etc/environment; then
-        printf "\nGTK_IM_MODULE=fcitx\n" | sudo tee -a /etc/environment 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+        printf "\nGTK_IM_MODULE=fcitx\n" | sudo tee -a /etc/environment 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") &> /dev/null
     fi
 
     if ! grep -q "QT_IM_MODULE=fcitx" /etc/environment; then
-        printf "QT_IM_MODULE=fcitx\n" | sudo tee -a /etc/environment 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+        printf "QT_IM_MODULE=fcitx\n" | sudo tee -a /etc/environment 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") &> /dev/null
     fi
 
     if ! grep -q "XMODIFIERS=@im=fcitx" /etc/environment; then
-        printf "XMODIFIERS=@im=fcitx\n" | sudo tee -a /etc/environment 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+        printf "XMODIFIERS=@im=fcitx\n" | sudo tee -a /etc/environment 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") &> /dev/null
     fi
 
 fi
@@ -168,14 +192,15 @@ fi
 #_____ for virtual machine
 # Check if the configuration is in a virtual box
 if hostnamectl | grep -q 'Chassis: vm'; then
-    printf "${attention}\n! You are using this script in a Virtual Machine.\n${action}\n=> Setting up things for you.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+    msg att "You are using this script in a Virtual Machine..."
+    msg act "Setting up things for you..." 
     sed -i '/env = WLR_NO_HARDWARE_CURSORS,1/s/^#//' "$dir/config/hypr/configs/environment.conf"
     sed -i '/env = WLR_RENDERER_ALLOW_SOFTWARE,1/s/^#//' "$dir/config/hypr/configs/environment.conf"
     echo -e '#Monitor\nmonitor=Virtual-1, 1920x1080@60,auto,1' > "$dir/config/hypr/configs/monitor.conf"
 
 else
     #_____ setting up the monitor
-    printf "${action}\n==> Setting the default monitor setup.\n"
+    msg act "Setting the default monitor setup..."
     echo -e "#Monitor\nmonitor=,preferred,auto,auto" > "$dir/config/hypr/configs/monitor.conf"
 fi
 
@@ -183,7 +208,7 @@ fi
 #_____ for nvidia gpu. I don't know if it's gonna work or not. Because I don't have any gpu.
 # uncommenting WLR_NO_HARDWARE_CURSORS if nvidia is detected
 if lspci -k | grep -A 2 -E "(VGA|3D)" | grep -iq nvidia; then
-  echo "Nvidia GPU detected. Setting up proper env's" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") || true
+  msg act "Nvidia GPU detected. Setting up proper env's" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") || true
   sed -i '/env = WLR_NO_HARDWARE_CURSORS,1/s/^#//' config/hypr/configs/environment.conf
   sed -i '/env = LIBVA_DRIVER_NAME,nvidia/s/^#//' config/hypr/configs/environment.conf
   sed -i '/env = __GLX_VENDOR_LIBRARY_NAME,nvidia/s/^# //' config/hypr/configs/environment.conf
@@ -198,28 +223,28 @@ sleep 1
 if [ -d $scripts_dir ]; then
     # make all the scripts executable...
     chmod +x "$scripts_dir"/* 2>&1 | tee -a "$log"
-    printf "${done}\n:: All the necessary scripts have been executable.\n"
+    msg dn "All the necessary scripts have been executable..."
     sleep 1
 else
-    printf "${error}\n! Could not find necessary scripts\n"
+    msg err "Could not find necessary scripts.."
 fi
 
 # Install Fonts
-printf "${attention}\n! Installing some fonts.. \n"
+msg act "Installing some fonts..."
 if [[ ! -d "$fonts_dir" ]]; then
 	mkdir -p "$fonts_dir"
 fi
 
 cp -r "$dir/extras/fonts" "$fonts_dir"
-printf "${action}\n==> Updating font cache...\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-sudo fc-cache -fv &> /dev/null
+msg act "Updating font cache..."
+sudo fc-cache -fv 2>&1 | tee -a "$log" &> /dev/null
 
 
 wayland_session_dir=/usr/share/wayland-sessions
 if [ -d "$wayland_session_dir" ]; then
-    printf "${done}\n:: $wayland_session_dir found\n"
+    msg att "$wayland_session_dir found..."
 else
-    printf "${attention}\n! $wayland_session_dir NOT found, creating.\n"
+    msg att "$wayland_session_dir NOT found, creating..."
     sudo mkdir $wayland_session_dir 2>&1 | tee -a "$log"
 fi
     sudo cp "$dir/extras/hyprland.desktop" /usr/share/wayland-sessions/ 2>&1 | tee -a "$log"
@@ -229,7 +254,7 @@ clear && sleep 1
 
 # Asking if the user wants to download more wallpapers
 if [[ -n "$(command -v gum)" ]]; then
-    printf "${ask}\n?? Would you like to add more wallpapers?\n"
+    msg ask "Would you like to add more wallpapers?"
     gum confirm "Please confirm." \
         --affirmative "Need more wallpapers" \
         --negative "No, skip"
@@ -240,7 +265,7 @@ if [[ -n "$(command -v gum)" ]]; then
         wallpaper="n"
     fi
 else
-    printf "${ask}\n?? Would you like to add more ${green}Wallpapers${end}? ${blue}[ y/n ]${end}\n"
+    msg ask "Would you like to add more ${green}Wallpapers${end}? ${blue}[ y/n ]${end}..."
     read -r -p "$(echo -e '\e[1;32mSelect: \e[0m')" wallpaper
 fi
 
@@ -248,7 +273,7 @@ printf " \n"
 
 # wallpaper...
 if [[ "$wallpaper" =~ ^[Y|y]$ ]]; then
-    printf "${action}\n==> Downloading some wallpapers.\n" && sleep 1
+    msg act "Downloading some wallpapers..."
     
     # cloning the wallpapers in a temporary directory
     git clone --depth=1 https://github.com/me-js-bro/Wallpapers.git ~/.cache/wallpaper-cache 2>&1 | tee -a "$log" &> /dev/null
@@ -259,9 +284,9 @@ if [[ "$wallpaper" =~ ^[Y|y]$ ]]; then
         cp "$HOME/.cache/wallpaper-cache/light"/* ~/.config/hypr/Dynamic-Wallpapers/light/ &> /dev/null
         cp "$HOME/.cache/wallpaper-cache/all"/* ~/.config/hypr/Wallpaper/ &> /dev/null
         rm -rf "$HOME/.cache/wallpaper-cache" &> /dev/null
-        printf "${done}\n:: Wallpapers were downloaded successfully..\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") & sleep 0.5
+        msg dn "Wallpapers were downloaded successfully..." 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") & sleep 0.5
     else
-        printf "\n${error}\n! Sorry, could not download more wallpapers. Going forward with the limited wallpapers.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") && sleep 0.5
+        msg err "Sorry, could not download more wallpapers. Going forward with the limited wallpapers..." 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") && sleep 0.5
     fi
 fi
 
@@ -270,27 +295,28 @@ fi
 check_distro &> /dev/null
 
 if [[ -d "$HOME/.config/hypr/Wallpaper" ]]; then
-  mode_file="$HOME/.config/hypr/.cache/.mode"
-  engine="$HOME/.config/hypr/.cache/.engine"
+    engine="$HOME/.config/hypr/.cache/.engine"
+    wallCache="$HOME/.config/hypr/.cache/.wallpaper"
 
-  touch "$mode_file" &> /dev/null
-  touch "$engine" &> /dev/null
-  
-  echo "dark" > "$mode_file"
-  echo "hyprpaper" > "$engine"
+    touch "$engine" &> /dev/null
+    touch "$wallCache" &> /dev/null
+      
+    echo "hyprpaper" > "$engine"
 
-  wallpaper="$HOME/.config/hypr/Wallpaper/$distro.png"
+    if [ -f "$HOME/.config/hypr/Wallpaper/${distro}.png" ]; then
+        echo "$distro" > "$wallCache"
+        wallpaper="$HOME/.config/hypr/Wallpaper/${distro}.png"
+    fi
 
-# setting the default wallpaper
-  ln -sf "$wallpaper" "$HOME/.config/hypr/.cache/current_wallpaper.png"
-   echo "wallpaper = ,$HOME/.config/hypr/.cache/current_wallpaper.png" > "$HOME/.config/hypr/hyprpaper.conf"
-  "$HOME/.config/hypr/scripts/pywal.sh" &> /dev/null
+    # setting the default wallpaper
+    ln -sf "$wallpaper" "$HOME/.config/hypr/.cache/current_wallpaper.png"
+    echo "wallpaper = ,~/.config/hypr/.cache/current_wallpaper.png" > "$HOME/.config/hypr/hyprpaper.conf"
 fi
 
 # setting up the waybar
-ln -sf "$HOME/.config/waybar/configs/fancy-top" "$HOME/.config/waybar/config"
-ln -sf "$HOME/.config/waybar/style/fancy-top.css" "$HOME/.config/waybar/style.css"
+ln -sf "$HOME/.config/waybar/configs/catppuccin-top" "$HOME/.config/waybar/config"
+ln -sf "$HOME/.config/waybar/style/catppuccin-top.css" "$HOME/.config/waybar/style.css"
 
-printf "${done}\n:: Script execution was successful! Now you can reboot and enjoy your customization.\n"
+msg dn "Script execution was successful! Now you can reboot and enjoy your customization..."
 
 # === ___ Script Ends Here ___ === #

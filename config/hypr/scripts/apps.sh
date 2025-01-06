@@ -11,8 +11,8 @@ case $1 in
         url="https://chat.openai.com"
         ;;
     gem)
-	url="https://gemini.google.com/app"
-	;;
+        url="https://gemini.google.com/app"
+        ;;
     wapp)
         url="https://web.whatsapp.com"
         ;;
@@ -29,12 +29,12 @@ case $1 in
 esac
 
 # Define the browsers in the order of preference
-browser_cache="$HOME/.config/hypr/.cache/browser"
+browser_cache="$HOME/.config/hypr/.cache/.browser"
 browser=$(grep "default" "$browser_cache" | awk -F'=' '{print $2}')
 
 # Loop through the browsers and try to open the URL with the first available one
 if [[ ! "$browser" == "firefox" ]]; then
     "$browser" --app="$url"
-elif [[ "$browser" == "firefox" ]]; then
+elif [[ "$browser" == "firefox" || "$browser" == "zen-browser" ]]; then
     "$browser" --new-window "$url"
 fi

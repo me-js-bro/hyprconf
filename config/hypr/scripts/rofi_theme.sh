@@ -44,8 +44,8 @@ echo "selected style: $selected_style"
 if [ -n "$selected_style" ]; then
     selected_style_number=$(echo "$selected_style" | awk -F '-' '{print $2}' | awk -F '.' '{print $1}')
     selected_style_path=$(ls ${rofiStyleDir}/style-${selected_style_number}.rasi)
-    echo "Applying theme: $selected_style_path"
-    rofi -show drun -theme "$selected_style_path"
+
+    notify-send -t 2000 -i "$HOME/.config/rofi/assets/style-${selected_style_number}.png" "Theme applied"
 
     # Update the menu_select.sh script with the selected theme
     sed -i "s|^theme=.*|theme='style-${selected_style_number}'|" "$menu_select_script"

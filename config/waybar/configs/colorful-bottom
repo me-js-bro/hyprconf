@@ -1,20 +1,42 @@
 {
-        "include": "$HOME/.config/waybar/modules",
+        "include": [
+            "$HOME/.config/waybar/modules/modules-main.jsonc",
+            "$HOME/.config/waybar/modules/modules-groups.jsonc",
+            "$HOME/.config/waybar/modules/modules-custom.jsonc",
+        ],
         "layer": "top",
         "position": "bottom",
         "mod": "dock",
         "exclusive": true,
         "passthrough": false,
         "gtk-layer-shell": true,
+        "reload_style_on_change": true,
         "height": 20,
         "margin-top": 0,
         "margin-bottom": 0,
     
-        "modules-left": ["custom/launch_rofi","hyprland/workspaces", "mpris"],
+        "modules-left": [
+            "custom/launch_rofi",
+            "hyprland/workspaces", 
+            "mpris"
+        ],
     
         "modules-center": [],
     
-        "modules-right": ["tray", "custom/updater", "custom/swaync", "custom/light_dark","custom/wallpaper-change", "pulseaudio","pulseaudio#microphone", "network", "battery", "backlight", "idle_inhibitor", "custom/nightlight", "custom/clipboard", "clock","custom/power_btn"],
+        "modules-right": [
+            "tray", 
+            "custom/updater",
+            "pulseaudio",
+            "pulseaudio#microphone", 
+            "group/network", 
+            "battery", 
+            "backlight", 
+            "idle_inhibitor", 
+            "custom/nightlight", 
+            "custom/clipboard", 
+            "clock",
+            "custom/power_btn"
+        ],
 
         "hyprland/workspaces": {
         "disable-scroll": true,

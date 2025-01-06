@@ -1,19 +1,43 @@
 {
-    "include": "$HOME/.config/waybar/modules",
+    "include": [
+        "$HOME/.config/waybar/modules/modules-main.jsonc",
+        "$HOME/.config/waybar/modules/modules-groups.jsonc",
+        "$HOME/.config/waybar/modules/modules-custom.jsonc",
+    ],
     "layer": "top",
     "position": "top",
     "mod": "dock",
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
+    "reload_style_on_change": true,
     "height": 10,
     "margin-top": -3,
 
-    "modules-left": ["custom/launch_rofi", "cpu", "memory", "custom/ai", "custom/github", "custom/weather", "mpris"],
+    "modules-left": [
+        "custom/launch_rofi", 
+        "group/sysinfo",
+        "custom/weather",
+        "mpris"
+    ],
 
-    "modules-center": ["hyprland/workspaces"],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
 
-    "modules-right": ["tray", "custom/updater", "custom/swaync", "pulseaudio", "pulseaudio#microphone", "battery", "backlight", "idle_inhibitor", "custom/nightlight" , "custom/clipboard", "network", "clock"],
+    "modules-right": [
+        "tray", 
+        "custom/updater", 
+        "pulseaudio", 
+        "pulseaudio#microphone", 
+        "battery", 
+        "backlight", 
+        "idle_inhibitor", 
+        "custom/nightlight", 
+        "custom/clipboard", 
+        "group/network", 
+        "clock"
+    ],
 
     "hyprland/workspaces": {
         "disable-scroll": true,

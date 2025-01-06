@@ -13,7 +13,7 @@ file_exists() {
 
 # Kill already running processes
 _ps=(
-    swaync
+    dunst
     rofi
     waybar
 )
@@ -24,6 +24,8 @@ for _prs in "${_ps[@]}"; do
 done
 
 sleep 0.3
-waybar & swaync &
+waybar &
+sleep 0.5
+hyprctl reload
 
 exit 0

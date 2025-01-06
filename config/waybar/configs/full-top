@@ -1,21 +1,45 @@
 {
-    "include": "$HOME/.config/waybar/modules",
+    "include": [
+        "$HOME/.config/waybar/modules/modules-main.jsonc",
+        "$HOME/.config/waybar/modules/modules-groups.jsonc",
+        "$HOME/.config/waybar/modules/modules-custom.jsonc",
+    ],
     "layer": "top",
     "position": "top",
     "mod": "dock",
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
+    "reload_style_on_change": true,
     "height": 20,
     "margin-top": 5,
     "margin-left": 5,
     "margin-right": 5,
 
-    "modules-left": ["custom/launch_rofi", "tray", "hyprland/workspaces", "custom/weather",  "custom/light_dark","custom/wallpaper-change", "mpris" ],
+    "modules-left": [
+        "custom/launch_rofi", 
+        "tray", 
+        "hyprland/workspaces", 
+        "custom/weather",
+        "mpris" 
+    ],
 
-    "modules-center": ["custom/updater", "clock", "custom/swaync"],
+    "modules-center": [
+        "custom/updater", 
+        "clock"],
 
-    "modules-right": [ "pulseaudio", "pulseaudio#microphone", "cpu","memory", "idle_inhibitor", "custom/nightlight", "custom/clipboard", "battery", "backlight",  "network", "custom/power_btn"],
+    "modules-right": [
+        "pulseaudio", 
+        "pulseaudio#microphone", 
+        "group/sysinfo", 
+        "idle_inhibitor", 
+        "custom/nightlight", 
+        "custom/clipboard", 
+        "battery", 
+        "backlight",  
+        "group/network", 
+        "custom/power_btn"
+    ],
 
     "hyprland/workspaces": {
         "disable-scroll": true,

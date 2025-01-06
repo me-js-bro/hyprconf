@@ -1,12 +1,15 @@
 #!/bin/bash
 
 scripts_dir="$HOME/.config/hypr/scripts"
-
-# WALLPAPERS PATH
 wallDIR="$HOME/.config/hypr/Wallpaper"
 cache_dir="$HOME/.config/hypr/.cache"
+themes_dir="$HOME/.config/hypr/.cache/colors"
+wallCache="$cache_dir/.wallpaper"
 engine_file="$cache_dir/.engine"
 engine=$(cat "$engine_file")
+
+[[ ! -f "$wallCache" ]] && touch "$wallCache"
+[[ ! -d "$themes_dir" ]] && mkdir -p "$themes_dir"
 
 # Transition config
 FPS=60
@@ -15,10 +18,6 @@ DURATION=2
 BEZIER=".43,1.19,1,.4"
 SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION"
 
-# Check if swaybg is running
-if pidof swaybg > /dev/null; then
-  pkill swaybg
-fi
 
 # Retrieve image files
 PICS=($(ls "${wallDIR}" | grep -E ".jpg$|.jpeg$|.png$|.gif$"))
@@ -26,14 +25,7 @@ RANDOM_PIC="${PICS[$((RANDOM % ${#PICS[@]}))]}"
 RANDOM_PIC_NAME="${#PICS[@]}. random"
 
 # Rofi command ( style )
-case $1 in
-  style1)
-      rofi_command="rofi -show -dmenu -config ~/.config/rofi/themes/conf-wall.rasi"
-      ;;
-  style2)
-      rofi_command="rofi -show -dmenu -config ~/.config/rofi/themes/conf-wall-2.rasi"
-      ;;
-esac
+rofi_command="rofi -show -dmenu -config ~/.config/rofi/themes/conf-wall.rasi"
 
 menu() {
   for i in "${!PICS[@]}"; do
@@ -77,8 +69,19 @@ if [[ "$engine" == "swww" ]]; then
     done
 
     if [[ $pic_index -ne -1 ]]; then
-      notify-send -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
+      notify-send -t 2000 -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
       swww img "${wallDIR}/${PICS[$pic_index]}" $SWWW_PARAMS
+
+      ln -sf "${wallDIR}/${PICS[$pic_index]}" "$cache_dir/current_wallpaper.png"
+        basename="$(basename "${wallDIR}/${PICS[$pic_index]}")"
+        wallName="${basename%.*}"
+        echo "$wallName" > "$wallCache"
+
+        if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
+            cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
+        fi
+        rm -rf "$HOME/.cache/wal"
+
     else
       echo "Image not found."
       exit 1
@@ -104,6 +107,7 @@ elif [[ "$engine" == "hyprpaper" ]]; then
     if [ "$choice" = "$RANDOM_PIC_NAME" ]; then
         # Preload the wallpaper
         hyprctl hyprpaper preload "${wallDIR}/${RANDOM_PIC}"
+        echo -e "\n\nWall is: ${wallDIR}/${RANDOM_PIC}"
         if [ $? -ne 0 ]; then
         echo "Failed to preload wallpaper"
         exit 1
@@ -126,16 +130,25 @@ elif [[ "$engine" == "hyprpaper" ]]; then
     done
 
     if [[ $pic_index -ne -1 ]]; then
-      notify-send -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
+      notify-send -t 2000 -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
       hyprctl hyprpaper preload "${wallDIR}/${PICS[$pic_index]}"
       hyprctl hyprpaper wallpaper " ,${wallDIR}/${PICS[$pic_index]}"
 
+        basename="$(basename "${wallDIR}/${PICS[$pic_index]}")"
+        wallName="${basename%.*}"
+        echo "$wallName" > "$wallCache"
+
       ln -sf "${wallDIR}/${PICS[$pic_index]}" "$cache_dir/current_wallpaper.png"
+
+        if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
+            wal -q -i "${wallDIR}/${PICS[$pic_index]}" || printf "\n\nCouls not generate any colors\n"
+            cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
+        fi
+        rm -rf "$HOME/.cache/wal"
     else
       echo "Image not found."
       exit 1
     fi
-    rm -rf ~/.cache/wal
   }
 
 fi
@@ -149,6 +162,5 @@ fi
 main
 
 sleep 0.5
+"$scripts_dir/wallcache.sh"
 "$scripts_dir/pywal.sh"
-sleep 0.2
-"$scripts_dir/Refresh.sh"

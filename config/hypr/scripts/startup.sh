@@ -1,6 +1,5 @@
 #!/bin/bash
 
-mode_file="$HOME/.config/hypr/.cache/.mode"
 scripts_dir="$HOME/.config/hypr/scripts"
 wallpaper_dir="$HOME/.config/hypr/Wallpaper"
 wallpaper="$HOME/.config/hypr/.cache/current_wallpaper.png"
@@ -16,10 +15,7 @@ DURATION=2
 BEZIER=".43,1.19,1,.4"
 SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
 
-if [ ! -f "$mode_file" ]; then
-    touch "$mode_file" && echo "light" >> "$mode_file"
-    "$scripts_dir/toggle_dark_light.sh"
-elif [ -f "$wallpaper" ]; then
+if [ -f "$wallpaper" ]; then
 
     if [[ "$engine" == "swww" ]] then
 
@@ -38,7 +34,7 @@ elif [ -f "$wallpaper" ]; then
         hyprctl hyprpaper wallpaper " ,$wallpaper"
         hyprctl reload
         
-        rm -rf ~/.cache/wal
+        [[ -d "$HOME/.cache/wal" ]] && rm -rf ~/.cache/wal
         
     fi
 else
@@ -47,19 +43,24 @@ fi
 
 # if openbangla keyboard is installed, the
 if [[ -d "/usr/share/openbangla-keyboard" ]]; then
-    fcitx5 &
+    fcitx5 & &> /dev/null
+fi
+
+# if openbangla keyboard is installed, the
+if [[ -d "/usr/share/openbangla-keyboard" ]]; then
+    fcitx5 & &> /dev/null
 fi
 
 "$scripts_dir/notification.sh" sys
+"$scripts_dir/wallcache.sh"
 "$scripts_dir/pywal.sh"
-"$scripts_dir/Refresh.sh"
 "$scripts_dir/system.sh" run &
 
 #_____ setup monitor
 
 monitor_setting=$(cat $monitor_config | grep "monitor")
 if [[ "$monitor_setting" == "monitor=,preferred,auto,auto" ]]; then
-    notify-send "Starting script" "S script to setup monitor configuration"
+    notify-send -t 3000 "Starting script" "S script to setup monitor configuration"
     kitty --title monitor sh -c "$scripts_dir/monitor.sh"
 fi
 

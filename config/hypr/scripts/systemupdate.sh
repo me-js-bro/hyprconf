@@ -6,6 +6,7 @@ update_sign="$HOME/.config/hypr/icons/update.png"
 done_sign="$HOME/.config/hypr/icons/done.png"
 warning_sign="$HOME/.config/hypr/icons/warning.png"
 error_sign="$HOME/.config/hypr/icons/error.png"
+upd_script="$HOME/.config/hypr/scripts/pkgupdate.sh"
 
 # notification functions
 update_notification() {
@@ -48,7 +49,7 @@ check_update() {
             echo "{\"text\":\"$upd\", \"tooltip\":\"  Packages are up to date\"}"
         else
             echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Official $ofc\n󱓾 AUR $aur\"}"
-            update_notification "$update_sign" "Updates Available: $upd" "Main: $ofc, Aur: $aur"
+            # update_notification "$update_sign" "Updates Available: $upd" "Main: $ofc\nAur: $aur"
         fi
 
     elif [ -n "$(command -v dnf)" ]; then
@@ -60,7 +61,7 @@ check_update() {
             echo "{\"text\":\"$upd\", \"tooltip\":\"  Packages are up to date\"}"
         else
             echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Updates Available: $upd\"}"
-            update_notification "$update_sign" "Updates Available" "$upd packages"
+            # update_notification "$update_sign" "Updates Available" "$upd packages"
         fi
 
     elif [ -n "$(command -v zypper)" ]; then
@@ -75,7 +76,7 @@ check_update() {
             echo "{\"text\":\"$upd\", \"tooltip\":\"  Packages are up to date\"}"
         else
             echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Updates Available: $upd\"}"
-            update_notification "$update_sign" "Updates Available" "$upd packages"
+            # update_notification "$update_sign" "Updates Available" "$upd packages"
         fi
     fi
 }
@@ -84,8 +85,23 @@ package_update() {
     if [ -n "$(command -v pacman)" ]; then
         aurhlpr=$(command -v yay || command -v paru)
         
-        kitty --title update sh -c "${aurhlpr} -Syyu --noconfirm"
-        upd=$?
+        kitty --title update sh -c "${upd_script}"
+        check_for_updates() {
+            aur=$(${aurhlpr} -Qua | wc -l)
+            ofc=$(checkupdates | wc -l)
+
+            # Calculate total available updates
+            upd=$(( ofc + aur ))
+
+            echo "$upd"
+        }
+
+        # tooltip in waybar
+        aur=$(${aurhlpr} -Qua | wc -l)
+        ofc=$(checkupdates | wc -l)
+
+        # Initial check for updates
+        upd=$(check_for_updates)
 
         sleep 1
 
@@ -98,8 +114,10 @@ package_update() {
         fi
     elif [ -n "$(command -v dnf)" ]; then
         # Run the update command and capture the return code
-        kitty --title update sh -c "sudo dnf update -y && sudo dnf upgrade -y"
-        upd=$?
+        kitty --title update sh -c "${upd_script}"
+        
+        # Calculate total available updates fedora
+        upd=$(dnf check-update -q | grep -vE 'Last metadata expiration|^$' | wc -l)
 
         sleep 1
 
@@ -112,8 +130,13 @@ package_update() {
         fi
 
     elif [ -n "$(command -v zypper)" ]; then
-        kitty --title update sh -c "sudo zypper dup -y"
-        upd=$?
+        kitty --title update sh -c "${upd_script}"
+
+        # count the number of available updates
+        ofc=$(zypper lu --best-effort | grep -c 'v  |')
+
+        # Calculate total available updates
+        upd=$(( ofc ))
 
         sleep 1
 
@@ -126,9 +149,7 @@ package_update() {
         fi
     fi
 
-        # reload waybar
-        killall waybar
-        waybar &
+    "$scripts_dir/waybar-reload.sh" --reload
 }
 
 case $1 in

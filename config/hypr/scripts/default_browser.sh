@@ -1,6 +1,6 @@
 #!/bin/bash
 
-browser_cache="$HOME/.config/hypr/.cache/browser"
+browser_cache="$HOME/.config/hypr/.cache/.browser"
 scripts_dir="$HOME/.config/hypr/scripts"
 
 [[ ! -f "$browser_cache" ]] && touch "$browser_cache"

@@ -1,0 +1,23 @@
+" Special
+let wallpaper  = "/home/js-bro/.config/hypr/Wallpaper/arch.png"
+let background = "#12121b"
+let foreground = "#bcd4ea"
+let cursor     = "#bcd4ea"
+
+" Colors
+let color0  = "#12121b"
+let color1  = "#56708E"
+let color2  = "#607F9F"
+let color3  = "#698CAF"
+let color4  = "#759DC3"
+let color5  = "#7BA5CD"
+let color6  = "#83B1DA"
+let color7  = "#bcd4ea"
+let color8  = "#8394a3"
+let color9  = "#56708E"
+let color10 = "#607F9F"
+let color11 = "#698CAF"
+let color12 = "#759DC3"
+let color13 = "#7BA5CD"
+let color14 = "#83B1DA"
+let color15 = "#bcd4ea"
