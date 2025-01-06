@@ -303,9 +303,9 @@ if [[ -d "$HOME/.config/hypr/Wallpaper" ]]; then
       
     echo "hyprpaper" > "$engine"
 
-    if [ -f "$HOME/.config/hypr/$distro.png" ]; then
-        echo "${distro}" > "$wallCache"
-        wallpaper="$HOME/.config/hypr/Wallpaper/$distro.png"
+    if [ -f "$HOME/.config/hypr/Wallpaper/${distro}.png" ]; then
+        echo "$distro" > "$wallCache"
+        wallpaper="$HOME/.config/hypr/Wallpaper/${distro}.png"
     fi
 
     # setting the default wallpaper
