@@ -19,7 +19,7 @@
     ### Progress bar ###
     progress_bar = true
     progress_bar_height = 10
-    progress_bar_frame_width = 0
+    progress_bar_frame_width = 3
     progress_bar_min_width = 150
     progress_bar_max_width = 300
     progress_bar_corner_radius = 20
@@ -48,10 +48,10 @@
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 0
+    frame_width = 3
 
     # Defines color of the frame around the notification window.
-    frame_color = "#abc2be"
+    frame_color = "#a6c1c7"
 
     gap_size = 5
 
@@ -197,7 +197,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-corner_radius = 20
+corner_radius = 15
 
     # Define which corners to round when drawing the window. If the corner radius
     # is set to 0 this option will be ignored.
@@ -395,19 +395,19 @@ corner_radius = 20
 
 
 [urgency_low]
-    background = "#101012"
-    foreground = "#abc2be"
+    background = "#091016"
+    foreground = "#a6c1c7"
     timeout = 10
 
 [urgency_normal]
-    background = "#10101280"
-    foreground = "#abc2be"
+    background = "#09101680"
+    foreground = "#a6c1c7"
     timeout = 10
     override_pause_level = 30
 
 [urgency_critical]
     background = "#8B0000"
-    foreground = "#abc2be"
-    frame_color = "#abc2be"
+    foreground = "#a6c1c7"
+    frame_color = "#a6c1c7"
     timeout = 0
     override_pause_level = 60
