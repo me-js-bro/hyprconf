@@ -9,7 +9,7 @@ engine_file="$cache_dir/.engine"
 engine=$(cat "$engine_file")
 
 [[ ! -f "$wallCache" ]] && touch "$wallCache"
-[[ ! -f "$themes_dir" ]] && mkdir -p "$themes_dir"
+[[ ! -d "$themes_dir" ]] && mkdir -p "$themes_dir"
 
 # Transition config
 FPS=60
@@ -25,14 +25,7 @@ RANDOM_PIC="${PICS[$((RANDOM % ${#PICS[@]}))]}"
 RANDOM_PIC_NAME="${#PICS[@]}. random"
 
 # Rofi command ( style )
-case $1 in
-  style1)
-      rofi_command="rofi -show -dmenu -config ~/.config/rofi/themes/conf-wall.rasi"
-      ;;
-  style2)
-      rofi_command="rofi -show -dmenu -config ~/.config/rofi/themes/conf-wall-2.rasi"
-      ;;
-esac
+rofi_command="rofi -show -dmenu -config ~/.config/rofi/themes/conf-wall.rasi"
 
 menu() {
   for i in "${!PICS[@]}"; do

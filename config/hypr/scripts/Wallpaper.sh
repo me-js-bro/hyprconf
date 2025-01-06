@@ -9,7 +9,7 @@ wallpaper_dir="$HOME/.config/hypr/Wallpaper"
 engine=$(cat "$engine_file")
 
 [[ ! -f "$wallCache" ]] && touch "$wallCache"
-[[ ! -f "$themes_dir" ]] && mkdir -p "$themes_dir"
+[[ ! -d "$themes_dir" ]] && mkdir -p "$themes_dir"
 
 if [[ "$engine" == "swww" ]]; then
 
