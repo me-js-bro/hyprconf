@@ -48,7 +48,7 @@ check_update() {
         if [ $upd -eq 0 ] ; then
             echo "{\"text\":\"$upd\", \"tooltip\":\"  Packages are up to date\"}"
         else
-            echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Official $ofc\n󱓾 AUR $aur\"}"
+            echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Official $ofc\n󱓾 AUR $aur\n\nPress CTRL + U to update\"}"
             # update_notification "$update_sign" "Updates Available: $upd" "Main: $ofc\nAur: $aur"
         fi
 
@@ -60,7 +60,7 @@ check_update() {
         if [ $upd -eq 0 ] ; then
             echo "{\"text\":\"$upd\", \"tooltip\":\"  Packages are up to date\"}"
         else
-            echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Updates Available: $upd\"}"
+            echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Updates Available: $upd\n\npress ctrl + u to update\"}"
             # update_notification "$update_sign" "Updates Available" "$upd packages"
         fi
 
@@ -75,7 +75,7 @@ check_update() {
         if [ $upd -eq 0 ] ; then
             echo "{\"text\":\"$upd\", \"tooltip\":\"  Packages are up to date\"}"
         else
-            echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Updates Available: $upd\"}"
+            echo "{\"text\":\"$upd\", \"tooltip\":\"󱓽 Updates Available: $upd\n\nPress CTRL + U to update\"}"
             # update_notification "$update_sign" "Updates Available" "$upd packages"
         fi
     fi
