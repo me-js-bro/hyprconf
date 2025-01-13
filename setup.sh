@@ -317,6 +317,11 @@ fi
 ln -sf "$HOME/.config/waybar/configs/catppuccin-top" "$HOME/.config/waybar/config"
 ln -sf "$HOME/.config/waybar/style/catppuccin-top.css" "$HOME/.config/waybar/style.css"
 
-msg dn "Script execution was successful! Now you can reboot and enjoy your customization..."
+# setting default themes, icon and cursor
+gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
+gsettings set org.gnome.desktop.interface icon-theme "TokyoNight-SE"
+gsettings set org.gnome.desktop.interface cursor-theme "Bibata-Modern-Ice"
+
+msg dn "Script execution was successful! Now you can reboot and enjoy your customization..." && sleep 1
 
 # === ___ Script Ends Here ___ === #
