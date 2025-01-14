@@ -21,7 +21,7 @@
     // notify using dunst ( haven't add in the waybar )
     "custom/notify": {
       // "format": "{icon} {}",
-        "format": "{} {icon}", // TODO: workaround for the module not showing up // revert when fixed
+        "format": "{} {icon}",
         "format-icons": {
             "email-notification": "<span foreground='white'><sup></sup></span>",
             "chat-notification": "󱋊<span foreground='white'><sup></sup></span>",
@@ -112,7 +112,7 @@
     // system info expand
     "custom/system": {
         "format": "",
-        "tooltip-format": "system info"
+        "tooltip-format": "system info\n\nLeft-click to check system info"
     },
 
     // power section expand

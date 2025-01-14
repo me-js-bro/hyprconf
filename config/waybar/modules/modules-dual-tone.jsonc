@@ -1,7 +1,6 @@
 {
-    // all the modules
+    // all the default modules
 
-    // Defaults 👇
     "wlr/taskbar": {
 		"format": "{icon}",
 		"icon-size": 18,
@@ -220,7 +219,7 @@
 
     "custom/pulseaudio_icon": {
         "format": "{icon}",
-        "tooltip": "false",
+        "tooltip": false,
         "on-click": "~/.config/hypr/scripts/volumecontrol.sh --toggle",
         "on-click-right": "pavucontrol",
         "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh --inc",
@@ -237,19 +236,12 @@
 
     "pulseaudio": {
         "format": "{volume}%",
-        "format-muted": "",
+        "format-muted": "0%",
         "on-click": "~/.config/hypr/scripts/volumecontrol.sh --toggle",
         "on-click-right": "pavucontrol",
         "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh --inc",
         "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh --dec",
         "scroll-step": 5,
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "default": ["", "", " "]
-        }
     },
 
     "custom/pulse_mic_icon": {
@@ -259,7 +251,7 @@
     "pulseaudio#microphone": {
         "format": "{format_source}",
         "format-source": "{volume}%",
-        "format-source-muted": "",
+        "format-source-muted": "0%",
         "on-click": "pamixer --default-source -t",
         "on-click-right": "pavucontrol",
         "on-scroll-up": "pamixer --default-source -i 5",

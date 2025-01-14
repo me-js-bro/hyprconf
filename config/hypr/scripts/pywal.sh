@@ -13,35 +13,6 @@ wallName="$(cat "$cacheDir/.wallpaper")"
 engine=$(cat "$engine_file")
 
 if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then
-    if [[ "$engine" = "swww" ]]; then
-        # Get a list of monitor outputs
-        monitor_outputs=($(ls "$swww_cache"))
-        # Initialize a flag to determine if the ln command was executed
-        ln_success=false
-        # Loop through monitor outputs
-        for output in "${monitor_outputs[@]}"; do
-            # Construct the full path to the cache file
-            cache_file="$swww_cache$output"
-
-            # Check if the cache file exists for the current monitor output
-            if [ -f "$cache_file" ]; then
-                # Get the wallpaper path from the cache file
-                wallpaper_path=$(cat "$cache_file")
-
-                # Copy the wallpaper to the location Rofi can access
-                if ln -sf "$wallpaper_path" "$HOME/.config/hypr/.cache/current_wallpaper.png"; then
-                    ln_success=true  # Set the flag to true upon successful execution
-                fi
-
-                break  # Exit the loop after processing the first found monitor output
-            fi
-        done
-
-        # Check the flag before executing further commands
-        if [ "$ln_success" = true ]; then
-            wal -q -i "$wallpaper_path"
-        fi
-    elif [[ "$engine" = "hyprpaper" ]]; then
         current_wallpaper="$HOME/.config/hypr/.cache/current_wallpaper.png"
         if [[ -f "$current_wallpaper" ]]; then
             wal -q -i "$current_wallpaper"
@@ -49,11 +20,10 @@ if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then
             # echo "No $current_wallpaper found"
             exit 1
         fi
-    fi
-    cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors" || echo "no wal file"
-    rm -rf "$HOME/.cache/wal"
+    mv "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors" || echo "no wal file"
+    [[ -d "$HOME/.cache/wal" ]] && rm -rf "$HOME/.cache/wal"
 else
-    printf "\n\n  ==> No need to generate colors, already exists in the ${themes_dir}/${wallName}-colors dir\n"
+    printf "\n-> No need to generate colors, already exists in the ${themes_dir}/${wallName}-colors dir\n"
 fi
 
 
