@@ -53,7 +53,7 @@
         "return-type": "json",
         "format": " {}",
         "on-click": "~/.config/hypr/scripts/systemupdate.sh --update",
-        "interval": 86400, // once every day
+        "interval": 1,
         "tooltip": true
     },
 
@@ -112,7 +112,7 @@
     // system info expand
     "custom/system": {
         "format": "",
-        "tooltip-format": "system info"
+        "tooltip-format": "system info\n\nLeft-click to check system info"
     },
 
     // power section expand

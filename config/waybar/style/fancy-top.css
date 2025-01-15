@@ -3,7 +3,7 @@
   border-radius: 0;
   font-family: "JetBrainsMono Nerd Font", "MesloLGS Nerd Font", "Font Awesome";
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   min-height: 0;
 }
 
@@ -11,7 +11,6 @@
 
 window#waybar {
   background: rgba(0, 0, 0, 0.5);
-  /* opacity: 0.8; */
 }
 
 tooltip {
@@ -30,27 +29,21 @@ tooltip label {
 #workspaces button {
   background-color: @background;
   color: @foregroud;
-  font-size: 15px;
   opacity: 0.8;
-  box-shadow: none;
-  text-shadow: none;
   border-radius: 15px;
-  margin-top: 3px;
-  margin-bottom: 3px;
+  padding: 0 4px;
   margin: 0 2px;
-  padding: 1px 5px;
-  animation: gradient_f 20s ease-in infinite;
-  transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+  /* transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.682); */
+  transition: all 0.2s linear;
 }
 
 #workspaces button.active {
   background: @background;
   opacity: 0.6;
-  padding: 0px 10px;
-  margin-left: 3px;
-  margin-right: 3px;
-  animation: gradient_f 20s ease-in infinite;
-  transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+  padding: 0px 13px;
+  margin: 0 2px;
+  /* transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682); */
+  transition: all 0.2s linear;
 }
 
 #workspaces button.focused {
@@ -69,10 +62,9 @@ tooltip label {
   background: @background;
   color: @foreground;
   opacity: 0.4;
-  padding-left: 8px;
-  padding-right: 8px;
-  animation: gradient_f 20s ease-in infinite;
-  transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+  padding: 0 12px;
+  /* transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682); */
+  transition: all 0.2s linear;
 }
 
 #taskbar button {
@@ -116,8 +108,7 @@ tooltip label {
 #memory,
 #clock,
 #battery,
-#backlight
-#pulseaudio,
+#backlight #pulseaudio,
 #pulseaudio.microphone,
 #network,
 #tray,
@@ -231,7 +222,7 @@ tooltip label {
 #workspaces {
   background: @foreground;
   color: @background;
-  padding: 5px 10px;
+  padding: 6px 7px;
   border-radius: 20px;
 }
 
@@ -253,12 +244,12 @@ tooltip label {
   margin: 8px 10px;
   margin-left: 20px;
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 14px;
   padding: 0 15px;
 }
 
 #pulseaudio {
-  background: rgba(0, 0, 0, 0);
+  font-size: 14px;
   border: 2px solid @foreground;
   color: @foreground;
   border-right: none;
@@ -270,6 +261,7 @@ tooltip label {
 #clock {
   background: @foreground;
   color: @background;
+  font-size: 14px;
   font-weight: 700;
   border-radius: 10px;
   margin-right: 20px;

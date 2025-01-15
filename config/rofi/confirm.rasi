@@ -7,7 +7,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "~/.config/rofi/themes/rofi-pywal.rasi"
+@import "~/.config/rofi/themes/rofi-colors.rasi"
 
 /*****----- Main Window -----*****/
 window {

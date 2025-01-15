@@ -144,6 +144,10 @@ tooltip label {
   color: @color4;
 }
 
+#custom-nightlight {
+  padding-right: 5px;
+}
+
 #cpu {
   border-right: none;
   color: @color4;
@@ -229,6 +233,7 @@ tooltip label {
 #network.speed {
   /* border: 1px solid red; */
   margin-right: 10px;
+  border: none;
 }
 
 #custom-updater {
@@ -346,4 +351,3 @@ tooltip label {
   border-radius: 3px;
   border: 1px solid #9db8c1;
 }
-

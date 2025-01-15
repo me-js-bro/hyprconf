@@ -13,8 +13,11 @@ display
 printf "\n"
 
 # asking for confirmation.
-choice=$(gum confirm "System update..." \
+choice=$(gum confirm "Would you like to," \
+        --prompt.foreground "" \
         --affirmative "Update now!" \
+        --selected.background "#bed3db" \
+        --selected.foreground "#0c0c0e" \
         --negative "Skip updating!"
         )
 
@@ -34,5 +37,9 @@ if [ $? -eq 0 ]; then
     printf "\n\n<> Please press ENTER to close "
     read
 else
-    gum spin --spinner minidot --title "Skipping updating your system..." -- sleep 2
+    gum spin \
+        --spinner dot \
+        --spinner.foreground "#bed3db" \
+        --title "Canceling the script..." -- \
+        sleep 2
 fi

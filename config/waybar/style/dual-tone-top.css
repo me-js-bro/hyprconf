@@ -82,7 +82,7 @@ tooltip label {
 #custom-clock_icon,
 #pulseaudio,
 #custom-pulseaudio_icon,
-#custom-puls_mic_icon,
+#custom-pulse_mic_icon,
 #network,
 #tray,
 #temperature,
@@ -401,7 +401,6 @@ tooltip label {
 #pulseaudio.microphone {
   color: @green;
   background-color: @mantle;
-  margin-right: 10px;
   border-left: 0px;
   border-right: 0px;
   border-radius: 0 5px 5px 0;
