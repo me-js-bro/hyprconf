@@ -16,14 +16,8 @@ if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then
         current_wallpaper="$HOME/.config/hypr/.cache/current_wallpaper.png"
         if [[ -f "$current_wallpaper" ]]; then
             wal -q -i "$current_wallpaper"
-        else
-            # echo "No $current_wallpaper found"
-            exit 1
         fi
-    mv "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors" || echo "no wal file"
-    [[ -d "$HOME/.cache/wal" ]] && rm -rf "$HOME/.cache/wal"
-else
-    printf "\n-> No need to generate colors, already exists in the ${themes_dir}/${wallName}-colors dir\n"
+    [[ -d "$HOME/.cache/wal" ]] && mv "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
 fi
 
 
@@ -86,7 +80,6 @@ else
     exit 1
 fi
 
-
 # setting kitty colors 
 kitty_colors="${themes_dir}/${wallName}-colors/colors-kitty.conf"
 kitty="$HOME/.config/kitty/kitty.conf"
@@ -105,14 +98,17 @@ inactive_border_color=$(extract_color "color5")
 sed -i "s/active_border_color .*$/active_border_color $active_border_color/g" "$kitty"
 sed -i "s/inactive_border_color .*$/inactive_border_color $inactive_border_color/g" "$kitty"
 
-ln -sf "${themes_dir}/${wallName}-colors/colors-kitty.conf" "$HOME/.config/kitty/colors-kitty.conf"
+[[ -f "$HOME/.config/kitty/colors-kitty.conf" ]] && rm "$HOME/.config/kitty/colors-kitty.conf"
+cp "${themes_dir}/${wallName}-colors/colors-kitty.conf" "$HOME/.config/kitty/"
 kitty @ set-color -a "$kitty"
 
 # setting rofi theme
-ln -sf "${themes_dir}/${wallName}-colors/colors-rofi-dark.rasi" "$HOME/.config/rofi/themes/rofi-pywal.rasi"
+[[ -f "$HOME/.config/rofi/themes/rofi-colors.rasi" ]] && rm "$HOME/.config/rofi/themes/rofi-colors.rasi"
+cp "${themes_dir}/${wallName}-colors/colors-rofi-dark.rasi" "$HOME/.config/rofi/themes/rofi-colors.rasi"
 
 # setting waybar colors
-ln -sf "${themes_dir}/${wallName}-colors/colors-waybar.css" "$HOME/.config/waybar/style/theme.css"
+[[ -f "$HOME/.config/waybar/style/theme.css" ]] && rm "$HOME/.config/waybar/style/theme.css"
+cp "${themes_dir}/${wallName}-colors/colors-waybar.css" "$HOME/.config/waybar/style/theme.css"
 
 # ----- Dunst
 dunst_file="$HOME/.config/dunst/dunstrc"
@@ -124,9 +120,6 @@ update_dunst_colors() {
     low_fg=$(jq -r '.colors.color7' "$colors_file")
     normal_bg=$(jq -r '.special.background' "$colors_file")
     normal_fg=$(jq -r '.special.foreground' "$colors_file")
-
-    echo "$normal_bg"
-    echo "$normal_fg"
 
     # Update Dunst configuration
     sed -i "s/frame_color = .*/frame_color = \"$frame\"/g" "$dunst_file"
@@ -140,6 +133,17 @@ update_dunst_colors() {
 update_dunst_colors
 
 
+# updated system update gum colors.
+sysupd_script="$scripts_dir/pkgupdate.sh"
+background_color=$(jq -r '.special.background' "$colors_file")
+foreground_color=$(jq -r '.special.foreground' "$colors_file")
+
+sed -i "s/--prompt.foreground .*/--prompt.foreground \"$foreground_color\" \\\/g" "$sysupd_script"
+sed -i "s/--selected.background .*/--selected.background \"$foreground_color\" \\\/g" "$sysupd_script"
+sed -i "s/--selected.foreground .*/--selected.foreground \"$background_color\" \\\/g" "$sysupd_script"
+sed -i "s/--spinner.foreground .*/--spinner.foreground \"$foreground_color\" \\\/g" "$sysupd_script"
+
+
 # remove these part if you don't like the colors according to your wallpaper.
 if [ -f $colors_file ]; then
     background_color=$(jq -r '.special.background' "$colors_file")
@@ -147,6 +151,7 @@ if [ -f $colors_file ]; then
 
     # Update VS Code settings
     vscode_settings_file="$HOME/.config/Code/User/settings.json"
+    if [[ -f "$vscode_settings_file" ]]; then
     cat <<EOF >"$vscode_settings_file"
 {
     "editor.mouseWheelZoom": true,
@@ -188,6 +193,7 @@ if [ -f $colors_file ]; then
     },
 }
 EOF
+    fi
 else
     exit 0
 fi

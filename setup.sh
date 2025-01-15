@@ -162,9 +162,10 @@ for confs in "${dirs[@]}"; do
     dir_path="$HOME/.config/$confs"
     if [[ -d "$dir_path" ]]; then
         mv "$dir_path" "$HOME/.config/HyprBackup-${USER}/" 2>&1 | tee -a "$log"
-        msg dn "Everything has been backuped in $HOME/.config/HyprBackup-${USER}..."
     fi
 done
+
+[[ -d "$HOME/.config/HyprBackup-${USER}" ]] && msg dn "Everything has been backuped in $HOME/.config/HyprBackup-${USER}..."
 
 sleep 1
 
@@ -217,10 +218,10 @@ fi
 sleep 1
 
 # cloning the dotfiles repository into ~/.config/hypr
-cp -r "$dir"/config/* "$HOME"/.config/
+cp -r "$dir/config/*" "$HOME/.config/"
 sleep 1
 
-if [ -d $scripts_dir ]; then
+if [[ -d "$scripts_dir" ]]; then
     # make all the scripts executable...
     chmod +x "$scripts_dir"/* 2>&1 | tee -a "$log"
     msg dn "All the necessary scripts have been executable..."

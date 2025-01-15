@@ -21,7 +21,7 @@
     // notify using dunst ( haven't add in the waybar )
     "custom/notify": {
       // "format": "{icon} {}",
-        "format": "{} {icon}",
+        "format": "{} {icon}", // TODO: workaround for the module not showing up // revert when fixed
         "format-icons": {
             "email-notification": "<span foreground='white'><sup></sup></span>",
             "chat-notification": "󱋊<span foreground='white'><sup></sup></span>",
@@ -53,7 +53,7 @@
         "return-type": "json",
         "format": " {}",
         "on-click": "~/.config/hypr/scripts/systemupdate.sh --update",
-        "interval": 86400, // once every day
+        "interval": 1,
         "tooltip": true
     },
 

@@ -25,10 +25,11 @@
     ],
 
     "modules-center": [
-        "custom/updater", 
-        "clock"],
+        "clock"
+    ],
 
     "modules-right": [
+        "custom/updater", 
         "pulseaudio", 
         "pulseaudio#microphone", 
         "group/sysinfo", 

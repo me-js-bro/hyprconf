@@ -1,5 +1,5 @@
 {
-    // all the default modules
+    // all the modules
 
     "wlr/taskbar": {
 		"format": "{icon}",
@@ -219,6 +219,7 @@
 
     "custom/pulseaudio_icon": {
         "format": "{icon}",
+        "format-muted": " ",
         "tooltip": false,
         "on-click": "~/.config/hypr/scripts/volumecontrol.sh --toggle",
         "on-click-right": "pavucontrol",

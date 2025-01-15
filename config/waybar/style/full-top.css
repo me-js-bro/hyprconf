@@ -225,6 +225,7 @@ tooltip label {
 #custom-updater {
   border-radius: 15px;
   padding: 0 15px;
+  margin-right: 10px;
 }
 
 #backlight {
