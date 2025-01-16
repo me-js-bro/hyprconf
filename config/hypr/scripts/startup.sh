@@ -33,9 +33,6 @@ if [ -f "$wallpaper" ]; then
         sleep 0.5
         hyprctl hyprpaper wallpaper " ,$wallpaper"
         hyprctl reload
-        
-        [[ -d "$HOME/.cache/wal" ]] && rm -rf ~/.cache/wal
-        
     fi
 else
     "$scripts_dir/Wallpaper.sh"
@@ -43,13 +40,9 @@ fi
 
 # if openbangla keyboard is installed, the
 if [[ -d "/usr/share/openbangla-keyboard" ]]; then
-    fcitx5 & &> /dev/null
+    fcitx5 &> /dev/null
 fi
 
-# if openbangla keyboard is installed, the
-if [[ -d "/usr/share/openbangla-keyboard" ]]; then
-    fcitx5 & &> /dev/null
-fi
 
 "$scripts_dir/notification.sh" sys
 "$scripts_dir/wallcache.sh"
@@ -59,8 +52,9 @@ fi
 #_____ setup monitor
 
 monitor_setting=$(cat $monitor_config | grep "monitor")
+monitor_icon="$HOME/.config/hypr/icons/monitor.png"
 if [[ "$monitor_setting" == "monitor=,preferred,auto,auto" ]]; then
-    notify-send -t 3000 "Starting script" "S script to setup monitor configuration"
+    notify-send -i "$monitor_icon" "Monitor Setup" "A popup for your monitor configuration will appear within 5 seconds." && sleep 5
     kitty --title monitor sh -c "$scripts_dir/monitor.sh"
 fi
 

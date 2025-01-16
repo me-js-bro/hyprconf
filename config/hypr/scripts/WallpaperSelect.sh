@@ -78,9 +78,10 @@ if [[ "$engine" == "swww" ]]; then
         echo "$wallName" > "$wallCache"
 
         if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
-            cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
+            wal -q -i "${wallDIR}/${PICS[$pic_index]}" || printf "\n\nCouls not generate any colors\n"
+            mv "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
         fi
-        rm -rf "$HOME/.cache/wal"
+        # rm -rf "$HOME/.cache/wal"
 
     else
       echo "Image not found."
@@ -142,9 +143,9 @@ elif [[ "$engine" == "hyprpaper" ]]; then
 
         if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
             wal -q -i "${wallDIR}/${PICS[$pic_index]}" || printf "\n\nCouls not generate any colors\n"
-            cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
+            mv "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
         fi
-        rm -rf "$HOME/.cache/wal"
+        # rm -rf "$HOME/.cache/wal"
     else
       echo "Image not found."
       exit 1

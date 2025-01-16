@@ -12,14 +12,6 @@ cyan="\e[1;36m"
 orange="\x1b[38;5;214m"
 end="\e[1;0m"
 
-# initial texts
-attention="[${orange} ATTENTION ${end}]"
-action="[${green} ACTION ${end}]"
-note="[${megenta} NOTE ${end}]"
-done="[${cyan} DONE ${end}]"
-ask="[${orange} QUESTION ${end}]"
-error="[${red} ERROR ${end}]"
-
 if command -v gum &> /dev/null; then
 
 display_text() {
@@ -66,8 +58,8 @@ touch "$log"
 
 sleep 1
 
-printf "${action}\n==> Cloning hyprconf repository\n"
-git clone --depth=1 https://github.com/me-js-bro/hyprconf.git "$HOME/.cache/hyprconf"
+printf "${green}=>${end} Cloning hyprconf repository\n"
+git clone --depth=1 https://github.com/me-js-bro/hyprconf.git "$HOME/.cache/hyprconf" &> /dev/null
 
 if [[ -d "$HOME/.cache/hyprconf" ]]; then
     cd "$HOME/.cache/hyprconf"
@@ -78,7 +70,7 @@ fi
 
 # Removint the cache file
 if [[ -d "$HOME/.config/hypr/scripts" ]]; then
-    printf "${done}\n:: Dotfiles were update successfully. Removing the cache.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+    printf "${cyan}::${end} Dotfiles were update successfully. Removing the cache.\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 
     rm -rf "$HOME/.cache/hyprconf" &> /dev/null
     exit 0

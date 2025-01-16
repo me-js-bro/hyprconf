@@ -37,6 +37,7 @@
        "drawer": {
             "transition-duration": 300,
             "children-class": "not-memory",
+            "click-to-reveal": true,
             "transition-left-to-right": false
        },
 
@@ -57,6 +58,7 @@
      "drawer": {
           "transition-duration": 300,
           "children-class": "not-memory",
+          "click-to-reveal": true,
           "transition-left-to-right": false
      },
 

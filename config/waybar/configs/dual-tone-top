@@ -35,6 +35,8 @@
         "tray", 
         "custom/pulseaudio_icon",
         "pulseaudio", 
+        "custom/pulse_mic_icon",
+        "pulseaudio#microphone",
         "custom/updater_icon", 
         "custom/updater", 
         "battery", 

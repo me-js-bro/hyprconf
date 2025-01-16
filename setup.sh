@@ -12,14 +12,6 @@ cyan="\e[1;36m"
 orange="\x1b[38;5;214m"
 end="\e[1;0m"
 
-# initial texts
-attention="[${orange} ATTENTION ${end}]"
-action="[${green} ACTION ${end}]"
-note="[${megenta} NOTE ${end}]"
-done="[${cyan} DONE ${end}]"
-ask="[${orange} QUESTION ${end}]"
-error="[${red} ERROR ${end}]"
-
 if command -v gum &> /dev/null; then
 
 display_text() {
@@ -66,8 +58,8 @@ touch "$log"
 
 # message prompts
 msg() {
-    local actn="$1"
-    local msg="$2"
+    local actn=$1
+    local msg=$2
 
     case $actn in
         act)
@@ -77,7 +69,7 @@ msg() {
             printf "${orange}??${end} $msg\n"
             ;;
         dn)
-            printf "${cyan}::${end} $msg\n"
+            printf "${cyan}::${end} $msg\n\n"
             ;;
         att)
             printf "${yellow}!!${end} $msg\n"
@@ -162,9 +154,10 @@ for confs in "${dirs[@]}"; do
     dir_path="$HOME/.config/$confs"
     if [[ -d "$dir_path" ]]; then
         mv "$dir_path" "$HOME/.config/HyprBackup-${USER}/" 2>&1 | tee -a "$log"
-        msg dn "Everything has been backuped in $HOME/.config/HyprBackup-${USER}..."
     fi
 done
+
+[[ -d "$HOME/.config/HyprBackup-${USER}" ]] && msg dn "Everything has been backuped in $HOME/.config/HyprBackup-${USER}..."
 
 sleep 1
 
@@ -217,10 +210,10 @@ fi
 sleep 1
 
 # cloning the dotfiles repository into ~/.config/hypr
-cp -r "$dir"/config/* "$HOME"/.config/
+cp -r "$dir/config"/* "$HOME/.config/"
 sleep 1
 
-if [ -d $scripts_dir ]; then
+if [[ -d "$scripts_dir" ]]; then
     # make all the scripts executable...
     chmod +x "$scripts_dir"/* 2>&1 | tee -a "$log"
     msg dn "All the necessary scripts have been executable..."

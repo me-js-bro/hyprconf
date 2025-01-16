@@ -15,7 +15,6 @@ file_exists() {
 _ps=(
     dunst
     rofi
-    waybar
 )
 for _prs in "${_ps[@]}"; do
     if pidof "${_prs}" &> /dev/null; then
@@ -24,8 +23,6 @@ for _prs in "${_ps[@]}"; do
 done
 
 sleep 0.3
-waybar &
-sleep 0.5
 hyprctl reload
 
 exit 0

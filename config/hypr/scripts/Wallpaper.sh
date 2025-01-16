@@ -34,9 +34,10 @@ if [[ "$engine" == "swww" ]]; then
         echo "$wallName" > "$wallCache"
 
         if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
-            cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
+            wal -q -i "$wallpaper"
+            mv "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
         fi
-        rm -rf "$HOME/.cache/wal"
+        # rm -rf "$HOME/.cache/wal"
 
 elif [[ "$engine" == "hyprpaper" ]]; then
 
@@ -72,9 +73,10 @@ elif [[ "$engine" == "hyprpaper" ]]; then
         echo "$wallName" > "$wallCache"
 
         if [[ ! -d "${themes_dir}/${wallName}-colors" ]]; then 
+            wal -q -i "$wallpaper"
             cp -r "$HOME/.cache/wal" "${themes_dir}/${wallName}-colors"
         fi
-        rm -rf "$HOME/.cache/wal"
+        # rm -rf "$HOME/.cache/wal"
 
         hyprctl reload
         if [ $? -ne 0 ]; then
