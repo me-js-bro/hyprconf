@@ -135,6 +135,7 @@ update_dunst_colors
 
 # updated system update gum colors.
 sysupd_script="$scripts_dir/pkgupdate.sh"
+monitor_setup_script="$scripts_dir/monitor.sh"
 background_color=$(jq -r '.special.background' "$colors_file")
 foreground_color=$(jq -r '.special.foreground' "$colors_file")
 
@@ -142,6 +143,11 @@ sed -i "s/--prompt.foreground .*/--prompt.foreground \"$foreground_color\" \\\/g
 sed -i "s/--selected.background .*/--selected.background \"$foreground_color\" \\\/g" "$sysupd_script"
 sed -i "s/--selected.foreground .*/--selected.foreground \"$background_color\" \\\/g" "$sysupd_script"
 sed -i "s/--spinner.foreground .*/--spinner.foreground \"$foreground_color\" \\\/g" "$sysupd_script"
+sed -i "s/--spinner.foreground .*/--spinner.foreground \"$foreground_color\" \\\/g" "$monitor_setup_script"
+sed -i "s/--title.foreground .*/--title.foreground \"$foreground_color\" \\\/g" "$monitor_setup_script"
+sed -i "s/--header.foreground .*/--header.foreground \"$foreground_color\" \\\/g" "$monitor_setup_script"
+sed -i "s/--selected.foreground .*/--selected.foreground \"$foreground_color\" \\\/g" "$monitor_setup_script"
+sed -i "s/--cursor.foreground .*/--cursor.foreground \"$foreground_color\" \\\/g" "$monitor_setup_script"
 
 
 # remove these part if you don't like the colors according to your wallpaper.
