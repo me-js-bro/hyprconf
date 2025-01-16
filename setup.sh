@@ -210,7 +210,7 @@ fi
 sleep 1
 
 # cloning the dotfiles repository into ~/.config/hypr
-cp -r "$dir/config/*" "$HOME/.config/"
+cp -r "$dir/config"/* "$HOME/.config/"
 sleep 1
 
 if [[ -d "$scripts_dir" ]]; then
