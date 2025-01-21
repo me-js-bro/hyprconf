@@ -1,6 +1,7 @@
 {
     // all the modules
 
+    // Defaults
     "wlr/taskbar": {
 		"format": "{icon}",
 		"icon-size": 18,

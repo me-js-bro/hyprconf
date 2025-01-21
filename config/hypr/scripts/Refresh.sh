@@ -15,6 +15,7 @@ file_exists() {
 _ps=(
     dunst
     rofi
+    # waybar
 )
 for _prs in "${_ps[@]}"; do
     if pidof "${_prs}" &> /dev/null; then
