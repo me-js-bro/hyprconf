@@ -309,6 +309,7 @@ fi
 # setting up the waybar
 ln -sf "$HOME/.config/waybar/configs/catppuccin-top" "$HOME/.config/waybar/config"
 ln -sf "$HOME/.config/waybar/style/catppuccin-top.css" "$HOME/.config/waybar/style.css"
+"$HOME/.config/hypr/scripts/pywal.sh" &> /dev/null
 
 # setting default themes, icon and cursor
 gsettings set org.gnome.desktop.interface gtk-theme "Dracula"

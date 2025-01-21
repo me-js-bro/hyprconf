@@ -28,7 +28,7 @@ fn_wallcache() {
 
     # Generate blurred image
     [ ! -e "${thmbDir}/${wall_name}.blur" ] && \
-        magick "${x_wall}"[0] -strip -scale 10% -blur 0x3 -resize 100% \
+        magick "${x_wall}"[0] -strip -scale 70% -blur 0x10 -resize 100% \
         "${thmbDir}/${wall_name}.blur"
 
     # Generate quad image
@@ -42,8 +42,11 @@ fn_wallcache() {
         "${thmbDir}/${wall_name}.png" && \
         mv "${thmbDir}/${wall_name}.png" "${thmbDir}/${wall_name}.quad"
 
-    ln -sf "${thmbDir}/${wall_name}.blur" "${cacheDir}/wall.blur"
-    ln -sf "${thmbDir}/${wall_name}.quad" "${cacheDir}/wall.quad"
+    [[ -f "${cacheDir}/${wall_name}.blur" ]] && rm -rf  "${cacheDir}/${wall_name}.blur"
+    cp -r "${thmbDir}/${wall_name}.blur" "${cacheDir}/wall.blur"
+
+    [[ -f "${cacheDir}/${wall_name}.quad" ]] && rm -rf  "${cacheDir}/${wall_name}.quad"
+    cp -r "${thmbDir}/${wall_name}.quad" "${cacheDir}/wall.quad"
 }
 
 # Process the current wallpaper

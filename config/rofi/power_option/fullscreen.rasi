@@ -25,7 +25,7 @@ configuration {
     textbox-font:                "JetBrains Mono Nerd Font 16";
     element-text-font:           "feather 64";
 
-    background-window:           black/70%;
+    background-window:           black/50%;
     background-normal:           white/5%;
     background-selected:         white/15%;
     foreground-normal:           white;
@@ -39,7 +39,7 @@ window {
     anchor:                      center;
     fullscreen:                  true;
     cursor:                      "default";
-    background-color:            var(background-window);
+    background-image:            url("~/.config/hypr/.cache/wall.blur", width);
 }
 
 /*****----- Main Box -----*****/
@@ -101,7 +101,6 @@ listview {
     reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-    
     spacing:                     var(listview-spacing);
     background-color:            transparent;
     border:                      0px;
@@ -111,7 +110,7 @@ listview {
 /*****----- Elements -----*****/
 element {
     enabled:                     true;
-    padding:                     var(element-padding);
+    padding:                     15px 15px 50px 15px;
     border-radius:               var(element-border-radius);
     background-color:            transparent;
     text-color:                  @foreground;
