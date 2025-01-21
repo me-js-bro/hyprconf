@@ -25,12 +25,4 @@ if [ -n "$selected_style" ]; then
     # Update the menu_select.sh script with the selected theme
     sed -i "s|^theme=.*|theme='${selected_style%.rasi}'|" "$menu_select_script"
     notify-send -t 3000 "Power menu" "Theme applied: ${selected_style}"
-
-    if [[ "$selected_style" == "fullscreen.rasi" ]]; then
-        # enabling rofi blur
-        sed -i "/^#layerrule = blur,rofi$/ s/#//" "$window_rules"
-        sed -i "/^#layerrule = blur,rofi$/d" "$window_rules"
-    else
-        sed -i "/^layerrule = blur,rofi$/ s/^/#/" "$window_rules"
-    fi
 fi

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 value_file="$HOME/.cache/.nightlight"
-default=6000
+default=6500
 notification_id_file=".nightlight_notify_id"
 
 # Initialize the value file if it doesn't exist
@@ -22,7 +22,7 @@ if command -v hyprsunset &> /dev/null; then
     fn_change_value() {
         case $1 in
             --inc)
-                if (( value + 100 <= 6000 )); then
+                if (( value + 100 <= 6500 )); then
                     value=$((value + 100))
                     echo "$value" > "$value_file"
                     notification_id=$(notify-send -p -r "$notification_id" "Nightlight" "Screen temp: ${value}k")
@@ -34,7 +34,7 @@ if command -v hyprsunset &> /dev/null; then
                 fi
             ;;
             --dec)
-                if (( value - 100 >= 3000 )); then
+                if (( value - 100 >= 4000 )); then
                     value=$((value - 100))
                     echo "$value" > "$value_file"
                     notification_id=$(notify-send -p -r "$notification_id" "Nightlight" "Screen temp: ${value}k")

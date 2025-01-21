@@ -2,9 +2,11 @@
 
 display() {
     cat << "EOF"
-╔═╗┬ ┬┌─┐┌┬┐┌─┐┌┬┐  ╦ ╦┌─┐┌┬┐┌─┐┌┬┐┌─┐
-╚═╗└┬┘└─┐ │ ├┤ │││  ║ ║├─┘ ││├─┤ │ ├┤ 
-╚═╝ ┴ └─┘ ┴ └─┘┴ ┴  ╚═╝┴  ─┴┘┴ ┴ ┴ └─┘
+   ____         __              __  __        __     __     
+  / __/_ _____ / /____ __ _    / / / /__  ___/ /__ _/ /____ 
+ _\ \/ // (_-</ __/ -_)  ' \  / /_/ / _ \/ _  / _ `/ __/ -_)
+/___/\_, /___/\__/\__/_/_/_/  \____/ .__/\_,_/\_,_/\__/\__/ 
+    /___/                         /_/                       
                                                      
 EOF
 }
@@ -14,10 +16,10 @@ printf "\n"
 
 # asking for confirmation.
 choice=$(gum confirm "Would you like to," \
-        --prompt.foreground "" \
+        --prompt.foreground "#e0e4e5" \
         --affirmative "Update now!" \
-        --selected.background "#bed3db" \
-        --selected.foreground "#0c0c0e" \
+        --selected.background "#e0e4e5" \
+        --selected.foreground "#13120f" \
         --negative "Skip updating!"
         )
 
@@ -39,7 +41,7 @@ if [ $? -eq 0 ]; then
 else
     gum spin \
         --spinner dot \
-        --spinner.foreground "#bed3db" \
-        --title "Canceling the script..." -- \
+        --spinner.foreground "#e0e4e5" \
+        --title "Skipping updating your system..." -- \
         sleep 2
 fi
