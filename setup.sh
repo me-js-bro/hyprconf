@@ -128,7 +128,6 @@ dirs=(
     hypr
     kitty
     nvim
-    ranger
     rofi
     waybar
     gtk-3.0
@@ -136,7 +135,57 @@ dirs=(
     Kvantum
     qt5ct
     qt6ct
+    yazi
 )
+
+# Paths
+backup_dir="$HOME/.temp-back"
+keybinds_backup="$backup_dir/keybinds.conf"
+wrules_backup="$backup_dir/wrules.conf"
+wallpapers_backup="$backup_dir/Wallpaper"
+keybinds="$HOME/.config/hypr/configs/keybinds.conf"
+wrules="$HOME/.config/hypr/configs/wrules.conf"
+wallpapers="$HOME/.config/hypr/Wallpaper"
+
+# Ensure backup directory exists
+mkdir -p "$backup_dir"
+
+# Function to handle backup/restore
+backup_or_restore() {
+    local file_path="$1"
+    local file_type="$2"
+
+    if [[ -e "$file_path" ]]; then
+        msg att "A $file_type has been found."
+        if command -v gum &> /dev/null; then
+            gum confirm "Would you Restore it or put it into the Backup?" \
+                --affirmative "Restore it.." \
+                --negative "Backup it..."
+            echo
+
+            if [[ $? -eq 0 ]]; then
+                action="r"
+            else
+                action="b"
+            fi
+
+        else
+            msg ask "Would you Restore it or put it into the Backup? [ r/b ]"
+            read -r -p "$(echo -e '\e[1;32mSelect: \e[0m')" action
+        fi
+
+        if [[ "$action" =~ ^[rR] ]]; then
+            cp -r "$file_path" "$backup_dir/"
+        else
+            msg att "$file_type will be backed up..."
+        fi
+    fi
+}
+
+# Backing up keybinds, wrules, and wallpapers
+backup_or_restore "$keybinds" "keybinds config file"
+backup_or_restore "$wrules" "window rules config file"
+backup_or_restore "$wallpapers" "wallpaper directory"
 
 # if some main directories exists, backing them up.
 if [[ -d "$HOME/.config/HyprBackup-${USER}" ]]; then
@@ -241,6 +290,35 @@ else
     sudo mkdir $wayland_session_dir 2>&1 | tee -a "$log"
 fi
     sudo cp "$dir/extras/hyprland.desktop" /usr/share/wayland-sessions/ 2>&1 | tee -a "$log"
+
+
+# restore the backuped items into the original location
+restore_backup() {
+    local backup_path="$1"      # Path to the backup file/directory
+    local original_path="$2"    # Original file/directory path
+    local file_type="$3"        # Description of the file/directory
+
+    if [[ -e "$backup_path" ]]; then
+        # Create a backup of the current file/directory if it exists
+        if [[ -e "$original_path" ]]; then
+            mv "$original_path" "${original_path}.backup"
+        fi
+
+        # Restore the file/directory from the backup
+        if cp -r "$backup_path" "$original_path"; then
+            msg dn "$file_type restored to its original location: $original_path."
+        else
+            msg err "Could not restore defaults."
+        fi
+    fi
+}
+
+# Restore files
+restore_backup "$keybinds_backup" "$keybinds" "keybinds config file"
+restore_backup "$wrules_backup" "$wrules" "window rules config file"
+restore_backup "$wallpapers_backup" "$wallpapers" "wallpaper directory"
+
+rm -rf "$backup_dir"
 
 clear && sleep 1
 
