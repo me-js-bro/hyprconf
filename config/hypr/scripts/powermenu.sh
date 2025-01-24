@@ -31,7 +31,7 @@ confirm_cmd() {
     rofi -dmenu \
         -p 'Confirmation' \
         -mesg 'Are you Sure?' \
-        -theme ${main_dir}/confirm.rasi
+        -theme ${main_dir}/rofi-confirm.rasi
 }
 
 # Ask for confirmation
@@ -49,14 +49,18 @@ run_cmd() {
     selected="$(confirm_exit)"
     if [[ "$selected" == "$yes" ]]; then
         if [[ $1 == '--shutdown' ]]; then
-            systemctl poweroff
+            "$HOME/.config/hypr/scripts/uptime.sh" && sleep 3
+            systemctl poweroff --now
         elif [[ $1 == '--reboot' ]]; then
+            "$HOME/.config/hypr/scripts/uptime.sh" && sleep 3
             systemctl reboot --now
         elif [[ $1 == '--lock' ]]; then
             hyprlock
         elif [[ $1 == '--logout' ]]; then
+            "$HOME/.config/hypr/scripts/uptime.sh" && sleep 3
             hyprctl dispatch exit 0
         elif [[ $1 == '--suspend' ]]; then
+            "$HOME/.config/hypr/scripts/uptime.sh" && sleep 3
             systemctl suspend
         fi
     else

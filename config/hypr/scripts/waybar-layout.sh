@@ -67,11 +67,12 @@ apply_config() {
 
     elif [[ "$1" == *"-bottom"* ]]; then
         sed -i "s/location:.*/location: southWest;/g" "$rofi_menu"
-        sed -i "s/x-offset:.*/x-offset: -15px;/g" "$rofi_menu"
-        sed -i "s/y-offset:.*/y-offset: 15px;/g" "$rofi_menu"
+        sed -i "s/x-offset:.*/x-offset: 15px;/g" "$rofi_menu"
+        sed -i "s/y-offset:.*/y-offset: -15px;/g" "$rofi_menu"
 
         sed -i "s/location:.*/location: southeast;/g" "$rofi_clipboard"
         sed -i "s/anchor:.*/anchor: southeast;/g" "$rofi_clipboard"
+        sed -i "s/x-offset:.*/x-offset: -15px;/g" "$rofi_clipboard"
         sed -i "s/y-offset:.*/y-offset: -15px;/g" "$rofi_clipboard"
     fi
 

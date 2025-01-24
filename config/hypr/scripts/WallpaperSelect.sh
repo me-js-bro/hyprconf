@@ -25,7 +25,7 @@ RANDOM_PIC="${PICS[$((RANDOM % ${#PICS[@]}))]}"
 RANDOM_PIC_NAME="${#PICS[@]}. random"
 
 # Rofi command ( style )
-rofi_command="rofi -show -dmenu -config ~/.config/rofi/themes/conf-wall.rasi"
+rofi_command="rofi -show -dmenu -config ~/.config/rofi/themes/rofi-wall.rasi"
 
 menu() {
   for i in "${!PICS[@]}"; do

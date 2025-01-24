@@ -28,7 +28,7 @@ option2="Selected area"
 
 options="$option1\n$option2"
 
-choice=$(echo -e "$options" | rofi -dmenu -replace -config ~/.config/rofi/themes/config-screenshots.rasi -i -no-show-icons -l 2 -width 30 -p)
+choice=$(echo -e "$options" | rofi -dmenu -replace -config ~/.config/rofi/themes/rofi-screenshots.rasi -i -no-show-icons -l 2 -width 30 -p)
 
 send_notification() {
     local msg="$1"
