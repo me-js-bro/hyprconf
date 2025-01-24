@@ -143,9 +143,11 @@ backup_dir="$HOME/.temp-back"
 keybinds_backup="$backup_dir/keybinds.conf"
 wrules_backup="$backup_dir/wrules.conf"
 wallpapers_backup="$backup_dir/Wallpaper"
+hypr_cache_backup="$backup_dir/.cache"
 keybinds="$HOME/.config/hypr/configs/keybinds.conf"
 wrules="$HOME/.config/hypr/configs/wrules.conf"
 wallpapers="$HOME/.config/hypr/Wallpaper"
+hypr_cache="$HOME/.config/hypr/.cache"
 
 # Ensure backup directory exists
 mkdir -p "$backup_dir"
@@ -186,6 +188,7 @@ backup_or_restore() {
 backup_or_restore "$keybinds" "keybinds config file"
 backup_or_restore "$wrules" "window rules config file"
 backup_or_restore "$wallpapers" "wallpaper directory"
+cp -r "$hypr_cache" "$backup_dir/"
 
 # if some main directories exists, backing them up.
 if [[ -d "$HOME/.config/HyprBackup-${USER}" ]]; then
@@ -317,6 +320,10 @@ restore_backup() {
 restore_backup "$keybinds_backup" "$keybinds" "keybinds config file"
 restore_backup "$wrules_backup" "$wrules" "window rules config file"
 restore_backup "$wallpapers_backup" "$wallpapers" "wallpaper directory"
+
+# restoring hyprland cache
+rm -rf "$HOME/.config/hypr/.cache"
+cp -r "$hypr_cache_backup" "$hypr_cache"
 
 rm -rf "$backup_dir"
 
