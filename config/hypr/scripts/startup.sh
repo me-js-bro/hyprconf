@@ -51,13 +51,6 @@ fi
 "$scripts_dir/system.sh" run &
 
 
-#_____ setting up nightlight if any value is available
-if [[ "$nightlight" -lt 6500 ]]; then
-    hyprsunset -t "$nightlight_value"
-else
-    hyprsunset -t 6500 &
-fi
-
 #_____ setup monitor
 
 monitor_setting=$(cat $monitor_config | grep "monitor")
@@ -70,3 +63,11 @@ fi
 sleep 3
 
 "$scripts_dir/default_browser.sh"
+
+#_____ setting up nightlight if any value is available
+if [[ "$nightlight" -lt 6500 ]]; then
+    hyprsunset -t "$nightlight_value"
+else
+    hyprsunset -t 6500 &
+fi
+
