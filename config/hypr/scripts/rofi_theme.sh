@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-rofiConf="$HOME/.config/rofi/themes/select_theme.rasi"
+rofiConf="$HOME/.config/rofi/themes/rofi-select_theme.rasi"
 rofiStyleDir="$HOME/.config/rofi/menu"
 rofiAssetDir="$HOME/.config/rofi/assets"
 menu_select_script="$HOME/.config/hypr/scripts/menu_select.sh"

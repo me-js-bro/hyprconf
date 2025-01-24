@@ -1,8 +1,8 @@
 #!/bin/bash
 
-value_file="$HOME/.cache/.nightlight"
+value_file="$HOME/.config/hypr/.cache/.nightlight"
 default=6500
-notification_id_file=".nightlight_notify_id"
+notification_id_file="$HOME/.config/hypr/.cache/.nightlight_notify_id"
 
 # Initialize the value file if it doesn't exist
 if [[ ! -f "$value_file" ]]; then

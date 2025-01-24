@@ -7,6 +7,7 @@ engine_path="$HOME/.config/hypr/.cache/.engine"
 monitor_config="$HOME/.config/hypr/configs/monitor.conf"
 
 engine=$(cat $engine_path)
+nightlight_value=$(cat "$HOME/.config/hypr/.cache/.nightlight")
 
 # Transition config
 FPS=60
@@ -48,6 +49,14 @@ fi
 "$scripts_dir/wallcache.sh"
 "$scripts_dir/pywal.sh"
 "$scripts_dir/system.sh" run &
+
+
+#_____ setting up nightlight if any value is available
+if [[ "$nightlight" -lt 6500 ]]; then
+    hyprsunset -t "$nightlight_value"
+else
+    hyprsunset -t 6500 &
+fi
 
 #_____ setup monitor
 
