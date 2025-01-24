@@ -13,7 +13,7 @@ prompt() {
     echo "hyprpaper"
 }
 
-rofi_command="rofi -i -dmenu -config ~/.config/rofi/themes/config-wall-engine.rasi"
+rofi_command="rofi -i -dmenu -config ~/.config/rofi/themes/rofi-wall-engine.rasi"
 
 # Main function
 main() {
