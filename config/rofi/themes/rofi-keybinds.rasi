@@ -77,7 +77,7 @@ entry {
     background-color:            @background;
     text-color:                  @foreground;
     cursor:                      text;
-    placeholder:                 "Search Keybinds;   The SUPER (windows) key is the mainMod";
+    placeholder:                 "Search Keybinds: The $mainMod is the SUPER (windows) key.";
     placeholder-color:           inherit;
 }
 
