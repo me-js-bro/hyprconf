@@ -11,7 +11,7 @@ browsers=("firefox" "brave" "${chromium_based[@]}")
 
 IFS=$'\n' read -rd '' -a browsers <<<"$chromium_based"
 
-if [[ -n "$(command -v firefox)" && -z "$chromium_based" ]]; then
+if [[ -n "$(command -v firefox)" ]]; then
     echo "firefox" >> "$browser_cache"
 fi
 
@@ -49,7 +49,7 @@ fi
 
 case $1 in
 --reset)
-    rm ~/.config/hypr/.cache/browser
+    rm ~/.config/hypr/.cache/.browser
     notify-send "Reset" "Default browser list has been reset"
     "$HOME/.config/hypr/scripts/default_browser.sh"
     ;;
