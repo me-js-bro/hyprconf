@@ -3,7 +3,7 @@
 rofiConf="$HOME/.config/rofi/themes/rofi-select_theme.rasi"
 rofiStyleDir="$HOME/.config/rofi/menu"
 rofiAssetDir="$HOME/.config/rofi/assets"
-menu_select_script="$HOME/.config/hypr/scripts/menu_select.sh"
+menu_select_script="$HOME/.config/hypr/scripts/menu.sh"
 
 # Set rofi scaling
 [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=10
