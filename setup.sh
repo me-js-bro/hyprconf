@@ -324,7 +324,7 @@ restore_backup "$wallpapers_backup" "$wallpapers" "wallpaper directory"
 
 # restoring hyprland cache
 [[ -e "$HOME/.config/hypr/.cache" ]] && rm -rf "$HOME/.config/hypr/.cache"
-cp -r "$hypr_cache_backup" "$hypr_cache"
+[[ -e "$hypr_cache_backup" ]] && cp -r "$hypr_cache_backup" "$hypr_cache"
 rm -rf "$backup_dir"
 
 clear && sleep 1
