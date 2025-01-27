@@ -125,16 +125,17 @@ dirs=(
     btop
     dunst
     fastfetch
-    hypr
-    kitty
-    nvim
-    rofi
-    waybar
+    fish
     gtk-3.0
     gtk-4.0
+    hypr
+    kitty
     Kvantum
+    nvim
     qt5ct
     qt6ct
+    rofi
+    waybar
     yazi
 )
 
