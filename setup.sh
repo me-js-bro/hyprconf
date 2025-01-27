@@ -125,16 +125,17 @@ dirs=(
     btop
     dunst
     fastfetch
-    hypr
-    kitty
-    nvim
-    rofi
-    waybar
+    fish
     gtk-3.0
     gtk-4.0
+    hypr
+    kitty
     Kvantum
+    nvim
     qt5ct
     qt6ct
+    rofi
+    waybar
     yazi
 )
 
@@ -188,7 +189,7 @@ backup_or_restore() {
 backup_or_restore "$keybinds" "keybinds config file"
 backup_or_restore "$wrules" "window rules config file"
 backup_or_restore "$wallpapers" "wallpaper directory"
-cp -r "$hypr_cache" "$backup_dir/"
+[[ -e "$hypr_cache" ]] && cp -r "$hypr_cache" "$backup_dir/"
 
 # if some main directories exists, backing them up.
 if [[ -d "$HOME/.config/HyprBackup-${USER}" ]]; then
@@ -268,6 +269,7 @@ sleep 1
 if [[ -d "$scripts_dir" ]]; then
     # make all the scripts executable...
     chmod +x "$scripts_dir"/* 2>&1 | tee -a "$log"
+    chmod +x "$HOME/.config/fish/change_style.sh" 2>&1 | tee -a "$log"
     msg dn "All the necessary scripts have been executable..."
     sleep 1
 else
@@ -322,18 +324,21 @@ restore_backup "$wrules_backup" "$wrules" "window rules config file"
 restore_backup "$wallpapers_backup" "$wallpapers" "wallpaper directory"
 
 # restoring hyprland cache
-rm -rf "$HOME/.config/hypr/.cache"
-cp -r "$hypr_cache_backup" "$hypr_cache"
-
+[[ -e "$HOME/.config/hypr/.cache" ]] && rm -rf "$HOME/.config/hypr/.cache"
+[[ -e "$hypr_cache_backup" ]] && cp -r "$hypr_cache_backup" "$hypr_cache"
 rm -rf "$backup_dir"
 
 clear && sleep 1
+
 
 
 # Asking if the user wants to download more wallpapers
 if [[ -n "$(command -v gum)" ]]; then
     msg ask "Would you like to add more wallpapers?"
     gum confirm "Please confirm." \
+        --prompt.foreground "#ff8700" \
+        --selected.background "#00FFFF" \
+        --selected.foreground "#000" \
         --affirmative "Need more wallpapers" \
         --negative "No, skip"
 
@@ -373,12 +378,13 @@ fi
 check_distro &> /dev/null
 
 if [[ -d "$HOME/.config/hypr/Wallpaper" ]]; then
+    mkdir -p "$HOME/.config/hypr/.cache"
     engine="$HOME/.config/hypr/.cache/.engine"
     wallCache="$HOME/.config/hypr/.cache/.wallpaper"
 
-    touch "$engine" &> /dev/null
-    touch "$wallCache" &> /dev/null
-      
+    touch "$engine"
+    touch "$wallCache"      
+
     echo "hyprpaper" > "$engine"
 
     if [ -f "$HOME/.config/hypr/Wallpaper/${distro}.png" ]; then
@@ -394,6 +400,9 @@ fi
 # setting up the waybar
 ln -sf "$HOME/.config/waybar/configs/catppuccin-top" "$HOME/.config/waybar/config"
 ln -sf "$HOME/.config/waybar/style/catppuccin-top.css" "$HOME/.config/waybar/style.css"
+
+msg act "Generating colors and other necessary things..."
+"$HOME/.config/hypr/scripts/wallcache.sh" &> /dev/null
 "$HOME/.config/hypr/scripts/pywal.sh" &> /dev/null
 
 # setting default themes, icon and cursor
@@ -401,6 +410,6 @@ gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
 gsettings set org.gnome.desktop.interface icon-theme "TokyoNight-SE"
 gsettings set org.gnome.desktop.interface cursor-theme "Bibata-Modern-Ice"
 
-msg dn "Script execution was successful! Now you can reboot and enjoy your customization..." && sleep 1
+msg dn "Script execution was successful! Now logout and log back in and enjoy your customization..." && sleep 1
 
 # === ___ Script Ends Here ___ === #
