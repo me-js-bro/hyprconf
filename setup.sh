@@ -323,18 +323,21 @@ restore_backup "$wrules_backup" "$wrules" "window rules config file"
 restore_backup "$wallpapers_backup" "$wallpapers" "wallpaper directory"
 
 # restoring hyprland cache
-rm -rf "$HOME/.config/hypr/.cache"
+[[ -e "$HOME/.config/hypr/.cache" ]] && rm -rf "$HOME/.config/hypr/.cache"
 cp -r "$hypr_cache_backup" "$hypr_cache"
-
 rm -rf "$backup_dir"
 
 clear && sleep 1
+
 
 
 # Asking if the user wants to download more wallpapers
 if [[ -n "$(command -v gum)" ]]; then
     msg ask "Would you like to add more wallpapers?"
     gum confirm "Please confirm." \
+        --prompt.foreground "#ff8700" \
+        --selected.background "#00FFFF" \
+        --selected.foreground "#000" \
         --affirmative "Need more wallpapers" \
         --negative "No, skip"
 
