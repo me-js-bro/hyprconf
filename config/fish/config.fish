@@ -5,7 +5,7 @@ fish_vi_key_bindings
 #===============================================#
 #           enable starship prompt
 #===============================================#
-set --export STARSHIP_CONFIG ~/.config/fish/starship/starship-os_logo.toml
+set --export STARSHIP_CONFIG ~/.config/fish/starship/starship-simple.toml
 
 if status is-interactive
     function starship_transient_prompt_func
