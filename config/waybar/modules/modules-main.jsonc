@@ -54,8 +54,8 @@
                 "activated": "",
                 "deactivated": "󰛊"
             },
-        "tooltip-format-activated":"Caffeine Mode Active",
-        "tooltip-format-deactivated":"Caffeine Mode Inactive"
+        "tooltip-format-activated":"Caffeine Mode: Active \nNothing will be happen.",
+        "tooltip-format-deactivated":"Caffeine Mode: Inactive\n\nIf there is no interaction with your\nsystem (mouse/keyboard), then \nScreen Lock: after 5 min \nScreen Off: after 10 min \nSleep: after 30 min"
     },
 
     // window

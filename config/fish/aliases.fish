@@ -47,6 +47,7 @@ alias find='nvim $(fzf --preview="bat --color=always {}")'
 #nvim
 alias nv='nvim'
 alias nvm='nvim .'
+alias open='nvim .'
 alias snv='sudo -E nvim -d'
 alias vi='nvim'
 alias vim='nvim'

@@ -45,6 +45,13 @@ if command -v hyprsunset &> /dev/null; then
                     echo "$notification_id" > "$notification_id_file"
                 fi
             ;;
+            --value)
+                value=5000
+                echo "$value" > "$value_file"
+                notification_id=$(notify-send -p -r "$notification_id" "Nightlight" "Screen temp set to 5000K")
+                echo "$notification_id" > "$notification_id_file"
+                hyprsunset -t 5000
+            ;;
             --def)
                 value=$default
                 echo "$value" > "$value_file"
