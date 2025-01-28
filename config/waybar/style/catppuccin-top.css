@@ -24,6 +24,7 @@ tooltip {
 }
 
 tooltip label {
+  font-size: 16px;
   color: @blue;
 }
 

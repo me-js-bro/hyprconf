@@ -25,36 +25,37 @@ tooltip {
 }
 
 tooltip label {
+  font-size: 16px;
   color: @foreground;
 }
 
 #workspaces button {
   padding: 5px;
-  color: #4f5064;
+  color: @foreground;
   margin-right: 5px;
   background-color: rgba(17, 17, 27, 0);
 }
 
 #workspaces button.active {
-  color: #b8bfdd;
+  color: @color5;
 }
 
 #workspaces button.focused {
-  color: #a6adc8;
-  background: #eba0ac;
-  border-radius: 15px;
+  color: @color8;
+  background: transparent;
+  border: none;
 }
 
 #workspaces button.urgent {
   color: #11111b;
-  background: #eba0ac;
-  border-radius: 15px;
+  background: transparent;
+  border: none;
 }
 
 #workspaces button:hover {
-  background: #11111b;
-  color: #cdd6f4;
-  border-radius: 15px;
+  background: transparent;
+  color: @color8;
+  border: none;
 }
 
 #taskbar button {
