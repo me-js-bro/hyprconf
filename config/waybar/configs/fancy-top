@@ -66,6 +66,7 @@
         "format": "Apps",
         "on-click": "rofi -show drun -theme ~/.config/rofi/menu/menu.rasi",
         "on-click-right": "kitty --title yazi -e yazi",
-        "tooltip": false
+        "tooltip": true,
+        "tooltip-format": "Left Click: Launch Rofi\nRight Click: Launch yazi"
     }
 }

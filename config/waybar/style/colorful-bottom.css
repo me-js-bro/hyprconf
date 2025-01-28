@@ -15,14 +15,14 @@ window#waybar {
 }
 
 tooltip {
-  background: @background;
-  opacity: 0.8;
+  background: transparent;
   border-radius: 3px;
-  border: 1px solid #9db8c1;
+  border: 1px solid @foreground;
 }
 
 tooltip label {
-  color: #9db8c1;
+  font-size: 16px;
+  color: @foreground;
 }
 
 #workspaces button {
@@ -37,8 +37,7 @@ tooltip label {
 }
 
 #workspaces button.focused {
-  color: #a6adc8;
-  background: #eba0ac;
+  color: @foreground;
   border-radius: 3px;
 }
 
@@ -49,9 +48,8 @@ tooltip label {
 }
 
 #workspaces button:hover {
-  background: #11111b;
-  color: #cdd6f4;
-  border-radius: 3px;
+  background: transparent;
+  color: @color7;
 }
 
 #taskbar button {
