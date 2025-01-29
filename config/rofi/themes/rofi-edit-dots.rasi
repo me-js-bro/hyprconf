@@ -13,11 +13,11 @@ configuration {
     me-accept-entry:       "MousePrimary";
     window-format:         "{w} · {c} · {t}";
 	dpi:					1;
-    
 }
 
 /* ---- Load pywal colors (custom wal template) ---- */
 @import "~/.config/rofi/themes/rofi-colors.rasi"
+@import "~/.config/rofi/rofi-vars.rasi"
 
 /* ---- Window ---- */
 window {
@@ -36,7 +36,7 @@ window {
     anchor:                       center;
     fullscreen:                   false;
     enabled:                      true;
-    border-radius:                20px;
+    border-radius:                @radius;
     background-color:             @background;
 }
 
@@ -89,7 +89,7 @@ entry {
     background-color:             transparent;
     text-color:                   inherit;
     cursor:                       text;
-    placeholder:                  " Configs";
+    placeholder:                  " Edit configs";
     placeholder-color:            inherit;
 }
 
@@ -139,7 +139,7 @@ element {
     padding:                      5px 10px;
     cursor:                       pointer;
     background-color:             @background;
-    border-radius:                10px;
+    border-radius:                @radius;
     border:                       2px;
 }
 

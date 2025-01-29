@@ -8,6 +8,8 @@ configuration {
 
 /*****----- Global Properties -----*****/
 @import "~/.config/rofi/themes/rofi-colors.rasi"
+@import "~/.config/rofi/rofi-vars.rasi"
+
 
 /*****----- Main Window -----*****/
 window {
@@ -17,7 +19,7 @@ window {
     width:                       500px;
     border:                      2px;
     border-color:                @foreground;
-    border-radius:               20px;
+    border-radius:               @radius;
     cursor:                      "default";
     background-color:            @background;
 }
@@ -34,7 +36,7 @@ mainbox {
 message {
     margin:                      0px;
     padding:                     20px;
-    border-radius:               20px;
+    border-radius:               @radius;
     background-color:            @alternate-active-background;
     text-color:                  @foreground;
 }
@@ -69,7 +71,7 @@ listview {
 /*****----- Elements -----*****/
 element {
     padding:                     60px 10px;
-    border-radius:               20px;
+    border-radius:               @radius;
     background-color:            @alternate-active-background;
     text-color:                  @foreground;
     cursor:                      pointer;

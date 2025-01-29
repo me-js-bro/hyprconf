@@ -1,23 +1,24 @@
 /* ---- Configuration ---- */
 configuration {
-    modi:                  "drun,run,filebrowser";
-    font:                  "Fira Code SemiBold 12";
-    show-icons:            true;
-    display-drun:          "";
-	display-run:           "";
-    display-filebrowser:   "";
-    display-window:        "";
-	drun-display-format:   "{name}";
-    hover-select:          true;
-    me-select-entry:       "MouseSecondary";
-    me-accept-entry:       "MousePrimary";
-    window-format:         "{w} · {c} · {t}";
-	dpi:					1;
+    modi:                      "drun,run,filebrowser";
+    font:                      "Fira Code SemiBold 12";
+    show-icons:                true;
+    display-drun:              "";
+	display-run:               "";
+    display-filebrowser:       "";
+    display-window:            "";
+	drun-display-format:       "{name}";
+    hover-select:              true;
+    me-select-entry:           "MouseSecondary";
+    me-accept-entry:           "MousePrimary";
+    window-format:             "{w} · {c} · {t}";
+	dpi:                        1;
     
 }
 
 /* ---- Load pywal colors (custom wal template) ---- */
 @import "~/.config/rofi/themes/rofi-colors.rasi"
+@import "~/.config/rofi/rofi-vars.rasi"
 
 /* ---- Window ---- */
 window {
@@ -36,7 +37,7 @@ window {
     anchor: northeast;
     fullscreen:                   false;
     enabled:                      true;
-    border-radius:                20px;
+    border-radius:                @radius;
     background-color:             @background;
 }
 
@@ -102,7 +103,7 @@ mode-switcher{
 }
 
 button {
-    border-radius:                10px;
+    border-radius:                @radius;
     background-color:             @background;
     text-color:                   inherit;
     cursor:                       pointer;
@@ -139,7 +140,7 @@ element {
     padding:                      5px 10px;
     cursor:                       pointer;
     background-color:             @background;
-    border-radius:                10px;
+    border-radius:                @radius;
     border:                       2px;
 }
 

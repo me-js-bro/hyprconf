@@ -17,6 +17,7 @@ configuration {
 
 // ---- Load pywal colors (custom wal template) ---- //
 @import "~/.config/rofi/themes/rofi-colors.rasi"
+@import "~/.config/rofi/rofi-vars.rasi"
 
 
 // Main //
@@ -32,7 +33,7 @@ window {
     border:                      2px solid;
     border-color:                @foreground;
     background-color:            @background;
-    border-radius: 20px;
+    border-radius:               @radius;
     location: northWest;
     x-offset: 15px;
     y-offset: 15px;
@@ -68,12 +69,12 @@ mode-switcher {
 }
 button {
     cursor:                      pointer;
-    border-radius:               3em;
+    border-radius:               @radius;
     background-color:            @background;
     text-color:                  @foreground;
 }
 button selected {
-    border-radius:               3em;
+    border-radius:               @radius-second;
     background-color:            @foreground;
     text-color:                  @background;
 }
@@ -119,7 +120,7 @@ element {
     cursor:                      pointer;
     background-color:            transparent;
     text-color:                  @foreground;
-    border-radius: 10px;
+    border-radius:               @radius;
 }
 element selected.normal {
     background-color:            @foreground;

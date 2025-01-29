@@ -8,6 +8,7 @@ configuration {
 
 /*****----- Global Properties -----*****/
 @import "~/.config/rofi/themes/rofi-colors.rasi"
+@import "~/.config/rofi/rofi-vars.rasi"
 
 
 * {
