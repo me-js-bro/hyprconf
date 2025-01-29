@@ -18,6 +18,8 @@ configuration {
 
 /* ---- Load pywal colors (custom wal template) ---- */
 @import "~/.config/rofi/themes/rofi-colors.rasi"
+@import "~/.config/rofi/rofi-vars.rasi"
+
 
 /* ---- Window ---- */
 window {
@@ -36,7 +38,7 @@ window {
     anchor:                       center;
     fullscreen:                   false;
     enabled:                      true;
-    border-radius:                20px;
+    border-radius:                @radius;
     background-color:             @background;
 }
 
@@ -104,7 +106,7 @@ mode-switcher{
 
 button {
     padding:                      10px;
-    border-radius:                10px;
+    border-radius:                @radius;
     background-color:             @background;
     text-color:                   inherit;
     cursor:                       pointer;
@@ -142,7 +144,7 @@ element {
     margin:                       5px;
     cursor:                       pointer;
     background-color:             @background;
-    border-radius:                10px;
+    border-radius:                @radius;
     border:                       2px;
 }
 

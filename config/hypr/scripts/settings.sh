@@ -9,19 +9,19 @@ EOF
 }
 
 # Script for setting window border width and roundness.
-hyprconf_setting="$HOME/.config/hypr/configs/decoration.conf"
+setting="$HOME/.config/hypr/configs/configs.conf"
 dunst="$HOME/.config/dunst/dunstrc"
+rofiVars="$HOME/.config/rofi/rofi-vars.rasi"
 
 
 # gum function to choose multiple settings
 display
 printf "\n  => Choose which settings you want to change\n  -> Need to select using the space bar\n"
 echo
-_hyprland_choice=$(gum choose --header "Select settings:" --no-limit "border_size" "roundness" "inner_gap" "outer_gap" "blur" "cancel")
+_hyprland_choice=$(gum choose --header "Select settings:" --no-limit "border_size" "roundness" "inner_gap" "outer_gap" "blur" "opacity" "cancel")
 
 # Convert the newline-separated string into an array
 IFS=$'\n' read -rd '' -a primary_choice <<<"$_hyprland_choice"
-IFS=$'\n' read -rd '' -a _swaync_primary <<<"$_swaync_choice"
 
 # Exit if "cancel" is chosen
 if [[ -n "$_hyprland_choice" && "${primary_choice[*]}" =~ "cancel" ]]; then
@@ -39,7 +39,7 @@ for user_choice in "${primary_choice[@]}"; do
             printf "Invalid input. Please enter a number.\n"
             border_size=$(gum input --placeholder "Type border width...")
         done
-        sed -i "s/border_size = .*/border_size = $border_size/g" "$hyprconf_setting"
+        sed -i "s/\$border = .*/\\\$border = $border_size/g" "$setting"
         sed -i "s/frame_width = .*/frame_width = $border_size/g" "$dunst"
         ;;
     "roundness")
@@ -49,8 +49,10 @@ for user_choice in "${primary_choice[@]}"; do
             printf "Invalid input. Please enter a number.\n"
             rounding=$(gum input --placeholder "Type border roundness...")
         done
-        sed -i "s/rounding = .*/rounding = $rounding/g" "$hyprconf_setting"
+        sed -i 's/\$rounding = .*/$rounding = '"$rounding"'/g' "$setting"
         sed -i "s/^[[:space:]]*corner_radius[[:space:]]*= .*/corner_radius = $rounding/g" "$dunst"
+        sed -i "s/radius: .*/radius: ${rounding}px;/g" "$rofiVars"
+        sed -i "s/radius-second: .*/radius-second: $((rounding / 2))px;/g" "$rofiVars"
         ;;
     "inner_gap")
         printf "\n[ <> ]\nSetting inner gap...\n\n"
@@ -59,7 +61,7 @@ for user_choice in "${primary_choice[@]}"; do
             printf "Invalid input. Please enter a number.\n"
             gaps_in=$(gum input --placeholder "Type the inner gap...")
         done
-        sed -i "s/gaps_in = .*/gaps_in = $gaps_in/g" "$hyprconf_setting"
+        sed -i "s/\$inner_gap = .*/\\\$inner_gap = $gaps_in/g" "$setting"
         ;;
     "outer_gap")
         printf "\n[ <> ]\nSetting outer gap...\n\n"
@@ -68,22 +70,37 @@ for user_choice in "${primary_choice[@]}"; do
             printf "Invalid input. Please enter a number.\n"
             gaps_out=$(gum input --placeholder "Type the outer gap...")
         done
-        sed -i "s/gaps_out = .*/gaps_out = $gaps_out/g" "$hyprconf_setting"
+        sed -i "s/\$outer_gap = .*/\\\$outer_gap = $gaps_out/g" "$setting"
         ;;
     "blur")
         printf "\n[ <> ]\nSetting blur...\n\n"
-        blur_size=$(gum input --placeholder "Type the amount of blur size...")
-        while ! [[ "$blur_size" =~ ^[0-9]+$ ]]; do
+        _blur_size=$(gum input --placeholder "Type the amount of blur size...")
+        while ! [[ "$_blur_size" =~ ^[0-9]+$ ]]; do
             printf "Invalid input. Please enter a number.\n"
-            blur_size=$(gum input --placeholder "Type the amount of blur size...")
+            _blur_size=$(gum input --placeholder "Type the amount of blur size...")
         done
-        blur_passes=$(gum input --placeholder "Type the amount of blur passes...")
-        while ! [[ "$blur_passes" =~ ^[0-9]+$ ]]; do
+            _blur_passes=$(gum input --placeholder "Type the amount of blur passes...")
+        while ! [[ "$_blur_passes" =~ ^[0-9]+$ ]]; do
             printf "Invalid input. Please enter a number.\n"
-            blur_passes=$(gum input --placeholder "Type the amount of blur passes...")
+            _blur_passes=$(gum input --placeholder "Type the amount of blur passes...")
         done
-        sed -i "/^[^_]*size = .*/s/size = .*/size = $blur_size/" "$hyprconf_setting"
-        sed -i "s/passes = .*/passes = $blur_passes/" "$hyprconf_setting"
+        sed -i "s/\$blur_size = .*/\\\$blur_size = $_blur_size/g" "$setting"
+        sed -i "s/\$blur_passes = .*/\\\$blur_passes = $_blur_passes/g" "$setting"
+        ;;
+    "opacity")
+        printf "\n[ <> ]\nSetting opacity...\n\n"
+        _act_op=$(gum input --placeholder "Type the amount of active opacity (ex: 0.9)...")
+        while ! [[ "$_act_op" =~ ^[0-9]+(\.[0-9]+)?$ ]]; do
+            printf "Invalid input. Please enter a number.\n"
+            _act_op=$(gum input --placeholder "Type the amount of active opacity (ex: 0.9)...")
+        done
+            _inact_op=$(gum input --placeholder "Type the amount of inactive opacity (ex: 0.9)...")
+        while ! [[ "$_inact_op" =~ ^[0-9]+(\.[0-9]+)?$ ]]; do
+            printf "Invalid input. Please enter a number.\n"
+            _inact_op=$(gum input --placeholder "Type the amount of inactive opacity (ex: 0.9)...")
+        done
+        sed -i "s/\$opacity_act = .*/\\\$opacity_act = $_act_op/g" "$setting"
+        sed -i "s/\$opacity_deact = .*/\\\$opacity_deact = $_inact_op/g" "$setting"
         ;;
     *)
         echo "Invalid choice: $user_choice"

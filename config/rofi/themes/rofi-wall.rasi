@@ -18,6 +18,7 @@ configuration {
 
 /* ---- Load pywal colors (custom wal template) ---- */
 @import "~/.config/rofi/themes/rofi-colors.rasi"
+@import "~/.config/rofi/rofi-vars.rasi"
 
 /* ---- Window ---- */
 window {
@@ -35,8 +36,7 @@ window {
     anchor:                 center;
     fullscreen:             false;
     enabled:                true;
-    border-radius:          12px;
-    border-radius:          12px;
+    border-radius:          @radius;
 }
 
 /* ---- Mainbox ---- */
@@ -92,7 +92,7 @@ entry {
 }
 
 button {
-    border-radius:                10px;
+    border-radius:                @radius;
     background-color:             @background;
     text-color:                   inherit;
     cursor:                       pointer;
@@ -118,7 +118,7 @@ listview {
 	fixed-height:           true;
 	fixed-columns:          false;
 	background-color:       transparent;
-	border-radius:          10px;
+	border-radius:          @radius;
 }
 
 /* ---- Element ---- */
@@ -128,7 +128,7 @@ element {
     cursor:                 pointer;
 	orientation: 			vertical;
     background-color:       transparent;
-    border-radius:          10px;
+    border-radius:          @radius;
     border:                 0px;
 }
 
@@ -190,7 +190,7 @@ element-text {
     text-color:                  inherit;
     cursor:                      inherit;
     padding:                     10px 15px;
-    border-radius:               10px;
+    border-radius:               @radius;
     vertical-align:              0.5;
     horizontal-align:            0.5;
 }
