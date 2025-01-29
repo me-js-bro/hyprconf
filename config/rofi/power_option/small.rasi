@@ -8,6 +8,7 @@ configuration {
 
 /*****----- Global Properties -----*****/
 @import "~/.config/rofi/themes/rofi-colors.rasi"
+@import "~/.config/rofi/rofi-vars.rasi"
 
 
 /*****----- Main Window -----*****/
@@ -26,7 +27,7 @@ window {
     margin:                      0px;
     padding:                     0px;
     border:                      2px solid;
-    border-radius:               20px;
+    border-radius:               @radius;
     border-color:                @foreground;
     cursor:                      "default";
     background-color:            @background;

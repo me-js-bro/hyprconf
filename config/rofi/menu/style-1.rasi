@@ -20,6 +20,8 @@ configuration {
 
 /* ---- Load pywal colors (custom wal template) ---- */
 @import "~/.config/rofi/themes/rofi-colors.rasi"
+@import "~/.config/rofi/rofi-vars.rasi"
+
 
 /* ---- Window ---- */
 window {
@@ -37,7 +39,7 @@ window {
     anchor:                     center;
     fullscreen:                 false;
     enabled:                    true;
-    border-radius:              20px;
+    border-radius:              @radius;
     background-image:           url("~/.config/hypr/.cache/current_wallpaper.png", height);
 }
 
@@ -48,7 +50,7 @@ mainbox {
 	padding:					0px;
     background-color:           transparent;
     children:                   [ "imagebox" ];
-    border-radius:              20px;
+    border-radius:              10px;
 }
 
 /* ---- Imagebox ---- */
@@ -78,7 +80,7 @@ inputbar {
     enabled:                    true;
     text-color:                 @foreground;
     spacing:                    10px;
-    border-radius:              10px;
+    border-radius:              @radius-second;
 	background-color:		    @background;
     children:                   [ "textbox-prompt-colon","entry" ];
 }
@@ -114,12 +116,13 @@ mode-switcher{
 
 button {
     padding:                   0px 12px 0px 8px;
-    border-radius:             15px;
+    border-radius:             @radius-second;
     background-color:          @background;
     text-color:                inherit;
     cursor:                    pointer;
     border:                    1px;
     border-color:              @active-background;
+    border-radius:             20px;
 }
 
 button selected {
@@ -155,7 +158,7 @@ element {
     margin:                     2px;
     cursor:                     pointer;
     background-color:         	transparent;
-    border-radius:              10px;
+    border-radius:              15px;
     border:                     0px;
 }
 

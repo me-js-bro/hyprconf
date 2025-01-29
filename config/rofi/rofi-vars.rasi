@@ -1,0 +1,4 @@
+* {
+    radius: 0px;
+    radius-second: 0px;
+}
