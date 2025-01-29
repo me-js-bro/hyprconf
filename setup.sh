@@ -354,7 +354,8 @@ fi
 
 printf " \n"
 
-# wallpaper...
+# =========  wallpaper section  ========= #
+
 if [[ "$wallpaper" =~ ^[Y|y]$ ]]; then
     msg act "Downloading some wallpapers..."
     
@@ -363,9 +364,7 @@ if [[ "$wallpaper" =~ ^[Y|y]$ ]]; then
 
     # copying the wallpaper to the main directory
     if [[ -d "$HOME/.cache/wallpaper-cache" ]]; then
-        cp "$HOME/.cache/wallpaper-cache/dark"/* ~/.config/hypr/Dynamic-Wallpapers/dark/ &> /dev/null
-        cp "$HOME/.cache/wallpaper-cache/light"/* ~/.config/hypr/Dynamic-Wallpapers/light/ &> /dev/null
-        cp "$HOME/.cache/wallpaper-cache/all"/* ~/.config/hypr/Wallpaper/ &> /dev/null
+        cp -r "$HOME/.cache/wallpaper-cache/all"/* ~/.config/hypr/Wallpaper/ &> /dev/null
         rm -rf "$HOME/.cache/wallpaper-cache" &> /dev/null
         msg dn "Wallpapers were downloaded successfully..." 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") & sleep 0.5
     else
