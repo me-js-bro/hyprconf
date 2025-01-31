@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Advanced Hyprland Installation Script by Js Bro ( https://github.com/me-js-bro )
+# Advanced Hyprland Installation Script by Shell Ninja ( https://github.com/shell-ninja )
 
 # color defination
 red="\e[1;31m"
@@ -59,7 +59,7 @@ touch "$log"
 sleep 1
 
 printf "${green}=>${end} Cloning hyprconf repository\n"
-git clone --depth=1 https://github.com/me-js-bro/hyprconf.git "$HOME/.cache/hyprconf" &> /dev/null
+git clone --depth=1 https://github.com/shell-ninja/hyprconf.git "$HOME/.cache/hyprconf" &> /dev/null
 
 if [[ -d "$HOME/.cache/hyprconf" ]]; then
     cd "$HOME/.cache/hyprconf"

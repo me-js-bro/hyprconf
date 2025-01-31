@@ -1,6 +1,6 @@
 <h1 align="center">Minimal Hyprland Configuration</h1>
 <h3 align="center">By</h3>
-<h2 align="center">Js Bro ( Md. Mahin Islam Mahi )</h2>
+<h2 align="center">Shell Ninja</h2>
 <br>
 
 <h3>This Hyprland configuration is kind of minila looking, but also little bit gorgeous I guess. Why don't you check it out? </h3>
@@ -10,59 +10,59 @@
 <details close>
 <summary>Themes</summary>
 <p align="center">
-   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/theme/1.png?raw=true" />
-   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/theme/2.png?raw=true" /> <br>
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/theme/1.png?raw=true" />
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/theme/2.png?raw=true" /> <br>
 
-   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/theme/3.png?raw=true" />
-   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/theme/4.png?raw=true" />
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/theme/3.png?raw=true" />
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/theme/4.png?raw=true" />
 </p> <br>
 </details>
 
 <details close>
 <summary>Menu</summary>
 <p align="center">
-   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/menu/1.png?raw=true" />
-   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/menu/2.png?raw=true" /> <br>
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/menu/1.png?raw=true" />
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/menu/2.png?raw=true" /> <br>
 
-   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/menu/4.png?raw=true" />
-   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/menu/3.png?raw=true" />
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/menu/4.png?raw=true" />
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/menu/3.png?raw=true" />
     <br>
 
-   <img aligh="center" width="99%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/clipboard.png?raw=true" />
+   <img aligh="center" width="99%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/clipboard.png?raw=true" />
 </p> <br>
 </details>
 
 <details close>
 <summary>Power Menu</summary>
 <p align="center">
-   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/power/1.png?raw=true" />
-   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/power/2.png?raw=true" /> <br>
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/power/1.png?raw=true" />
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/power/2.png?raw=true" /> <br>
 
-   <img aligh="center" width="99%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/power/3.png?raw=true" />
+   <img aligh="center" width="99%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/power/3.png?raw=true" />
 </p> <br>
 </details>
 
 <details close>
 <summary>Wallpaper</summary>
 <p align="center">
-   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/wallpaper/1.png?raw=true" />
-   <img aligh="center" width="49%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/wallpaper/2.png?raw=true" /> <br>
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/wallpaper/1.png?raw=true" />
+   <img aligh="center" width="49%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/wallpaper/2.png?raw=true" /> <br>
 
-   <img aligh="center" width="99%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/wallpaper/3.png?raw=true" />
+   <img aligh="center" width="99%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/wallpaper/3.png?raw=true" />
 </p> <br>
 </details>
 
 <details close>
 <summary>Lock Screen</summary>
 <p align="center">
-   <img aligh="center" width="99%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/lock.png?raw=true" />
+   <img aligh="center" width="99%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/lock.png?raw=true" />
 </p>
 </details>
 
 <details close>
 <summary>Login Screen (sddm)</summary>
 <p align="center">
-   <img aligh="center" width="99%" src="https://github.com/me-js-bro/Screen-Shots/blob/main/hyprconf/sddm/sddm_theme.jpg?raw=true" />
+   <img aligh="center" width="99%" src="https://github.com/shell-ninja/Screen-Shots/blob/main/hyprconf/sddm/sddm_theme.jpg?raw=true" />
 </p>
 </details>
 
@@ -93,12 +93,12 @@ If you have OpenBangla-Keyboard installed, then you need to follow some steps to
 </h4>
 <h4>1) Right click on this keyboard icon in you waybar.</h4>
 
-<img src="https://github.com/me-js-bro/Screen-Shots/blob/main/openbangla/step-1.jpg?raw=true" /> <br>
+<img src="https://github.com/shell-ninja/Screen-Shots/blob/main/openbangla/step-1.jpg?raw=true" /> <br>
 
 <h4>2) Search for "openbangla" and select the keyboard</h4>
-<img src="https://github.com/me-js-bro/Screen-Shots/blob/main/openbangla/step-2.jpg?raw=true" /> <br>
+<img src="https://github.com/shell-ninja/Screen-Shots/blob/main/openbangla/step-2.jpg?raw=true" /> <br>
 <h4>3) Now add the keyboard by clicking the 'right aero' icon and click on apply.</h4>
-<img src="https://github.com/me-js-bro/Screen-Shots/blob/main/openbangla/step-3.jpg?raw=true" /> <br>
+<img src="https://github.com/shell-ninja/Screen-Shots/blob/main/openbangla/step-3.jpg?raw=true" /> <br>
 
 <h4>Now you can switch keyboard using "CTRL + Space"</h4> <br>
 </details>
@@ -110,7 +110,7 @@ If you have OpenBangla-Keyboard installed, then you need to follow some steps to
 - Clone this repository:
 
 ```
-   git clone --depth=1 https://github.com/me-js-bro/hyprconf.git
+   git clone --depth=1 https://github.com/shell-ninja/hyprconf.git
 ```
 
 - Now run this commands:
@@ -125,7 +125,7 @@ If you have OpenBangla-Keyboard installed, then you need to follow some steps to
 <h4>To Update into the latest commit. jusr run this command in your tarminal..</h4>
 
 ```shell
-bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/update.sh -O -)"
+bash -c "$(wget -q  https://raw.githubusercontent.com/shell-ninja/hyprconf/main/update.sh -O -)"
 ```
 
 - Hurrah! Now reboot your system, select Hyprland from your login manager, log into your Hyprland and enjoy it.
@@ -133,7 +133,7 @@ bash -c "$(wget -q  https://raw.githubusercontent.com/me-js-bro/hyprconf/main/up
 
 ## -----------(O_O)-----------
 
-#### Well if you want to automate the required packages installation process and setup this config automaticly. then you should visit [This Repository](https://github.com/me-js-bro/hyprconf-install.git). I will automate the process for you.
+#### Well if you want to automate the required packages installation process and setup this config automaticly. then you should visit [This Repository](https://github.com/shell-ninja/hyprconf-install.git). I will automate the process for you.
 
 <br>
 
