@@ -65,9 +65,20 @@ sleep 3
 "$scripts_dir/default_browser.sh"
 
 #_____ setting up nightlight if any value is available
-if [[ "$nightlight" -lt 6500 ]]; then
-    hyprsunset -t "$nightlight_value"
-else
-    hyprsunset -t 6500 &
-fi
+value_file="$HOME/.config/hypr/.cache/.nightlight"
+notification_id_file="$HOME/.config/hypr/.cache/.notification_id"  # Define the notification file
+current_time="$(date +%H%M)"
+start_time="2000"
+end_time="0700"
 
+# Check if the current time is between 17:30 and 07:00
+if [[ "$current_time" -ge "$start_time" && "$current_time" -lt "2400" ]] || [[ "$current_time" -ge "0000" && "$current_time" -lt "$end_time" ]]; then
+    value=5000
+    echo "$value" > "$value_file"
+    # Get the last notification ID to update
+    notification_id=$(notify-send -p -r "$notification_id" "Nightlight" "Screen temp set to 5000K")
+    echo "$notification_id" > "$notification_id_file"
+    hyprsunset -t 5000
+else
+    killall hyprsunset
+fi

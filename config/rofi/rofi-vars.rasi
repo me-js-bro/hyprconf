@@ -1,4 +1,4 @@
 * {
-    radius: 0px;
-    radius-second: 0px;
+    radius: 20px;
+    radius-second: 10px;
 }
