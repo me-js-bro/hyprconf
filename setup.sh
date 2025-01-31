@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Advanced Hyprland Installation Script by Js Bro ( https://github.com/me-js-bro )
+# Advanced Hyprland Installation Script by Shell Ninja ( https://github.com/shell-ninja )
 
 # color defination
 red="\e[1;31m"
@@ -360,7 +360,7 @@ if [[ "$wallpaper" =~ ^[Y|y]$ ]]; then
     msg act "Downloading some wallpapers..."
     
     # cloning the wallpapers in a temporary directory
-    git clone --depth=1 https://github.com/me-js-bro/Wallpapers.git ~/.cache/wallpaper-cache 2>&1 | tee -a "$log" &> /dev/null
+    git clone --depth=1 https://github.com/shell-ninja/Wallpapers.git ~/.cache/wallpaper-cache 2>&1 | tee -a "$log" &> /dev/null
 
     # copying the wallpaper to the main directory
     if [[ -d "$HOME/.cache/wallpaper-cache" ]]; then
