@@ -103,6 +103,13 @@ If you have OpenBangla-Keyboard installed, then you need to follow some steps to
 <h4>Now you can switch keyboard using "CTRL + Space"</h4> <br>
 </details>
 
+## Configure
+
+### Hyprland
+
+- To configure hyprland settings, you can visit to `~/.config/hypr` directory. Inside it, you will fine `configs` dir, holding all the configuration files; `scripts` dir for all the scripts.
+- Wallpapers are stored in the `~/.config/hypr/Wallpaper/` directory. Just copy your favourite wallpapers into this directory.
+
 ## Installation
 
 <h4>To install and setup this hyprland configuration automaticly, just follow these stpes...</h4>
