@@ -24,7 +24,7 @@ if [[ "$engine" == "swww" ]]; then
         BEZIER=".43,1.19,1,.4"
         SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
 
-        notify-send -t 2000 -i "${wallpaper}" "Changing wallpaper."
+        notify-send --replace-id=1 -i "${wallpaper}" "Changing wallpaper" -h int:value:75
         swww query || swww init && swww img ${wallpaper} $SWWW_PARAMS
 
         ln -sf "$wallpaper" "$cache_dir/current_wallpaper.png"
@@ -64,7 +64,7 @@ elif [[ "$engine" == "hyprpaper" ]]; then
         fi
 
         # Set the wallpaper using hyprpaper
-        notify-send -t 2000 -i "$wallpaper" "Changing wallpaper"
+        notify-send --replace-id=1 -i "${wallpaper}" "Changing wallpaper" -h int:value:75
         hyprctl hyprpaper wallpaper " ,$wallpaper"
         ln -sf "$wallpaper" "$cache_dir/current_wallpaper.png"
         
