@@ -330,27 +330,9 @@ rm -rf "$backup_dir"
 
 clear && sleep 1
 
-
-
 # Asking if the user wants to download more wallpapers
-if [[ -n "$(command -v gum)" ]]; then
-    msg ask "Would you like to add more wallpapers?"
-    gum confirm "Please confirm." \
-        --prompt.foreground "#ff8700" \
-        --selected.background "#00FFFF" \
-        --selected.foreground "#000" \
-        --affirmative "Need more wallpapers" \
-        --negative "No, skip"
-
-    if [ $? -eq 0 ]; then
-       wallpaper="y" 
-    else
-        wallpaper="n"
-    fi
-else
-    msg ask "Would you like to add more ${green}Wallpapers${end}? ${blue}[ y/n ]${end}..."
-    read -r -p "$(echo -e '\e[1;32mSelect: \e[0m')" wallpaper
-fi
+msg ask "Would you like to add more ${green}Wallpapers${end}? ${blue}[ y/n ]${end}..."
+read -r -p "$(echo -e '\e[1;32mSelect: \e[0m')" wallpaper
 
 printf " \n"
 

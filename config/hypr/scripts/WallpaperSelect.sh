@@ -69,7 +69,7 @@ if [[ "$engine" == "swww" ]]; then
     done
 
     if [[ $pic_index -ne -1 ]]; then
-      notify-send -t 2000 -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
+      notify-send --replace-id=1 -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper" -h int:value:35
       swww img "${wallDIR}/${PICS[$pic_index]}" $SWWW_PARAMS
 
       ln -sf "${wallDIR}/${PICS[$pic_index]}" "$cache_dir/current_wallpaper.png"
@@ -131,7 +131,7 @@ elif [[ "$engine" == "hyprpaper" ]]; then
     done
 
     if [[ $pic_index -ne -1 ]]; then
-      notify-send -t 2000 -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper"
+      notify-send --replace-id=1 -i "${wallDIR}/${PICS[$pic_index]}" "Changing wallpaper" -h int:value:35
       hyprctl hyprpaper preload "${wallDIR}/${PICS[$pic_index]}"
       hyprctl hyprpaper wallpaper " ,${wallDIR}/${PICS[$pic_index]}"
 
