@@ -52,7 +52,6 @@ fn_wallcache() {
 # Process the current wallpaper
 fn_wallcache "${currentWall_name}" "${input_file}"
 
-# Notify success
 if [ ! -f "${thmbDir}/${currentWall_name}.quad" ]; then
     exit 1
 fi
