@@ -62,17 +62,9 @@ if [ -f $colors_file ]; then
     rgba_color_opacity=$(hex_to_rgba_opacity $hex_color)
 
     # Set Hyprland active border color based on foreground color
-    hyprland_config=~/.config/hypr/configs/decoration.conf
-    hyprlock_config=~/.config/hypr/hyprlock.conf
-    sed -i "s/col.active_border .*$/col.active_border = $rgba_color/g" "$hyprland_config"
-    sed -i "s/col.inactive_border .*$/col.inactive_border = $rgba_color_other/g" "$hyprland_config"
-
-# for hyprlock
-    sed -i "s/outer_color = .*$/outer_color = $rgba_color_opacity/" "$hyprlock_config"
-    sed -i "s/inner_color = .*$/inner_color = $rgba_color_opacity/" "$hyprlock_config"
-    sed -i "s/border_color = .*$/border_color = $rgba_color_opacity/" "$hyprlock_config"
-    sed -i "s/font_color = .*$/font_color = $rgba_color/" "$hyprlock_config"
-    sed -i "s/^[c]olor = .*$/color = $rgba_color/" "$hyprlock_config"
+    hyprland_config=~/.config/hypr/configs/configs.conf
+    sed -i "s/act_border = .*$/act_border = $rgba_color/g" "$hyprland_config"
+    sed -i "s/inact_border = .*$/inact_border = $rgba_color_other/g" "$hyprland_config"
     
     # Reload Hyprland configuration (optional)
     hyprctl reload
