@@ -5,6 +5,10 @@
 
 <h3>This Hyprland configuration is kind of minila looking, but also little bit gorgeous I guess. Why don't you check it out? </h3>
 
+## [ NOTE ]
+
+This is a rolling release configuration. It means, I often make changes, fix bugs and add features. If you want to update to the latest changes, just use this keyboard shortcut to update: `SUPER Shift + U`
+
 ## Screenshots
 
 <details close>
