@@ -132,10 +132,12 @@ dirs=(
     kitty
     Kvantum
     nvim
+    nwg-look
     qt5ct
     qt6ct
     rofi
     waybar
+    xsettingsd
     yazi
 )
 
@@ -196,10 +198,10 @@ if [[ -d "$HOME/.config/HyprBackup-${USER}" ]]; then
     msg att "a HyprBackup directory was there. Archiving it..."
     cd "$HOME/.config"
     mkdir -p "HyprArchive-${USER}"
-    zip -r -1 "HyprBackup-${USER}.zip" "HyprBackup-${USER}" &> /dev/null
-    mv "HyprBackup-${USER}.zip" "HyprArchive-${USER}/"
+    zip -r -1 "HyprArchive-${USER}/HyprBackup-$(date +%d-%m-%Y_%I-%M-%p)-${USER}.zip" "HyprBackup-${USER}" &> /dev/null
+    # mv "HyprBackup-${USER}.zip" "HyprArchive-${USER}/"
     rm -rf "HyprBackup-${USER}"
-    msg dn "HyprBackup-${USER} was zipped and backed to HyprArchive-${USER} directory..."
+    msg dn "HyprBackup-${USER} was zipped and backed up inside HyprArchive-${USER} directory..." && sleep 1
 fi
 
 for confs in "${dirs[@]}"; do
@@ -246,8 +248,8 @@ if hostnamectl | grep -q 'Chassis: vm'; then
 
 else
     #_____ setting up the monitor
-    msg act "Setting the default monitor setup..."
-    echo -e "#Monitor\nmonitor=,preferred,auto,auto" > "$dir/config/hypr/configs/monitor.conf"
+    msg act "Setting the high resolution and maximum refresh rate for your monitor..."
+    echo -e "#Monitor\nmonitor=,highres,auto,1\nmonitor=,highrr,auto,1" > "$dir/config/hypr/configs/monitor.conf"
 fi
 
 

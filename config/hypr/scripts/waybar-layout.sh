@@ -84,6 +84,8 @@ restart_waybar() {
     killall waybar
     sleep 0.1  # Delay for Waybar to completely terminate
     waybar &
+    sleep 0.5
+    hyprctl reload
 }
 
 # Main function
