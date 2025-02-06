@@ -18,7 +18,7 @@ rofiVars="$HOME/.config/rofi/rofi-vars.rasi"
 display
 printf "\n  => Choose which settings you want to change\n  -> Need to select using the space bar\n"
 echo
-_hyprland_choice=$(gum choose --header "Select settings:" --no-limit "border_size" "roundness" "inner_gap" "outer_gap" "blur" "opacity" "cancel")
+_hyprland_choice=$(gum choose --header "Select settings:" --no-limit "border_size" "roundness" "inner_gap" "outer_gap" "blur" "opacity" "shadow" "cancel")
 
 # Convert the newline-separated string into an array
 IFS=$'\n' read -rd '' -a primary_choice <<<"$_hyprland_choice"
@@ -101,6 +101,15 @@ for user_choice in "${primary_choice[@]}"; do
         done
         sed -i "s/\$opacity_act = .*/\\\$opacity_act = $_act_op/g" "$setting"
         sed -i "s/\$opacity_deact = .*/\\\$opacity_deact = $_inact_op/g" "$setting"
+        ;;
+    "shadow")
+        printf "\n[ <> ]\nSetting shadow range ( 0 means no shadow )...\n\n"
+        _shd_rng=$(gum input --placeholder "Type the amount of shadow range...")
+        while ! [[ "$_shd_rng" =~ ^[0-9]+(\.[0-9]+)?$ ]]; do
+            printf "Invalid input. Please enter a number.\n"
+            _shd_rng=$(gum input --placeholder "Type the amount of shadow range...")
+        done
+        sed -i "s/\$shadow_range = .*/\\\$shadow_range = $_shd_rng/g" "$setting"
         ;;
     *)
         echo "Invalid choice: $user_choice"
