@@ -1,28 +1,23 @@
 #!/bin/bash
 
-# Directory containing the style files
-styles_dir="$HOME/.config/rofi/power_option"
-window_rules="$HOME/.config/hypr/configs/wrules.conf"
-
 # rofi them
 theme="$HOME/.config/rofi/themes/rofi-powertheme.rasi"
 
 # # Path to the script where the selected theme is saved
 menu_select_script="$HOME/.config/hypr/scripts/powermenu.sh"
 
-# Get a list of style files
-style_files=($(ls "$styles_dir"/*.rasi))
+# Function to display the prompt
+prompt() {
+    echo "fullscreen"
+    echo "small"
+}
 
-# Extract only the file names for display
-style_names=("${style_files[@]##*/}")
+rofi_command="rofi -i -dmenu -config $theme"
 
 # Present the list of styles using Rofi and get the selected style
-selected_style=$(printf "%s\n" "${style_names[@]}" | rofi -dmenu -config "$theme" "Select Rofi theme")
+selected_style=$(prompt | ${rofi_command})
 
-# If a selection was made, apply the new style
 if [ -n "$selected_style" ]; then
-    selected_style_path="$styles_dir/$selected_style"
-    # Update the menu_select.sh script with the selected theme
     sed -i "s|^theme=.*|theme='${selected_style%.rasi}'|" "$menu_select_script"
     notify-send -t 3000 "Power menu" "Theme applied: ${selected_style}"
 fi
