@@ -32,9 +32,15 @@ CTRL + U | system update
 PRINT | take screenshot
  + SHIFT + H | show keybind help
  + SHIFT + M | exit Hyprland
+ + N | toggle special minimized (pyprland)
+ + SHIFT + N | toggle minimized (pyprland)
+ + SHIFT + O | shift monitor (pyprland)
  + SHIFT + R | run startup script
+ + SHIFT + Z | ++ zoom
+ + Z | zoom
  + S | open settings in terminal
  + TAB | switch windows with Rofi
+ALT + TAB | Cycle through Windows
 F9 | toggle audio mute
 F10 | decrease volume
 F11 | increase volume
