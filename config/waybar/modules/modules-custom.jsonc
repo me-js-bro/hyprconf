@@ -54,7 +54,7 @@
         "return-type": "json",
         "format": " {}",
         "on-click": "~/.config/hypr/scripts/systemupdate.sh --update",
-        "interval": 86400, // once a day
+        "interval": 86400,
         "tooltip": true
     },
 
