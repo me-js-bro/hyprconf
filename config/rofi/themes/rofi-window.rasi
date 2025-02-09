@@ -35,7 +35,7 @@ window {
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
-    border:                      0px solid;
+    border:                      @border-seze;
     border-radius:               @radius;
     border-color:                @active-background;
     background-color:            @background;

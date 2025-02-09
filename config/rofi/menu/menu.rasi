@@ -30,7 +30,7 @@ window {
     cursor:                      "default";
     spacing:                     0em;
     padding:                     0em;
-    border:                      2px solid;
+    border:                      @border-size;
     border-color:                @foreground;
     background-color:            @background;
     border-radius:               @radius;
@@ -74,7 +74,7 @@ button {
     text-color:                  @foreground;
 }
 button selected {
-    border-radius:               @radius-second;
+    border-radius:               5em;
     background-color:            @foreground;
     text-color:                  @background;
 }
@@ -120,7 +120,7 @@ element {
     cursor:                      pointer;
     background-color:            transparent;
     text-color:                  @foreground;
-    border-radius:               @radius;
+    border-radius:               1em;
 }
 element selected.normal {
     background-color:            @foreground;
