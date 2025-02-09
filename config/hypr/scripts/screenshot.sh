@@ -6,7 +6,7 @@ fi
 
 swpy_dir="$HOME/.config/swappy"
 save_dir="${2:-$XDG_PICTURES_DIR/Screenshots}"
-save_file=$(date +'%y%m%d_%I%M%p_screenshot.png')
+save_file=$(date +'screenshot_%y%m%d_%H%M%S.png')
 temp_screenshot="/tmp/screenshot.png"
 
 mkdir -p $save_dir

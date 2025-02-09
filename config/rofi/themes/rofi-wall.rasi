@@ -29,7 +29,7 @@ window {
     spacing:                0px;
     padding:                2px;
     margin:                 0px; 
-    border:                 2px;
+    border:                 @border-size;
     border-color:           @foreground;
     cursor:                 "default";
     location:               center;

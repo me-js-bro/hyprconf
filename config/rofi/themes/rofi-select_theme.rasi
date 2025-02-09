@@ -30,7 +30,7 @@ window {
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
-    border:                      2px 0px solid;
+    border:                      @border-size;
     border-radius:               0px;
     border-color:                @foreground;
     background-color:            @background;

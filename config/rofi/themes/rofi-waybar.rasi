@@ -23,14 +23,14 @@ configuration {
 
 /* ---- Window ---- */
 window {
-    width:                        300px;
+    width:                        600px;
     x-offset:                     0px;
     y-offset:                     0px;
     spacing:                      0px;
     padding:                      0px;
     margin:                       0px; 
     color:                        @foreground;
-    border:                       2px solid;
+    border:                       @border-size;
     border-color:                 @foreground;
     cursor:                       "default";
     transparency:                 "real";
@@ -119,8 +119,8 @@ button selected {
 /* ---- Listview ---- */
 listview {
     enabled:                      true;
-    columns:                      1;
-    lines:                        5;
+    columns:                      2;
+    lines:                        4;
     cycle:                        true;
     dynamic:                      true;
     scrollbar:                    false;

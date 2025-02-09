@@ -18,7 +18,20 @@ rofiVars="$HOME/.config/rofi/rofi-vars.rasi"
 display
 printf "\n  => Choose which settings you want to change\n  -> Need to select using the space bar\n"
 echo
-_hyprland_choice=$(gum choose --header "Select settings:" --no-limit "border_size" "roundness" "inner_gap" "outer_gap" "blur" "opacity" "shadow" "cancel")
+_hyprland_choice=$(gum choose \
+    --header "Select settings:" \
+    --header.foreground "#c3cbd0" \
+    --no-limit \
+    --cursor.foreground "#c3cbd0" \
+    "border size" \
+    "roundness" \
+    "inner gap" \
+    "outer gap" \
+    "blur" \
+    "opacity" \
+    "shadow" \
+    "cancel"
+)
 
 # Convert the newline-separated string into an array
 IFS=$'\n' read -rd '' -a primary_choice <<<"$_hyprland_choice"
@@ -32,15 +45,16 @@ fi
 for user_choice in "${primary_choice[@]}"; do
     clear
     case "$user_choice" in
-    "border_size")
+    "border size")
         printf "\n[ <> ]\nSetting border size...\n\n"
-        border_size=$(gum input --placeholder "Type border width...")
-        while ! [[ "$border_size" =~ ^[0-9]+$ ]]; do
+        borderSize=$(gum input --placeholder "Type border width...")
+        while ! [[ "$borderSize" =~ ^[0-9]+$ ]]; do
             printf "Invalid input. Please enter a number.\n"
-            border_size=$(gum input --placeholder "Type border width...")
+            borderSize=$(gum input --placeholder "Type border width...")
         done
-        sed -i "s/\$border = .*/\\\$border = $border_size/g" "$setting"
-        sed -i "s/frame_width = .*/frame_width = $border_size/g" "$dunst"
+        sed -i "s/\$border = .*/\\\$border = $borderSize/g" "$setting"
+        sed -i "s/frame_width = .*/frame_width = $borderSize/g" "$dunst"
+        sed -i "s/border-size: .*/border-size: ${borderSize}px;/g" "$rofiVars"
         ;;
     "roundness")
         printf "\n[ <> ]\nSetting border roundness...\n\n"
@@ -54,7 +68,7 @@ for user_choice in "${primary_choice[@]}"; do
         sed -i "s/radius: .*/radius: ${rounding}px;/g" "$rofiVars"
         sed -i "s/radius-second: .*/radius-second: $((rounding / 2))px;/g" "$rofiVars"
         ;;
-    "inner_gap")
+    "inner gap")
         printf "\n[ <> ]\nSetting inner gap...\n\n"
         gaps_in=$(gum input --placeholder "Type the inner gap...")
         while ! [[ "$gaps_in" =~ ^[0-9]+$ ]]; do
@@ -63,7 +77,7 @@ for user_choice in "${primary_choice[@]}"; do
         done
         sed -i "s/\$inner_gap = .*/\\\$inner_gap = $gaps_in/g" "$setting"
         ;;
-    "outer_gap")
+    "outer gap")
         printf "\n[ <> ]\nSetting outer gap...\n\n"
         gaps_out=$(gum input --placeholder "Type the outer gap...")
         while ! [[ "$gaps_out" =~ ^[0-9]+$ ]]; do
