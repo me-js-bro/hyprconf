@@ -28,7 +28,7 @@ window {
     padding:                      0px;
     margin:                       0px; 
     color:                        @foreground;
-    border:                       2px solid;
+    border:                       @border-size;
     border-color:                 @foreground;
     cursor:                       "default";
     transparency:                 "real";
